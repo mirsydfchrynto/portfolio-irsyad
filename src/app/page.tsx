@@ -64,8 +64,8 @@ export default function Home() {
             >
               <div className="space-y-4">
                 <span className="font-mono text-[10px] uppercase tracking-widest text-sky-400 font-bold block select-none">// FRONTEND ENGINEER &amp; SYSTEM BUILDER</span>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-extrabold tracking-tight text-white leading-none font-display uppercase select-none">
-                  MUHAMMAD IRSYAD
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-extrabold tracking-tight text-white leading-none font-display select-none">
+                  M. Irsyad Fachryanto
                 </h1>
                 <div className="text-lg md:text-xl font-display font-medium text-white/30 tracking-tight lowercase">
                   architecting digital experiences
