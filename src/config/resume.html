@@ -46,7 +46,7 @@
       width: 154mm;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
     }
     .header-right {
       flex-shrink: 0;
@@ -68,7 +68,7 @@
       display: block;
     }
     .name-title {
-      margin-bottom: 1mm;
+      margin-bottom: 0;
     }
     h1 {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -91,7 +91,6 @@
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
       gap: 1.5mm;
-      margin-top: 1mm;
     }
     .contact-col {
       display: flex;
@@ -129,7 +128,7 @@
     .left-col, .right-col {
       display: flex;
       flex-direction: column;
-      gap: 3mm;
+      gap: 2.5mm;
     }
     section {
       display: flex;
@@ -142,18 +141,18 @@
       text-transform: uppercase;
       color: #0f172a;
       border-bottom: 1.5px solid #0f172a;
-      padding-bottom: 0.5mm;
-      margin-bottom: 1.5mm;
+      padding-bottom: 0.4mm;
+      margin-bottom: 1.2mm;
       letter-spacing: 0.8px;
     }
     .summary-text {
       font-size: 8pt;
       color: #334155;
       text-align: left;
-      line-height: 1.25;
+      line-height: 1.2;
     }
     .skills-group {
-      margin-bottom: 1.5mm;
+      margin-bottom: 1.2mm;
     }
     .skills-group:last-child {
       margin-bottom: 0;
@@ -162,17 +161,17 @@
       font-size: 7.8pt;
       font-weight: 700;
       color: #0f172a;
-      margin-bottom: 0.3mm;
+      margin-bottom: 0.2mm;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     .skills-list {
       font-size: 7.8pt;
       color: #475569;
-      line-height: 1.25;
+      line-height: 1.2;
     }
     .education-item {
-      margin-bottom: 1.5mm;
+      margin-bottom: 1.2mm;
     }
     .education-item:last-child {
       margin-bottom: 0;
@@ -180,11 +179,11 @@
     .education-details {
       font-size: 7.8pt;
       color: #334155;
-      line-height: 1.25;
-      margin-top: 0.3mm;
+      line-height: 1.2;
+      margin-top: 0.2mm;
     }
     .timeline-item {
-      margin-bottom: 2mm;
+      margin-bottom: 1.8mm;
     }
     .timeline-item:last-child {
       margin-bottom: 0;
@@ -193,32 +192,32 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 0.3mm;
+      margin-bottom: 0.2mm;
     }
     .item-title {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
       color: #0f172a;
-      font-size: 9.2pt;
+      font-size: 9.1pt;
     }
     .item-period {
-      font-size: 7.5pt;
+      font-size: 7.2pt;
       color: #64748b;
       font-weight: 600;
       font-variant-numeric: tabular-nums;
     }
     .item-role {
-      font-size: 8pt;
+      font-size: 7.8pt;
       font-weight: 600;
       color: #475569;
       font-style: italic;
-      margin-bottom: 1mm;
+      margin-bottom: 0.8mm;
     }
     ul {
       list-style-type: none;
       display: flex;
       flex-direction: column;
-      gap: 0.5mm;
+      gap: 0.4mm;
     }
     ul li {
       position: relative;
@@ -226,7 +225,7 @@
       font-size: 7.8pt;
       color: #334155;
       text-align: left;
-      line-height: 1.25;
+      line-height: 1.2;
     }
     ul li::before {
       content: "▪";
@@ -421,9 +420,20 @@
             </div>
             <div class="item-role">Lead Mobile Developer</div>
             <ul>
-              <li><strong>Fault-Tolerant Architecture</strong>: Mengembangkan **In-Memory Filtering Fallback** untuk mengatasi kegagalan indeks Firestore (`failed-precondition`) secara otomatis tanpa downtime.</li>
-              <li><strong>AI Support System</strong>: Mengintegrasikan chatbot NLP berbasis **RAG (FAISS & SentenceTransformer)** untuk sistem dukungan pelanggan yang akurat dan responsif.</li>
-              <li><strong>Fair Booking Algorithm</strong>: Implementasi algoritma penugasan barberman yang adil berbasis metrik beban kerja antrean bulanan secara real-time.</li>
+              <li><strong>Fault-Tolerant Architecture</strong>: Mengembangkan **In-Memory Filtering Fallback** untuk mengatasi kegagalan indeks Firestore secara otomatis tanpa downtime.</li>
+              <li><strong>AI Support System</strong>: Mengintegrasikan chatbot NLP berbasis **RAG (FAISS & SentenceTransformer)** untuk sistem dukungan pelanggan yang responsif.</li>
+            </ul>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="item-header">
+              <span class="item-title">Desktop POS (Java Swing)</span>
+              <span class="item-period">Mei 2024</span>
+            </div>
+            <div class="item-role">Java Software Engineer</div>
+            <ul>
+              <li><strong>Data Persistence & JDBC</strong>: Membangun layer database menggunakan **JDBC & MySQL** dengan optimasi kueri SQL guna menjaga konsistensi data transaksi retail secara real-time.</li>
+              <li><strong>Modular Desktop UI</strong>: Merancang antarmuka desktop menggunakan **Java Swing & AWT**, menerapkan pemisahan logika bisnis untuk efisiensi pemeliharaan kode (Maintenance).</li>
             </ul>
           </div>
         </section>
