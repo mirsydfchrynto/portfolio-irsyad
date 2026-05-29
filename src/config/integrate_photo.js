@@ -35,14 +35,13 @@ try {
         </div>
         <div class="contact-grid">
           <div class="contact-col">
-            <div class="contact-item"><strong>Lahir:</strong> Tegal, 18 Maret 2005</div>
-            <div class="contact-item"><strong>Gender:</strong> Laki-laki &nbsp;|&nbsp; <strong>Agama:</strong> Islam</div>
-            <div class="contact-item"><strong>Status:</strong> Belum Kawin</div>
-            <div class="contact-item"><strong>Alamat:</strong> Jl. Segarawana 1 No.11 RT01 RW17, Kab. Tegal</div>
+            <div class="contact-item"><strong>Lokasi:</strong> Tegal, Jawa Tengah, ID</div>
+            <div class="contact-item"><strong>Spesialisasi:</strong> Android & Full-Stack Web</div>
+            <div class="contact-item"><strong>Fokus:</strong> Software Security & System Architecture</div>
           </div>
           <div class="contact-col right">
-            <div class="contact-item"><strong>Hubungi:</strong> +62 858 6502 6621</div>
-            <div class="contact-item"><strong>Email:</strong> <a href="mailto:mirsyadf1005@gmail.com">mirsyadf1005@gmail.com</a></div>
+            <div class="contact-item"><strong>WhatsApp:</strong> +62 858 6502 6621</div>
+            <div class="contact-item"><strong>Email:</strong> <a href="mailto:irsydfchrynto@gmail.com">irsydfchrynto@gmail.com</a></div>
             <div class="contact-item"><strong>GitHub:</strong> <a href="https://github.com/mirsydfchrynto" target="_blank">github.com/mirsydfchrynto</a></div>
             <div class="contact-item"><strong>Tautan:</strong> <a href="https://irsyad-architect.surge.sh" target="_blank">irsyad-architect.surge.sh</a></div>
           </div>

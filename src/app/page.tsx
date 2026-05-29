@@ -568,10 +568,10 @@ export default function Home() {
                 <span className="text-white/20 select-none">&gt;</span>
                 <span className="text-white/30 uppercase text-[9px] tracking-wider w-16">Email:</span>
                 <a 
-                  href="mailto:mirsyadf1005@gmail.com" 
+                  href="mailto:irsydfchrynto@gmail.com" 
                   className="text-white font-bold underline hover:text-white/80 transition-colors lowercase min-h-[44px] flex items-center"
                 >
-                  mirsyadf1005@gmail.com
+                  irsydfchrynto@gmail.com
                 </a>
               </div>
 
