@@ -44,7 +44,7 @@ export const blueprints = [
     curiosity: "Bagaimana cara membatasi celah kecurangan siswa pada ujian digital tingkat sekolah menggunakan penguncian native Android tanpa mengharuskan rooting perangkat?",
     systemsExplored: "Flutter Kiosk mode (MethodChannel), lock native Android system (startLockTask & FLAG_SECURE), Next.js 16 (Turbopack), Firestore Security Rules (createdBy & isOwner), State-Driven Fallback & Unsub Guard.",
     technicalChallenge: "Menghindari Firestore Internal Assertion errors akibat state monitoring real-time yang tidak stabil pada jaringan sekolah, serta menyinkronkan clock drift server untuk sisa waktu ujian.",
-    learnings: "Membangun sistem interop MethodChannel Kotlin-Dart, merancang sinkronisasi waktu jaringan via server timestamp, dan mengotomatiskan ekspor nilai dalam bentuk berkas Excel (.xlsx).",
+    learnings: "Membangun sistem interop MethodChannel Kotlin-Dart, merancang sinkronisasi waktu jaringan via server timestamp, and mengotomatiskan ekspor nilai dalam bentuk berkas Excel (.xlsx).",
     tags: ["Flutter", "Dart", "Kotlin", "Next.js 16", "Firestore Rules"],
     links: { visit: "", repo: "https://github.com/mirsydfchrynto/CBT-System" },
     image: "/secure_cbt_ui.png",
@@ -62,7 +62,7 @@ export const blueprints = [
     journal: {
       context: "Ujian daring menggunakan platform standar seperti Google Forms sangat rentan terhadap kecurangan. Siswa dapat dengan mudah beralih tab untuk mencari jawaban di Google, mengambil tangkapan layar untuk dibagikan, atau menyalin soal. Proyek ini dirancang sebagai laboratorium riset mandiri untuk membatasi celah kecurangan tersebut secara komprehensif pada mobile client (Android) milik siswa sekolah (SD/SMP), terintegrasi langsung dengan dashboard portal monitoring dan bank soal pengajar.",
       whyBuilt: "Sistem operasional ini menggunakan alur berbasis Handshake QR dinamis. Pengajar mengaktifkan sesi ujian dari dashboard web Next.js yang menampilkan kode QR berisi parameter token berotasi cepat. Klien mobile Flutter memindai QR, memicu token validation di sisi server, mengaktifkan Kiosk Mode di tingkat sistem Android, dan mengunci navigasi di layar ujian. Jika siswa mencoba berpindah layar atau meminimalkan aplikasi, sistem langsung mencatat log pelanggaran dan mengirimkannya sebagai log heartbeat pengawasan.",
-      systemThinking: "Arsitektur dual-platform ini mengandalkan isolasi data yang ketat. Siswa didaftarkan secara temporal menggunakan format id 'STD-timestamp' untuk mengurangi gesekan registrasi. Token masuk dikonstruksi secara dinamis dengan format 'SCBT|examId|sessionId|random|timestamp' dan berotasi setiap 5 detik untuk mencegah replay attacks. Untuk menghindari manipulasi waktu lokal pada ponsel siswa, sistem mengimplementasikan network handshake: perangkat klien menulis server timestamp ke '/server_time/{student_id}' di Firestore, membacanya kembali untuk mendeteksi clock drift, lalu menyesuaikan sisa waktu secara akurat sesuai clock server.",
+      systemThinking: "Arsitektur dual-platform ini mengandalkan isolasi data yang ketat. Siswa didaftarkan secara temporal menggunakan format id 'STD-timestamp' untuk mengurangi gesekan registrasi. Token masuk dikonstruksi secara dinamis dengan format 'SCBT|examId|sessionId|random|timestamp' and berotasi setiap 5 detik untuk mencegah replay attacks. Untuk menghindari manipulasi waktu lokal pada ponsel siswa, sistem mengimplementasikan network handshake: perangkat klien menulis server timestamp ke '/server_time/{student_id}' di Firestore, membacanya kembali untuk mendeteksi clock drift, lalu menyesuaikan sisa waktu secara akurat sesuai clock server.",
       exploration: "Pintu gerbang keamanan mobile didesain menggunakan MethodChannel ke modul native Kotlin (MainActivity.kt). API native startLockTask() mengunci status bar, tombol Home, dan menu Recents. flag hardware WindowManager.LayoutParams.FLAG_SECURE diaktifkan untuk mematikan screenshot dan screencast secara hardware-level. Untuk menjaga rendering UI tetap berada di 60fps tanpa lagging, proses pemetaan acak (shuffling) pertanyaan dan opsi soal dijalankan secara asinkronus di background thread menggunakan Dart compute Isolate. Hasil mapping disimpan terenkripsi secara lokal menggunakan database Hive AES-256, dengan kunci enkripsi yang diamankan di Android Keystore via Flutter Secure Storage. Di sisi pengawas, Next.js web portal menyediakan fitur analisis lembar jawaban 3-level drill-down (Sesi -> Hasil Siswa -> Rincian Jawaban Butir Soal) lengkap dengan ekspor rekap Excel.",
       constraints: "Kendala operasional terbesar muncul saat menguji sistem dengan 100+ siswa bersamaan pada Spark tier Firebase. Listener real-time global pada dashboard pengawas (/active_exams) memicu jutaan reads per menit dan menyebabkan pembengkakan kuota. Masalah ini diselesaikan dengan menonaktifkan monitoring real-time global pada beranda dashboard (hanya memuat data on-demand), memperpanjang siklus heartbeat mobile client menjadi berkala 60 detik, serta menulis composite indexing pada Firestore. Selain itu, rotasi token QR 5 detik sering gagal tervalidasi akibat jeda jaringan; kendala ini diselesaikan dengan menerapkan grace-period token validation yang memverifikasi kecocokan scan terhadap activeToken dan lastToken sekaligus. Terjadi pula kendala Firestore Internal Assertion errors akibat pemutusan koneksi yang mendadak, yang berhasil diatasi dengan memasang Unsub Guard global pada saat teardown active listener Firestore.",
       reflection: "Jika merancang ulang hari ini, saya akan menggantikan kueri snap Firestore untuk handshake token QR dengan REST API serverless atau koneksi WebSocket terisolasi guna memangkas biaya operasional database. Saya juga akan menambahkan sensor deteksi ADB/USB debugging tingkat native Kotlin untuk memblokir siswa yang mencoba mengakali runtime sistem via PC.",
@@ -137,12 +137,6 @@ export const blueprints = [
 
 export const engineeringJourney = [
   {
-    period: "2025 - SEKARANG",
-    role: "Flutter Mentor",
-    location: "Harkat University Lab",
-    description: "Membantu mahasiswa memahami cara membangun aplikasi Flutter yang maintainable dan terstruktur. Fokus saya adalah mengenalkan penulisan kode dengan prinsip SOLID dan memisahkan logika bisnis dari UI sejak awal pengerjaan proyek praktikum."
-  },
-  {
     period: "FEB 2025 - SEKARANG",
     role: "Full Stack Developer",
     location: "Okey Bimbel",
@@ -150,9 +144,15 @@ export const engineeringJourney = [
   },
   {
     period: "2024 - SEKARANG",
+    role: "Flutter Mentor",
+    location: "Community Plug-in",
+    description: "Dipercaya sebagai mentor kelas Flutter sejak semester 2 untuk membantu mahasiswa membangun pondasi pemrograman mobile yang maintainable. Berfokus pada penerapan Clean Architecture, prinsip SOLID, dan pemisahan logika bisnis dari UI."
+  },
+  {
+    period: "2023 - SEKARANG",
     role: "Core Member",
-    location: "Plug-In Linux Community",
-    description: "Berkolaborasi dengan sesama antusias open-source untuk menyelenggarakan sesi diskusi teknis, berbagi tips optimasi sistem operasi, dan mengenalkan kenyamanan workflow CLI kepada mahasiswa tingkat awal."
+    location: "Community Plug-in",
+    description: "Bergabung sejak awal perkuliahan dan dipercaya sebagai anggota inti dalam organisasi. Berkolaborasi menyelenggarakan workshop teknis, diskusi arsitektur, dan mengenalkan workflow CLI yang efisien kepada sesama mahasiswa."
   }
 ];
 
@@ -172,13 +172,13 @@ export const exploredTools = [
 ];
 
 export const inlineResume = {
-  summary: "Saya adalah mahasiswa Informatika Universitas Harkat Negeri dengan ketertarikan mendalam pada Mobile Engineering (Flutter & Kotlin) dan System Architecture. Berfokus pada perancangan aplikasi yang andal untuk memecahkan masalah operasional riil. Berpengalaman langsung mengoptimalkan database NoSQL, mengintegrasikan interop native OS, dan aktif berkontribusi dalam membagikan pengetahuan pemrograman di komunitas Linux.",
+  summary: "Saya adalah mahasiswa Semester 6 D4 Teknik Informatika Universitas Harkat Negeri Tegal dengan IPK 3.92/4.00. Memiliki ketertarikan mendalam pada Mobile Engineering (Flutter & Kotlin) dan System Architecture. Berperan aktif sebagai Flutter Mentor dan Core Member di Komunitas Plug-in sejak awal perkuliahan, saya berfokus pada penerapan Clean Architecture dan SOLID dalam membangun aplikasi yang andal.",
   education: [
     {
-      institution: "Universitas Harkat Negeri",
-      degree: "Teknik Informatika (Sarjana Terapan)",
-      period: "2023 - Sekarang (Aktif)",
-      notes: "Indeks Prestasi Kumulatif: 3.92 / 4.00. Aktif membagikan pemahaman Clean Architecture dan SOLID di laboratorium kampus."
+      institution: "Universitas Harkat Negeri Tegal",
+      degree: "D4 Teknik Informatika (Sarjana Terapan)",
+      period: "2023 - SEKARANG",
+      notes: "Semester 6 | IPK: 3.92 / 4.00. Aktif sebagai Core Member & Flutter Mentor di komunitas Plug-in sejak semester 2."
     },
     {
       institution: "SMK Negeri 2 Tegal",
@@ -190,25 +190,35 @@ export const inlineResume = {
   experience: [
     {
       company: "Okey Bimbel",
-      role: "Full Stack Developer",
+      role: "Lead Freelance IT Support & Dev",
       period: "FEB 2025 - SEKARANG",
-      description: "Memikul tanggung jawab atas rekayasa dan siklus operasional ekosistem ujian digital anti-curang (CBT) terintegrasi.",
+      description: "Memikul tanggung jawab sebagai mitra IT andalan untuk rekayasa berkelanjutan dan dukungan operasional ekosistem ujian digital.",
       bullets: [
-        "Membangun portal admin Next.js 16 (Turbopack) & klien mobile Flutter terintegrasi untuk pengawasan real-time dan manajemen bank soal.",
+        "Membangun dan memelihara portal admin Next.js 16 (Turbopack) & klien mobile Flutter untuk pengawasan real-time harian.",
         "Mengembangkan interop native Android Kotlin (startLockTask & FLAG_SECURE) untuk mematikan screenshot/overlay dan mengunci total layar ujian.",
-        "Mengoptimalkan performa Firestore NoSQL sebesar 70% melalui restrukturisasi kueri per-sesi on-demand dan state recovery Hive AES-256 lokal."
+        "Menjadi konsultan IT utama yang menangani seluruh kebutuhan teknologi dan optimasi cloud infrastruktur bimbingan belajar."
       ]
     }
   ],
   community: [
     {
-      organization: "Plug-In Linux Community",
-      role: "Core Member & Flutter Class Mentor",
+      organization: "Community Plug-in",
+      role: "Flutter Mentor",
       period: "2024 - SEKARANG",
-      description: "Mengembangkan ekosistem belajar open-source di lingkungan mahasiswa.",
+      description: "Menjadi mentor kelas Flutter bagi mahasiswa untuk menanamkan pondasi Separation of Concerns (SoC) dan standar industri (Clean Architecture & SOLID).",
       bullets: [
-        "Menyelenggarakan workshop pengenalan shell scripting, otomasi CLI, dan manajemen workflow.",
-        "Menjadi mentor kelas pemrograman Flutter gratis bagi 40+ mahasiswa tingkat awal untuk menanamkan pondasi Separation of Concerns (SoC) sejak dini."
+        "Membimbing 40+ mahasiswa dalam memahami arsitektur Flutter yang terstruktur.",
+        "Menyelenggarakan workshop pemrograman Flutter berkala."
+      ]
+    },
+    {
+      organization: "Community Plug-in",
+      role: "Core Member",
+      period: "2023 - SEKARANG",
+      description: "Berkontribusi dalam pengembangan ekosistem belajar di lingkungan mahasiswa sebagai anggota inti organisasi.",
+      bullets: [
+        "Berkolaborasi dalam menyelenggarakan sesi diskusi teknis dan workshop.",
+        "Mengenalkan kenyamanan workflow CLI kepada mahasiswa universitas."
       ]
     }
   ],

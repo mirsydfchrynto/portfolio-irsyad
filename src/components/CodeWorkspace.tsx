@@ -23,11 +23,11 @@ const SNIPPETS: Snippet[] = [
         <span className="text-blue-400">import</span> io.flutter.embedding.android.FlutterActivity<br/>
         <span className="text-blue-400">import</span> io.flutter.embedding.engine.FlutterEngine<br/>
         <span className="text-blue-400">import</span> io.flutter.plugin.common.MethodChannel<br/><br/>
-        <span className="text-sky-400">class</span> <span className="text-teal-400">MainActivity</span>: <span className="text-teal-400">FlutterActivity</span>() &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">private val</span> CHANNEL = <span className="text-amber-400">"com.okeybimbel/security"</span><br/><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">override fun</span> <span className="text-teal-400">configureFlutterEngine</span>(flutterEngine: <span className="text-teal-400">FlutterEngine</span>) &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">super</span>.configureFlutterEngine(flutterEngine)<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-teal-400">MethodChannel</span>(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler &#123; call, result <span className="text-purple-400">-&gt;</span><br/>
+        <span className="text-rose-400">class</span> <span className="text-red-400">MainActivity</span>: <span className="text-red-400">FlutterActivity</span>() &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">private val</span> CHANNEL = <span className="text-amber-400">"com.okeybimbel/security"</span><br/><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">override fun</span> <span className="text-red-400">configureFlutterEngine</span>(flutterEngine: <span className="text-red-400">FlutterEngine</span>) &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">super</span>.configureFlutterEngine(flutterEngine)<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-red-400">MethodChannel</span>(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler &#123; call, result <span className="text-purple-400">-&gt;</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-purple-400">when</span> (call.method) &#123;<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-amber-400">"startLockTask"</span> <span className="text-purple-400">-&gt;</span> &#123;<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startLockTask()<br/>
@@ -53,17 +53,17 @@ const SNIPPETS: Snippet[] = [
       <>
         <span className="text-neutral-500">// lib/core/utils/remote_data_source.dart</span><br/>
         <span className="text-blue-400">import</span> <span className="text-amber-400">'package:cloud_firestore/cloud_firestore.dart'</span>;<br/><br/>
-        <span className="text-sky-400">class</span> <span className="text-teal-400">RemoteDataSource</span> &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">final</span> <span className="text-teal-400">FirebaseFirestore</span> _firestore = <span className="text-teal-400">FirebaseFirestore</span>.instance;<br/><br/>
+        <span className="text-rose-400">class</span> <span className="text-red-400">RemoteDataSource</span> &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">final</span> <span className="text-red-400">FirebaseFirestore</span> _firestore = <span className="text-red-400">FirebaseFirestore</span>.instance;<br/><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-neutral-500">// Menulis & membaca ulang timestamp server untuk menghitung drift</span><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-teal-400">Future</span>&lt;<span className="text-teal-400">DateTime</span>&gt; getServerTime(<span className="text-teal-400">String</span> uid) <span className="text-sky-400">async</span> &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">try</span> &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">final</span> docRef = _firestore.collection(<span className="text-amber-400">'server_time'</span>).doc(uid);<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">await</span> docRef.set(&#123;<span className="text-amber-400">'t'</span>: <span className="text-teal-400">FieldValue</span>.serverTimestamp()&#125;);<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">final</span> snap = <span className="text-sky-400">await</span> docRef.get();<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">return</span> (snap.data()?&#91;<span className="text-amber-400">'t'</span>&#93; <span className="text-sky-400">as</span> <span className="text-teal-400">Timestamp</span>).toDate();<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125; <span className="text-sky-400">catch</span> (e) &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">return</span> <span className="text-teal-300">DateTime</span>.now(); <span className="text-neutral-500">// Fallback ke waktu lokal</span><br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-red-400">Future</span>&lt;<span className="text-red-400">DateTime</span>&gt; getServerTime(<span className="text-red-400">String</span> uid) <span className="text-rose-400">async</span> &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">try</span> &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">final</span> docRef = _firestore.collection(<span className="text-amber-400">'server_time'</span>).doc(uid);<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">await</span> docRef.set(&#123;<span className="text-amber-400">'t'</span>: <span className="text-red-400">FieldValue</span>.serverTimestamp()&#125;);<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">final</span> snap = <span className="text-rose-400">await</span> docRef.get();<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">return</span> (snap.data()?&#91;<span className="text-amber-400">'t'</span>&#93; <span className="text-rose-400">as</span> <span className="text-red-400">Timestamp</span>).toDate();<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125; <span className="text-rose-400">catch</span> (e) &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">return</span> <span className="text-teal-300">DateTime</span>.now(); <span className="text-neutral-500">// Fallback ke waktu lokal</span><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&#125;<br/>
         &#125;
@@ -78,25 +78,25 @@ const SNIPPETS: Snippet[] = [
       <>
         <span className="text-neutral-500">// lib/services/queue_service.dart</span><br/>
         <span className="text-blue-400">import</span> <span className="text-amber-400">'package:cloud_firestore/cloud_firestore.dart'</span>;<br/><br/>
-        <span className="text-sky-400">class</span> <span className="text-teal-400">QueueService</span> &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">final</span> <span className="text-teal-400">FirebaseFirestore</span> _firestore = <span className="text-teal-400">FirebaseFirestore</span>.instance;<br/><br/>
+        <span className="text-rose-400">class</span> <span className="text-red-400">QueueService</span> &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">final</span> <span className="text-red-400">FirebaseFirestore</span> _firestore = <span className="text-red-400">FirebaseFirestore</span>.instance;<br/><br/>
         &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-neutral-500">// Melakukan query antrean aktif dengan fallback in-memory filter</span><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-teal-400">Stream</span>&lt;<span className="text-teal-400">List</span>&lt;<span className="text-teal-400">QueueModel</span>&gt;&gt; getWaitingQueues(<span className="text-teal-400">String</span> shopId) &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">try</span> &#123;<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">return</span> _firestore<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-red-400">Stream</span>&lt;<span className="text-red-400">List</span>&lt;<span className="text-red-400">QueueModel</span>&gt;&gt; getWaitingQueues(<span className="text-red-400">String</span> shopId) &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">try</span> &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">return</span> _firestore<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collection(<span className="text-amber-400">'queues'</span>)<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.where(<span className="text-amber-400">'shopId'</span>, isEqualTo: shopId)<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.where(<span className="text-amber-400">'status'</span>, isEqualTo: <span className="text-amber-400">'waiting'</span>)<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.snapshots()<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map((snap) =&gt; snap.docs.map((d) =&gt; <span className="text-teal-400">QueueModel</span>.fromDoc(d)).toList());<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125; <span className="text-sky-400">catch</span> (e) &#123;<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map((snap) =&gt; snap.docs.map((d) =&gt; <span className="text-red-400">QueueModel</span>.fromDoc(d)).toList());<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125; <span className="text-rose-400">catch</span> (e) &#123;<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-neutral-500">// Fallback in-memory filter</span><br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-sky-400">return</span> _firestore<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="text-rose-400">return</span> _firestore<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.collection(<span className="text-amber-400">'queues'</span>)<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.where(<span className="text-amber-400">'shopId'</span>, isEqualTo: shopId)<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.snapshots()<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map((snap) =&gt; snap.docs<br/>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map((d) =&gt; <span className="text-teal-400">QueueModel</span>.fromDoc(d))<br/>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map((d) =&gt; <span className="text-red-400">QueueModel</span>.fromDoc(d))<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.where((q) =&gt; q.status == <span className="text-amber-400">'waiting'</span>)<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.toList());<br/>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#125;<br/>
@@ -114,7 +114,7 @@ export function CodeWorkspace() {
   return (
     <div className="relative group w-full max-w-xl">
       {/* Dynamic backdrop glows */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-sky-500/10 to-teal-500/10 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
+      <div className="absolute -inset-1 bg-gradient-to-r from-rose-500/10 to-red-500/10 rounded-lg blur-md opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
       
       {/* Editor Window Container */}
       <div className="relative border border-white/10 bg-[#0b0c10] w-full font-mono text-[11px] leading-relaxed shadow-2xl flex flex-col h-[350px] overflow-hidden rounded-md transition-all duration-300">
@@ -133,10 +133,10 @@ export function CodeWorkspace() {
           </div>
           
           <div className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-full bg-sky-500/20 flex items-center justify-center">
-              <Play size={6} className="text-sky-400 ml-0.5" />
+            <div className="w-2.5 h-2.5 rounded-full bg-rose-500/20 flex items-center justify-center">
+              <Play size={6} className="text-rose-400 ml-0.5" />
             </div>
-            <span className="text-[9px] font-sans text-sky-400 font-bold uppercase tracking-wider">Live</span>
+            <span className="text-[9px] font-sans text-rose-400 font-bold uppercase tracking-wider">Live</span>
           </div>
         </div>
 
@@ -149,11 +149,11 @@ export function CodeWorkspace() {
                 onClick={() => setActiveIdx(idx)}
                 className={`flex items-center gap-2 px-4 py-2 border-r border-white/5 transition-colors cursor-pointer text-[10px] ${
                   activeIdx === idx 
-                    ? "bg-[#0b0c10] text-sky-400 border-t-2 border-t-sky-500 font-semibold" 
+                    ? "bg-[#0b0c10] text-rose-400 border-t-2 border-t-rose-500 font-semibold" 
                     : "text-white/40 hover:text-white/60"
                 }`}
               >
-                <FileCode size={11} className={activeIdx === idx ? "text-sky-400" : "text-white/20"} />
+                <FileCode size={11} className={activeIdx === idx ? "text-rose-400" : "text-white/20"} />
                 <span>{snippet.filename}</span>
               </button>
             ))}
@@ -162,7 +162,7 @@ export function CodeWorkspace() {
 
         {/* Editor Description Banner */}
         <div className="bg-white/[0.01] px-4 py-2.5 border-b border-white/5 text-white/50 text-[10px] flex items-start select-none">
-          <Terminal size={12} className="text-teal-400 mr-2 mt-0.5 flex-shrink-0" />
+          <Terminal size={12} className="text-red-400 mr-2 mt-0.5 flex-shrink-0" />
           <p className="normal-case text-white/60 leading-normal font-sans">{activeSnippet.description}</p>
         </div>
 

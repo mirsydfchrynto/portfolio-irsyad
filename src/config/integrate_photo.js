@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const photoSource = '/home/irsyad/Downloads/profile_irsyad.png';
+const photoSource = '/home/irsyad/Downloads/irsyaddd.png';
 const resumeHtmlPath = path.join(__dirname, 'resume.html');
 const publicAvatarPath = path.join(__dirname, '../../public/avatar.jpg');
 const pageTsxPath = path.join(__dirname, '../app/page.tsx');

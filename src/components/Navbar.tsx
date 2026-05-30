@@ -36,9 +36,9 @@ export function Navbar() {
     <>
       <nav className="fixed top-0 left-0 w-full z-50 px-6 py-5 md:px-12 md:py-6 flex justify-between items-center bg-black/85 backdrop-blur-md border-b border-white/5">
         <div className="flex items-center gap-3">
-          <div className="w-1.5 h-1.5 bg-white rounded-full opacity-60" />
-          <span className="text-xs font-bold uppercase tracking-wider text-white">
-            IRSYAD
+          <div className="w-1.5 h-1.5 bg-rose-500 rounded-full animate-pulse" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+            Irsyad&apos;s Journey
           </span>
         </div>
 

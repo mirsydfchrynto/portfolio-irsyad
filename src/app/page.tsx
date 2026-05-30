@@ -39,7 +39,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#060608] text-white overflow-x-hidden relative selection:bg-white selection:text-black">
+    <div className="min-h-screen bg-[#060608] text-white relative selection:bg-white selection:text-black">
       <CommandPalette />
       <Navbar />
       
@@ -63,7 +63,7 @@ export default function Home() {
               transition={{ duration: 0.8, ease: easeCubic }}
             >
               <div className="space-y-4">
-                <span className="font-mono text-[10px] uppercase tracking-widest text-sky-400 font-bold block select-none">// FRONTEND ENGINEER &amp; SYSTEM BUILDER</span>
+                <span className="font-mono text-[10px] uppercase tracking-widest text-rose-400 font-bold block select-none">// FRONTEND ENGINEER &amp; SYSTEM BUILDER</span>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[76px] font-extrabold tracking-tight text-white leading-none font-display select-none">
                   M. Irsyad Fachryanto
                 </h1>
@@ -94,12 +94,12 @@ export default function Home() {
               </div>
 
               <div className="flex flex-wrap gap-6 pt-6 border-t border-white/5 max-w-md font-mono text-[11px] text-white/30 select-none">
-                <div className="flex items-center gap-1.5 hover:text-sky-400 transition-colors duration-300">
-                  <Shield size={12} className="text-sky-400" />
+                <div className="flex items-center gap-1.5 hover:text-rose-400 transition-colors duration-300">
+                  <Shield size={12} className="text-rose-400" />
                   <span>Focus: <strong className="text-white/70">Clean Code</strong></span>
                 </div>
-                <div className="flex items-center gap-1.5 hover:text-teal-400 transition-colors duration-300">
-                  <Terminal size={12} className="text-teal-400" />
+                <div className="flex items-center gap-1.5 hover:text-red-400 transition-colors duration-300">
+                  <Terminal size={12} className="text-red-400" />
                   <span>Stack: <strong className="text-white/70">Next.js &amp; Flutter</strong></span>
                 </div>
                 <div className="flex items-center gap-1.5 hover:text-purple-400 transition-colors duration-300">
@@ -116,10 +116,10 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: easeCubic, delay: 0.15 }}
             >
-              {/* Photo backdrop glow */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-sky-500/10 to-teal-500/10 rounded-lg blur-xl opacity-60 pointer-events-none" />
+              {/* Photo backdrop glow - Neutral/Red subtle */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-rose-500/10 to-red-600/10 rounded-lg blur-xl opacity-60 pointer-events-none" />
               
-              <div className="relative group w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] aspect-[2/3] border-[3px] border-white/20 bg-[#0e0f14]/50 shadow-[16px_16px_0px_rgba(255,255,255,0.02)] hover:shadow-[12px_12px_0px_rgba(14,165,233,0.15)] hover:border-white/45 hover:scale-[1.02] transition-all duration-500 rounded-sm overflow-hidden select-none">
+              <div className="relative group w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px] aspect-[2/3] border-[3px] border-white/20 bg-[#0e0f14]/50 shadow-[16px_16px_0px_rgba(255,255,255,0.02)] hover:shadow-[12px_12px_0px_rgba(244,63,94,0.15)] hover:border-white/45 hover:scale-[1.02] transition-all duration-500 rounded-sm overflow-hidden select-none">
                 <img 
                   src="/avatar.jpg" 
                   alt="M. Irsyad Fachryanto" 
@@ -127,11 +127,11 @@ export default function Home() {
                 />
                 
                 {/* Overlay subtle brutalist design details */}
-                <div className="absolute top-4 left-4 font-mono text-[9px] text-white/50 bg-black/60 px-2 py-0.5 border border-white/10 rounded-xs select-none">
-                  SYS: ACTIVE
+                <div className="absolute top-4 left-4 font-mono text-[9px] text-white/50 bg-black/60 px-2 py-0.5 border border-white/10 rounded-xs select-none uppercase tracking-widest">
+                  Identity: Batch 2005
                 </div>
-                <div className="absolute bottom-4 right-4 font-mono text-[9px] text-teal-400 bg-black/60 px-2 py-0.5 border border-teal-500/20 rounded-xs select-none">
-                  843 × 1264 PX
+                <div className="absolute bottom-4 right-4 font-mono text-[9px] text-rose-400 bg-black/60 px-2 py-0.5 border border-rose-500/20 rounded-xs select-none">
+                  SECURE_CBT / V4.0
                 </div>
               </div>
             </motion.div>
@@ -151,7 +151,7 @@ export default function Home() {
         >
           <div className="lg:col-span-5 space-y-6 relative">
             <div className="flex items-center gap-2 select-none">
-              <span className="text-[10px] font-mono text-sky-400 font-bold">[01]</span>
+              <span className="text-[10px] font-mono text-rose-400 font-bold">[01]</span>
               <span className="font-mono text-[9px] uppercase tracking-wider text-white/40 block font-bold">// INTERACTIVE WORKSPACE</span>
             </div>
             <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white font-display">Log Solusi &amp; Eksplorasi Arsitektur</h3>
@@ -174,7 +174,7 @@ export default function Home() {
           <div className="md:col-span-4 border border-white/5 bg-[#0a0a0d]/20 p-8 rounded-sm flex flex-col justify-between relative group hover:border-white/10 transition-colors">
             <div className="relative space-y-4">
               <div className="flex items-center gap-2 select-none">
-                <span className="text-[10px] font-mono text-sky-400 font-bold">[02]</span>
+                <span className="text-[10px] font-mono text-rose-400 font-bold">[02]</span>
                 <span className="font-mono text-[9px] uppercase tracking-wider text-white/40 block font-bold">
                   ABOUT JOURNAL
                 </span>
@@ -201,7 +201,7 @@ export default function Home() {
             <div className="relative pt-6 border-t border-white/5 grid sm:grid-cols-3 gap-6 font-mono text-[10px] text-white/35 select-none">
               {exploredTools.map((exp, i) => (
                 <div key={i} className="space-y-2 group/tool">
-                  <span className="text-white/25 block transition-colors group-hover/tool:text-sky-400/50">0{i+1} // {exp.category}</span>
+                  <span className="text-white/25 block transition-colors group-hover/tool:text-rose-400/50">0{i+1} // {exp.category}</span>
                   <ul className="space-y-1 text-white/50 font-sans text-xs group-hover/tool:text-white/80 transition-colors duration-300">
                     {exp.technologies.map((tech) => (
                       <li key={tech}>{tech}</li>
@@ -221,7 +221,7 @@ export default function Home() {
         >
           <div className="relative flex flex-wrap items-baseline justify-between gap-4 border-b border-white/5 pb-3 select-none">
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono text-sky-400 font-bold">[03]</span>
+              <span className="text-[10px] font-mono text-rose-400 font-bold">[03]</span>
               <span className="font-mono text-[9px] uppercase tracking-wider text-white/40 block font-bold">
                 FEATURED PRODUCTION SYSTEM
               </span>
@@ -252,13 +252,13 @@ export default function Home() {
             {/* Stories & Details Right */}
             <div className="lg:col-span-7 space-y-6">
               <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 border border-sky-500/20 bg-sky-500/5 rounded-sm font-mono text-[8.5px] text-sky-400 uppercase tracking-widest font-bold select-none">
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 border border-rose-500/20 bg-rose-500/5 rounded-sm font-mono text-[8.5px] text-rose-400 uppercase tracking-widest font-bold select-none">
                   Live Production System
                 </div>
                 <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white font-display">
                   {productionExperience.title}
                 </h3>
-                <p className="text-xs text-teal-400 font-mono tracking-wider uppercase select-none">
+                <p className="text-xs text-red-400 font-mono tracking-wider uppercase select-none">
                   Role: {productionExperience.role} &mdash; {productionExperience.period}
                 </p>
               </div>
@@ -271,7 +271,7 @@ export default function Home() {
               <ul className="space-y-2.5 font-mono text-[10px] text-white/50 leading-relaxed border-t border-b border-white/5 py-4">
                 {productionExperience.metrics.map((metric, idx) => (
                   <li key={idx} className="flex gap-2.5 items-start">
-                    <span className="text-sky-400 select-none font-bold">&rarr;</span>
+                    <span className="text-rose-400 select-none font-bold">&rarr;</span>
                     <span>{metric}</span>
                   </li>
                 ))}
@@ -279,7 +279,7 @@ export default function Home() {
 
               {/* Quick Proof Timeline Summary */}
               <div className="space-y-3 font-sans text-xs">
-                <span className="font-mono text-[9px] text-sky-400/50 uppercase tracking-wider font-bold block select-none">Impact &amp; Engineering Solutions:</span>
+                <span className="font-mono text-[9px] text-rose-400/50 uppercase tracking-wider font-bold block select-none">Impact &amp; Engineering Solutions:</span>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-[11px] leading-relaxed font-medium">
                   <div>
                     <span className="font-mono text-[9px] text-white/50 block font-bold select-none">01 / Security</span>
@@ -329,7 +329,7 @@ export default function Home() {
           {...fadeInUp}
         >
           <div className="flex flex-wrap items-baseline justify-between gap-4 border-b border-white/5 pb-2">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-sky-400 font-bold">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-rose-400 font-bold">
               03 / System explorations
             </span>
             <span className="font-mono text-[9px] text-white/35">
@@ -355,7 +355,7 @@ export default function Home() {
           {...fadeInUp}
         >
           <div className="md:col-span-4 border border-white/5 bg-[#0a0a0d]/40 p-8 rounded-md hover:border-white/10 transition-colors">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-sky-400 font-bold block">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-rose-400 font-bold block">
               04 / Perjalanan tumbuh
             </span>
             <div className="text-[10px] font-mono text-white/20 block select-none leading-relaxed mt-4">
@@ -388,7 +388,7 @@ export default function Home() {
         >
           <div className="md:col-span-4 space-y-8 sticky top-24 border border-white/5 bg-[#0a0a0d]/50 p-8 rounded-md hover:border-white/10 transition-colors">
             <div className="space-y-2">
-              <span className="font-mono text-[9px] uppercase tracking-wider text-sky-400 font-bold block">
+              <span className="font-mono text-[9px] uppercase tracking-wider text-rose-400 font-bold block">
                 05 / Resume overview
               </span>
               <h2 className="text-xl font-bold tracking-tight text-white font-display uppercase italic">Curriculum Vitae</h2>
@@ -461,7 +461,7 @@ export default function Home() {
           <div className="md:col-span-8 border border-white/5 bg-[#0a0a0d]/30 p-8 rounded-md space-y-12">
             {/* Professional Summary */}
             <div className="space-y-4">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-sky-400 font-bold font-mono">// Ringkasan Profesional</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-rose-400 font-bold font-mono">// Ringkasan Profesional</h3>
               <p className="text-sm text-white/70 leading-relaxed font-sans font-medium">
                 {inlineResume.summary}
               </p>
@@ -469,7 +469,7 @@ export default function Home() {
 
             {/* Education */}
             <div className="space-y-4 pt-4 border-t border-white/5">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-sky-400 font-bold font-mono">// Pendidikan</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-rose-400 font-bold font-mono">// Pendidikan</h3>
               {inlineResume.education.map((edu, idx) => (
                 <div key={idx} className="space-y-3">
                   <div className="flex justify-between items-baseline gap-2 font-mono text-xs text-white/60">
@@ -488,7 +488,7 @@ export default function Home() {
 
             {/* Experience */}
             <div className="space-y-4 pt-4 border-t border-white/5">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-sky-400 font-bold font-mono">// Pengalaman Utama</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-rose-400 font-bold font-mono">// Pengalaman Utama</h3>
               {inlineResume.experience.map((exp, i) => (
                 <div key={i} className="space-y-3">
                   <div className="flex justify-between items-baseline gap-2 font-mono text-xs text-white/60">
@@ -498,7 +498,7 @@ export default function Home() {
                   <p className="text-xs text-white/50 leading-relaxed font-sans">{exp.description}</p>
                   <ul className="space-y-1.5 pl-4 list-disc text-xs text-white/55 leading-relaxed font-sans">
                     {exp.bullets.map((bullet, idx) => (
-                      <li key={idx} className="marker:text-sky-500/40">{bullet}</li>
+                      <li key={idx} className="marker:text-rose-500/40">{bullet}</li>
                     ))}
                   </ul>
                 </div>
@@ -507,7 +507,7 @@ export default function Home() {
 
             {/* Community & Mentoring */}
             <div className="space-y-4 pt-4 border-t border-white/5">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-sky-400 font-bold font-mono">// Keterlibatan Komunitas</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-rose-400 font-bold font-mono">// Keterlibatan Komunitas</h3>
               {inlineResume.community.map((comm, i) => (
                 <div key={i} className="space-y-3">
                   <div className="flex justify-between items-baseline gap-2 font-mono text-xs text-white/60">
@@ -517,7 +517,7 @@ export default function Home() {
                   <p className="text-xs text-white/50 leading-relaxed font-sans">{comm.description}</p>
                   <ul className="space-y-1.5 pl-4 list-disc text-xs text-white/55 leading-relaxed font-sans">
                     {comm.bullets.map((bullet, idx) => (
-                      <li key={idx} className="marker:text-sky-500/40">{bullet}</li>
+                      <li key={idx} className="marker:text-rose-500/40">{bullet}</li>
                     ))}
                   </ul>
                 </div>
@@ -526,11 +526,11 @@ export default function Home() {
 
             {/* Detailed Skills Matrix */}
             <div className="space-y-4 pt-4 border-t border-white/5">
-              <h3 className="text-xs font-mono uppercase tracking-widest text-sky-400 font-bold font-mono">// Matriks Keahlian</h3>
+              <h3 className="text-xs font-mono uppercase tracking-widest text-rose-400 font-bold font-mono">// Matriks Keahlian</h3>
               <div className="grid sm:grid-cols-3 gap-6 font-mono text-[10px] text-white/40">
                 {inlineResume.skills.map((skill, i) => (
                   <div key={i} className="space-y-2 group/skill">
-                    <span className="text-white/20 block group-hover/skill:text-sky-400/50 transition-colors">0{i+1} // {skill.category}</span>
+                    <span className="text-white/20 block group-hover/skill:text-rose-400/50 transition-colors">0{i+1} // {skill.category}</span>
                     <ul className="space-y-1 text-white/60 font-sans text-xs group-hover/skill:text-white transition-colors duration-300">
                       {skill.tools.map((t) => (
                         <li key={t}>{t}</li>
@@ -550,7 +550,7 @@ export default function Home() {
           {...fadeInUp}
         >
           <div className="md:col-span-4">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-sky-400 font-bold block">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-rose-400 font-bold block">
               06 / Correspondence
             </span>
           </div>
@@ -572,6 +572,19 @@ export default function Home() {
                   className="text-white font-bold underline hover:text-white/80 transition-colors lowercase min-h-[44px] flex items-center"
                 >
                   irsydfchrynto@gmail.com
+                </a>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="text-white/20 select-none">&gt;</span>
+                <span className="text-white/30 uppercase text-[9px] tracking-wider w-16">WhatsApp:</span>
+                <a 
+                  href="https://wa.me/6285865826621" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-white font-bold underline hover:text-white/80 transition-colors min-h-[44px] flex items-center"
+                >
+                  +62 858-6582-6621
                 </a>
               </div>
 
@@ -627,3 +640,4 @@ export default function Home() {
     </div>
   );
 }
+
