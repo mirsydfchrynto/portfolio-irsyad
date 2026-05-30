@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { CodeWorkspace } from "@/components/CodeWorkspace";
+import { KernelTerminalExplorer } from "@/components/KernelTerminalExplorer";
 import { ProjectLabCard } from "@/components/ProjectLabCard";
 import { CommandPalette } from "@/components/CommandPalette";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
@@ -143,23 +144,28 @@ export default function Home() {
       {/* MAIN STORY CONTAINER */}
       <main className="max-w-5xl mx-auto px-4 md:px-12 py-24 space-y-48 md:space-y-64 relative z-10">
         
-        {/* SCENE 1.5 — INTERACTIVE CODE TERMINAL (CLEAN CENTERPIECE CARD) */}
+        {/* SCENE 1.5 — KERNEL_TERMINAL_EXPLORER (INFORMATICS RELATABLE MONITOR) */}
         <motion.section 
-          id="code-terminal" 
-          className="border border-white/5 bg-[#0b0c11]/30 p-8 md:p-12 rounded-sm grid lg:grid-cols-12 gap-8 items-center relative group hover:border-white/10 transition-colors duration-300"
+          id="kernel-explorer" 
+          className="border border-white/5 bg-[#0b0c11]/30 p-8 md:p-12 rounded-sm grid lg:grid-cols-12 gap-12 items-center relative group hover:border-white/10 transition-colors duration-300"
           {...fadeInUp}
         >
-          <div className="lg:col-span-5 space-y-6 relative">
-            <div className="flex items-center gap-2 select-none">
-              <span className="text-[10px] font-mono text-rose-400 font-bold">[01]</span>
-              <span className="font-mono text-[9px] uppercase tracking-wider text-white/40 block font-bold">// INTERACTIVE WORKSPACE</span>
+          <div className="lg:col-span-6 space-y-8 relative">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 select-none">
+                <span className="text-[10px] font-mono text-rose-400 font-bold">[01]</span>
+                <span className="font-mono text-[9px] uppercase tracking-wider text-white/40 block font-bold">// KERNEL_TERMINAL_EXPLORER</span>
+              </div>
+              <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white font-display">Sistem Monitoring &amp; Log Pemikiran</h3>
+              <p className="text-sm md:text-base text-white/50 leading-relaxed font-sans font-medium">
+                Selamat datang di pusat saraf digital saya. Di sini Anda bisa memantau "vitals" mahasiswa informatika secara real-time—mulai dari asupan kafein hingga tingkat stres saat debugging 3 subuh. Gunakan tab editor di sebelah kanan untuk meninjau artefak kode konkret yang saya bangun.
+              </p>
             </div>
-            <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white font-display">Log Solusi &amp; Eksplorasi Arsitektur</h3>
-            <p className="text-sm md:text-base text-white/50 leading-relaxed font-sans font-medium">
-              Navigasikan tab editor di sebelah kanan untuk meninjau implementasi kode konkret yang saya terapkan pada proyek riil, mulai dari native Android interop (startLockTask) hingga mekanisme sinkronisasi database Firestore.
-            </p>
+            
+            <KernelTerminalExplorer />
           </div>
-          <div className="lg:col-span-7 flex justify-center lg:justify-end w-full relative">
+          
+          <div className="lg:col-span-6 flex justify-center lg:justify-end w-full relative h-full">
             <CodeWorkspace />
           </div>
         </motion.section>

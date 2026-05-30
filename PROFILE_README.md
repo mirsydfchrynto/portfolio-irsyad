@@ -1,66 +1,55 @@
-# M. Irsyad Fachryanto
-### Aspiring Mobile Developer & Software Architect
+# Muhammad Irsyad Fachryanto
+**Architecting system integrity under constraints.**
 
+---
+
+### // SYSTEM_MAP
+<img src="https://raw.githubusercontent.com/mirsydfchrynto/mirsydfchrynto/main/assets/SYSTEM_MAP.svg" width="100%" />
+
+---
+
+### // LIVE_ENGINEERING_STATE
+<img src="https://raw.githubusercontent.com/mirsydfchrynto/mirsydfchrynto/main/assets/LIVE_STATE.svg" width="100%" />
+
+---
+
+### // FAILURE_ARCHIVE
+<img src="https://raw.githubusercontent.com/mirsydfchrynto/mirsydfchrynto/main/assets/FAILURE_ARCHIVE.svg" width="100%" />
+
+---
+
+### // ARCHITECTURE_DEEP_IVE: SECURE_CBT
+<img src="https://raw.githubusercontent.com/mirsydfchrynto/mirsydfchrynto/main/assets/CBT_BLUEPRINT.svg" width="100%" />
+
+#### The Core Logic
+I built the Secure CBT system to solve a specific problem: students bypassing browser-based exam locks. 
+- **The Kotlin Bridge:** Instead of relying on Dart-level listeners, I used `startLockTask()` to request the OS to pin the application.
+- **Hardware Control:** `FLAG_SECURE` was implemented at the window level to ensure that screenshot attempts return a zero-byte black image.
+- **Time Integrity:** To prevent students from changing their device clock to gain extra time, I implemented a network handshake that compares `FieldValue.serverTimestamp()` with local UTC time to calculate drift.
+
+---
+
+### // SYSTEM_THINKING
+- **Complexity Choice:** I pull in native complexity (Kotlin/MethodChannels) when OS-level security is non-negotiable. I reject it when a simple in-memory sort can replace a complex DB query.
+- **Abstraction Policy:** If an abstraction hides the lifecycle of the underlying process, I avoid it. I prefer building my own bridges over using generic, heavy plugins.
+- **Design Philosophy:** Design exists to communicate state. In my UIs, high-contrast typography and real-time status indicators take priority over decorative assets.
+
+---
+
+### // THE_NOW_OPERATING_SYSTEM
+- **Currently Building:** Native-to-web synchronization bridge for a distributed dashboard.
+- **Currently Learning:** Procedural motion logic to reduce cognitive load in dense data views.
+- **Current Research:** [Offline-First Consistency Models](./research/01_offline_consistency.md).
+
+---
+
+### // ACCESS_POINTS
+- [NOW.md](./NOW.md) - Monthly status update.
+- [/research](./research) - Engineering notebooks and experiments.
+- [Portfolio](https://irsyad-architect.surge.sh) - Visual deployment log.
+- [Email](mailto:irsydfchrynto@gmail.com) - Correspondence.
+
+---
 <div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Space+Grotesk&size=24&duration=3000&pause=1000&color=F43F5E&center=true&vCenter=true&width=600&lines=MOBILE+DEVELOPER;SOFTWARE+ARCHITECTURE+LEARNER;FLUTTER+SPECIALIST;LINUX+ENTHUSIAST" alt="Typing SVG" />
-</div>
-
----
-
-### 🟢 ABOUT ME
-Mahasiswa D4 Teknik Informatika yang sedang mendalami **Mobile Development** dan **Software Architecture**. Fokus saya adalah membangun aplikasi yang tidak hanya berjalan, tapi juga memiliki fondasi kode yang bersih (Clean Code) dan arsitektur yang kuat (SOLID). Saya percaya bahwa software yang baik dimulai dari perencanaan yang matang.
-
-*   🔭 Sedang belajar: **Advanced Flutter, Kotlin Native, & System Design.**
-*   🌱 Fokus saat ini: Memahami **Clean Architecture** secara mendalam dan implementasi **Design Patterns**.
-*   💬 Tanya saya tentang: **Flutter, Mobile UI/UX, atau Kustomisasi Linux.**
-
----
-
-### 🛡️ ENGINEERING ARSENAL
-
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=dart,flutter,kotlin,nextjs,ts,py,firebase,supabase,linux,git,docker,figma" />
-</div>
-
----
-
-### 🚀 FEATURED PROJECTS
-
-<table border="0">
-  <tr>
-    <td width="50%">
-      <h4>📱 Secure CBT Master</h4>
-      <p>Sistem ujian anti-curang. Fokus pada keamanan tingkat device (Kiosk Mode) dan protokol komunikasi aman.</p>
-      <code>Flutter</code> <code>Kotlin</code> <code>Firebase</code>
-    </td>
-    <td width="50%">
-      <h4>💈 Geges Smart Barber</h4>
-      <p>SaaS manajemen barbershop. Implementasi logika penjadwalan dan sinkronisasi data real-time.</p>
-      <code>Flutter</code> <code>Clean Arch</code> <code>NoSQL</code>
-    </td>
-  </tr>
-</table>
-
----
-
-### 📊 STATISTICS
-
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=mirsydfchrynto&show_icons=true&theme=radical&hide_border=true&bg_color=0d1117" height="180" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mirsydfchrynto&layout=compact&theme=radical&hide_border=true&bg_color=0d1117" height="180" />
-</div>
-
----
-
-### 🤝 CONNECT WITH ME
-<p align="center">
-  <a href="https://wa.me/6285865826621"><img src="https://img.shields.io/badge/WhatsApp-25D366?style=flat-square&logo=whatsapp&logoColor=white" /></a>
-  <a href="mailto:irsydfchrynto@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=flat-square&logo=gmail&logoColor=white" /></a>
-  <a href="https://linkedin.com/in/mirsydfchrynto"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white" /></a>
-  <a href="https://irsyad-architect.surge.sh"><img src="https://img.shields.io/badge/Portfolio-000000?style=flat-square&logo=vercel&logoColor=white" /></a>
-</p>
-
-<div align="center">
-  <sub>© 2026 M. Irsyad Fachryanto | Build with focus and curiosity.</sub><br/>
-  <img src="https://komarev.com/ghpvc/?username=mirsydfchrynto&color=f43f5e&style=flat-square&label=PROFILE+VIEWS" />
+  <sub>M. IRSYAD FACHRYANTO // PUBLIC_ENGINEERING_OS_V1.0 // 2026</sub>
 </div>
