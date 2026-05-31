@@ -75,7 +75,7 @@ export function Navbar() {
                       M. IRSYAD F.
                     </span>
                     <span className="text-[7px] md:text-[8px] font-mono text-white/20 uppercase tracking-[0.1em] md:tracking-[0.2em] font-black">
-                      Est. 2005
+                      THE JOURNEY
                     </span>
                   </div>
                 </div>

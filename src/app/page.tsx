@@ -60,7 +60,7 @@ export default function Home() {
               <div className="space-y-4 md:space-y-6">
                 <div className="flex items-center gap-3">
                   <span className="w-8 md:w-10 h-[1px] bg-[#E31B23]" />
-                  <span className="section-label tracking-[0.4em] md:tracking-[0.6em]">Full-Stack Architect</span>
+                  <span className="section-label tracking-[0.4em] md:tracking-[0.6em]">Software Student & Developer</span>
                 </div>
                 <h1 className="giant-type text-white group cursor-default">
                   M. Irsyad <br/>
@@ -103,7 +103,7 @@ export default function Home() {
               <div className="relative group w-full max-w-[320px] md:max-w-[420px] aspect-[4/5] bg-neutral-900 border border-white/5 overflow-hidden shadow-2xl">
                 <img src="/avatar.jpg" alt="M. Irsyad Fachryanto Profile" className="w-full h-full object-cover grayscale contrast-[1.1] brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000 scale-[1.02] group-hover:scale-100" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                <div className="absolute top-6 md:top-8 right-6 md:right-8 font-mono text-[8px] md:text-[10px] text-white/40 font-black uppercase tracking-widest bg-black/40 backdrop-blur-md px-3 md:px-4 py-1.5 border border-white/5">Batch 2005</div>
+                <div className="absolute top-6 md:top-8 right-6 md:right-8 font-mono text-[8px] md:text-[10px] text-white/40 font-black uppercase tracking-widest bg-black/40 backdrop-blur-md px-3 md:px-4 py-1.5 border border-white/5">LEARNING LOG</div>
                 <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 flex flex-col gap-1">
                    <span className="font-mono text-[8px] md:text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">System_Status</span>
                    <span className="text-white font-black text-[10px] md:text-xs uppercase tracking-widest bg-[#E31B23] px-3 py-1 shadow-2xl">Production_Ready</span>
