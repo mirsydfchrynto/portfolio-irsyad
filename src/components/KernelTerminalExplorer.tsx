@@ -23,7 +23,7 @@ interface LogEntry {
 }
 
 const INITIAL_LOGS: LogEntry[] = [
-  { id: 1, type: "INFO", message: "Kernel Initialized: Semester 6 Mode Active", time: "08:00:00" },
+  { id: 1, type: "INFO", message: "Kernel Initialized: God Mode Active", time: "08:00:00" },
   { id: 2, type: "DEBUG", message: "Searching for social life... 404 Not Found.", time: "08:05:21" },
   { id: 3, type: "SUCCESS", message: "Caffeine detected. Productivity +50%", time: "09:12:45" },
 ];
@@ -73,11 +73,11 @@ export function KernelTerminalExplorer() {
   }, []);
 
   return (
-    <div className="w-full space-y-4 font-mono select-none">
+    <div className="w-full space-y-6 font-mono select-none">
       {/* Vitals Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <VitalCard 
-          icon={<Coffee size={14} className="text-amber-400" />} 
+          icon={<Coffee size={14} className="text-amber-500" />} 
           label="Caffeine" 
           value={vitals.caffeine} 
           unit="%" 
@@ -85,21 +85,21 @@ export function KernelTerminalExplorer() {
         />
         <VitalCard 
           icon={<Ghost size={14} className="text-purple-400" />} 
-          label="Sleep" 
+          label="Rest" 
           value={vitals.sleep} 
           unit="%" 
           color="bg-purple-500" 
         />
         <VitalCard 
-          icon={<AlertTriangle size={14} className="text-rose-400" />} 
+          icon={<AlertTriangle size={14} className="text-[#ff0055]" />} 
           label="Stress" 
           value={vitals.stress} 
           unit="%" 
-          color="bg-rose-500" 
+          color="bg-[#ff0055]" 
         />
         <VitalCard 
           icon={<Zap size={14} className="text-emerald-400" />} 
-          label="Productivity" 
+          label="Output" 
           value={vitals.productivity} 
           unit="%" 
           color="bg-emerald-500" 
@@ -107,45 +107,47 @@ export function KernelTerminalExplorer() {
       </div>
 
       {/* Main Terminal Area */}
-      <div className="relative border border-white/10 bg-[#0b0c10] rounded-sm overflow-hidden shadow-2xl">
+      <div className="relative border border-white/10 bg-[#060608] shadow-[20px_20px_80px_rgba(0,0,0,0.9)] overflow-hidden brutal-card">
+        <div className="absolute inset-0 architect-grid-dense opacity-[0.05] pointer-events-none" />
+        
         {/* Header */}
-        <div className="bg-[#12131a] flex border-b border-white/5 items-center justify-between px-4 h-9">
-          <div className="flex items-center gap-1.5">
-            <Activity size={12} className="text-rose-500 animate-pulse" />
-            <span className="text-[10px] uppercase tracking-widest text-white/50 font-bold">KERNEL_TERMINAL_EXPLORER V6.0.2</span>
+        <div className="bg-[#0a0a0c] flex border-b border-white/5 items-center justify-between px-5 h-12">
+          <div className="flex items-center gap-3">
+            <Activity size={14} className="text-[#ff0055] animate-pulse" />
+            <span className="text-[10px] uppercase tracking-[0.3em] text-white/40 font-black">KERNEL_MONITOR_V5.0</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[9px] text-emerald-500/80 font-bold uppercase tracking-tighter">System Nominal</span>
+          <div className="flex items-center gap-3">
+            <div className="w-2 h-2 rounded-full bg-[#ff0055] animate-pulse shadow-[0_0_15px_rgba(255,0,85,0.6)]" />
+            <span className="text-[9px] text-[#ff0055] font-black uppercase tracking-widest">God Mode Synchronized</span>
           </div>
         </div>
 
-        <div className="p-4 grid lg:grid-cols-1 gap-4">
+        <div className="p-8 relative z-10">
           {/* Logs Section */}
-          <div className="space-y-2 min-h-[160px]">
-            <div className="flex items-center gap-2 border-b border-white/5 pb-2 mb-3">
-              <Terminal size={12} className="text-rose-400" />
-              <span className="text-[9px] uppercase text-rose-400/70 font-bold tracking-widest">Thought_Process.log</span>
+          <div className="space-y-6 min-h-[200px]">
+            <div className="flex items-center gap-3 border-b border-white/5 pb-3 mb-6">
+              <Terminal size={16} className="text-[#ff0055]" />
+              <span className="text-[10px] uppercase text-[#ff0055] font-black tracking-[0.3em]">Thought_Engine.log</span>
             </div>
-            <div className="space-y-1.5 overflow-hidden">
+            <div className="space-y-3 overflow-hidden">
               <AnimatePresence mode="popLayout">
                 {logs.map((log) => (
                   <motion.div
                     key={log.id}
-                    initial={{ opacity: 0, x: -10 }}
+                    initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 10 }}
-                    className="flex items-start gap-3 text-[10px] leading-relaxed group"
+                    exit={{ opacity: 0, x: 20 }}
+                    className="flex items-start gap-5 text-[11px] leading-relaxed group"
                   >
-                    <span className="text-white/20 whitespace-nowrap">[{log.time}]</span>
-                    <span className={`font-bold min-w-[45px] ${
+                    <span className="text-white/20 whitespace-nowrap font-mono">[{log.time}]</span>
+                    <span className={`font-black min-w-[55px] ${
                       log.type === "INFO" ? "text-blue-400" : 
-                      log.type === "WARN" ? "text-rose-400" : 
-                      log.type === "SUCCESS" ? "text-emerald-400" : "text-amber-400"
+                      log.type === "WARN" ? "text-amber-400" : 
+                      log.type === "SUCCESS" ? "text-emerald-400" : "text-[#ff0055]"
                     }`}>
                       {log.type}
                     </span>
-                    <span className="text-white/60 group-hover:text-white transition-colors">
+                    <span className="text-white/50 group-hover:text-white transition-colors duration-500">
                       {log.message}
                     </span>
                   </motion.div>
@@ -156,14 +158,14 @@ export function KernelTerminalExplorer() {
         </div>
 
         {/* Footer Stats */}
-        <div className="bg-[#0f1015] px-4 py-2 border-t border-white/5 flex flex-wrap justify-between items-center gap-4 text-[8px] text-white/25 uppercase tracking-widest">
-          <div className="flex gap-4">
-            <span className="flex items-center gap-1.5"><Cpu size={10} className="text-white/20" /> CPU: Intel(R) Core(TM) i7-Irsyad</span>
-            <span className="flex items-center gap-1.5"><FileCode size={10} className="text-white/20" /> Runtime: Semester_6_Stable</span>
+        <div className="bg-[#0a0a0c] px-6 py-3 border-t border-white/5 flex flex-wrap justify-between items-center gap-8 text-[9px] text-white/10 uppercase tracking-[0.3em] font-black">
+          <div className="flex gap-8">
+            <span className="flex items-center gap-2.5 hover:text-[#ff0055] transition-colors cursor-crosshair"><Cpu size={12} className="text-[#ff0055]/30" /> NODE: IRSYAD_V5</span>
+            <span className="flex items-center gap-2.5 hover:text-[#ff0055] transition-colors cursor-crosshair"><FileCode size={12} className="text-[#ff0055]/30" /> ENV: EXPERIMENTAL_STABLE</span>
           </div>
-          <div className="flex gap-4">
-            <span className="text-emerald-500/50 flex items-center gap-1"><CheckCircle2 size={10} /> Sync: 100%</span>
-            <span className="text-rose-500/50 flex items-center gap-1"><Bug size={10} /> Bugs: &infin;</span>
+          <div className="flex gap-8">
+            <span className="text-emerald-500/30 flex items-center gap-2"><CheckCircle2 size={12} /> SYNC: 100%</span>
+            <span className="text-[#ff0055]/30 flex items-center gap-2"><Bug size={12} /> ISSUES: 0.00</span>
           </div>
         </div>
       </div>
@@ -173,23 +175,24 @@ export function KernelTerminalExplorer() {
 
 function VitalCard({ icon, label, value, unit, color }: { icon: any, label: string, value: number, unit: string, color: string }) {
   return (
-    <div className="bg-[#0e0f14]/50 border border-white/5 p-3 rounded-sm space-y-2 group hover:border-white/10 transition-colors">
+    <div className="bg-[#0a0a0c] border border-white/5 p-5 space-y-4 group hover:border-[#ff0055]/40 transition-all duration-700 shadow-2xl brutal-card">
       <div className="flex items-center justify-between">
-        {icon}
-        <span className="text-[8px] text-white/30 uppercase tracking-tighter">{label}</span>
+        <div className="group-hover:scale-125 transition-transform duration-700 opacity-60 group-hover:opacity-100">{icon}</div>
+        <span className="text-[10px] text-white/20 uppercase tracking-[0.3em] font-black group-hover:text-[#ff0055] transition-colors">{label}</span>
       </div>
-      <div className="flex items-baseline gap-1">
-        <span className="text-lg font-bold text-white tracking-tighter">{Math.round(value)}</span>
-        <span className="text-[10px] text-white/20">{unit}</span>
+      <div className="flex items-baseline gap-2">
+        <span className="text-3xl font-black text-white tracking-tighter">{Math.round(value)}</span>
+        <span className="text-[12px] text-white/10 font-black tracking-widest">{unit}</span>
       </div>
-      <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+      <div className="h-1.5 w-full bg-white/[0.03] overflow-hidden">
         <motion.div 
-          className={`h-full ${color}`}
+          className={`h-full ${color} shadow-[0_0_20px_rgba(255,0,85,0.4)]`}
           initial={{ width: 0 }}
           animate={{ width: `${value}%` }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
     </div>
   );
 }
+
