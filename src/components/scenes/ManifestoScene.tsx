@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { introduction, exploredTools } from "@/config/portfolioData";
+import { Activity, Shield, Cpu } from "lucide-react";
 
 export function ManifestoScene() {
   const easeCubic = [0.16, 1, 0.3, 1] as any;
@@ -16,48 +17,75 @@ export function ManifestoScene() {
   return (
     <motion.section 
       id="about" 
-      className="grid md:grid-cols-12 gap-16 items-stretch"
+      className="grid md:grid-cols-12 gap-10 items-stretch"
       {...fadeInUp}
     >
-      <div className="md:col-span-4 brutal-card p-12 flex flex-col justify-between group hover:border-[#ff0055]/40">
-        <div className="space-y-8">
+      {/* 1. MANIFESTO HEADER BOX */}
+      <div className="md:col-span-4 brutal-card p-10 flex flex-col justify-between group hover:border-[#ff0055]/40 transition-all duration-700 bg-[#050507]">
+        <div className="space-y-10">
           <div className="flex items-center gap-4">
             <span className="text-[12px] font-mono text-[#ff0055] font-black tracking-widest">[SCENE_03]</span>
-            <span className="font-mono text-[11px] uppercase tracking-[0.4em] text-white/20 block font-black">
-              MANIFESTO
+            <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/20 block font-black">
+              CORE_MANIFESTO
             </span>
           </div>
-          <h3 className="text-3xl font-bold font-display tracking-tighter text-white leading-[1.1]">
-            Foundations &amp; <br />
-            Engineering <br />
+          
+          <h3 className="text-3xl font-black font-display tracking-tighter text-white leading-[1] uppercase">
+            Foundations <br />
+            &amp; Engineering <br />
             Principles
           </h3>
+
+          <div className="space-y-4 pt-10 border-t border-white/5">
+            <div className="flex items-center justify-between text-[10px] font-mono text-white/20 uppercase tracking-widest font-black">
+              <span className="flex items-center gap-2"><Shield size={10} className="text-[#ff0055]" /> Integrity</span>
+              <span className="text-white/40">Enabled</span>
+            </div>
+            <div className="flex items-center justify-between text-[10px] font-mono text-white/20 uppercase tracking-widest font-black">
+              <span className="flex items-center gap-2"><Cpu size={10} className="text-[#ff0055]" /> Logic</span>
+              <span className="text-white/40">Clean_Only</span>
+            </div>
+            <div className="flex items-center justify-between text-[10px] font-mono text-white/20 uppercase tracking-widest font-black">
+              <span className="flex items-center gap-2"><Activity size={10} className="text-[#ff0055]" /> Output</span>
+              <span className="text-white/40">High_Fidelity</span>
+            </div>
+          </div>
         </div>
-        <div className="font-mono text-[11px] text-white/10 block select-none leading-relaxed mt-24 uppercase tracking-[0.3em] font-bold">
-          Archived 2023 // Tegal, ID <br />
-          <span className="text-[#ff0055] opacity-50">High integrity technical log</span>
+
+        <div className="font-mono text-[10px] text-white/10 block select-none leading-relaxed mt-20 uppercase tracking-[0.4em] font-black group-hover:text-white/20 transition-colors">
+          Archived // Tegal, ID <br />
+          <span className="text-[#ff0055] opacity-50 shadow-[0_0_10px_rgba(255,0,85,0.2)]">Personal technical archive</span>
         </div>
       </div>
       
-      <div className="md:col-span-8 brutal-card p-12 md:p-20 space-y-16 relative group overflow-hidden">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff0055]/5 blur-[80px] pointer-events-none" />
+      {/* 2. MANIFESTO CONTENT BOX */}
+      <div className="md:col-span-8 brutal-card p-12 md:p-20 space-y-20 relative group overflow-hidden bg-[#0a0a0c]">
+        {/* Ambient identity red glow */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#ff0055]/5 blur-[100px] pointer-events-none group-hover:bg-[#ff0055]/10 transition-all duration-1000" />
         
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tighter leading-[1.1] text-white">
-          Architecting <span className="text-[#ff0055]">high-integrity</span> digital experiences through clean engineering and <span className="italic font-light opacity-60">bold minimalism</span>.
-        </h2>
-        <p className="paragraph-editorial text-lg md:text-xl text-white/60">
-          {introduction.bio}
-        </p>
+        <div className="space-y-12 relative z-10">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tighter leading-[1] text-white uppercase">
+            Architecting <span className="text-[#ff0055] drop-shadow-[0_0_20px_rgba(255,0,85,0.3)]">high-integrity</span> <br />
+            digital experiences through clean engineering and <span className="italic font-light opacity-50 lowercase tracking-tight">bold minimalism</span>.
+          </h2>
+          <p className="paragraph-editorial text-xl md:text-2xl text-white/50 leading-relaxed font-medium">
+            {introduction.bio}
+          </p>
+        </div>
         
-        <div className="pt-16 border-t border-white/5 grid sm:grid-cols-3 gap-12 font-mono text-[11px] text-white/10 uppercase tracking-[0.2em] select-none font-bold">
+        {/* 3. TECHNOLOGY BENTO GRID */}
+        <div className="pt-16 border-t border-white/5 grid sm:grid-cols-3 gap-12 font-mono text-[11px] text-white/10 uppercase tracking-[0.3em] select-none font-black relative z-10">
           {exploredTools.map((exp, i) => (
-            <div key={i} className="space-y-6 group/tool">
-              <span className="text-[#ff0055] font-black">0{i+1} // {exp.category}</span>
-              <ul className="space-y-3 text-white/40 font-sans text-[12px] normal-case tracking-normal font-medium group-hover/tool:text-white transition-colors duration-500">
+            <div key={i} className="space-y-8 group/tool">
+              <div className="flex items-center gap-3">
+                <span className="text-[#ff0055] font-black">0{i+1}</span>
+                <span className="text-white/40 group-hover/tool:text-[#ff0055] transition-colors">{exp.category}</span>
+              </div>
+              <ul className="space-y-4 text-white/30 font-sans text-[13px] normal-case tracking-normal font-bold group-hover/tool:text-white transition-all duration-700">
                 {exp.technologies.map((tech) => (
-                  <li key={tech} className="flex items-center gap-3">
-                    <span className="w-1.5 h-[1px] bg-[#ff0055]/40" />
-                    {tech}
+                  <li key={tech} className="flex items-center gap-4 group/item">
+                    <div className="w-1.5 h-1.5 bg-[#ff0055]/20 border border-[#ff0055]/40 group-hover/tool:bg-[#ff0055] transition-all" />
+                    <span className="opacity-60 group-hover/tool:opacity-100 transition-opacity">{tech}</span>
                   </li>
                 ))}
               </ul>
