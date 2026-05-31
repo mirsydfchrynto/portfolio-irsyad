@@ -46,8 +46,8 @@ UPTIME: 99.9% | SECURITY: FORCED-HARDENED | ETHOS: CLEAN-CODE
 
 ### SYSTEM_OPERATIONAL_STATS
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=mirsydfchrynto&show_icons=true&theme=transparent&hide_border=true&title_color=f43f5e&text_color=666&icon_color=f43f5e&text_bold=false" width="48%" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mirsydfchrynto&layout=compact&theme=transparent&hide_border=true&title_color=f43f5e&text_color=666&icon_color=f43f5e&text_bold=false" width="40%" />
+  <img src="https://github-readme-stats.vercel.app/api?username=mirsydfchrynto&show_icons=true&theme=transparent&hide_border=true&title_color=0070f3&text_color=666&icon_color=0070f3&text_bold=false" width="48%" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=mirsydfchrynto&layout=compact&theme=transparent&hide_border=true&title_color=0070f3&text_color=666&icon_color=0070f3&text_bold=false" width="40%" />
 </div>
 
 <div align="center">
@@ -55,7 +55,7 @@ UPTIME: 99.9% | SECURITY: FORCED-HARDENED | ETHOS: CLEAN-CODE
 </div>
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=mirsydfchrynto&theme=transparent&hide_border=true&stroke=f43f5e&ring=f43f5e&fire=f43f5e&currStreakLabel=f43f5e" width="100%" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=mirsydfchrynto&theme=transparent&hide_border=true&stroke=0070f3&ring=0070f3&fire=0070f3&currStreakLabel=0070f3" width="100%" />
 </div>
 
 ---

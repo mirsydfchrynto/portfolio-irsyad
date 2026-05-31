@@ -47,6 +47,12 @@ export default function Home() {
     setTimeout(() => setDownloading(false), 1500);
   };
 
+  // DYNAMIC LIGHTING GRADIENT (Hook must be top-level)
+  const spotlightGradient = useTransform(
+    [mouseX, mouseY],
+    ([x, y]) => `radial-gradient(800px circle at ${x}px ${y}px, rgba(255, 0, 85, 0.04), transparent 85%)`
+  );
+
   return (
     <div className="min-h-screen bg-[#020203] text-white relative selection:bg-[#ff0055] selection:text-white overflow-hidden cursor-none">
       <AnimatePresence mode="wait">
@@ -80,12 +86,7 @@ export default function Home() {
 
             <motion.div 
               className="fixed inset-0 z-0 pointer-events-none"
-              style={{
-                background: useTransform(
-                  [mouseX, mouseY],
-                  ([x, y]) => `radial-gradient(800px circle at ${x}px ${y}px, rgba(255, 0, 85, 0.04), transparent 85%)`
-                )
-              }}
+              style={{ background: spotlightGradient }}
             />
 
             {/* THE NARRATIVE ENGINE */}

@@ -89,5 +89,5 @@ $ git commit -m "feat: building future systems"
 
 <div align="center">
   <sub>© 2026 M. IRSYAD FACHRYANTO // ENGINEERED_FOR_STABILITY.</sub><br/>
-  <img src="https://komarev.com/ghpvc/?username=mirsydfchrynto&color=f43f5e&style=flat-square&label=VISITOR_LOG" />
+  <img src="https://komarev.com/ghpvc/?username=mirsydfchrynto&color=0070f3&style=flat-square&label=VISITOR_LOG" />
 </div>
