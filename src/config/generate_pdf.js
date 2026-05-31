@@ -4,13 +4,14 @@ const fs = require('fs');
 
 const sourceHtml = path.join(__dirname, 'resume.html');
 const tempPdf = path.join(__dirname, 'temp_resume.pdf');
+const targetName = 'CV M.IRSYAD FACHRYANTO.pdf';
 
 // Target destinations
 const targets = [
-  '/home/irsyad/Downloads/muhammad-irsyad-fachryanto-resume.pdf',
-  path.join(__dirname, '../../public/resume/muhammad-irsyad-fachryanto-resume.pdf'),
-  path.join(__dirname, '../../public/resume/muhammad-irsyad-fachryanto-resume.txt'),
-  '/home/irsyad/Gudang/mydevelopment/muhammad_irsyadF-1772222539127.pdf'
+  path.join('/home/irsyad/Downloads', targetName),
+  path.join(__dirname, '../../public/resume', targetName),
+  path.join(__dirname, '../../public/resume', targetName.replace('.pdf', '.txt')),
+  path.join('/home/irsyad/Gudang/mydevelopment', `CV_IRSYAD_${Date.now()}.pdf`)
 ];
 
 console.log('--- RESUME GENERATION SYSTEM ---');

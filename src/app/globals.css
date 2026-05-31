@@ -1,193 +1,80 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: var(--font-space-grotesk), "Space Grotesk", sans-serif;
-  --font-sans: var(--font-inter), "SF Pro Display", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "SF Mono", ui-monospace, monospace;
+  --font-sans: "Inter", var(--font-inter), ui-sans-serif, system-ui;
+  --font-display: "Space Grotesk", var(--font-space-grotesk), sans-serif;
+  --font-mono: "JetBrains Mono", var(--font-jetbrains-mono), monospace;
 }
 
 :root {
-  --background: #020203;
-  --foreground: #ffffff;
-  --accent: #E31B23; /* Signature Architect Red (2005 Edition) */
-  --accent-muted: #990000;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(227, 27, 35, 0.3);
-  --grid-color: rgba(227, 27, 35, 0.015);
-  --glass: rgba(255, 255, 255, 0.02);
+  --accent: #E31B23;
+  --bg: #060608;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.65;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer base {
+  html {
+    background-color: var(--bg);
+    color: white;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  body {
+    @apply font-sans;
+  }
+
+  ::selection {
+    background-color: white;
+    color: black;
+  }
 }
 
-/* SCENE 0: System Noise Texture with Boot Animation */
-.system-noise {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  content: "";
-  opacity: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  animation: noise-boot 2s steps(4) forwards;
+@layer components {
+  .architect-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  .architect-grid-dense {
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  .brutal-card {
+    @apply border border-white/5 bg-white/[0.01] transition-all duration-500;
+  }
+
+  .brutal-card:hover {
+    @apply border-white/20 bg-white/[0.03] shadow-[0_0_40px_rgba(255,255,255,0.02)];
+  }
+
+  .giant-type {
+    @apply font-display font-black tracking-tighter uppercase leading-[0.85];
+    font-size: clamp(3rem, 8vw, 6rem);
+  }
+
+  .section-label {
+    @apply font-mono text-[10px] font-black uppercase tracking-[0.4em] text-[#E31B23];
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
-@keyframes noise-boot {
-  0% { opacity: 0; transform: scale(1.1); }
-  50% { opacity: 0.04; }
-  100% { opacity: 0.025; transform: scale(1); }
+/* Animations */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
-/* Cinematic visual glow - Identity Red */
-.cyber-glow {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(227, 27, 35, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.cyber-glow-red {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(227, 27, 35, 0.06) 0%, rgba(0, 0, 0, 0) 75%);
-  filter: blur(100px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* High-Impact Typography */
-.giant-type {
-  font-size: clamp(3rem, 8vw, 6.5rem);
-  font-weight: 800;
-  line-height: 0.95;
-  letter-spacing: -0.06em;
-  font-family: var(--font-display);
-  text-transform: uppercase;
-}
-
-.section-type {
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.04em;
-  font-family: var(--font-display);
-}
-
-.paragraph-editorial {
-  font-size: clamp(1rem, 1.1rem, 1.25rem);
-  line-height: 1.75;
-  max-width: 65ch;
-  color: rgba(255, 255, 255, 0.6);
-  font-family: var(--font-sans);
-  font-weight: 450;
-}
-
-.mono-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--accent);
-  font-weight: 800;
-}
-
-/* Refined Architectural Grid with Entry Animation */
-.architect-grid {
-  background-size: 80px 80px;
-  background-image: 
-    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-  mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
-  animation: grid-pulse 10s ease-in-out infinite alternate;
-}
-
-@keyframes grid-pulse {
-  from { opacity: 0.02; }
-  to { opacity: 0.04; }
-}
-
-.architect-grid-dense {
-  background-size: 20px 20px;
-  background-image: 
-    linear-gradient(to right, rgba(227, 27, 35, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(227, 27, 35, 0.01) 1px, transparent 1px);
-}
-
-/* Elite Glassmorphism */
-.glass-panel {
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-}
-
-/* Neo-Brutalist Elite Physicality */
-.brutal-card {
-  border: 1px solid var(--border);
-  background: #050507;
-  position: relative;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.brutal-card::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  background: linear-gradient(135deg, var(--accent) 0%, transparent 40%);
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-}
-
-.brutal-card:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 20px 40px -10px rgba(227, 27, 35, 0.15);
-}
-
-.brutal-card:hover::after {
-  opacity: 0.1;
-}
-
-/* Interactive Cursor Target Base */
-.cursor-follower {
-  width: 20px;
-  height: 20px;
-  border: 1px solid var(--accent);
-  position: fixed;
-  pointer-events: none;
-  z-index: 10000;
-  transition: transform 0.15s ease-out;
-}
-
-/* Custom Scrollbar Identity */
-::-webkit-scrollbar {
-  width: 3px;
-}
-::-webkit-scrollbar-track {
-  background: #000000;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 0px;
-}
-
-::selection {
-  background: var(--accent);
-  color: white;
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
 }

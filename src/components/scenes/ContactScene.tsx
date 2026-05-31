@@ -5,7 +5,7 @@ import { ArrowUpRight, Zap, Globe, MessageSquare, Mail, GitBranch } from "lucide
 import { Magnetic } from "@/components/Magnetic";
 
 export function ContactScene() {
-  const easeCubic = [0.16, 1, 0.3, 1] as any;
+  const easeCubic: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -24,7 +24,7 @@ export function ContactScene() {
   return (
     <motion.section 
       id="contact" 
-      className="brutal-card p-12 md:p-24 space-y-24 relative overflow-hidden group/contact bg-[#050507]"
+      className="brutal-card p-6 md:p-24 space-y-16 md:space-y-24 relative overflow-hidden group/contact bg-[#050507]"
       {...fadeInUp}
     >
       {/* 1. ATMOSPHERIC DEPTH */}
@@ -49,7 +49,7 @@ export function ContactScene() {
           <div className="space-y-10">
             <h3 className="section-type text-white lg:text-7xl xl:text-8xl tracking-tighter leading-[0.85] font-black uppercase">
               Initialize <br /> 
-              <span className="text-[#E31B23] drop-shadow-[0_0_30px_rgba(255,0,85,0.4)]">High Integrity</span> <br /> 
+              <span className="text-[#E31B23] drop-shadow-[0_0_30px_rgba(227, 27, 35,0.4)]">High Integrity</span> <br /> 
               Link.
             </h3>
             <p className="paragraph-editorial text-2xl text-white/50 leading-relaxed font-medium">
@@ -71,7 +71,7 @@ export function ContactScene() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="brutal-card p-10 space-y-8 hover:border-[#E31B23]/60 transition-all duration-700 group/link bg-[#0a0a0c] h-full flex flex-col justify-between"
+                className="brutal-card p-6 md:p-10 space-y-8 hover:border-[#E31B23]/60 transition-all duration-700 group/link bg-[#0a0a0c] h-full flex flex-col justify-between"
               >
                 <div className="flex justify-between items-start">
                   <div className="w-12 h-12 bg-[#E31B23]/5 border border-[#E31B23]/20 flex items-center justify-center text-[#E31B23] group-hover/link:bg-[#E31B23] group-hover/link:text-white transition-all duration-500 shadow-2xl">

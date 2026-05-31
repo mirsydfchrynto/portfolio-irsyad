@@ -74,29 +74,29 @@ export function CommandPalette() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.98, opacity: 0, y: 30 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full max-w-2xl bg-[#060608] border border-white/10 p-0 overflow-hidden shadow-[0_0_100px_rgba(255,0,85,0.2)] brutal-card"
+              className="w-full max-w-2xl bg-[#060608] border border-white/10 p-0 overflow-hidden shadow-[0_0_60px_rgba(227, 27, 35,0.15)] md:shadow-[0_0_100px_rgba(227, 27, 35,0.2)] brutal-card"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Search Header */}
-              <div className="p-8 border-b border-white/5 flex items-center gap-6 bg-white/[0.01]">
+              <div className="p-4 md:p-8 border-b border-white/5 flex items-center gap-4 md:gap-6 bg-white/[0.01]">
                 <Search size={22} className="text-[#E31B23] animate-pulse" />
                 <input 
                   autoFocus
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Execute system query..." 
-                  className="bg-transparent border-none outline-none text-lg placeholder:text-white/5 flex-grow text-white font-sans font-black tracking-tight"
+                  className="bg-transparent border-none outline-none text-base md:text-lg placeholder:text-white/5 flex-grow text-white font-sans font-black tracking-tight"
                 />
               </div>
 
               {/* Action List */}
-              <div className="p-6 max-h-[450px] overflow-y-auto space-y-6">
+              <div className="p-4 md:p-6 max-h-[350px] md:max-h-[450px] overflow-y-auto space-y-4 md:space-y-6">
                 {filteredActions.length > 0 ? (
                   <div>
-                    <div className="text-[10px] font-mono text-[#E31B23] font-black uppercase tracking-[0.5em] px-4 mb-6 opacity-60">
+                    <div className="text-[9px] md:text-[10px] font-mono text-[#E31B23] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] px-2 md:px-4 mb-4 md:mb-6 opacity-60">
                       ACTIVE_MATCHES ({filteredActions.length})
                     </div>
-                    <div className="grid gap-3">
+                    <div className="grid gap-2 md:gap-3">
                       {filteredActions.map((action, i) => (
                         <a 
                           key={i} 
@@ -107,15 +107,15 @@ export function CommandPalette() {
                             setIsOpen(false);
                             setQuery("");
                           }}
-                          className="flex items-center justify-between p-5 bg-white/[0.01] border border-white/5 hover:border-[#E31B23]/40 hover:bg-[#E31B23]/5 transition-all group/item brutal-card"
+                          className="flex items-center justify-between p-3.5 md:p-5 bg-white/[0.01] border border-white/5 hover:border-[#E31B23]/40 hover:bg-[#E31B23]/5 transition-all group/item brutal-card"
                         >
-                          <div className="flex items-center gap-5 text-[14px] text-white/40 group-hover/item:text-white transition-colors font-black">
+                          <div className="flex items-center gap-3 md:gap-5 text-[13px] md:text-[14px] text-white/40 group-hover/item:text-white transition-colors font-black">
                             <span className="text-[#E31B23] opacity-20 group-hover/item:opacity-100 transition-opacity">
                               {action.icon}
                             </span>
                             {action.label}
                           </div>
-                          <span className="text-[10px] font-mono text-white/10 uppercase tracking-[0.3em] group-hover/item:text-[#E31B23] transition-colors font-black">
+                          <span className="hidden sm:block text-[10px] font-mono text-white/10 uppercase tracking-[0.3em] group-hover/item:text-[#E31B23] transition-colors font-black">
                             {action.category}
                           </span>
                         </a>

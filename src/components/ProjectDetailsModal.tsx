@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, GitBranch, ArrowUpRight, CheckCircle2, ChevronRight, Zap, Terminal, ExternalLink, Clock, ShieldCheck, Cpu, FileCode, Search } from "lucide-react";
+import { X, GitBranch, ArrowUpRight, Zap, Terminal } from "lucide-react";
 import { Magnetic } from "./Magnetic";
 
 interface TimelineItem {
@@ -61,7 +61,7 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as any }
   };
 
   return (
@@ -72,41 +72,38 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[1000] bg-[#020203] overflow-y-auto selection:bg-[#E31B23] selection:text-white"
+          className="fixed inset-0 z-[1000] bg-[#060608] overflow-y-auto selection:bg-[#E31B23] selection:text-white"
         >
           {/* Main Overlay Container */}
           <div className="min-h-screen w-full flex flex-col relative z-50">
             <div className="fixed inset-0 z-0 architect-grid opacity-[0.04] pointer-events-none" />
-            <div className="fixed inset-0 z-0 architect-grid-dense opacity-[0.02] pointer-events-none" />
             
-            {/* Minimal Sticky Top Navigation */}
-            <div className="sticky top-0 z-[100] bg-black/90 backdrop-blur-xl px-8 py-6 md:px-16 border-b border-white/5 flex justify-between items-center">
-              <div className="flex items-center gap-6">
-                <div className="w-2 h-2 bg-[#E31B23] rounded-full animate-pulse shadow-[0_0_15px_rgba(255,0,85,0.6)]" />
-                <span className="font-mono text-[11px] uppercase tracking-[0.4em] text-white/40 font-black">
-                  DEEP_DIVE_PROTOCOL // {project.title}
+            {/* Sticky Top Navigation */}
+            <div className="sticky top-0 z-[100] bg-black/90 backdrop-blur-xl px-6 py-4 md:px-16 md:py-6 border-b border-white/5 flex justify-between items-center">
+              <div className="flex items-center gap-4">
+                <div className="w-2 h-2 bg-[#E31B23] rounded-full" />
+                <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-white/40 font-bold truncate max-w-[150px] md:max-w-none">
+                  Detail Proyek // {project.title}
                 </span>
               </div>
-              <Magnetic strength={0.15}>
-                <button 
-                  onClick={onClose}
-                  className="group relative px-8 py-3 bg-white text-black text-[11px] font-mono font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:pr-14 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-                  aria-label="Close Journal"
-                >
-                  <span className="relative z-10">TERMINATE_LINK</span>
-                  <X className="absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={16} />
-                  <div className="absolute inset-0 bg-[#E31B23] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-                </button>
-              </Magnetic>
+              <button 
+                onClick={onClose}
+                className="group flex items-center gap-3 text-white/40 hover:text-white transition-colors"
+              >
+                <span className="font-mono text-[10px] uppercase tracking-widest font-bold hidden md:block">Tutup</span>
+                <div className="p-2 border border-white/10 group-hover:border-white/30 transition-colors">
+                  <X size={16} />
+                </div>
+              </button>
             </div>
 
-            {/* Cinematic Article Body */}
-            <article className="w-full max-w-6xl mx-auto px-8 md:px-16 py-32 space-y-48 relative z-10">
+            {/* Content Body */}
+            <article className="w-full max-w-5xl mx-auto px-6 md:px-16 py-12 md:py-24 space-y-24 md:space-y-40 relative z-10">
               
               {/* Header Title */}
-              <motion.div {...sectionReveal} className="space-y-12">
-                <div className="flex flex-wrap items-center gap-6 font-mono text-[11px] text-[#E31B23] uppercase font-black tracking-[0.3em]">
-                  {project.role && <span className="px-3 py-1 bg-[#E31B23]/5 border border-[#E31B23]/20 shadow-[0_0_20px_rgba(255,0,85,0.1)]">{project.role}</span>}
+              <motion.div {...sectionReveal} className="space-y-6 md:space-y-10">
+                <div className="flex flex-wrap items-center gap-3 md:gap-6 font-mono text-[10px] text-[#E31B23] uppercase font-bold tracking-widest">
+                  {project.role && <span className="px-2 py-1 bg-[#E31B23]/5 border border-[#E31B23]/10">{project.role}</span>}
                   {project.period && (
                     <>
                       <span className="text-white/10">|</span>
@@ -114,57 +111,51 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                     </>
                   )}
                 </div>
-                <h1 className="section-type text-white lg:text-7xl xl:text-8xl tracking-tighter leading-[0.9] font-black">
+                <h1 className="text-white text-4xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9]">
                   {project.title}
                 </h1>
-                <p className="text-2xl md:text-3xl text-white/40 leading-tight max-w-4xl font-display font-medium border-l-4 border-[#E31B23] pl-10 py-4 italic">
+                <p className="text-lg md:text-2xl text-white/40 leading-relaxed max-w-3xl font-medium border-l-2 border-[#E31B23] pl-6 py-2 italic">
                   {project.tagline}
                 </p>
               </motion.div>
 
-              {/* SECTION 1 — Context */}
-              <motion.section {...sectionReveal} className="space-y-12">
+              {/* Konteks Proyek */}
+              <motion.section {...sectionReveal} className="space-y-8">
                 <div className="flex items-center gap-4">
-                  <span className="text-[#E31B23] font-mono text-sm font-black">[01]</span>
-                  <h2 className="font-mono text-[12px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-3 flex-grow">
-                    MISSION_PARAMETER
+                  <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold border-b border-white/5 pb-2 flex-grow">
+                    Konteks & Masalah
                   </h2>
                 </div>
-                <div className="paragraph-editorial text-xl text-white/60 leading-relaxed font-medium">
+                <div className="text-lg text-white/60 leading-relaxed font-medium">
                   {project.journal.context}
                 </div>
               </motion.section>
 
-              {/* SECTION 2 — Visual Showcase */}
+              {/* Visual Showcase */}
               {project.image && (
-                <motion.section {...sectionReveal} className="space-y-16">
+                <motion.section {...sectionReveal} className="space-y-12">
                   <div className="flex items-center gap-4">
-                    <span className="text-[#E31B23] font-mono text-sm font-black">[02]</span>
-                    <h2 className="font-mono text-[12px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-3 flex-grow">
-                      VISUAL_EVIDENCE
+                    <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold border-b border-white/5 pb-2 flex-grow">
+                      Tampilan Antarmuka
                     </h2>
                   </div>
-                  <div className="brutal-card p-6 group overflow-hidden bg-[#0a0a0c]">
-                    <div className="relative aspect-[16/9] overflow-hidden">
+                  <div className="border border-white/10 p-2 bg-[#0a0a0c]">
+                    <div className="relative aspect-[16/9] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                       <img 
                         src={project.image} 
-                        alt={`${project.title} Interface`}
-                        className="w-full h-full object-cover opacity-40 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-out grayscale group-hover:grayscale-0"
+                        alt={`${project.title} UI`}
+                        className="w-full h-full object-cover"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                      <div className="absolute bottom-8 left-8 bg-black/90 backdrop-blur-xl px-6 py-3 border border-[#E31B23]/30 text-[11px] font-mono text-[#E31B23] font-black tracking-[0.4em] uppercase shadow-2xl">
-                        NODE_SNAPSHOT // ARCHIVE_01
-                      </div>
                     </div>
                   </div>
 
                   {project.metrics && (
-                    <div className="grid md:grid-cols-3 gap-8">
+                    <div className="grid md:grid-cols-3 gap-6">
                       {project.metrics.map((metric, i) => (
-                        <div key={i} className="brutal-card p-10 space-y-6 hover:border-[#E31B23]/30 transition-all duration-500">
-                          <Zap size={20} className="text-[#E31B23] opacity-50" />
-                          <p className="text-[13px] text-white/50 font-black leading-relaxed uppercase tracking-[0.2em]">{metric}</p>
+                        <div key={i} className="p-6 border border-white/5 bg-white/[0.02] space-y-4">
+                          <Zap size={18} className="text-[#E31B23]" />
+                          <p className="text-[11px] text-white/50 font-bold leading-relaxed uppercase tracking-wider">{metric}</p>
                         </div>
                       ))}
                     </div>
@@ -172,25 +163,24 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                 </motion.section>
               )}
 
-              {/* SECTION 3 — Engineering Narrative */}
-              <motion.section {...sectionReveal} className="space-y-16">
+              {/* Proses Pengerjaan */}
+              <motion.section {...sectionReveal} className="space-y-12">
                 <div className="flex items-center gap-4">
-                  <span className="text-[#E31B23] font-mono text-sm font-black">[03]</span>
-                  <h2 className="font-mono text-[12px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-3 flex-grow">
-                    SYSTEM_STORY
+                  <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold border-b border-white/5 pb-2 flex-grow">
+                    Alasan Dibangun
                   </h2>
                 </div>
-                <div className="paragraph-editorial text-xl text-white/60 leading-relaxed font-medium">
+                <div className="text-lg text-white/60 leading-relaxed font-medium">
                   {project.journal.whyBuilt}
                 </div>
 
                 {project.timeline && (
-                  <div className="space-y-12 pl-12 border-l-2 border-[#E31B23]/10 relative">
+                  <div className="space-y-8 pl-8 border-l border-white/10">
                     {project.timeline.map((step, idx) => (
                       <div key={idx} className="relative group">
-                        <div className="absolute -left-[54px] top-0 w-8 h-[2px] bg-[#E31B23] group-hover:w-12 transition-all duration-700" />
-                        <span className="font-mono text-[11px] text-[#E31B23] font-black uppercase tracking-[0.4em] block mb-3 opacity-60 group-hover:opacity-100 transition-opacity">{step.label}</span>
-                        <p className="text-white/50 leading-relaxed max-w-3xl font-bold group-hover:text-white transition-colors duration-500 text-lg">
+                        <div className="absolute -left-[33px] top-1.5 w-2 h-2 bg-[#E31B23]" />
+                        <span className="font-mono text-[10px] text-[#E31B23] font-bold uppercase tracking-widest block mb-2">{step.label}</span>
+                        <p className="text-white/50 leading-relaxed max-w-2xl font-medium">
                           {step.description}
                         </p>
                       </div>
@@ -199,121 +189,106 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                 )}
               </motion.section>
 
-              {/* SECTION 4 — System Architecture */}
-              <motion.section {...sectionReveal} className="space-y-16">
+              {/* Arsitektur Sistem */}
+              <motion.section {...sectionReveal} className="space-y-12">
                 <div className="flex items-center gap-4">
-                  <span className="text-[#E31B23] font-mono text-sm font-black">[04]</span>
-                  <h2 className="font-mono text-[12px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-3 flex-grow">
-                    ARCHITECTURE_MAP
+                  <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold border-b border-white/5 pb-2 flex-grow">
+                    Arsitektur & Logika
                   </h2>
                 </div>
-                <div className="paragraph-editorial text-white/50 text-lg leading-relaxed">
+                <div className="text-white/50 text-base leading-relaxed">
                   {project.journal.systemThinking}
                 </div>
 
-                <div className="brutal-card p-12 md:p-20 flex flex-col items-center justify-center bg-[#050507] hover:border-[#E31B23]/20 transition-all duration-1000">
-                  <span className="font-mono text-[10px] text-[#E31B23] font-black uppercase tracking-[0.5em] mb-12 animate-pulse">Logical_Dependency_Map</span>
+                <div className="p-8 md:p-16 flex flex-col items-center justify-center bg-[#050507] border border-white/5">
+                  <span className="font-mono text-[9px] text-[#E31B23] font-bold uppercase tracking-[0.4em] mb-8">Peta Logika Sistem</span>
                   
-                  <div className="w-full max-w-3xl">
+                  <div className="w-full max-w-2xl">
                     {project.id === "okey-bimbel" && <OkeyBimbelDiagram />}
                     {project.id === "01" && <SecureCBTDiagram />}
                     {project.id === "02" && <GegesBarberDiagram />}
-                    {project.id === "03" && <LinuxCustomizationDiagram />}
+                    {project.id === "03" && <SecureCBTDiagram />} {/* Placeholder for VisionSafe */}
+                    {project.id === "04" && <LinuxCustomizationDiagram />}
                   </div>
                 </div>
               </motion.section>
 
-              {/* SECTION 5 — Technical Deep Dive */}
-              <motion.section {...sectionReveal} className="space-y-16">
+              {/* Eksplorasi Teknis */}
+              <motion.section {...sectionReveal} className="space-y-12">
                 <div className="flex items-center gap-4">
-                  <span className="text-[#E31B23] font-mono text-sm font-black">[05]</span>
-                  <h2 className="font-mono text-[12px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-3 flex-grow">
-                    TECHNICAL_SYNC
+                  <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.3em] font-bold border-b border-white/5 pb-2 flex-grow">
+                    Eksplorasi Teknis
                   </h2>
                 </div>
-                <div className="paragraph-editorial text-white/50 text-lg leading-relaxed">
+                <div className="text-white/50 text-base leading-relaxed">
                   {project.journal.exploration}
                 </div>
 
                 {project.folderStructure && (
-                  <div className="brutal-card p-10 relative overflow-hidden bg-black/60 font-mono">
-                    <div className="absolute top-0 right-0 p-4 opacity-10">
-                      <Terminal size={100} className="text-[#E31B23]" />
-                    </div>
-                    <span className="font-mono text-[10px] text-white/10 uppercase tracking-[0.4em] block mb-8">Node_FileSystem_Tree</span>
-                    <pre className="text-[12px] text-[#E31B23]/80 whitespace-pre overflow-x-auto leading-relaxed border-l-2 border-[#E31B23]/30 pl-8 font-black">
+                  <div className="p-6 md:p-10 border border-white/5 bg-black/40 font-mono">
+                    <span className="font-mono text-[9px] text-white/20 uppercase tracking-widest block mb-6">Struktur Folder</span>
+                    <pre className="text-[11px] text-[#E31B23]/80 whitespace-pre overflow-x-auto leading-relaxed border-l border-[#E31B23]/30 pl-6">
                       {project.folderStructure}
                     </pre>
                   </div>
                 )}
               </motion.section>
 
-              {/* SECTION 6 — Critical Analysis */}
-              <motion.section {...sectionReveal} className="grid md:grid-cols-2 gap-16 pt-16 border-t-2 border-white/5">
-                <div className="space-y-8">
-                  <h3 className="font-mono text-[11px] text-[#E31B23] font-black uppercase tracking-[0.4em]">06 // CONSTRAINTS_REPORT</h3>
-                  <p className="text-white/40 leading-relaxed font-bold text-lg italic">
+              {/* Analisis & Refleksi */}
+              <motion.section {...sectionReveal} className="grid md:grid-cols-2 gap-16 pt-16 border-t border-white/5">
+                <div className="space-y-6">
+                  <h3 className="font-mono text-[10px] text-[#E31B23] font-bold uppercase tracking-widest">Kendala & Solusi</h3>
+                  <p className="text-white/40 leading-relaxed font-medium">
                     {project.journal.constraints}
                   </p>
                 </div>
-                <div className="space-y-8">
-                  <h3 className="font-mono text-[11px] text-emerald-400 font-black uppercase tracking-[0.4em]">07 // SYSTEM_EVOLUTION</h3>
-                  <p className="text-white/40 leading-relaxed font-bold text-lg">
+                <div className="space-y-6">
+                  <h3 className="font-mono text-[10px] text-white/60 font-bold uppercase tracking-widest">Refleksi & Pengembangan</h3>
+                  <p className="text-white/40 leading-relaxed font-medium">
                     {project.journal.reflection}
                   </p>
                 </div>
               </motion.section>
 
-              {/* SECTION 8 — Key Lessons */}
-              <motion.section {...sectionReveal} className="brutal-card p-12 md:p-24 space-y-10 bg-[#E31B23]/[0.03] border-[#E31B23]/30 shadow-[0_0_80px_rgba(255,0,85,0.1)]">
-                <h2 className="font-mono text-[12px] text-[#E31B23] font-black uppercase tracking-[0.5em]">
-                  08 / ARCHITECT_TAKEAWAY
+              {/* Kesimpulan */}
+              <motion.section {...sectionReveal} className="p-12 md:p-20 space-y-8 bg-white/[0.01] border border-white/5">
+                <h2 className="font-mono text-[10px] text-[#E31B23] font-bold uppercase tracking-widest text-center">
+                  Pelajaran Utama
                 </h2>
-                <div className="text-2xl md:text-4xl text-white font-black leading-tight font-display tracking-tighter">
+                <div className="text-2xl md:text-3xl text-white font-black text-center leading-tight tracking-tighter">
                   &quot;{project.journal.lessons}&quot;
                 </div>
               </motion.section>
 
-              {/* Journal Footer Links */}
-              <div className="pt-32 flex flex-wrap justify-center gap-12">
+              {/* Links */}
+              <div className="pt-24 flex flex-wrap justify-center gap-8">
                 {repoLink && (
-                  <Magnetic strength={0.2}>
-                    <a 
-                      href={repoLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="group relative px-14 py-7 bg-white text-black text-[12px] font-mono font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:pr-20 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)]"
-                    >
-                      <span className="relative z-10">SOURCE_MANIFEST</span>
-                      <GitBranch className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={20} />
-                      <div className="absolute inset-0 bg-[#E31B23] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
-                    </a>
-                  </Magnetic>
+                  <a 
+                    href={repoLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-10 py-5 bg-white text-black text-[11px] font-mono font-bold uppercase tracking-widest hover:bg-[#E31B23] hover:text-white transition-all"
+                  >
+                    Source Code
+                  </a>
                 )}
                 {liveLink && (
-                  <Magnetic strength={0.2}>
-                    <a 
-                      href={liveLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="px-14 py-7 border border-white/10 hover:border-[#E31B23] text-[12px] font-mono font-black uppercase tracking-widest text-white/30 hover:text-white flex items-center gap-5 transition-all duration-500 bg-white/[0.02]"
-                    >
-                      <span>PRODUCTION_SYNC</span>
-                      <ArrowUpRight size={20} className="text-[#E31B23]" />
-                    </a>
-                  </Magnetic>
+                  <a 
+                    href={liveLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-10 py-5 border border-white/20 text-[11px] font-mono font-bold uppercase tracking-widest text-white/60 hover:text-white hover:border-white transition-all"
+                  >
+                    Lihat Demo
+                  </a>
                 )}
               </div>
             </article>
 
-            {/* Bottom Credit */}
-            <footer className="mt-auto py-32 border-t border-white/5 bg-black/60 text-center space-y-10">
-              <div className="font-mono text-[11px] text-white/10 uppercase tracking-[0.6em] font-black">
-                M. Irsyad Fachryanto // Technical Engineering Log
-              </div>
-              <div className="w-20 h-[1px] bg-gradient-to-r from-transparent via-[#E31B23]/50 to-transparent mx-auto" />
-              <div className="font-mono text-[10px] text-white/5 uppercase tracking-[0.3em] font-bold">
-                &copy; {new Date().getFullYear()} IDENTITY_ENFORCED
+            {/* Footer */}
+            <footer className="mt-auto py-24 border-t border-white/5 bg-black/60 text-center">
+              <div className="font-mono text-[10px] text-white/10 uppercase tracking-[0.4em] font-bold">
+                M. Irsyad Fachryanto &copy; {new Date().getFullYear()}
               </div>
             </footer>
 
@@ -340,7 +315,6 @@ function OkeyBimbelDiagram() {
       <rect x="310" y="70" width="100" height="55" rx="0" stroke="#E31B23" strokeWidth="2" fill="#000" />
       <text x="360" y="88" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Firebase</text>
       <text x="360" y="99" fill="#E31B23" fontSize="8" fontFamily="monospace" textAnchor="middle">Realtime Stream</text>
-      <path d="M360 125 V160 H55 V110" stroke="#ffffff" strokeWidth="1" strokeDasharray="4,4" opacity="0.1" />
     </svg>
   );
 }
@@ -358,7 +332,7 @@ function SecureCBTDiagram() {
       <path d="M255 90 H305" stroke="#E31B23" strokeWidth="2" strokeDasharray="4,4" />
       <polygon points="305,90 300,87 300,93" fill="#E31B23" />
       <rect x="310" y="70" width="100" height="45" rx="0" stroke="#ffffff" strokeWidth="2" fill="#000" />
-      <text x="360" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Blur Overlay</text>
+      <text x="360" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Sistem Peringatan</text>
     </svg>
   );
 }
@@ -377,7 +351,7 @@ function GegesBarberDiagram() {
       <text x="370" y="88" fill="#ffffff" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="bold">188+ Tests</text>
       <path d="M210 110 V150 H330" stroke="#E31B23" strokeWidth="1" strokeDasharray="3,3" />
       <rect x="330" y="135" width="80" height="30" rx="0" stroke="#E31B23" strokeWidth="1" fill="#000" />
-      <text x="370" y="152" fill="#ffffff" fontSize="7" fontFamily="monospace" textAnchor="middle">Integrity</text>
+      <text x="370" y="152" fill="#ffffff" fontSize="7" fontFamily="monospace" textAnchor="middle">Integritas</text>
     </svg>
   );
 }
@@ -393,7 +367,7 @@ function LinuxCustomizationDiagram() {
       <text x="225" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Guardian</text>
       <path d="M275 90 H325" stroke="#ffffff" strokeWidth="1" />
       <rect x="330" y="70" width="80" height="40" rx="0" stroke="#ffffff" strokeWidth="2" fill="#000" />
-      <text x="370" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">RAM_Sync</text>
+      <text x="370" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Otomasi RAM</text>
     </svg>
   );
 }

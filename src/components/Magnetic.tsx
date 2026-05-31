@@ -13,6 +13,9 @@ export function Magnetic({ children, strength = 0.5 }: MagneticProps) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Disable magnetic effect on touch devices for elite mobile UX
+    if (window.matchMedia("(hover: none)").matches) return;
+
     const { clientX, clientY } = e;
     const { width, height, left, top } = ref.current!.getBoundingClientRect();
     const x = (clientX - (left + width / 2)) * strength;

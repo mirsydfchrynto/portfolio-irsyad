@@ -4,20 +4,20 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cpu, Terminal, Shield } from "lucide-react";
 
+const STATUSES = [
+  "INITIALIZING_BOOT_CORE_V5.0",
+  "LOADING_IDENTITY_RED_MANIFEST...",
+  "ENGAGING_MAGNETIC_INTERACTIONS...",
+  "SYNCING_NEURAL_MONITOR_V5...",
+  "CALIBRATING_ARCHITECT_GRID...",
+  "ENFORCING_SYSTEM_INTEGRITY...",
+  "READY_FOR_DEPLOYMENT"
+];
+
 export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [statusIdx, setStatusIdx] = useState(0);
   const [isExit, setIsExit] = useState(false);
-
-  const statuses = [
-    "INITIALIZING_BOOT_CORE_V5.0",
-    "LOADING_IDENTITY_RED_MANIFEST...",
-    "ENGAGING_MAGNETIC_INTERACTIONS...",
-    "SYNCING_NEURAL_MONITOR_V5...",
-    "CALIBRATING_ARCHITECT_GRID...",
-    "ENFORCING_SYSTEM_INTEGRITY...",
-    "READY_FOR_DEPLOYMENT"
-  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -35,7 +35,7 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
     }, 30);
 
     const statusTimer = setInterval(() => {
-      setStatusIdx((prev) => (prev < statuses.length - 1 ? prev + 1 : prev));
+      setStatusIdx((prev) => (prev < STATUSES.length - 1 ? prev + 1 : prev));
     }, 450);
 
     return () => {
@@ -51,20 +51,20 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[10000] bg-[#020203] flex flex-col items-center justify-center p-12 overflow-hidden"
+          className="fixed inset-0 z-[10000] bg-[#020203] flex flex-col items-center justify-center p-6 md:p-12 overflow-hidden"
         >
           {/* Architectural Background Texture */}
           <div className="absolute inset-0 architect-grid opacity-[0.05]" />
           <div className="absolute inset-0 architect-grid-dense opacity-[0.03]" />
           
-          <div className="relative w-full max-w-2xl space-y-16">
+          <div className="relative w-full max-w-2xl space-y-12 md:space-y-16">
             {/* 1. CENTER LOGO SEQUENCE */}
-            <div className="flex flex-col items-center gap-8">
+            <div className="flex flex-col items-center gap-6 md:gap-8">
               <motion.div 
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
-                className="relative w-24 h-24 flex items-center justify-center"
+                className="relative w-20 h-24 md:w-24 md:h-24 flex items-center justify-center"
               >
                 <div className="absolute inset-0 bg-[#E31B23]/20 rounded-sm blur-2xl animate-pulse" />
                 <div className="relative w-full h-full border-2 border-[#E31B23] flex items-center justify-center bg-[#050507]">
@@ -74,48 +74,48 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
               
               <div className="text-center space-y-2">
                 <motion.h2 
-                  className="text-4xl md:text-5xl font-black font-display tracking-[0.4em] text-white uppercase leading-none"
-                  initial={{ opacity: 0, letterSpacing: "1em" }}
-                  animate={{ opacity: 1, letterSpacing: "0.4em" }}
+                  className="text-3xl md:text-5xl font-black font-display tracking-[0.3em] md:tracking-[0.4em] text-white uppercase leading-none"
+                  initial={{ opacity: 0, letterSpacing: "0.8em" }}
+                  animate={{ opacity: 1, letterSpacing: "0.3em" }}
                   transition={{ duration: 1.5, ease: "easeOut" }}
                 >
                   IRSYAD
                 </motion.h2>
-                <span className="font-mono text-[11px] text-[#E31B23] font-black uppercase tracking-[0.8em] opacity-60">
+                <span className="font-mono text-[9px] md:text-[11px] text-[#E31B23] font-black uppercase tracking-[0.5em] md:tracking-[0.8em] opacity-60">
                   Architect_Engine
                 </span>
               </div>
             </div>
 
             {/* 2. PROGRESS MODULE */}
-            <div className="space-y-6">
-              <div className="flex justify-between items-end font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black">
-                <div className="flex items-center gap-3">
+            <div className="space-y-4 md:space-y-6">
+              <div className="flex justify-between items-end font-mono text-[9px] md:text-[10px] text-white/20 uppercase tracking-[0.2em] md:tracking-[0.4em] font-black">
+                <div className="flex items-center gap-2 md:gap-3">
                   <Terminal size={12} className="text-[#E31B23]" />
-                  <span>{statuses[statusIdx]}</span>
+                  <span className="truncate max-w-[180px] md:max-w-none">{STATUSES[statusIdx]}</span>
                 </div>
                 <span>{Math.round(progress)}%</span>
               </div>
-              
+
               <div className="relative h-1 w-full bg-white/5 overflow-hidden">
                 <motion.div 
-                  className="absolute inset-y-0 left-0 bg-[#E31B23] shadow-[0_0_20px_rgba(255,0,85,0.8)]"
+                  className="absolute inset-y-0 left-0 bg-[#E31B23] shadow-[0_0_20px_rgba(227, 27, 35, 0.8)]"
                   style={{ width: `${progress}%` }}
                 />
               </div>
             </div>
 
             {/* 3. SYSTEM FLAGS (BOTTOM) */}
-            <div className="grid grid-cols-3 gap-6 pt-12 border-t border-white/5 font-mono text-[9px] text-white/10 uppercase tracking-[0.3em] font-black">
-              <div className="flex items-center gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 pt-8 md:pt-12 border-t border-white/5 font-mono text-[8px] md:text-[9px] text-white/10 uppercase tracking-[0.2em] md:tracking-[0.3em] font-black">
+              <div className="flex items-center gap-2 md:gap-3 justify-center sm:justify-start">
                 <Shield size={10} className={progress > 30 ? "text-emerald-500" : "text-white/10"} />
                 <span>Security_Ready</span>
               </div>
-              <div className="flex items-center gap-3 justify-center">
+              <div className="flex items-center gap-2 md:gap-3 justify-center">
                 <div className={`w-1.5 h-1.5 rounded-full ${progress > 60 ? "bg-[#E31B23]" : "bg-white/10"} animate-pulse`} />
                 <span>Narrative_Link</span>
               </div>
-              <div className="flex items-center gap-3 justify-end">
+              <div className="flex items-center gap-2 md:gap-3 justify-center sm:justify-end">
                 <div className={`w-1.5 h-1.5 rounded-full ${progress > 90 ? "bg-emerald-500" : "bg-white/10"}`} />
                 <span>Stable_Build</span>
               </div>

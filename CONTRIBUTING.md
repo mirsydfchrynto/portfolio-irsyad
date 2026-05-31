@@ -1,6 +1,6 @@
 # Contributing to this Project
 
-Thank you for your interest in contributing! As a "Supreme Architect" project, we maintain high standards for code quality and integrity.
+Thank you for your interest in contributing! We maintain high standards for code quality and integrity.
 
 ## Engineering Standards
 - **Clean Architecture:** All changes must follow SOLID principles.
