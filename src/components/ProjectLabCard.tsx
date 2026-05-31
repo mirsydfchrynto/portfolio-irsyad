@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, GitBranch, FlaskConical, Layout, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, GitBranch, FlaskConical, Layout, ShieldCheck, Users2 } from "lucide-react";
 import { Magnetic } from "./Magnetic";
 
 interface ProjectLabCardProps {
@@ -9,6 +9,7 @@ interface ProjectLabCardProps {
     tagline: string;
     tags: string[];
     links: { repo: string; visit: string };
+    collaborators?: any[];
   };
   onOpenDetails: () => void;
 }

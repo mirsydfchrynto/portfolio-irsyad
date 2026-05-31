@@ -1,6 +1,7 @@
 export const introduction = {
   title: "M. Irsyad Fachryanto",
-  subtitle: "Software Architect & Full-Stack Engineer",
+  subtitle: "Elite Architect & Full-Stack Engineer",
+  group: "Architect-Elite / Nexus-E",
   bio: "I am a computer science student dedicated to engineering high-integrity digital ecosystems. My core expertise lies in Flutter, Kotlin Native, and Next.js. I prioritize scalable architecture, operational reliability, and clean structures over complex but fragile solutions. This archive documents my engineering journey, problem-solving methodologies, and system-level explorations."
 };
 
@@ -12,6 +13,9 @@ export const productionExperience = {
   tagline: "High-integrity dual-platform exam ecosystem featuring native Android Kiosk Mode and dynamic QR handshake authentication.",
   url: "https://okeybimbel.web.app/",
   image: "/okey_bimbel_preview.webp",
+  collaborators: [
+    { name: "M. Irsyad Fachryanto", role: "Lead Full-Stack Developer", github: "https://github.com/mirsydfchrynto" }
+  ],
   metrics: [
     "Managing live exam operations for hundreds of concurrent students with zero data loss.",
     "Automated centralized exam distribution and real-time monitoring workflows.",
@@ -51,6 +55,9 @@ export const blueprints = [
     tags: ["Flutter", "Dart", "Kotlin Native", "Next.js 16", "Firestore"],
     links: { visit: "", repo: "https://github.com/mirsydfchrynto/CBT-System" },
     image: "/secure_cbt_ui.webp",
+    collaborators: [
+      { name: "M. Irsyad Fachryanto", role: "Lead System Architect", github: "https://github.com/mirsydfchrynto" }
+    ],
     overview: "Secure CBT Master focuses on creating an isolated exam environment. It uses hardware-level window flags to block screenshots and screencasts.",
     folderStructure: `cbt-system/
 ├── mobile-cbt/ (Flutter)
@@ -85,6 +92,9 @@ export const blueprints = [
     tags: ["Flutter", "Dart", "Firebase App Check", "Next.js", "NoSQL"],
     links: { visit: "", repo: "https://github.com/mirsydfchrynto/GEGES_Capstone" },
     image: "/geges_barber_ui.webp",
+    collaborators: [
+      { name: "M. Irsyad Fachryanto", role: "Lead Full-Stack Developer", github: "https://github.com/mirsydfchrynto" }
+    ],
     overview: "A comprehensive solution for barbershop management, featuring customer booking apps and owner dashboards for workforce management.",
     folderStructure: `geges-barber/
 ├── lib/
@@ -108,7 +118,7 @@ export const blueprints = [
   },
   {
     id: "03",
-    title: "VisionSafe (EyeGuardian)",
+    title: "capstone-pt2 (VisionSafe)",
     tagline: "On-device AI eye-fatigue mitigation system using MediaPipe Face Mesh for real-time distance monitoring.",
     curiosity: "Can we reduce Computer Vision Syndrome using Edge AI without sending visual data to a server?",
     systemsExplored: "Flutter, MediaPipe Face Mesh (Edge AI), Background Services, Local Notifications, SQLite.",
@@ -117,6 +127,10 @@ export const blueprints = [
     tags: ["Flutter", "MediaPipe", "Edge AI", "Computer Vision"],
     links: { visit: "", repo: "https://github.com/mirsydfchrynto/visionsafe-app" },
     image: "/avatar.jpg",
+    collaborators: [
+      { name: "M. Irsyad Fachryanto", role: "AI Research Lead", github: "https://github.com/mirsydfchrynto" },
+      { name: "Marsha Dwi Lucyana", role: "UI/UX & Research Analyst", github: "https://github.com/marshadwi" }
+    ],
     overview: "VisionSafe uses Edge AI to monitor if a user is too close to the screen or blinking infrequently, providing real-time alerts.",
     failureRecovery: {
       incident: "Background processing killed by Android System due to high resource usage.",

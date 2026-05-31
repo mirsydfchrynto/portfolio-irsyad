@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, GitBranch, ArrowUpRight, Zap, ShieldAlert, CheckCircle2, FolderTree, Info } from "lucide-react";
+import { X, GitBranch, ArrowUpRight, Zap, ShieldAlert, CheckCircle2, FolderTree, Info, Users2 } from "lucide-react";
 
 interface TimelineItem {
   label: string;
@@ -13,6 +13,12 @@ interface FailureRecovery {
   incident: string;
   rootCause: string;
   recovery: string;
+}
+
+interface Collaborator {
+  name: string;
+  role: string;
+  github?: string;
 }
 
 interface ProjectDetails {
@@ -29,6 +35,7 @@ interface ProjectDetails {
   timeline?: TimelineItem[];
   failureRecovery?: FailureRecovery;
   folderStructure?: string;
+  collaborators?: Collaborator[];
   journal: {
     context: string;
     whyBuilt: string;
@@ -141,6 +148,36 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                  </motion.section>
 
                  <motion.aside {...sectionReveal} className="lg:col-span-4 space-y-10">
+                    {/* Collaborators Section */}
+                    {project.collaborators && project.collaborators.length > 0 && (
+                      <div className="p-8 border border-white/5 bg-white/[0.01] space-y-8 mb-10">
+                        <div className="flex items-center gap-3">
+                          <Users2 size={14} className="text-[#E31B23]" />
+                          <span className="font-mono text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Project_Collective</span>
+                        </div>
+                        <div className="space-y-6">
+                          {project.collaborators.map((member, i) => (
+                            <div key={i} className="group/member space-y-2">
+                              <div className="flex justify-between items-center">
+                                <span className="text-[11px] text-white font-black uppercase tracking-widest">{member.name}</span>
+                                {member.github && (
+                                  <a 
+                                    href={member.github} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="text-white/20 hover:text-[#E31B23] transition-colors"
+                                  >
+                                    <GitBranch size={12} />
+                                  </a>
+                                )}
+                              </div>
+                              <p className="text-[10px] text-white/30 font-mono uppercase tracking-wider">{member.role}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="p-8 border border-white/5 bg-white/[0.01] space-y-8">
                        <span className="font-mono text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Success_Metrics</span>
                        <div className="space-y-6">
