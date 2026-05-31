@@ -16,9 +16,8 @@ The visual language is defined by the intersection of **Neo-Brutalism**, **Premi
 
 ### 2.1 Color Palette
 - **95% Monochrome:** #020203 (Deepest Black) and #FFFFFF (Pure White).
-- **Primary Accent:** #0070f3 (Electric Blue).
-- **Secondary Accent:** #ff0055 (System Rose - used for critical failures or highlights).
-- **Logic:** Colors must be rare and intentional. Blue signals intelligence and authority; Rose signals critical state or intensity.
+- **Signature Accent:** #E31B23 (Architect Red - 2005 Edition).
+- **Logic:** Colors are symbolic of Identity (Red), Engineering (Black), and Clarity (White). Red appears only at moments that deserve extreme attention.
 
 ### 2.2 Typography
 - **Display:** Space Grotesk (Variable). Used for high-impact, giant headers.
@@ -27,11 +26,13 @@ The visual language is defined by the intersection of **Neo-Brutalism**, **Premi
 - **Rules:** 
   - Giant type must be bold and tightly kerned (`tracking-tighter`).
   - Monospaced text must always accompany high-level titles to provide "System Integrity" context.
+  - Birth Year "2005" is a core visual anchor.
 
 ### 2.3 Visual Components
 - **The Brutal Card:** 2px high-contrast borders, sharp corners, and deep inky shadows (`shadow-2xl`). Hover states must translate the card and enhance border brightness.
 - **Glassmorphism:** Used only for navigation or overlays. Background blur must be high (12px+) with extremely low opacity backgrounds (3-5%).
 - **Architectural Grid:** A 80px background grid with 20px sub-grids to provide a sense of structure and scale.
+- **Cinematic Storytelling:** Scrolling feels like scene transitions. Every section builds anticipation.
 
 ---
 
@@ -52,15 +53,15 @@ The visual language is defined by the intersection of **Neo-Brutalism**, **Premi
 
 ## 4. PROJECT ARCHITECTURE REPORT (MAY 31, 2026)
 
-### 4.1 Refactor Summary: Elite Migration
-The portfolio has been successfully migrated from a "Standard Dev" aesthetic to "Supreme Architect" mode.
+### 4.1 Refactor Summary: God-Mode V5 (2005 Pivot)
+The portfolio has been pivoted to a high-integrity "Signature Red" identity, anchoring the user's personal brand to their birth year (2005).
 
 **Key Changes:**
-1.  **Identity Pivot:** Replaced all Rose-400 primary accents with Electric Blue (#0070f3).
-2.  **Typography Overhaul:** Implemented `giant-type` (clamp-based responsive scales) for cinematic impact.
-3.  **Hero Reconstruction:** Added scroll-driven scale and opacity transforms using Framer Motion `useScroll`.
-4.  **Terminal Console Fidelity:** Updated `KernelTerminalExplorer` and `CodeWorkspace` with 2px borders, grid overlays, and real-time WIB clock synchronization.
-5.  **Engineering Journal:** Transformed `ProjectDetailsModal` into a multi-section narrative article with custom SVG architecture diagrams for every major project.
+1.  **Identity Pivot:** Replaced all System Rose (#ff0055) and Electric Blue accents with Signature Red (#E31B23).
+2.  **2005 Branding:** Integrated "Est. 2005" as a core visual identifier across the Hero and Navbar.
+3.  **Typography Overhaul:** Maintained `giant-type` with tighter kerning for cinematic impact.
+4.  **Terminal Console Fidelity:** Updated `KernelTerminalExplorer` and `CodeWorkspace` with the new Red theme.
+5.  **Engineering Journal:** Focused on "High-Integrity" narrative.
 
 ### 4.2 Component Audit
 - **Navbar:** Elite glassmorphism with real-time WIB clock and location tracking.

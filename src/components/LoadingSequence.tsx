@@ -66,9 +66,9 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="relative w-24 h-24 flex items-center justify-center"
               >
-                <div className="absolute inset-0 bg-[#ff0055]/20 rounded-sm blur-2xl animate-pulse" />
-                <div className="relative w-full h-full border-2 border-[#ff0055] flex items-center justify-center bg-[#050507]">
-                  <Cpu size={40} className="text-[#ff0055] animate-pulse" />
+                <div className="absolute inset-0 bg-[#E31B23]/20 rounded-sm blur-2xl animate-pulse" />
+                <div className="relative w-full h-full border-2 border-[#E31B23] flex items-center justify-center bg-[#050507]">
+                  <Cpu size={40} className="text-[#E31B23] animate-pulse" />
                 </div>
               </motion.div>
               
@@ -81,7 +81,7 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
                 >
                   IRSYAD
                 </motion.h2>
-                <span className="font-mono text-[11px] text-[#ff0055] font-black uppercase tracking-[0.8em] opacity-60">
+                <span className="font-mono text-[11px] text-[#E31B23] font-black uppercase tracking-[0.8em] opacity-60">
                   Architect_Engine
                 </span>
               </div>
@@ -91,7 +91,7 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
             <div className="space-y-6">
               <div className="flex justify-between items-end font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black">
                 <div className="flex items-center gap-3">
-                  <Terminal size={12} className="text-[#ff0055]" />
+                  <Terminal size={12} className="text-[#E31B23]" />
                   <span>{statuses[statusIdx]}</span>
                 </div>
                 <span>{Math.round(progress)}%</span>
@@ -99,7 +99,7 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
               
               <div className="relative h-1 w-full bg-white/5 overflow-hidden">
                 <motion.div 
-                  className="absolute inset-y-0 left-0 bg-[#ff0055] shadow-[0_0_20px_rgba(255,0,85,0.8)]"
+                  className="absolute inset-y-0 left-0 bg-[#E31B23] shadow-[0_0_20px_rgba(255,0,85,0.8)]"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -112,7 +112,7 @@ export function LoadingSequence({ onComplete }: { onComplete: () => void }) {
                 <span>Security_Ready</span>
               </div>
               <div className="flex items-center gap-3 justify-center">
-                <div className={`w-1.5 h-1.5 rounded-full ${progress > 60 ? "bg-[#ff0055]" : "bg-white/10"} animate-pulse`} />
+                <div className={`w-1.5 h-1.5 rounded-full ${progress > 60 ? "bg-[#E31B23]" : "bg-white/10"} animate-pulse`} />
                 <span>Narrative_Link</span>
               </div>
               <div className="flex items-center gap-3 justify-end">

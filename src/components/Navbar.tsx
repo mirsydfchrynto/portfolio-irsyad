@@ -57,23 +57,23 @@ export function Navbar() {
               <Magnetic strength={0.2}>
                 <div className="flex items-center gap-5 group cursor-pointer">
                   <div className="relative w-10 h-10 flex items-center justify-center">
-                    <div className="absolute inset-0 bg-[#ff0055]/10 rounded-sm blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700" />
-                    <div className="relative w-full h-full bg-[#050507] border border-white/10 flex items-center justify-center group-hover:border-[#ff0055]/40 transition-colors duration-700">
-                      <Cpu size={18} className="text-[#ff0055] group-hover:rotate-90 transition-transform duration-1000" />
+                    <div className="absolute inset-0 bg-[#E31B23]/10 rounded-sm blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                    <div className="relative w-full h-full bg-[#050507] border border-white/10 flex items-center justify-center group-hover:border-[#E31B23]/40 transition-colors duration-700">
+                      <Cpu size={18} className="text-[#E31B23] group-hover:rotate-90 transition-transform duration-1000" />
                       {/* Scanner Line Effect */}
-                      <div className="absolute inset-x-0 h-[1px] bg-[#ff0055]/40 top-0 group-hover:top-full transition-all duration-1000 ease-in-out pointer-events-none" />
+                      <div className="absolute inset-x-0 h-[1px] bg-[#E31B23]/40 top-0 group-hover:top-full transition-all duration-1000 ease-in-out pointer-events-none" />
                     </div>
                   </div>
                   <div className="hidden xl:flex flex-col -space-y-1">
-                    <span className="text-[12px] font-black uppercase tracking-[0.4em] text-white">
-                      IRSYAD
+                  <span className="text-[12px] font-black uppercase tracking-[0.4em] text-white">
+                    IRSYAD
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[9px] font-mono text-[#E31B23] font-black uppercase tracking-[0.2em] opacity-80">
+                      SERIES_2005
                     </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[9px] font-mono text-[#ff0055] font-black uppercase tracking-[0.2em] opacity-80">
-                        ARCHITECT
-                      </span>
-                      <div className="w-1 h-1 bg-emerald-500 rounded-full animate-pulse" />
-                    </div>
+                    <div className="w-1 h-1 bg-emerald-500 rounded-full animate-pulse" />
+                  </div>
                   </div>
                 </div>
               </Magnetic>
@@ -89,14 +89,14 @@ export function Navbar() {
                       className="group relative px-5 py-2 overflow-hidden transition-colors duration-300"
                     >
                       <div className="flex items-center gap-2 relative z-10">
-                        <span className="text-[8px] font-mono text-[#ff0055] font-black opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">{link.id}</span>
+                        <span className="text-[8px] font-mono text-[#E31B23] font-black opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">{link.id}</span>
                         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 group-hover:text-white transition-colors duration-300 font-bold">
                           {link.name}
                         </span>
                       </div>
                       {/* Interaction Background */}
                       <div className="absolute inset-0 bg-white/[0.03] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
-                      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#ff0055] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#E31B23] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                     </a>
                   </Magnetic>
                 ))}
@@ -109,11 +109,11 @@ export function Navbar() {
                 {/* System Metrics */}
                 <div className="flex flex-col items-end">
                   <div className="flex items-center gap-2 text-[9px] font-mono text-white/20 uppercase tracking-widest font-black">
-                    <Activity size={10} className="text-[#ff0055]" />
+                    <Activity size={10} className="text-[#E31B23]" />
                     <span>State: <strong className="text-white/40">Synchronized</strong></span>
                   </div>
                   <div className="flex items-center gap-2 text-[9px] font-mono text-white/20 uppercase tracking-widest font-black">
-                    <ShieldCheck size={10} className="text-[#ff0055]" />
+                    <ShieldCheck size={10} className="text-[#E31B23]" />
                     <span>Integ: <strong className="text-white/40">100%_Valid</strong></span>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ export function Navbar() {
 
                 {/* Clock Module */}
                 <div className="flex items-center gap-3 px-4 py-2 bg-white/[0.02] border border-white/5 rounded-sm">
-                  <Clock size={12} className="text-[#ff0055] opacity-50" />
+                  <Clock size={12} className="text-[#E31B23] opacity-50" />
                   <div className="flex flex-col -space-y-1">
                     <span className="text-[11px] font-mono text-white font-black">{localTime || "--:--"}</span>
                     <span className="text-[7px] font-mono text-white/20 uppercase tracking-widest font-bold text-right">WIB_ID</span>
@@ -136,7 +136,7 @@ export function Navbar() {
                     href="https://github.com/mirsydfchrynto" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="p-3 text-white/20 hover:text-[#ff0055] hover:bg-[#ff0055]/5 border border-white/5 hover:border-[#ff0055]/30 transition-all duration-500"
+                    className="p-3 text-white/20 hover:text-[#E31B23] hover:bg-[#E31B23]/5 border border-white/5 hover:border-[#E31B23]/30 transition-all duration-500"
                     aria-label="GitHub Source"
                   >
                     <GitBranch size={16} />
@@ -147,7 +147,7 @@ export function Navbar() {
                     href="https://instagram.com/muhammadirsyadf" 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="p-3 text-white/20 hover:text-[#ff0055] hover:bg-[#ff0055]/5 border border-white/5 hover:border-[#ff0055]/30 transition-all duration-500"
+                    className="p-3 text-white/20 hover:text-[#E31B23] hover:bg-[#E31B23]/5 border border-white/5 hover:border-[#E31B23]/30 transition-all duration-500"
                     aria-label="Instagram Identity"
                   >
                     <Globe size={16} />
@@ -162,7 +162,7 @@ export function Navbar() {
                 aria-label="Toggle Navigation"
               >
                 <div className={`w-5 h-[2px] bg-white transition-all duration-500 ${isOpen ? "rotate-45 translate-y-[3px]" : ""}`} />
-                <div className={`w-3 h-[2px] bg-[#ff0055] self-end mr-3.5 transition-all duration-500 ${isOpen ? "opacity-0" : ""}`} />
+                <div className={`w-3 h-[2px] bg-[#E31B23] self-end mr-3.5 transition-all duration-500 ${isOpen ? "opacity-0" : ""}`} />
                 <div className={`w-5 h-[2px] bg-white transition-all duration-500 ${isOpen ? "-rotate-45 -translate-y-[3px]" : ""}`} />
               </button>
             </div>
@@ -186,10 +186,10 @@ export function Navbar() {
             
             <div className="flex flex-col gap-12 relative z-10 w-full max-w-lg mx-auto">
               <div className="space-y-3">
-                <span className="font-mono text-[11px] text-[#ff0055] font-black uppercase tracking-[0.5em] block">
+                <span className="font-mono text-[11px] text-[#E31B23] font-black uppercase tracking-[0.5em] block">
                   SYSTEM_ACCESS_DIRECTORY
                 </span>
-                <div className="w-full h-[1px] bg-gradient-to-r from-[#ff0055] to-transparent" />
+                <div className="w-full h-[1px] bg-gradient-to-r from-[#E31B23] to-transparent" />
               </div>
               
               <div className="flex flex-col gap-4">
@@ -201,12 +201,12 @@ export function Navbar() {
                     key={link.name} 
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center justify-between p-6 bg-white/[0.02] border border-white/5 hover:border-[#ff0055]/40 transition-all group"
+                    className="flex items-center justify-between p-6 bg-white/[0.02] border border-white/5 hover:border-[#E31B23]/40 transition-all group"
                   >
-                    <span className="text-4xl font-black text-white group-hover:text-[#ff0055] transition-colors font-display tracking-tighter uppercase">
+                    <span className="text-4xl font-black text-white group-hover:text-[#E31B23] transition-colors font-display tracking-tighter uppercase">
                       {link.name}
                     </span>
-                    <span className="text-[14px] font-mono text-white/10 group-hover:text-[#ff0055]/50 transition-colors font-black">
+                    <span className="text-[14px] font-mono text-white/10 group-hover:text-[#E31B23]/50 transition-colors font-black">
                       /{link.id}
                     </span>
                   </motion.a>
@@ -217,13 +217,13 @@ export function Navbar() {
             <div className="relative z-10 w-full max-w-lg mx-auto pt-12 border-t border-white/5 flex flex-col gap-8">
               <div className="flex justify-between items-center font-mono text-[11px] text-white/20 uppercase tracking-[0.3em] font-black">
                 <span>IRSYAD // ARCHITECT</span>
-                <span className="text-[#ff0055] animate-pulse">BOOT_STABLE</span>
+                <span className="text-[#E31B23] animate-pulse">BOOT_STABLE</span>
               </div>
               <div className="flex gap-6">
-                <a href="https://github.com/mirsydfchrynto" className="flex-1 py-4 bg-white/5 border border-white/5 text-white/30 hover:text-white hover:border-[#ff0055]/40 transition-all flex items-center justify-center gap-3 font-mono text-[10px] font-black uppercase tracking-widest">
+                <a href="https://github.com/mirsydfchrynto" className="flex-1 py-4 bg-white/5 border border-white/5 text-white/30 hover:text-white hover:border-[#E31B23]/40 transition-all flex items-center justify-center gap-3 font-mono text-[10px] font-black uppercase tracking-widest">
                   <GitBranch size={16} /> GitHub
                 </a>
-                <a href="https://instagram.com/muhammadirsyadf" className="flex-1 py-4 bg-white/5 border border-white/5 text-white/30 hover:text-white hover:border-[#ff0055]/40 transition-all flex items-center justify-center gap-3 font-mono text-[10px] font-black uppercase tracking-widest">
+                <a href="https://instagram.com/muhammadirsyadf" className="flex-1 py-4 bg-white/5 border border-white/5 text-white/30 hover:text-white hover:border-[#E31B23]/40 transition-all flex items-center justify-center gap-3 font-mono text-[10px] font-black uppercase tracking-widest">
                   <Globe size={16} /> Identity
                 </a>
               </div>

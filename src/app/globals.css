@@ -9,11 +9,11 @@
 :root {
   --background: #020203;
   --foreground: #ffffff;
-  --accent: #ff0055; /* Identity Red (System Rose) */
-  --accent-muted: #990033;
+  --accent: #E31B23; /* Signature Architect Red (2005 Edition) */
+  --accent-muted: #990000;
   --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 0, 85, 0.3);
-  --grid-color: rgba(255, 0, 85, 0.015);
+  --border-strong: rgba(227, 27, 35, 0.3);
+  --grid-color: rgba(227, 27, 35, 0.015);
   --glass: rgba(255, 255, 255, 0.02);
 }
 
@@ -54,7 +54,7 @@ body {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(255, 0, 85, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(227, 27, 35, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
@@ -64,7 +64,7 @@ body {
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(255, 0, 85, 0.06) 0%, rgba(0, 0, 0, 0) 75%);
+  background: radial-gradient(circle, rgba(227, 27, 35, 0.06) 0%, rgba(0, 0, 0, 0) 75%);
   filter: blur(100px);
   pointer-events: none;
   z-index: 0;
@@ -124,8 +124,8 @@ body {
 .architect-grid-dense {
   background-size: 20px 20px;
   background-image: 
-    linear-gradient(to right, rgba(255, 0, 85, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 0, 85, 0.01) 1px, transparent 1px);
+    linear-gradient(to right, rgba(227, 27, 35, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(227, 27, 35, 0.01) 1px, transparent 1px);
 }
 
 /* Elite Glassmorphism */
@@ -157,7 +157,7 @@ body {
 .brutal-card:hover {
   border-color: var(--accent);
   transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 20px 40px -10px rgba(255, 0, 85, 0.15);
+  box-shadow: 0 20px 40px -10px rgba(227, 27, 35, 0.15);
 }
 
 .brutal-card:hover::after {

@@ -17,7 +17,18 @@ import { ContactScene } from "@/components/scenes/ContactScene";
 import { FooterScene } from "@/components/scenes/FooterScene";
 
 export default function Home() {
-  const [selectedProject, setSelectedProject] = useState<any | null>(null);
+  const [selectedProject, setSelectedProject] = useState<null | {
+    id: string;
+    title: string;
+    tagline: string;
+    role?: string;
+    period?: string;
+    url?: string;
+    image?: string;
+    metrics?: string[];
+    timeline?: Array<{ label: string; description: string }>;
+    journal: any;
+  }>(null);
   const [downloading, setDownloading] = useState(false);
   const [isBooting, setIsBooting] = useState(true);
 
@@ -34,7 +45,7 @@ export default function Home() {
     };
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
 
   // SCROLL CHOREOGRAPHY
   const { scrollYProgress } = useScroll();
@@ -50,11 +61,11 @@ export default function Home() {
   // DYNAMIC LIGHTING GRADIENT (Hook must be top-level)
   const spotlightGradient = useTransform(
     [mouseX, mouseY],
-    ([x, y]) => `radial-gradient(800px circle at ${x}px ${y}px, rgba(255, 0, 85, 0.04), transparent 85%)`
+    ([x, y]) => `radial-gradient(800px circle at ${x}px ${y}px, rgba(227, 27, 35, 0.04), transparent 85%)`
   );
 
   return (
-    <div className="min-h-screen bg-[#020203] text-white relative selection:bg-[#ff0055] selection:text-white overflow-hidden cursor-none">
+    <div className="min-h-screen bg-[#020203] text-white relative selection:bg-[#E31B23] selection:text-white overflow-hidden cursor-none">
       <AnimatePresence mode="wait">
         {isBooting ? (
           <LoadingSequence key="boot" onComplete={() => setIsBooting(false)} />
@@ -70,14 +81,14 @@ export default function Home() {
 
             {/* CUSTOM SYSTEM CURSOR (V5_GOD) */}
             <motion.div 
-              className="fixed top-0 left-0 w-8 h-8 border border-[#ff0055]/50 z-[9999] pointer-events-none mix-blend-difference flex items-center justify-center"
+              className="fixed top-0 left-0 w-8 h-8 border border-[#E31B23]/50 z-[9999] pointer-events-none mix-blend-difference flex items-center justify-center"
               style={{ x: cursorX, y: cursorY, translateX: "-50%", translateY: "-50%" }}
             >
-              <div className="w-1 h-1 bg-[#ff0055]" />
-              <div className="absolute -top-1 -left-1 w-2 h-[1px] bg-[#ff0055]" />
-              <div className="absolute -top-1 -left-1 w-[1px] h-2 bg-[#ff0055]" />
-              <div className="absolute -bottom-1 -right-1 w-2 h-[1px] bg-[#ff0055]" />
-              <div className="absolute -bottom-1 -right-1 w-[1px] h-2 bg-[#ff0055]" />
+              <div className="w-1 h-1 bg-[#E31B23]" />
+              <div className="absolute -top-1 -left-1 w-2 h-[1px] bg-[#E31B23]" />
+              <div className="absolute -top-1 -left-1 w-[1px] h-2 bg-[#E31B23]" />
+              <div className="absolute -bottom-1 -right-1 w-2 h-[1px] bg-[#E31B23]" />
+              <div className="absolute -bottom-1 -right-1 w-[1px] h-2 bg-[#E31B23]" />
             </motion.div>
             
             {/* GLOBAL ENVIRONMENT */}

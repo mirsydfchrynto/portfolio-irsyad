@@ -28,17 +28,17 @@ export function ContactScene() {
       {...fadeInUp}
     >
       {/* 1. ATMOSPHERIC DEPTH */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#ff0055]/5 blur-[150px] pointer-events-none group-hover/contact:opacity-100 opacity-30 transition-all duration-1000 animate-pulse" />
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#E31B23]/5 blur-[150px] pointer-events-none group-hover/contact:opacity-100 opacity-30 transition-all duration-1000 animate-pulse" />
       
       <div className="relative flex flex-wrap items-baseline justify-between gap-8 border-b border-white/5 pb-12">
         <div className="flex items-center gap-5">
-          <span className="text-[14px] font-mono text-[#ff0055] font-black tracking-widest">[SCENE_07]</span>
+          <span className="text-[14px] font-mono text-[#E31B23] font-black tracking-widest">[SCENE_07]</span>
           <span className="font-mono text-[11px] uppercase tracking-[0.5em] text-white/20 block font-black">
             ESTABLISH_UPLINK
           </span>
         </div>
         <div className="flex items-center gap-3 font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black">
-          <Globe size={14} className="text-[#ff0055]" />
+          <Globe size={14} className="text-[#E31B23]" />
           <span>Network_State: <strong className="text-white/40">Ready_To_Sync</strong></span>
         </div>
       </div>
@@ -49,7 +49,7 @@ export function ContactScene() {
           <div className="space-y-10">
             <h3 className="section-type text-white lg:text-7xl xl:text-8xl tracking-tighter leading-[0.85] font-black uppercase">
               Initialize <br /> 
-              <span className="text-[#ff0055] drop-shadow-[0_0_30px_rgba(255,0,85,0.4)]">High Integrity</span> <br /> 
+              <span className="text-[#E31B23] drop-shadow-[0_0_30px_rgba(255,0,85,0.4)]">High Integrity</span> <br /> 
               Link.
             </h3>
             <p className="paragraph-editorial text-2xl text-white/50 leading-relaxed font-medium">
@@ -57,7 +57,7 @@ export function ContactScene() {
             </p>
           </div>
           
-          <div className="flex items-center gap-6 font-mono text-[11px] text-[#ff0055] font-black uppercase tracking-[0.4em]">
+          <div className="flex items-center gap-6 font-mono text-[11px] text-[#E31B23] font-black uppercase tracking-[0.4em]">
              <Zap size={18} className="animate-bounce" />
              <span>Awaiting Command Sequence</span>
           </div>
@@ -71,17 +71,17 @@ export function ContactScene() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="brutal-card p-10 space-y-8 hover:border-[#ff0055]/60 transition-all duration-700 group/link bg-[#0a0a0c] h-full flex flex-col justify-between"
+                className="brutal-card p-10 space-y-8 hover:border-[#E31B23]/60 transition-all duration-700 group/link bg-[#0a0a0c] h-full flex flex-col justify-between"
               >
                 <div className="flex justify-between items-start">
-                  <div className="w-12 h-12 bg-[#ff0055]/5 border border-[#ff0055]/20 flex items-center justify-center text-[#ff0055] group-hover/link:bg-[#ff0055] group-hover/link:text-white transition-all duration-500 shadow-2xl">
+                  <div className="w-12 h-12 bg-[#E31B23]/5 border border-[#E31B23]/20 flex items-center justify-center text-[#E31B23] group-hover/link:bg-[#E31B23] group-hover/link:text-white transition-all duration-500 shadow-2xl">
                     {item.icon}
                   </div>
-                  <ArrowUpRight size={20} className="text-white/10 group-hover/link:text-[#ff0055] group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-all duration-500" />
+                  <ArrowUpRight size={20} className="text-white/10 group-hover/link:text-[#E31B23] group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-all duration-500" />
                 </div>
 
                 <div className="space-y-3">
-                  <span className="text-[11px] text-[#ff0055] font-black uppercase tracking-[0.3em] block opacity-40 group-hover/link:opacity-100 transition-opacity">
+                  <span className="text-[11px] text-[#E31B23] font-black uppercase tracking-[0.3em] block opacity-40 group-hover/link:opacity-100 transition-opacity">
                     {item.label}
                   </span>
                   <span className="text-lg text-white/60 group-hover/link:text-white transition-colors font-black tracking-tighter uppercase break-all">
@@ -89,7 +89,7 @@ export function ContactScene() {
                   </span>
                 </div>
 
-                <div className="w-full h-[1px] bg-white/5 mt-4 group-hover/link:bg-[#ff0055]/30 transition-colors" />
+                <div className="w-full h-[1px] bg-white/5 mt-4 group-hover/link:bg-[#E31B23]/30 transition-colors" />
               </a>
             </Magnetic>
           ))}

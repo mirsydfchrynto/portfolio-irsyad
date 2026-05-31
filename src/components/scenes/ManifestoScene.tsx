@@ -21,10 +21,10 @@ export function ManifestoScene() {
       {...fadeInUp}
     >
       {/* 1. MANIFESTO HEADER BOX */}
-      <div className="md:col-span-4 brutal-card p-10 flex flex-col justify-between group hover:border-[#ff0055]/40 transition-all duration-700 bg-[#050507]">
+      <div className="md:col-span-4 brutal-card p-10 flex flex-col justify-between group hover:border-[#E31B23]/40 transition-all duration-700 bg-[#050507]">
         <div className="space-y-10">
           <div className="flex items-center gap-4">
-            <span className="text-[12px] font-mono text-[#ff0055] font-black tracking-widest">[SCENE_03]</span>
+            <span className="text-[12px] font-mono text-[#E31B23] font-black tracking-widest">[SCENE_03]</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-white/20 block font-black">
               CORE_MANIFESTO
             </span>
@@ -38,15 +38,15 @@ export function ManifestoScene() {
 
           <div className="space-y-4 pt-10 border-t border-white/5">
             <div className="flex items-center justify-between text-[10px] font-mono text-white/20 uppercase tracking-widest font-black">
-              <span className="flex items-center gap-2"><Shield size={10} className="text-[#ff0055]" /> Integrity</span>
+              <span className="flex items-center gap-2"><Shield size={10} className="text-[#E31B23]" /> Integrity</span>
               <span className="text-white/40">Enabled</span>
             </div>
             <div className="flex items-center justify-between text-[10px] font-mono text-white/20 uppercase tracking-widest font-black">
-              <span className="flex items-center gap-2"><Cpu size={10} className="text-[#ff0055]" /> Logic</span>
+              <span className="flex items-center gap-2"><Cpu size={10} className="text-[#E31B23]" /> Logic</span>
               <span className="text-white/40">Clean_Only</span>
             </div>
             <div className="flex items-center justify-between text-[10px] font-mono text-white/20 uppercase tracking-widest font-black">
-              <span className="flex items-center gap-2"><Activity size={10} className="text-[#ff0055]" /> Output</span>
+              <span className="flex items-center gap-2"><Activity size={10} className="text-[#E31B23]" /> Output</span>
               <span className="text-white/40">High_Fidelity</span>
             </div>
           </div>
@@ -54,18 +54,18 @@ export function ManifestoScene() {
 
         <div className="font-mono text-[10px] text-white/10 block select-none leading-relaxed mt-20 uppercase tracking-[0.4em] font-black group-hover:text-white/20 transition-colors">
           Archived // Tegal, ID <br />
-          <span className="text-[#ff0055] opacity-50 shadow-[0_0_10px_rgba(255,0,85,0.2)]">Personal technical archive</span>
+          <span className="text-[#E31B23] opacity-50 shadow-[0_0_10px_rgba(255,0,85,0.2)]">Personal technical archive</span>
         </div>
       </div>
       
       {/* 2. MANIFESTO CONTENT BOX */}
       <div className="md:col-span-8 brutal-card p-12 md:p-20 space-y-20 relative group overflow-hidden bg-[#0a0a0c]">
         {/* Ambient identity red glow */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-[#ff0055]/5 blur-[100px] pointer-events-none group-hover:bg-[#ff0055]/10 transition-all duration-1000" />
+        <div className="absolute top-0 right-0 w-80 h-80 bg-[#E31B23]/5 blur-[100px] pointer-events-none group-hover:bg-[#E31B23]/10 transition-all duration-1000" />
         
         <div className="space-y-12 relative z-10">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tighter leading-[1] text-white uppercase">
-            Architecting <span className="text-[#ff0055] drop-shadow-[0_0_20px_rgba(255,0,85,0.3)]">high-integrity</span> <br />
+            Architecting <span className="text-[#E31B23] drop-shadow-[0_0_20px_rgba(255,0,85,0.3)]">high-integrity</span> <br />
             digital experiences through clean engineering and <span className="italic font-light opacity-50 lowercase tracking-tight">bold minimalism</span>.
           </h2>
           <p className="paragraph-editorial text-xl md:text-2xl text-white/50 leading-relaxed font-medium">
@@ -78,13 +78,13 @@ export function ManifestoScene() {
           {exploredTools.map((exp, i) => (
             <div key={i} className="space-y-8 group/tool">
               <div className="flex items-center gap-3">
-                <span className="text-[#ff0055] font-black">0{i+1}</span>
-                <span className="text-white/40 group-hover/tool:text-[#ff0055] transition-colors">{exp.category}</span>
+                <span className="text-[#E31B23] font-black">0{i+1}</span>
+                <span className="text-white/40 group-hover/tool:text-[#E31B23] transition-colors">{exp.category}</span>
               </div>
               <ul className="space-y-4 text-white/30 font-sans text-[13px] normal-case tracking-normal font-bold group-hover/tool:text-white transition-all duration-700">
                 {exp.technologies.map((tech) => (
                   <li key={tech} className="flex items-center gap-4 group/item">
-                    <div className="w-1.5 h-1.5 bg-[#ff0055]/20 border border-[#ff0055]/40 group-hover/tool:bg-[#ff0055] transition-all" />
+                    <div className="w-1.5 h-1.5 bg-[#E31B23]/20 border border-[#E31B23]/40 group-hover/tool:bg-[#E31B23] transition-all" />
                     <span className="opacity-60 group-hover/tool:opacity-100 transition-opacity">{tech}</span>
                   </li>
                 ))}

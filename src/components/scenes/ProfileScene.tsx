@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { inlineResume } from "@/config/portfolioData";
 import { pdfBase64 } from "@/config/pdfBase64";
-import { Download, Shield, Terminal, Cpu, Activity, CheckCircle2 } from "lucide-react";
+import { Download, Cpu, Activity, CheckCircle2 } from "lucide-react";
 import { Magnetic } from "@/components/Magnetic";
 
 interface ProfileSceneProps {
@@ -31,7 +31,7 @@ export function ProfileScene({ handleDownload, downloading }: ProfileSceneProps)
       <div className="lg:col-span-4 space-y-12 sticky top-40">
         <div className="space-y-6">
           <div className="flex items-center gap-4">
-            <span className="text-[12px] font-mono text-[#ff0055] font-black tracking-widest">[SCENE_06]</span>
+            <span className="text-[12px] font-mono text-[#E31B23] font-black tracking-widest">[SCENE_06]</span>
             <span className="font-mono text-[11px] uppercase tracking-[0.4em] text-white/20 block font-black">
               IDENTITY_SYNC
             </span>
@@ -41,27 +41,27 @@ export function ProfileScene({ handleDownload, downloading }: ProfileSceneProps)
           </h2>
         </div>
 
-        <div className="brutal-card p-10 space-y-10 hover:border-[#ff0055]/50 transition-all duration-700 bg-[#050507]">
+        <div className="brutal-card p-10 space-y-10 hover:border-[#E31B23]/50 transition-all duration-700 bg-[#050507]">
           <div className="space-y-10 font-mono text-[11px] text-white/30 uppercase tracking-[0.2em] font-bold">
             <div className="space-y-4">
-              <span className="text-[#ff0055]/50 block font-black">System_Identity &rarr;</span>
+              <span className="text-[#E31B23]/50 block font-black">System_Identity &rarr;</span>
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-white/5 border border-white/10 flex items-center justify-center">
-                   <Cpu size={20} className="text-[#ff0055]" />
+                   <Cpu size={20} className="text-[#E31B23]" />
                 </div>
                 <span className="text-white text-[15px] normal-case tracking-normal font-sans font-black">M. Irsyad Fachryanto</span>
               </div>
             </div>
             
             <div className="space-y-4 border-t border-white/5 pt-8">
-              <span className="text-[#ff0055]/50 block font-black">Focus_Node &rarr;</span>
+              <span className="text-[#E31B23]/50 block font-black">Focus_Node &rarr;</span>
               <span className="text-white text-[14px] normal-case tracking-normal font-sans font-black block">Full-Stack Architect &amp; Native Mobile</span>
             </div>
 
             <div className="space-y-4 border-t border-white/5 pt-8">
               <div className="flex items-center justify-between">
-                <span className="text-[#ff0055]/50 block font-black">Performance &rarr;</span>
-                <div className="flex items-center gap-2 text-[#ff0055]">
+                <span className="text-[#E31B23]/50 block font-black">Performance &rarr;</span>
+                <div className="flex items-center gap-2 text-[#E31B23]">
                   <Activity size={12} className="animate-pulse" />
                   <span className="font-black text-[12px]">IPK: 3.92</span>
                 </div>
@@ -79,7 +79,7 @@ export function ProfileScene({ handleDownload, downloading }: ProfileSceneProps)
               >
                 <span className="relative z-10">{downloading ? "SYNCHRONIZING..." : "DOWNLOAD_RESUME"}</span>
                 <Download className="relative z-10 group-hover:translate-y-1 transition-transform" size={20} />
-                <div className="absolute inset-0 bg-[#ff0055] translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[0.16,1,0.3,1]" />
+                <div className="absolute inset-0 bg-[#E31B23] translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[0.16,1,0.3,1]" />
               </a>
             </Magnetic>
           </div>
@@ -91,24 +91,24 @@ export function ProfileScene({ handleDownload, downloading }: ProfileSceneProps)
         <div className="brutal-card p-12 md:p-24 space-y-32 bg-[#0a0a0c]">
           {/* Executive Summary */}
           <div className="space-y-10">
-            <h3 className="font-mono text-[12px] uppercase tracking-[0.5em] text-[#ff0055] font-black flex items-center gap-4">
-              <span className="w-8 h-[1px] bg-[#ff0055]" /> // EXEC_SUMMARY
+            <h3 className="font-mono text-[12px] uppercase tracking-[0.5em] text-[#E31B23] font-black flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-[#E31B23]" /> {"// EXEC_SUMMARY"}
             </h3>
             <p className="text-2xl md:text-3xl text-white/80 leading-snug font-display font-medium tracking-tighter uppercase italic">
-              "{inlineResume.summary}"
+              &quot;{inlineResume.summary}&quot;
             </p>
           </div>
 
           {/* Production History */}
           <div className="space-y-16">
-            <h3 className="font-mono text-[12px] uppercase tracking-[0.5em] text-[#ff0055] font-black flex items-center gap-4">
-              <span className="w-8 h-[1px] bg-[#ff0055]" /> // PROD_HISTORY
+            <h3 className="font-mono text-[12px] uppercase tracking-[0.5em] text-[#E31B23] font-black flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-[#E31B23]" /> {"// PROD_HISTORY"}
             </h3>
             <div className="space-y-24">
               {inlineResume.experience.map((exp, i) => (
                 <div key={i} className="space-y-10 group/exp">
                   <div className="flex flex-wrap justify-between items-baseline gap-8 border-b border-white/5 pb-6">
-                    <h4 className="text-3xl md:text-4xl font-black text-white group-hover/exp:text-[#ff0055] transition-colors duration-700 tracking-tighter uppercase">{exp.role} @ {exp.company}</h4>
+                    <h4 className="text-3xl md:text-4xl font-black text-white group-hover/exp:text-[#E31B23] transition-colors duration-700 tracking-tighter uppercase">{exp.role} @ {exp.company}</h4>
                     <span className="font-mono text-xs text-white/20 uppercase tracking-[0.3em] font-black">{exp.period}</span>
                   </div>
                   <p className="paragraph-editorial text-xl text-white/50 leading-relaxed font-medium">{exp.description}</p>
@@ -116,7 +116,7 @@ export function ProfileScene({ handleDownload, downloading }: ProfileSceneProps)
                     {exp.bullets.map((bullet, idx) => (
                       <li key={idx} className="flex gap-8 items-start group/bullet">
                         <div className="flex flex-col items-center pt-2">
-                          <CheckCircle2 size={16} className="text-[#ff0055] opacity-40 group-hover/bullet:opacity-100 transition-opacity" />
+                          <CheckCircle2 size={16} className="text-[#E31B23] opacity-40 group-hover/bullet:opacity-100 transition-opacity" />
                           <div className="w-[1px] h-4 bg-white/5 mt-2" />
                         </div>
                         <span className="group-hover/bullet:text-white transition-colors duration-500">{bullet}</span>
@@ -130,20 +130,20 @@ export function ProfileScene({ handleDownload, downloading }: ProfileSceneProps)
 
           {/* Technology Matrix */}
           <div className="space-y-16 pt-24 border-t border-white/5">
-            <h3 className="font-mono text-[12px] uppercase tracking-[0.5em] text-[#ff0055] font-black flex items-center gap-4">
-              <span className="w-8 h-[1px] bg-[#ff0055]" /> // TECH_MATRIX
+            <h3 className="font-mono text-[12px] uppercase tracking-[0.5em] text-[#E31B23] font-black flex items-center gap-4">
+              <span className="w-8 h-[1px] bg-[#E31B23]" /> {"// TECH_MATRIX"}
             </h3>
             <div className="grid sm:grid-cols-3 gap-16">
               {inlineResume.skills.map((skill, i) => (
                 <div key={i} className="space-y-10 group/skill">
                   <div className="flex items-baseline gap-3">
-                    <span className="font-mono text-[11px] text-[#ff0055] font-black tracking-[0.3em] block uppercase">0{i+1}</span>
+                    <span className="font-mono text-[11px] text-[#E31B23] font-black tracking-[0.3em] block uppercase">0{i+1}</span>
                     <span className="font-mono text-[10px] text-white/40 font-black uppercase tracking-widest">{skill.category}</span>
                   </div>
                   <ul className="space-y-5 text-[15px] text-white/30 font-bold group-hover/skill:text-white transition-all duration-700">
                     {skill.tools.map((t) => (
                       <li key={t} className="flex items-center gap-5">
-                        <div className="w-2 h-2 bg-[#ff0055]/5 border border-[#ff0055]/20 group-hover/skill:bg-[#ff0055] group-hover/skill:border-[#ff0055] transition-all rotate-45 shadow-[0_0_15px_rgba(255,0,85,0)] group-hover/skill:shadow-[0_0_15px_rgba(255,0,85,0.4)]" />
+                        <div className="w-2 h-2 bg-[#E31B23]/5 border border-[#E31B23]/20 group-hover/skill:bg-[#E31B23] group-hover/skill:border-[#E31B23] transition-all rotate-45 shadow-[0_0_15px_rgba(227,27,35,0)] group-hover/skill:shadow-[0_0_15px_rgba(227,27,35,0.4)]" />
                         <span className="opacity-60 group-hover/skill:opacity-100 transition-opacity uppercase tracking-tight">{t}</span>
                       </li>
                     ))}
