@@ -66,15 +66,9 @@ export default function Home() {
                   M. Irsyad <br/>
                   <span className="text-white/10 group-hover:text-[#E31B23] transition-colors duration-1000 ease-out">Fachryanto</span>
                 </h1>
-                <div className="flex items-center gap-4">
-                  <p className="text-white/30 font-display text-lg md:text-2xl tracking-tight lowercase">
-                    {introduction.subtitle}
-                  </p>
-                  <span className="w-1 h-1 rounded-full bg-[#E31B23]" />
-                  <p className="text-[#E31B23] font-mono text-xs tracking-widest uppercase opacity-60">
-                    {introduction.group}
-                  </p>
-                </div>
+                <p className="text-white/30 font-display text-lg md:text-2xl tracking-tight lowercase max-w-xl">
+                  Building High-Integrity Digital Ecosystems.
+                </p>
               </div>
               
               <p className="text-white/50 text-base md:text-xl leading-relaxed max-w-2xl font-medium border-l border-white/10 pl-6 md:pl-8 py-2">

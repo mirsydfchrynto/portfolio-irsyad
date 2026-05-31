@@ -1,7 +1,6 @@
 export const introduction = {
   title: "M. Irsyad Fachryanto",
-  subtitle: "Elite Architect & Full-Stack Engineer",
-  group: "Architect-Elite / Nexus-E",
+  subtitle: "Software Architect & Full-Stack Engineer",
   bio: "I am a computer science student dedicated to engineering high-integrity digital ecosystems. My core expertise lies in Flutter, Kotlin Native, and Next.js. I prioritize scalable architecture, operational reliability, and clean structures over complex but fragile solutions. This archive documents my engineering journey, problem-solving methodologies, and system-level explorations."
 };
 
