@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, GitBranch, ArrowUpRight, CheckCircle2, ChevronRight, Zap } from "lucide-react";
+import { Magnetic } from "./Magnetic";
 
 interface TimelineItem {
   label: string;
@@ -86,15 +87,17 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                   DEEP_DIVE_PROTOCOL // {project.title}
                 </span>
               </div>
-              <button 
-                onClick={onClose}
-                className="group relative px-8 py-3 bg-white text-black text-[11px] font-mono font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:pr-14 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
-                aria-label="Close Journal"
-              >
-                <span className="relative z-10">TERMINATE_LINK</span>
-                <X className="absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={16} />
-                <div className="absolute inset-0 bg-[#ff0055] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-              </button>
+              <Magnetic strength={0.15}>
+                <button 
+                  onClick={onClose}
+                  className="group relative px-8 py-3 bg-white text-black text-[11px] font-mono font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:pr-14 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+                  aria-label="Close Journal"
+                >
+                  <span className="relative z-10">TERMINATE_LINK</span>
+                  <X className="absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={16} />
+                  <div className="absolute inset-0 bg-[#ff0055] translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                </button>
+              </Magnetic>
             </div>
 
             {/* Cinematic Article Body */}
@@ -274,27 +277,31 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
               {/* Journal Footer Links */}
               <div className="pt-32 flex flex-wrap justify-center gap-12">
                 {repoLink && (
-                  <a 
-                    href={repoLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="group relative px-14 py-7 bg-white text-black text-[12px] font-mono font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:pr-20 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)]"
-                  >
-                    <span className="relative z-10">SOURCE_MANIFEST</span>
-                    <GitBranch className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={20} />
-                    <div className="absolute inset-0 bg-[#ff0055] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
-                  </a>
+                  <Magnetic strength={0.2}>
+                    <a 
+                      href={repoLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group relative px-14 py-7 bg-white text-black text-[12px] font-mono font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:pr-20 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)]"
+                    >
+                      <span className="relative z-10">SOURCE_MANIFEST</span>
+                      <GitBranch className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={20} />
+                      <div className="absolute inset-0 bg-[#ff0055] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                    </a>
+                  </Magnetic>
                 )}
                 {liveLink && (
-                  <a 
-                    href={liveLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-14 py-7 border border-white/10 hover:border-[#ff0055] text-[12px] font-mono font-black uppercase tracking-widest text-white/30 hover:text-white flex items-center gap-5 transition-all duration-500 bg-white/[0.02]"
-                  >
-                    <span>PRODUCTION_SYNC</span>
-                    <ArrowUpRight size={20} className="text-[#ff0055]" />
-                  </a>
+                  <Magnetic strength={0.2}>
+                    <a 
+                      href={liveLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="px-14 py-7 border border-white/10 hover:border-[#ff0055] text-[12px] font-mono font-black uppercase tracking-widest text-white/30 hover:text-white flex items-center gap-5 transition-all duration-500 bg-white/[0.02]"
+                    >
+                      <span>PRODUCTION_SYNC</span>
+                      <ArrowUpRight size={20} className="text-[#ff0055]" />
+                    </a>
+                  </Magnetic>
                 )}
               </div>
             </article>

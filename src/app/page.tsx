@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { CodeWorkspace } from "@/components/CodeWorkspace";
 import { KernelTerminalExplorer } from "@/components/KernelTerminalExplorer";
 import { ProjectLabCard } from "@/components/ProjectLabCard";
 import { CommandPalette } from "@/components/CommandPalette";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
+import { Magnetic } from "@/components/Magnetic";
 import { 
   introduction, 
   productionExperience, 
@@ -22,6 +23,21 @@ import { ArrowUpRight, Terminal, Shield, Cpu, ChevronRight, Download, Zap } from
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [downloading, setDownloading] = useState(false);
+
+  // Mouse Tracking for Dynamic Lighting & Cursor
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const cursorX = useSpring(mouseX, { stiffness: 500, damping: 28 });
+  const cursorY = useSpring(mouseY, { stiffness: 500, damping: 28 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
@@ -45,13 +61,36 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#020203] text-white relative selection:bg-[#ff0055] selection:text-white overflow-hidden">
+    <div className="min-h-screen bg-[#020203] text-white relative selection:bg-[#ff0055] selection:text-white overflow-hidden cursor-none">
       <CommandPalette />
       <Navbar />
+
+      {/* CUSTOM SYSTEM CURSOR */}
+      <motion.div 
+        className="fixed top-0 left-0 w-8 h-8 border border-[#ff0055]/50 z-[9999] pointer-events-none mix-blend-difference flex items-center justify-center"
+        style={{ x: cursorX, y: cursorY, translateX: "-50%", translateY: "-50%" }}
+      >
+        <div className="w-1 h-1 bg-[#ff0055]" />
+        <div className="absolute -top-1 -left-1 w-2 h-[1px] bg-[#ff0055]" />
+        <div className="absolute -top-1 -left-1 w-[1px] h-2 bg-[#ff0055]" />
+        <div className="absolute -bottom-1 -right-1 w-2 h-[1px] bg-[#ff0055]" />
+        <div className="absolute -bottom-1 -right-1 w-[1px] h-2 bg-[#ff0055]" />
+      </motion.div>
       
       {/* SCENE 0: Cinematic Environment */}
       <div className="fixed inset-0 z-0 architect-grid opacity-[0.03] pointer-events-none" />
       <div className="fixed inset-0 z-0 architect-grid-dense opacity-[0.02] pointer-events-none" />
+
+      {/* Dynamic Lighting Spotlight */}
+      <motion.div 
+        className="fixed inset-0 z-0 pointer-events-none"
+        style={{
+          background: useTransform(
+            [mouseX, mouseY],
+            ([x, y]) => `radial-gradient(600px circle at ${x}px ${y}px, rgba(255, 0, 85, 0.03), transparent 80%)`
+          )
+        }}
+      />
 
       {/* Identity Red Atmospheric Lighting */}
       <div className="absolute top-[-5%] left-[-10%] cyber-glow-red opacity-30 animate-pulse" />
@@ -91,10 +130,10 @@ export default function Home() {
                 </h1>
                 
                 <div className="text-xl md:text-2xl font-display font-medium text-white/30 tracking-tighter lowercase flex items-center gap-5">
-                  <span className="animate-pulse">●</span>
+                  <span className="animate-pulse text-[#ff0055]">●</span>
                   <span>architecting digital ecosystems</span>
                   <span className="w-16 h-[1px] bg-white/10" />
-                  <span className="font-mono text-xs text-white/20 tracking-widest uppercase">System v4.2.0</span>
+                  <span className="font-mono text-xs text-white/20 tracking-widest uppercase">System v5.0.0</span>
                 </div>
               </div>
               
@@ -104,22 +143,26 @@ export default function Home() {
                 </p>
                 
                 <div className="flex flex-wrap gap-8 pt-4">
-                  <a 
-                    href="#production-experience"
-                    className="group relative px-10 py-5 bg-white text-black text-[12px] font-mono tracking-widest font-black uppercase overflow-hidden transition-all duration-500 hover:pr-14 hover:shadow-[0_0_40px_rgba(255,255,255,0.1)]"
-                  >
-                    <span className="relative z-10">INITIALIZE ARCHIVE</span>
-                    <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={18} />
-                    <div className="absolute inset-0 bg-[#ff0055] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
-                  </a>
+                  <Magnetic strength={0.2}>
+                    <a 
+                      href="#production-experience"
+                      className="group relative px-10 py-5 bg-white text-black text-[12px] font-mono tracking-widest font-black uppercase overflow-hidden transition-all duration-500 hover:pr-14 hover:shadow-[0_0_40px_rgba(255,255,255,0.1)]"
+                    >
+                      <span className="relative z-10">INITIALIZE ARCHIVE</span>
+                      <ChevronRight className="absolute right-5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500" size={18} />
+                      <div className="absolute inset-0 bg-[#ff0055] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]" />
+                    </a>
+                  </Magnetic>
                   
-                  <a 
-                    href="#resume"
-                    className="px-10 py-5 border border-white/10 hover:border-[#ff0055] text-[12px] font-mono tracking-widest text-white/50 hover:text-white transition-all bg-white/[0.02] flex items-center gap-4 uppercase font-black"
-                  >
-                    <span>ANALYZE CV</span>
-                    <Download size={16} className="opacity-40 group-hover:opacity-100 transition-opacity" />
-                  </a>
+                  <Magnetic strength={0.2}>
+                    <a 
+                      href="#resume"
+                      className="px-10 py-5 border border-white/10 hover:border-[#ff0055] text-[12px] font-mono tracking-widest text-white/50 hover:text-white transition-all bg-white/[0.02] flex items-center gap-4 uppercase font-black"
+                    >
+                      <span>ANALYZE CV</span>
+                      <Download size={16} className="opacity-40 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  </Magnetic>
                 </div>
               </div>
 
@@ -332,22 +375,26 @@ export default function Home() {
               </ul>
 
               <div className="flex flex-wrap gap-8 pt-4">
-                <button
-                  onClick={() => setSelectedProject(productionExperience)}
-                  className="px-12 py-6 bg-white text-black font-mono text-[12px] font-black tracking-widest uppercase hover:bg-[#ff0055] hover:text-white transition-all duration-500 shadow-xl"
-                >
-                  DEEP_DIVE_PROTOCOLS
-                </button>
-                {productionExperience.url && (
-                  <a
-                    href={productionExperience.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-10 py-6 border border-white/10 hover:border-[#ff0055] text-[12px] font-mono tracking-widest text-white/40 hover:text-white flex items-center gap-4 transition-all uppercase font-black bg-white/[0.02]"
+                <Magnetic strength={0.2}>
+                  <button
+                    onClick={() => setSelectedProject(productionExperience)}
+                    className="px-12 py-6 bg-white text-black font-mono text-[12px] font-black tracking-widest uppercase hover:bg-[#ff0055] hover:text-white transition-all duration-500 shadow-xl"
                   >
-                    <span>LIVE_SYNC</span>
-                    <ArrowUpRight size={18} />
-                  </a>
+                    DEEP_DIVE_PROTOCOLS
+                  </button>
+                </Magnetic>
+                {productionExperience.url && (
+                  <Magnetic strength={0.2}>
+                    <a
+                      href={productionExperience.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-10 py-6 border border-white/10 hover:border-[#ff0055] text-[12px] font-mono tracking-widest text-white/40 hover:text-white flex items-center gap-4 transition-all uppercase font-black bg-white/[0.02]"
+                    >
+                      <span>LIVE_SYNC</span>
+                      <ArrowUpRight size={18} />
+                    </a>
+                  </Magnetic>
                 )}
               </div>
             </div>
@@ -412,16 +459,18 @@ export default function Home() {
               </div>
 
               <div className="space-y-6">
-                <a 
-                  href={`data:application/pdf;base64,${pdfBase64}`}
-                  download="muhammad-irsyad-fachryanto-resume.pdf"
-                  onClick={handleDownload}
-                  className="group relative flex items-center justify-between w-full h-[70px] px-8 bg-white text-black font-mono text-[12px] font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)]"
-                >
-                  <span className="relative z-10">{downloading ? "SYNCHRONIZING..." : "GENERATE PDF"}</span>
-                  <Download className="relative z-10 group-hover:translate-y-1 transition-transform" size={20} />
-                  <div className="absolute inset-0 bg-[#ff0055] translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
-                </a>
+                <Magnetic strength={0.15}>
+                  <a 
+                    href={`data:application/pdf;base64,${pdfBase64}`}
+                    download="muhammad-irsyad-fachryanto-resume.pdf"
+                    onClick={handleDownload}
+                    className="group relative flex items-center justify-between w-full h-[70px] px-8 bg-white text-black font-mono text-[12px] font-black uppercase tracking-widest overflow-hidden transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)]"
+                  >
+                    <span className="relative z-10">{downloading ? "SYNCHRONIZING..." : "GENERATE PDF"}</span>
+                    <Download className="relative z-10 group-hover:translate-y-1 transition-transform" size={20} />
+                    <div className="absolute inset-0 bg-[#ff0055] translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
+                  </a>
+                </Magnetic>
               </div>
             </div>
           </div>
@@ -513,19 +562,20 @@ export default function Home() {
                 { label: "Channel_Email", value: "irsydfchrynto@gmail.com", href: "mailto:irsydfchrynto@gmail.com" },
                 { label: "Channel_WhatsApp", value: "+62 858-6582-6621", href: "https://wa.me/6285865826621" },
                 { label: "Source_Archive", value: "mirsydfchrynto", href: "https://github.com/mirsydfchrynto" },
-                { label: "Identity_Log", value: "@muhammadirsyadf", href: "https://instagram.com/muhammadirsyadf" }
+                { label: "Channel_Identity", value: "@muhammadirsyadf", href: "https://instagram.com/muhammadirsyadf" }
               ].map((item) => (
-                <a 
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="brutal-card p-8 space-y-6 hover:border-[#ff0055]/60 transition-all duration-700 group/link bg-[#050507]"
-                >
-                  <span className="text-[11px] text-[#ff0055] font-black uppercase tracking-[0.3em] block opacity-60 group-hover:opacity-100 transition-opacity">{item.label}</span>
-                  <span className="text-[15px] text-white/70 group-hover:text-white transition-colors font-bold tracking-tight">{item.value}</span>
-                  <ArrowUpRight size={16} className="text-white/10 group-hover:text-[#ff0055] transition-colors ml-auto" />
-                </a>
+                <Magnetic key={item.label} strength={0.1}>
+                  <a 
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="brutal-card p-8 space-y-6 hover:border-[#ff0055]/60 transition-all duration-700 group/link bg-[#050507] h-full block"
+                  >
+                    <span className="text-[11px] text-[#ff0055] font-black uppercase tracking-[0.3em] block opacity-60 group-hover:opacity-100 transition-opacity">{item.label}</span>
+                    <span className="text-[15px] text-white/70 group-hover:text-white transition-colors font-bold tracking-tight">{item.value}</span>
+                    <ArrowUpRight size={16} className="text-white/10 group-hover:text-[#ff0055] transition-colors ml-auto mt-4" />
+                  </a>
+                </Magnetic>
               ))}
             </div>
           </div>
@@ -573,7 +623,7 @@ export default function Home() {
             <div className="flex items-center gap-6 text-right">
               <span>TEGAL, INDONESIA</span>
               <span className="w-16 h-[1px] bg-white/10" />
-              <span className="text-white/30">V4.2.0_ELITE</span>
+              <span className="text-white/30">V5.0.0_GOD</span>
             </div>
           </div>
         </div>
@@ -589,4 +639,3 @@ export default function Home() {
     </div>
   );
 }
-

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, GitBranch, FlaskConical, Layout, ShieldCheck } from "lucide-react";
+import { Magnetic } from "./Magnetic";
 
 interface ProjectLabCardProps {
   project: {
@@ -53,23 +54,27 @@ export function ProjectLabCard({ project, onOpenDetails }: ProjectLabCardProps) 
       </div>
 
       <div className="flex items-center justify-between pt-8 border-t border-white/5">
-        <button 
-          onClick={onOpenDetails}
-          className="flex items-center gap-3 font-mono text-[11px] font-black uppercase tracking-widest text-[#ff0055] hover:text-white transition-colors group/btn"
-        >
-          <span>DEEP_SCAN</span>
-          <ArrowUpRight size={16} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
-        </button>
+        <Magnetic strength={0.2}>
+          <button 
+            onClick={onOpenDetails}
+            className="flex items-center gap-3 font-mono text-[11px] font-black uppercase tracking-widest text-[#ff0055] hover:text-white transition-colors group/btn"
+          >
+            <span>DEEP_SCAN</span>
+            <ArrowUpRight size={16} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
+          </button>
+        </Magnetic>
 
         <div className="flex items-center gap-6">
-          <a 
-            href={project.links.repo} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="p-2.5 text-white/20 hover:text-[#ff0055] hover:bg-[#ff0055]/5 border border-transparent hover:border-[#ff0055]/30 transition-all duration-500 rounded-sm"
-          >
-            <GitBranch size={18} />
-          </a>
+          <Magnetic strength={0.3}>
+            <a 
+              href={project.links.repo} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="p-2.5 text-white/20 hover:text-[#ff0055] hover:bg-[#ff0055]/5 border border-transparent hover:border-[#ff0055]/30 transition-all duration-500 rounded-sm"
+            >
+              <GitBranch size={18} />
+            </a>
+          </Magnetic>
         </div>
       </div>
     </motion.div>

@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Cpu, GitBranch, Globe, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
+import { Magnetic } from "./Magnetic";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,40 +48,43 @@ export function Navbar() {
           scrolled ? "bg-black/90 backdrop-blur-xl border-b border-white/5 py-4" : "bg-transparent"
         }`}
       >
-        <div className="flex items-center gap-4 group cursor-pointer">
-          <div className="relative w-10 h-10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-[#ff0055]/20 rounded-sm blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative w-full h-full bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#ff0055]/50 transition-colors duration-500">
-              <Cpu size={18} className="text-[#ff0055] group-hover:rotate-90 transition-transform duration-700" />
+        <Magnetic strength={0.2}>
+          <div className="flex items-center gap-4 group cursor-pointer">
+            <div className="relative w-10 h-10 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[#ff0055]/20 rounded-sm blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative w-full h-full bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#ff0055]/50 transition-colors duration-500">
+                <Cpu size={18} className="text-[#ff0055] group-hover:rotate-90 transition-transform duration-700" />
+              </div>
+            </div>
+            <div className="flex flex-col -space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white">
+                IRSYAD
+              </span>
+              <span className="text-[9px] font-mono text-[#ff0055] font-black uppercase tracking-[0.2em] opacity-80">
+                ARCHITECT
+              </span>
             </div>
           </div>
-          <div className="flex flex-col -space-y-1">
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white">
-              IRSYAD
-            </span>
-            <span className="text-[9px] font-mono text-[#ff0055] font-black uppercase tracking-[0.2em] opacity-80">
-              ARCHITECT
-            </span>
-          </div>
-        </div>
+        </Magnetic>
 
         {/* Desktop Links & Info */}
         <div className="hidden lg:flex items-center gap-10">
           <div className="flex gap-10">
             {links.map((link) => (
-              <a 
-                key={link.name} 
-                href={link.href}
-                className="group relative py-1 overflow-hidden"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="text-[9px] font-mono text-[#ff0055] font-black opacity-40 group-hover:opacity-100 transition-opacity select-none">{link.id}</span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white transition-colors duration-300">
-                    {link.name}
-                  </span>
-                </div>
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#ff0055] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out" />
-              </a>
+              <Magnetic key={link.name} strength={0.15}>
+                <a 
+                  href={link.href}
+                  className="group relative py-1 overflow-hidden"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-[9px] font-mono text-[#ff0055] font-black opacity-40 group-hover:opacity-100 transition-opacity select-none">{link.id}</span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white transition-colors duration-300">
+                      {link.name}
+                    </span>
+                  </div>
+                  <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#ff0055] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out" />
+                </a>
+              </Magnetic>
             ))}
           </div>
 
@@ -99,22 +103,26 @@ export function Navbar() {
             </div>
             
             <div className="flex items-center gap-2">
-              <a 
-                href="https://github.com/mirsydfchrynto" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-2.5 text-white/30 hover:text-[#ff0055] hover:bg-white/5 transition-all duration-300 rounded-sm"
-              >
-                <GitBranch size={16} />
-                </a>
+              <Magnetic strength={0.3}>
                 <a 
-                href="https://instagram.com/muhammadirsyadf" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-2.5 text-white/30 hover:text-[#ff0055] hover:bg-white/5 transition-all duration-300 rounded-sm"
+                  href="https://github.com/mirsydfchrynto" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2.5 text-white/30 hover:text-[#ff0055] hover:bg-white/5 transition-all duration-300 rounded-sm"
                 >
-                <Globe size={16} />
+                  <GitBranch size={16} />
                 </a>
+              </Magnetic>
+              <Magnetic strength={0.3}>
+                <a 
+                  href="https://instagram.com/muhammadirsyadf" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2.5 text-white/30 hover:text-[#ff0055] hover:bg-white/5 transition-all duration-300 rounded-sm"
+                >
+                  <Globe size={16} />
+                </a>
+              </Magnetic>
             </div>
           </div>
         </div>
