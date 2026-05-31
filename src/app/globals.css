@@ -9,12 +9,12 @@
 :root {
   --background: #020203;
   --foreground: #ffffff;
-  --accent: #0070f3; /* Electric Blue */
-  --accent-secondary: #ff0055; /* System Rose */
-  --border: rgba(255, 255, 255, 0.12);
-  --border-strong: rgba(255, 255, 255, 0.25);
-  --grid-color: rgba(255, 255, 255, 0.02);
-  --glass: rgba(255, 255, 255, 0.03);
+  --accent: #ff0055; /* Identity Red (System Rose) */
+  --accent-muted: #990033;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 0, 85, 0.3);
+  --grid-color: rgba(255, 0, 85, 0.015);
+  --glass: rgba(255, 255, 255, 0.02);
 }
 
 body {
@@ -28,7 +28,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Elite background noise texture overlay */
+/* SCENE 0: System Noise Texture with Boot Animation */
 .system-noise {
   position: fixed;
   top: 0;
@@ -36,28 +36,35 @@ body {
   width: 100vw;
   height: 100vh;
   content: "";
-  opacity: 0.025;
+  opacity: 0;
   pointer-events: none;
   z-index: 9999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  animation: noise-boot 2s steps(4) forwards;
 }
 
-/* Cinematic visual glow behind focal components */
+@keyframes noise-boot {
+  0% { opacity: 0; transform: scale(1.1); }
+  50% { opacity: 0.04; }
+  100% { opacity: 0.025; transform: scale(1); }
+}
+
+/* Cinematic visual glow - Identity Red */
 .cyber-glow {
   position: absolute;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 0, 85, 0.03) 0%, rgba(0, 0, 0, 0) 70%);
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
 }
 
-.cyber-glow-blue {
+.cyber-glow-red {
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(0, 112, 243, 0.05) 0%, rgba(0, 0, 0, 0) 75%);
+  background: radial-gradient(circle, rgba(255, 0, 85, 0.06) 0%, rgba(0, 0, 0, 0) 75%);
   filter: blur(100px);
   pointer-events: none;
   z-index: 0;
@@ -93,26 +100,32 @@ body {
 .mono-tag {
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 800;
 }
 
-/* Refined Architectural Grid */
+/* Refined Architectural Grid with Entry Animation */
 .architect-grid {
   background-size: 80px 80px;
   background-image: 
     linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
   mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+  animation: grid-pulse 10s ease-in-out infinite alternate;
+}
+
+@keyframes grid-pulse {
+  from { opacity: 0.02; }
+  to { opacity: 0.04; }
 }
 
 .architect-grid-dense {
   background-size: 20px 20px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 0, 85, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 0, 85, 0.01) 1px, transparent 1px);
 }
 
 /* Elite Glassmorphism */
@@ -123,47 +136,48 @@ body {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
 }
 
-/* Neo-Brutalist Elite Depth */
+/* Neo-Brutalist Elite Physicality */
 .brutal-card {
-  border: 2px solid var(--border);
-  background: #0a0a0c;
-  box-shadow: 12px 12px 0px rgba(255, 255, 255, 0.02);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border);
+  background: #050507;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brutal-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(135deg, var(--accent) 0%, transparent 40%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
 }
 
 .brutal-card:hover {
-  border-color: var(--border-strong);
-  box-shadow: 8px 8px 0px rgba(0, 112, 243, 0.15);
-  transform: translate(2px, 2px);
+  border-color: var(--accent);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 20px 40px -10px rgba(255, 0, 85, 0.15);
 }
 
-/* Magnetic Button Base */
-.btn-magnetic {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 2rem;
-  background: white;
-  color: black;
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 2px solid white;
+.brutal-card:hover::after {
+  opacity: 0.1;
 }
 
-.btn-magnetic:hover {
-  background: black;
-  color: white;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+/* Interactive Cursor Target Base */
+.cursor-follower {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--accent);
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.15s ease-out;
 }
 
-/* Custom Scrollbar Elite */
+/* Custom Scrollbar Identity */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 ::-webkit-scrollbar-track {
   background: #000000;
@@ -176,16 +190,4 @@ body {
 ::selection {
   background: var(--accent);
   color: white;
-}
-
-/* Motion Utilities */
-.reveal-scene {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-scene.active {
-  opacity: 1;
-  transform: translateY(0);
 }

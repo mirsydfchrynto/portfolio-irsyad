@@ -21,30 +21,30 @@ export function ProjectLabCard({ project, onOpenDetails }: ProjectLabCardProps) 
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className="brutal-card group flex flex-col justify-between p-8 space-y-8 h-full"
+      className="brutal-card group flex flex-col justify-between p-10 space-y-10 h-full hover:border-[#ff0055]/50 transition-all duration-700"
     >
-      <div className="space-y-6">
+      <div className="space-y-8">
         <div className="flex justify-between items-start">
-          <div className="w-12 h-12 bg-[#0070f3]/5 border border-[#0070f3]/20 flex items-center justify-center text-[#0070f3] group-hover:bg-[#0070f3] group-hover:text-white transition-all duration-500">
-            {project.id === "01" ? <ShieldCheck size={20} /> : project.id === "02" ? <Layout size={20} /> : <FlaskConical size={20} />}
+          <div className="w-14 h-14 bg-[#ff0055]/5 border border-[#ff0055]/20 flex items-center justify-center text-[#ff0055] group-hover:bg-[#ff0055] group-hover:text-white transition-all duration-700 shadow-[0_0_20px_rgba(255,0,85,0.1)] group-hover:shadow-[0_0_30px_rgba(255,0,85,0.4)]">
+            {project.id === "01" ? <ShieldCheck size={24} /> : project.id === "02" ? <Layout size={24} /> : <FlaskConical size={24} />}
           </div>
-          <span className="font-mono text-[10px] text-white/20 font-bold group-hover:text-[#0070f3]/50 transition-colors uppercase tracking-[0.2em]">Lab_{project.id}</span>
+          <span className="font-mono text-[11px] text-white/20 font-black group-hover:text-[#ff0055] transition-colors uppercase tracking-[0.4em]">LAB_NODE_{project.id}</span>
         </div>
         
-        <div className="space-y-3">
-          <h3 className="text-xl font-bold font-display text-white group-hover:text-[#0070f3] transition-colors duration-500 tracking-tight">
+        <div className="space-y-4">
+          <h3 className="text-2xl font-black font-display text-white group-hover:text-[#ff0055] transition-colors duration-700 tracking-tighter leading-none">
             {project.title}
           </h3>
-          <p className="text-[13px] text-white/50 leading-relaxed font-medium group-hover:text-white/70 transition-colors duration-500">
+          <p className="text-[14px] text-white/40 leading-relaxed font-medium group-hover:text-white/70 transition-colors duration-700">
             {project.tagline}
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-2 pt-2">
+        <div className="flex flex-wrap gap-3 pt-2">
           {project.tags.map((tag) => (
             <span 
               key={tag} 
-              className="px-2.5 py-1 bg-white/5 border border-white/5 text-[9px] font-mono text-white/30 uppercase tracking-widest group-hover:border-[#0070f3]/20 group-hover:text-[#0070f3]/60 transition-all duration-500"
+              className="px-3 py-1 bg-white/[0.02] border border-white/5 text-[10px] font-mono text-white/20 uppercase tracking-[0.2em] font-black group-hover:border-[#ff0055]/20 group-hover:text-[#ff0055]/60 transition-all duration-700"
             >
               {tag}
             </span>
@@ -52,23 +52,23 @@ export function ProjectLabCard({ project, onOpenDetails }: ProjectLabCardProps) 
         </div>
       </div>
 
-      <div className="flex items-center justify-between pt-6 border-t border-white/5">
+      <div className="flex items-center justify-between pt-8 border-t border-white/5">
         <button 
           onClick={onOpenDetails}
-          className="flex items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-[#0070f3] hover:text-white transition-colors group/btn"
+          className="flex items-center gap-3 font-mono text-[11px] font-black uppercase tracking-widest text-[#ff0055] hover:text-white transition-colors group/btn"
         >
-          <span>Analysis</span>
-          <ArrowUpRight size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+          <span>DEEP_SCAN</span>
+          <ArrowUpRight size={16} className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" />
         </button>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <a 
             href={project.links.repo} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="p-2 text-white/20 hover:text-white transition-colors"
+            className="p-2.5 text-white/20 hover:text-[#ff0055] hover:bg-[#ff0055]/5 border border-transparent hover:border-[#ff0055]/30 transition-all duration-500 rounded-sm"
           >
-            <GitBranch size={16} />
+            <GitBranch size={18} />
           </a>
         </div>
       </div>

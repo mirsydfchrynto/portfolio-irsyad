@@ -44,21 +44,21 @@ export function Navbar() {
     <>
       <nav 
         className={`fixed top-0 left-0 w-full z-[100] px-6 py-4 md:px-12 md:py-6 flex justify-between items-center transition-all duration-500 ${
-          scrolled ? "bg-black/80 backdrop-blur-xl border-b border-white/5 py-4" : "bg-transparent"
+          scrolled ? "bg-black/90 backdrop-blur-xl border-b border-white/5 py-4" : "bg-transparent"
         }`}
       >
         <div className="flex items-center gap-4 group cursor-pointer">
           <div className="relative w-10 h-10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-[#0070f3]/20 rounded-sm blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative w-full h-full bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#0070f3]/50 transition-colors duration-500">
-              <Cpu size={18} className="text-[#0070f3] group-hover:rotate-90 transition-transform duration-700" />
+            <div className="absolute inset-0 bg-[#ff0055]/20 rounded-sm blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative w-full h-full bg-[#0a0a0c] border border-white/10 flex items-center justify-center group-hover:border-[#ff0055]/50 transition-colors duration-500">
+              <Cpu size={18} className="text-[#ff0055] group-hover:rotate-90 transition-transform duration-700" />
             </div>
           </div>
           <div className="flex flex-col -space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-white">
               IRSYAD
             </span>
-            <span className="text-[9px] font-mono text-[#0070f3] font-bold uppercase tracking-[0.2em] opacity-80">
+            <span className="text-[9px] font-mono text-[#ff0055] font-black uppercase tracking-[0.2em] opacity-80">
               ARCHITECT
             </span>
           </div>
@@ -74,12 +74,12 @@ export function Navbar() {
                 className="group relative py-1 overflow-hidden"
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] font-mono text-[#0070f3] font-bold opacity-40 group-hover:opacity-100 transition-opacity select-none">{link.id}</span>
+                  <span className="text-[9px] font-mono text-[#ff0055] font-black opacity-40 group-hover:opacity-100 transition-opacity select-none">{link.id}</span>
                   <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/50 group-hover:text-white transition-colors duration-300">
                     {link.name}
                   </span>
                 </div>
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#0070f3] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out" />
+                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#ff0055] -translate-x-[105%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out" />
               </a>
             ))}
           </div>
@@ -92,7 +92,7 @@ export function Navbar() {
                 <span className="w-1 h-1 bg-emerald-500 rounded-full animate-pulse" />
                 <span>TEGAL, ID</span>
               </div>
-              <div className="flex items-center gap-2 px-3 py-1 bg-[#0070f3]/5 border border-[#0070f3]/10 text-[#0070f3]/80 rounded-sm">
+              <div className="flex items-center gap-2 px-3 py-1 bg-[#ff0055]/5 border border-[#ff0055]/10 text-[#ff0055]/80 rounded-sm">
                 <Clock size={10} />
                 <span>WIB {localTime || "--:--"}</span>
               </div>
@@ -103,7 +103,7 @@ export function Navbar() {
                 href="https://github.com/mirsydfchrynto" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="p-2.5 text-white/30 hover:text-[#0070f3] hover:bg-white/5 transition-all duration-300 rounded-sm"
+                className="p-2.5 text-white/30 hover:text-[#ff0055] hover:bg-white/5 transition-all duration-300 rounded-sm"
               >
                 <GitBranch size={16} />
                 </a>
@@ -111,7 +111,7 @@ export function Navbar() {
                 href="https://instagram.com/muhammadirsyadf" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="p-2.5 text-white/30 hover:text-[#0070f3] hover:bg-white/5 transition-all duration-300 rounded-sm"
+                className="p-2.5 text-white/30 hover:text-[#ff0055] hover:bg-white/5 transition-all duration-300 rounded-sm"
                 >
                 <Globe size={16} />
                 </a>
@@ -123,7 +123,7 @@ export function Navbar() {
         <div className="flex lg:hidden items-center gap-4">
           <button 
             onClick={() => setIsOpen(!isOpen)}
-            className="w-10 h-10 border border-white/10 text-white bg-white/5 flex items-center justify-center hover:border-[#0070f3]/40 transition-colors"
+            className="w-10 h-10 border border-white/10 text-white bg-white/5 flex items-center justify-center hover:border-[#ff0055]/40 transition-colors"
             aria-label="Menu"
           >
             {isOpen ? <X size={18} /> : <Menu size={18} />}
@@ -146,10 +146,10 @@ export function Navbar() {
             
             <div className="flex flex-col gap-10 relative z-10 w-full max-w-md mx-auto">
               <div className="space-y-2">
-                <span className="font-mono text-[10px] text-[#0070f3] font-bold uppercase tracking-[0.4em] block">
+                <span className="font-mono text-[10px] text-[#ff0055] font-black uppercase tracking-[0.4em] block">
                   INDEX_DIRECTORY
                 </span>
-                <div className="w-20 h-1 bg-[#0070f3]" />
+                <div className="w-20 h-1 bg-[#ff0055]" />
               </div>
               
               <div className="flex flex-col gap-8">
@@ -163,10 +163,10 @@ export function Navbar() {
                     onClick={() => setIsOpen(false)}
                     className="flex items-center justify-between group"
                   >
-                    <span className="text-4xl font-bold text-white group-hover:text-[#0070f3] transition-colors font-display">
+                    <span className="text-4xl font-bold text-white group-hover:text-[#ff0055] transition-colors font-display">
                       {link.name}
                     </span>
-                    <span className="text-[12px] font-mono text-white/20 group-hover:text-[#0070f3]/50 transition-colors">
+                    <span className="text-[12px] font-mono text-white/20 group-hover:text-[#ff0055]/50 transition-colors">
                       /{link.id}
                     </span>
                   </motion.a>
@@ -177,7 +177,7 @@ export function Navbar() {
             <div className="relative z-10 w-full max-w-md mx-auto pt-10 border-t border-white/5 flex flex-col gap-6">
               <div className="flex justify-between items-center font-mono text-[10px] text-white/30 uppercase tracking-[0.2em]">
                 <span>M. Irsyad Fachryanto</span>
-                <span className="text-[#0070f3] font-bold">STATE: STABLE</span>
+                <span className="text-[#ff0055] font-black">STATE: STABLE</span>
               </div>
               <div className="flex gap-4">
                 <a href="https://github.com/mirsydfchrynto" className="p-3 bg-white/5 border border-white/5 text-white/40 hover:text-white transition-colors">

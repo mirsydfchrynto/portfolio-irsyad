@@ -48,10 +48,10 @@ export function CommandPalette() {
         <motion.button 
           whileHover={{ scale: 1.05 }}
           onClick={() => setIsOpen(true)}
-          className="bg-black/90 text-white/40 border-2 border-white/5 hover:border-[#0070f3]/40 cursor-pointer flex items-center gap-4 px-5 py-2.5 font-mono text-[10px] transition-all group shadow-2xl"
+          className="bg-black/90 text-white/40 border border-white/5 hover:border-[#ff0055]/40 cursor-pointer flex items-center gap-4 px-6 py-3 font-mono text-[10px] transition-all group shadow-2xl brutal-card"
         >
-          <Command size={12} className="text-[#0070f3]" />
-          <span className="uppercase tracking-[0.2em] font-bold group-hover:text-white transition-colors">Press Ctrl+K for Directory</span>
+          <Command size={14} className="text-[#ff0055]" />
+          <span className="uppercase tracking-[0.3em] font-black group-hover:text-white transition-colors">Press Ctrl+K for System Directory</span>
         </motion.button>
       </div>
 
@@ -61,42 +61,42 @@ export function CommandPalette() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[1000] bg-black/95 backdrop-blur-md flex items-center justify-center p-6"
+            className="fixed inset-0 z-[1000] bg-black/98 backdrop-blur-xl flex items-center justify-center p-6"
             onClick={() => {
               setIsOpen(false);
               setQuery("");
             }}
           >
-            <div className="absolute inset-0 architect-grid opacity-[0.03] pointer-events-none" />
+            <div className="absolute inset-0 architect-grid opacity-[0.05] pointer-events-none" />
             
             <motion.div 
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              initial={{ scale: 0.98, opacity: 0, y: 30 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="w-full max-w-2xl bg-[#060608] border-2 border-white/10 p-0 overflow-hidden shadow-[0_0_80px_rgba(0,112,243,0.15)]"
+              exit={{ scale: 0.98, opacity: 0, y: 30 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full max-w-2xl bg-[#060608] border border-white/10 p-0 overflow-hidden shadow-[0_0_100px_rgba(255,0,85,0.2)] brutal-card"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Search Header */}
-              <div className="p-6 border-b-2 border-white/5 flex items-center gap-4 bg-white/[0.01]">
-                <Search size={18} className="text-[#0070f3]" />
+              <div className="p-8 border-b border-white/5 flex items-center gap-6 bg-white/[0.01]">
+                <Search size={22} className="text-[#ff0055] animate-pulse" />
                 <input 
                   autoFocus
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="System query..." 
-                  className="bg-transparent border-none outline-none text-base placeholder:text-white/10 flex-grow text-white font-sans font-medium"
+                  placeholder="Execute system query..." 
+                  className="bg-transparent border-none outline-none text-lg placeholder:text-white/5 flex-grow text-white font-sans font-black tracking-tight"
                 />
               </div>
 
               {/* Action List */}
-              <div className="p-4 max-h-[400px] overflow-y-auto space-y-4">
+              <div className="p-6 max-h-[450px] overflow-y-auto space-y-6">
                 {filteredActions.length > 0 ? (
                   <div>
-                    <div className="text-[9px] font-mono text-[#0070f3] font-bold uppercase tracking-[0.4em] px-3 mb-4">
-                      Active_Matches ({filteredActions.length})
+                    <div className="text-[10px] font-mono text-[#ff0055] font-black uppercase tracking-[0.5em] px-4 mb-6 opacity-60">
+                      ACTIVE_MATCHES ({filteredActions.length})
                     </div>
-                    <div className="grid gap-2">
+                    <div className="grid gap-3">
                       {filteredActions.map((action, i) => (
                         <a 
                           key={i} 
@@ -107,15 +107,15 @@ export function CommandPalette() {
                             setIsOpen(false);
                             setQuery("");
                           }}
-                          className="flex items-center justify-between p-4 bg-white/[0.01] border border-white/5 hover:border-[#0070f3]/30 hover:bg-[#0070f3]/5 transition-all group"
+                          className="flex items-center justify-between p-5 bg-white/[0.01] border border-white/5 hover:border-[#ff0055]/40 hover:bg-[#ff0055]/5 transition-all group/item brutal-card"
                         >
-                          <div className="flex items-center gap-4 text-[13px] text-white/50 group-hover:text-white transition-colors font-medium">
-                            <span className="text-[#0070f3] opacity-40 group-hover:opacity-100 transition-opacity">
+                          <div className="flex items-center gap-5 text-[14px] text-white/40 group-hover/item:text-white transition-colors font-black">
+                            <span className="text-[#ff0055] opacity-20 group-hover/item:opacity-100 transition-opacity">
                               {action.icon}
                             </span>
                             {action.label}
                           </div>
-                          <span className="text-[9px] font-mono text-white/20 uppercase tracking-[0.2em] group-hover:text-[#0070f3] transition-colors">
+                          <span className="text-[10px] font-mono text-white/10 uppercase tracking-[0.3em] group-hover/item:text-[#ff0055] transition-colors font-black">
                             {action.category}
                           </span>
                         </a>
@@ -123,16 +123,16 @@ export function CommandPalette() {
                     </div>
                   </div>
                 ) : (
-                  <div className="py-12 text-center space-y-4">
-                    <div className="text-white/10 font-mono text-[10px] uppercase tracking-[0.4em]">Query_Failure</div>
-                    <p className="text-white/20 text-xs">No matching system nodes found.</p>
+                  <div className="py-20 text-center space-y-6">
+                    <div className="text-[#ff0055] font-mono text-[11px] uppercase tracking-[0.6em] font-black animate-pulse">QUERY_FAILURE</div>
+                    <p className="text-white/10 text-sm font-bold uppercase tracking-widest">No matching system nodes located.</p>
                   </div>
                 )}
               </div>
 
               {/* Status Footer */}
-              <div className="p-4 border-t-2 border-white/5 font-mono text-[9px] text-white/20 uppercase text-center tracking-[0.4em] bg-black">
-                EXEC: ESC_TO_TERMINATE
+              <div className="p-5 border-t border-white/5 font-mono text-[10px] text-white/10 uppercase text-center tracking-[0.5em] bg-black font-black">
+                EXEC: ESC_TO_TERMINATE_SESSION
               </div>
             </motion.div>
           </motion.div>
