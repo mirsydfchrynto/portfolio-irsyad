@@ -21,8 +21,36 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Muhammad Irsyad F | Aspiring Software Architect & Frontend Engineer",
-  description: "Portofolio personal Muhammad Irsyad F. Eksplorasi pengembangan aplikasi mobile dengan Flutter, Kotlin, web modular dengan Next.js, dan sistem Linux.",
+  title: "M. Irsyad Fachryanto | Full-Stack Architect & Mobile Engineer",
+  description: "Senior-level portfolio of M. Irsyad Fachryanto. Specializing in high-integrity Flutter, Kotlin Native, and Next.js digital ecosystems.",
+  keywords: ["Software Architect", "Frontend Engineer", "Flutter Developer", "Kotlin Native", "Next.js Expert", "Web Performance"],
+  authors: [{ name: "M. Irsyad Fachryanto" }],
+  openGraph: {
+    title: "M. Irsyad Fachryanto | Full-Stack Architect",
+    description: "Architecting high-integrity digital experiences with Flutter, Kotlin, and Next.js.",
+    url: "https://irsyad-architect.surge.sh",
+    siteName: "Irsyad Architect Portfolio",
+    images: [
+      {
+        url: "/avatar.jpg",
+        width: 1200,
+        height: 630,
+        alt: "M. Irsyad Fachryanto Portfolio Preview",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "M. Irsyad Fachryanto | Full-Stack Architect",
+    description: "Architecting high-integrity digital experiences with Flutter, Kotlin, and Next.js.",
+    images: ["/avatar.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -30,10 +58,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "M. Irsyad Fachryanto",
+    "jobTitle": "Full-Stack Architect & Mobile Engineer",
+    "url": "https://irsyad-architect.surge.sh",
+    "sameAs": [
+      "https://github.com/mirsydfchrynto",
+      "https://instagram.com/muhammadirsyadf"
+    ],
+    "knowsAbout": ["Flutter", "Kotlin", "Next.js", "Software Architecture", "NoSQL Optimization"]
+  };
+
   return (
-    <html lang="id" className="scroll-smooth">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased bg-black text-white selection:bg-white selection:text-black`}>
-        <div className="system-noise" />
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased bg-[#060608] text-white selection:bg-white selection:text-black`}>
         {children}
       </body>
     </html>
