@@ -1,0 +1,14 @@
+[Unit]
+Description=SDA Smart Search Booster - M. Irsyad Fachryanto Branding Engine
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /home/irsyad/Gudang/mydevelopment/portfolio-irsyad/smart_search_booster.py
+Restart=always
+RestartSec=3600
+User=irsyad
+WorkingDirectory=/home/irsyad/Gudang/mydevelopment/portfolio-irsyad
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=multi-user.target

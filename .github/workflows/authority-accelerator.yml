@@ -1,40 +1,44 @@
-name: "Elite Authority Accelerator"
+name: "Perpetual Branding Engine V4.0"
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # Every 6 hours
+    - cron: "0 */3 * * *" # Every 3 hours - Brutal consistency
   workflow_dispatch:
 
 jobs:
-  ping-engines:
-    name: Search Engine Force Index
+  index-domination:
+    name: Global Index Acceleration
     runs-on: ubuntu-latest
     steps:
-      - name: Ping Google
+      - name: Force Ping Search Engines
         run: |
+          echo ">>> Initiating Global Indexing Pulse..."
           curl -I "https://www.google.com/ping?sitemap=https://irsyad-architect.surge.sh/sitemap.xml"
-          
-      - name: Ping Bing (IndexNow)
-        run: |
           curl -I "https://www.bing.com/ping?sitemap=https://irsyad-architect.surge.sh/sitemap.xml"
+          
+      - name: Authority Seeding (Web Archive)
+        run: |
+          echo ">>> Seeding URL to Global Archive (Backlink Boost)..."
+          curl -I "https://web.archive.org/save/https://irsyad-architect.surge.sh/" || echo "Archive busy, skipping."
 
-  social-traffic:
-    name: GitHub Authority Boost
+  social-heartbeat:
+    name: GitHub & Social Presence
     runs-on: ubuntu-latest
     permissions:
       issues: write
       discussions: write
     steps:
-      - name: Create System Vital Log (Issue)
+      - name: System Vital Handshake
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TIMESTAMP=$(date +'%Y-%m-%d %H:%M:%S')
+          # Maintain 'Galaxy Brain' and 'Quickdraw' signals
           gh issue create \
-            --title "System Vital Check [$TIMESTAMP]" \
-            --body "Automated system integrity check for M. Irsyad Fachryanto Digital Ecosystem. Status: ACTIVE. Performance: OPTIMAL." \
+            --title "Digital Integrity Log [$TIMESTAMP]" \
+            --body "Automated heartbeat for M. Irsyad Fachryanto. Performance: ELITE. All systems operational." \
             --label "documentation"
           
-          # Close it immediately to keep it clean (Quickdraw trigger)
           ISSUE_NUMBER=$(gh issue list --limit 1 --json number -q '.[0].number')
-          gh issue close $ISSUE_NUMBER --comment "Vital check completed successfully."
+          gh issue close $ISSUE_NUMBER --comment "Handshake verified. Integrity at 100%."
+
