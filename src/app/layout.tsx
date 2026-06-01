@@ -22,49 +22,45 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "M. Irsyad Fachryanto | Full-Stack Architect & Mobile Engineer",
-  description: "Senior-level portfolio of M. Irsyad Fachryanto. Specializing in high-integrity Flutter, Kotlin Native, and Next.js digital ecosystems based in Indonesia.",
+  description: "Official Portfolio of M. Irsyad Fachryanto. 6th-semester Computer Science Student at Universitas Harkat Negeri Tegal (GPA 3.92). Specialist in Flutter, Kotlin Native, and Next.js.",
   keywords: [
     "M. Irsyad Fachryanto",
+    "Irsyad Fachryanto",
+    "Muhammad Irsyad Fachryanto",
     "Irsyad Architect",
     "Software Architect Indonesia",
-    "Frontend Engineer Indonesia",
-    "Flutter Developer Expert",
-    "Kotlin Native Specialist",
-    "Next.js Expert",
-    "Web Performance Engineer",
+    "Flutter Expert Indonesia",
+    "Next.js Developer Indonesia",
+    "Universitas Harkat Negeri Tegal Computer Science",
     "Secure CBT Master Developer"
   ],
   authors: [{ name: "M. Irsyad Fachryanto" }],
   creator: "M. Irsyad Fachryanto",
   publisher: "M. Irsyad Fachryanto",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
+  metadataBase: new URL("https://irsyad-architect.surge.sh"),
   alternates: {
     canonical: "https://irsyad-architect.surge.sh",
   },
   openGraph: {
-    title: "M. Irsyad Fachryanto | Full-Stack Architect",
-    description: "Architecting high-integrity digital experiences with Flutter, Kotlin, and Next.js. Expert Software Engineer from Indonesia.",
+    title: "M. Irsyad Fachryanto | Digital Architecture & Engineering",
+    description: "Personal archive and portfolio of M. Irsyad Fachryanto. Engineering high-integrity digital ecosystems.",
     url: "https://irsyad-architect.surge.sh",
-    siteName: "Irsyad Architect Portfolio",
+    siteName: "M. Irsyad Fachryanto Portfolio",
     images: [
       {
         url: "/avatar.jpg",
         width: 1200,
         height: 630,
-        alt: "M. Irsyad Fachryanto Portfolio Preview",
+        alt: "M. Irsyad Fachryanto Portfolio",
       },
     ],
     locale: "id_ID",
-    type: "website",
+    type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "M. Irsyad Fachryanto | Full-Stack Architect",
-    description: "Architecting high-integrity digital experiences with Flutter, Kotlin, and Next.js. Specialist in secure and performant applications.",
+    title: "M. Irsyad Fachryanto",
+    description: "Software Architect & Computer Science Student. Specialist in Secure Systems.",
     images: ["/avatar.jpg"],
     creator: "@mirsydfchrynto",
   },
@@ -90,31 +86,35 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "M. Irsyad Fachryanto",
-    "alternateName": "Irsyad Architect",
-    "jobTitle": "Full-Stack Architect & Mobile Engineer",
+    "givenName": "Irsyad",
+    "familyName": "Fachryanto",
     "url": "https://irsyad-architect.surge.sh",
     "image": "https://irsyad-architect.surge.sh/avatar.jpg",
+    "jobTitle": "Full-Stack Architect & Mobile Engineer",
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Universitas Harkat Negeri Tegal",
+      "sameAs": "https://harkat.ac.id" 
+    },
     "sameAs": [
       "https://github.com/mirsydfchrynto",
       "https://instagram.com/muhammadirsyadf",
-      "https://www.linkedin.com/in/mirsydfchrynto"
+      "https://linkedin.com/in/mirsydfchrynto"
     ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Indonesia",
-      "addressCountry": "ID"
-    },
-    "description": "Expert Software Architect specializing in Flutter, Kotlin, and Next.js. Creator of Secure CBT Master and Geges Smart Barber ecosystems.",
+    "description": "M. Irsyad Fachryanto is a high-achieving Computer Science student (GPA 3.92) and Software Architect specializing in secure mobile and web ecosystems.",
     "knowsAbout": [
-      "Software Architecture",
-      "Mobile Development",
-      "Web Performance",
+      "Software Engineering",
+      "Mobile App Development",
       "Flutter",
+      "Kotlin",
       "Next.js",
-      "Firebase",
       "Cybersecurity",
-      "Cloud Infrastructure"
-    ]
+      "Full-Stack Development"
+    ],
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://irsyad-architect.surge.sh"
+    }
   };
 
   return (
