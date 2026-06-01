@@ -88,7 +88,8 @@ export default function RootLayout({
     "sameAs": [
       "https://github.com/mirsydfchrynto",
       "https://instagram.com/muhammadirsyadf",
-      "https://linkedin.com/in/mirsydfchrynto"
+      "https://linkedin.com/in/mirsydfchrynto",
+      "https://developers.google.com/profile/u/105716030488150294968"
     ],
     "description": "M. Irsyad Fachryanto is a high-achieving Computer Science student (GPA 3.92) and Software Architect specializing in secure mobile and web ecosystems.",
     "knowsAbout": [
@@ -109,6 +110,23 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        {/* Google Analytics 4 (GA4) */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=G-44_I-FdL_RTHGcAcZbaD8ozX9ICPPf-uyvKvAHhTLo4`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-44_I-FdL_RTHGcAcZbaD8ozX9ICPPf-uyvKvAHhTLo4', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
