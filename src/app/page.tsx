@@ -390,6 +390,14 @@ export default function Home() {
         <div className="font-mono text-[8px] md:text-[10px] text-white/10 uppercase tracking-[0.4em] md:tracking-[0.6em] font-black relative z-10 px-6">
           M. Irsyad Fachryanto &copy; 2026 // <span className="text-white/5 italic">Handcrafted with focus on Architecture & System Integrity</span>
         </div>
+        {/* Stealth Visitor Tracker - Elite Monitoring */}
+        <div className="mt-8 flex justify-center opacity-5 hover:opacity-100 transition-opacity duration-500">
+          <img 
+            src="https://komarev.com/ghpvc/?username=mirsydfchrynto&label=SYSTEM_TRAFFIC&color=E31B23&style=flat-square" 
+            alt="System Traffic Monitor" 
+            className="h-5 pointer-events-none"
+          />
+        </div>
         <div className="absolute inset-0 bg-noise opacity-[0.01] pointer-events-none" />
       </footer>
 
