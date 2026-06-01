@@ -28,6 +28,9 @@ jobs:
       issues: write
       discussions: write
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
       - name: System Vital Handshake
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -39,6 +42,7 @@ jobs:
             --body "Automated heartbeat for M. Irsyad Fachryanto. Performance: ELITE. All systems operational." \
             --label "documentation"
           
-          ISSUE_NUMBER=$(gh issue list --limit 1 --json number -q '.[0].number')
-          gh issue close $ISSUE_NUMBER --comment "Handshake verified. Integrity at 100%."
+          # Use explicit repo flag to ensure GH CLI finds the context
+          ISSUE_NUMBER=$(gh issue list --repo ${{ github.repository }} --limit 1 --json number -q '.[0].number')
+          gh issue close $ISSUE_NUMBER --repo ${{ github.repository }} --comment "Handshake verified. Integrity at 100%."
 
