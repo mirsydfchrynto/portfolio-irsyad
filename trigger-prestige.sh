@@ -1,10 +1,10 @@
 #!/bin/bash
 # -----------------------------------------------------------------------------
-# PRESTIGE TRIGGER: Achievement & Contribution Engine [V1.0]
+# PRESTIGE TRIGGER: Achievement & Contribution Engine [V7.0]
 # -----------------------------------------------------------------------------
 # Purpose: 
 # 1. Backfill Contribution Graph (Green Boxes)
-# 2. Level Up Pull Shark & Pair Extraordinaire Badges
+# 2. Level Up Pull Shark, Pair Extraordinaire, Quickdraw, & YOLO Badges
 # -----------------------------------------------------------------------------
 
 set -e
@@ -24,12 +24,12 @@ show_help() {
 }
 
 backfill_graph() {
-    local days=$1
+    local days=${1:-30}
     echo ">>> Initiating Graph Backfill for $days days..."
-    for i in $(seq $days -1 1); do
+    for i in $(seq "$days" -1 1); do
         d=$(date -d "$i days ago" +%Y-%m-%d)
-        echo "Historical Integrity Pulse: $d" >> $LOG_FILE
-        git add $LOG_FILE
+        echo "Historical Integrity Pulse [$i]: $d" >> "$LOG_FILE"
+        git add "$LOG_FILE"
         GIT_AUTHOR_DATE="$d 12:00:00" GIT_COMMITTER_DATE="$d 12:00:00" \
         git commit -m "chore(infra): historical architectural pulse $d" --quiet
     done
@@ -38,23 +38,30 @@ backfill_graph() {
 }
 
 trigger_badges() {
-    local count=$2
+    local count=${1:-10}
     echo ">>> Initiating $count Badge Handshake Cycles..."
-    for i in $(seq 1 $count); do
-        BRANCH="prestige/handshake-$i-$(date +%s)"
+    for i in $(seq 1 "$count"); do
+        TIMESTAMP=$(date +%s%N)
+        BRANCH="prestige/handshake-$i-$TIMESTAMP"
+        
+        echo ">>> [Cycle $i/$count] Starting $BRANCH"
+        
         git checkout -b "$BRANCH" --quiet
-        echo "Handshake Pulse $i: $(date)" >> $LOG_FILE
-        git add $LOG_FILE
+        echo "Handshake Pulse $i [$TIMESTAMP]: $(date)" >> "$LOG_FILE"
+        git add "$LOG_FILE"
+        
+        # Commit with Co-author
         git commit -m "chore: prestige handshake cycle $i
-
+        
 Co-authored-by: $CO_AUTHOR" --quiet
         
-        echo ">>> Pushing branch $BRANCH and creating PR..."
+        echo ">>> Pushing and creating PR..."
         git push origin "$BRANCH" --quiet
-        PR_URL=$(gh pr create --title "chore: prestige handshake cycle $i" --body "Automated achievement optimization pulse." --base main)
         
-        echo ">>> Merging PR and cleaning up..."
-        gh pr merge "$PR_URL" --merge --admin --delete-branch
+        PR_URL=$(gh pr create --title "chore: prestige handshake cycle $i" --body "Automated achievement optimization pulse." --base main --head "$BRANCH")
+        
+        echo ">>> Merging PR immediately (Quickdraw/YOLO)..."
+        gh pr merge "$PR_URL" --merge --delete-branch --admin || gh pr merge "$PR_URL" --merge --delete-branch
         
         git checkout main --quiet
         git pull origin main --quiet
@@ -69,14 +76,14 @@ fi
 
 case "$1" in
     graph)
-        backfill_graph ${2:-30}
+        backfill_graph "$2"
         ;;
     badges)
-        trigger_badges $2
+        trigger_badges "$2"
         ;;
     all)
-        backfill_graph 365
-        trigger_badges 50
+        backfill_graph "${2:-365}"
+        trigger_badges "${3:-50}"
         ;;
     *)
         show_help
@@ -84,7 +91,4 @@ case "$1" in
         ;;
 esac
 
-echo "-----------------------------------------------------------------------------"
-echo "PROTOCOL COMPLETE: System Integrity & Prestige Synchronized."
-echo "Note: Achievement badges may take up to 24-48 hours to reflect on your profile."
-echo "-----------------------------------------------------------------------------"
+echo ">>> PRESTIGE ENGINE V7.0 COMPLETED SUCCESSFULLY"
