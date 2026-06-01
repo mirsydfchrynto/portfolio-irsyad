@@ -22,6 +22,9 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://irsyad-architect.surge.sh"),
+  verification: {
+    google: "44_I-FdL_RTHGcAcZbaD8ozX9ICPPf-uyvKvAHhTLo4",
+  },
   title: "M. Irsyad Fachryanto | Full-Stack Architect & Mobile Engineer",
   description: "Official Portfolio of M. Irsyad Fachryanto. 6th-semester Computer Science Student at Universitas Harkat Negeri Tegal (GPA 3.92). Specialist in Flutter, Kotlin Native, and Next.js.",
   alternates: {
