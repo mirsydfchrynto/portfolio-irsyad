@@ -18,9 +18,9 @@ export function Navbar() {
   }, []);
 
   const links = [
-    { name: "Showroom", href: "#showroom" },
-    { name: "Matrix", href: "#matrix" },
-    { name: "Chronicle", href: "#ledger" },
+    { name: "Projects", href: "#projects" },
+    { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -33,12 +33,12 @@ export function Navbar() {
           scrolled ? "py-2" : "py-3 md:py-5"
         }`}
       >
-        <div className="w-full px-4 sm:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className={`flex items-center justify-between px-4 sm:px-6 h-14 md:h-16 transition-all duration-300 border ${
               scrolled
-                ? "bg-white/90 backdrop-blur-md border-slate-200/90 shadow-md shadow-slate-900/5 rounded-2xl"
-                : "bg-white/75 backdrop-blur-sm border-slate-200/60 shadow-sm rounded-2xl"
+                ? "bg-white/95 backdrop-blur-md border-slate-200 shadow-sm rounded-2xl"
+                : "bg-white/80 backdrop-blur-sm border-slate-200/70 shadow-sm rounded-2xl"
             }`}
           >
             {/* LOGO */}
@@ -47,14 +47,13 @@ export function Navbar() {
               className="flex items-center gap-2.5 group cursor-pointer"
               aria-label="Home"
             >
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/25 group-hover:scale-105 transition-transform">
-                <Layers size={17} className="stroke-[2.2]" />
+              <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
+                <span className="font-mono text-xs font-black">IF</span>
               </div>
               <div className="flex items-baseline gap-1">
-                <span className="font-display font-black text-slate-900 text-base md:text-lg tracking-tight">
-                  Irsyad
+                <span className="font-display font-bold text-slate-900 text-sm sm:text-base tracking-tight">
+                  Muhammad Irsyad Fachryanto
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
               </div>
             </a>
 
