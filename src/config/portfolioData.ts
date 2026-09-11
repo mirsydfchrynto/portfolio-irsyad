@@ -10,6 +10,7 @@ export const productionExperience = {
   role: "Full-Stack Developer",
   period: "FEB 2026 - PRESENT",
   tagline: "High-integrity dual-platform exam ecosystem featuring native Android Kiosk Mode and dynamic QR handshake authentication.",
+  quickSummary: "Turns standard Android tablets and phones into 100% cheat-proof exam stations for schools. Students cannot exit, split screen, or screenshot tests, while educators supervise live scores from a Next.js web dashboard.",
   url: "https://github.com/mirsydfchrynto/okeybimbel-cbt-release",
   image: "/okey_bimbel_preview.webp",
   collaborators: [
@@ -46,18 +47,19 @@ export const blueprints = [
   {
     id: "01",
     title: "Geges Smart Barber (Capstone 1)",
-    tagline: "Unified multi-tenant barbershop ecosystem with real-time queue management, bookings, product marketplace, and admin chat.",
+    tagline: "All-in-one barbershop app: real-time wait queues, appointment bookings, product shop, and direct barber chat.",
+    quickSummary: "Eliminates barbershop waiting room crowds. Customers can monitor live queue times from home, book their favorite barber, buy hair products, and chat with shop admins.",
     curiosity: "How to unify fragmented barbershop operations into one platform with fair barber workload distribution?",
     systemsExplored: "Flutter Mobile, Clean Architecture, BLoC State Isolation, Firestore Real-Time Streams, React Admin Portal, WhatsApp Gateway.",
     technicalChallenge: "Developing a fair-work distribution algorithm that balances queue allocations among barbers based on monthly workload and shifts.",
     learnings: "Deepened understanding of Separation of Concerns (SoC), real-time concurrency handling, and multi-tenant business provisioning.",
-    tags: ["Flutter", "Dart", "Clean Architecture", "Firestore", "React", "Live Queue"],
+    tags: ["Flutter", "Live Queue", "Clean Architecture", "Firestore", "React Admin"],
     links: { visit: "", repo: "https://github.com/MyCampusLab/capstone-pt1" },
-    image: "/geges_barber_ui.webp",
+    image: "",
     collaborators: [
       { name: "M. Irsyad Fachryanto", role: "Lead Full-Stack Developer", github: "https://github.com/mirsydfchrynto" }
     ],
-    overview: "Geges Smart Barber is my dream business platform designed to modernize the barbershop industry. Customers can join live queues, book appointments, order grooming products, and chat directly with shop admins, while barbers receive fair work distribution.",
+    overview: "Geges Smart Barber is an all-in-one barbershop platform designed to modernize haircut appointments. Customers can join live queues, book appointments, order grooming products, and chat directly with shop admins, while barbers receive fair work distribution.",
     folderStructure: `geges-barber/
 ├── customer-app/ (Flutter)
 │   ├── lib/core/          # Clean architecture layers
@@ -83,19 +85,20 @@ export const blueprints = [
   {
     id: "02",
     title: "VisionSafe (Capstone 2)",
-    tagline: "On-device AI eye-fatigue mitigation system using MediaPipe Face Mesh for real-time distance monitoring.",
+    tagline: "Smart eye-health guardian: automatically blurs phone screen when held dangerously close to the eyes.",
+    quickSummary: "Protects children and heavy phone users from eye fatigue. When you hold your screen closer than 30cm, it gently blurs the screen until you back away—runs 100% on your phone with zero privacy risk.",
     curiosity: "Can we protect user eye health from screen fatigue on Android without transmitting sensitive camera feeds to remote servers?",
     systemsExplored: "Flutter, MediaPipe Face Mesh (Edge AI), Android Foreground Service (Kotlin), Gaussian Blur Overlay, Dynamic Sampling.",
     technicalChallenge: "Maintaining continuous Face Mesh landmark processing in the background without rapid battery depletion or OS process termination.",
     learnings: "TensorFlow Lite & MediaPipe pipeline optimization, Android process lifecycles, and privacy-by-design edge computation.",
-    tags: ["Flutter", "MediaPipe", "Edge AI", "Computer Vision", "Kotlin Service"],
+    tags: ["Flutter", "Edge AI", "MediaPipe", "Health Tech", "Kotlin Service"],
     links: { visit: "", repo: "https://github.com/MyCampusLab/capstone-pt2" },
-    image: "/avatar.jpg",
+    image: "",
     collaborators: [
       { name: "M. Irsyad Fachryanto", role: "AI & Native Systems Lead", github: "https://github.com/mirsydfchrynto" },
       { name: "Marsha Dwi Lucyana", role: "UI/UX & Research Analyst", github: "https://github.com/marshadwi" }
     ],
-    overview: "VisionSafe utilizes on-device MediaPipe Face Mesh to calculate the Z-coordinate distance from the user's eyes to the screen. When the distance drops below 30cm, it triggers an intelligent Gaussian blur overlay to safeguard vision health.",
+    overview: "VisionSafe utilizes on-device MediaPipe Face Mesh to calculate the distance from the user's eyes to the screen. When the distance drops below 30cm, it triggers an intelligent Gaussian blur overlay to safeguard vision health.",
     folderStructure: `visionsafe/
 ├── lib/ai/              # MediaPipe landmark processor
 ├── lib/service/         # Dynamic sampling controller
@@ -106,7 +109,7 @@ export const blueprints = [
       recovery: "Engineered an adaptive frame-sampling loop that scales detection frequency dynamically based on battery state and device movement."
     },
     journal: {
-      context: "Computer Vision Syndrome is pervasive due to screen overuse and poor ergonomic distance habits.",
+      context: "Eye strain and early myopia are pervasive due to screen overuse and poor ergonomic distance habits.",
       whyBuilt: "To create an unobtrusive, zero-privacy-compromise eye guardian that actively enforces healthy viewing distance.",
       systemThinking: "All image analysis occurs exclusively in local memory via isolated Dart threads without external network transmissions.",
       exploration: "Tuned 3D landmark mesh coordinates to derive precise eye-to-sensor depth metrics in varying ambient lighting.",
@@ -117,14 +120,15 @@ export const blueprints = [
   {
     id: "03",
     title: "Febrian Barbershop AI Agent",
-    tagline: "Production WhatsApp conversational agent powered by Llama 3.3 70B (Groq) with tool calling and SQLite memory.",
+    tagline: "24/7 WhatsApp AI booking assistant: handles customer chats and schedules appointments automatically.",
+    quickSummary: "An AI assistant deployed on WhatsApp for Febrian Barbershop. It answers price questions, books haircut appointments, and logs walk-ins 24/7 into the database so barbers never lose clients during busy cuts.",
     curiosity: "How to automate customer booking and walk-in logging for local service businesses with zero missed inquiries?",
     systemsExplored: "Node.js, TypeScript, Baileys WhatsApp Gateway, Groq SDK (Llama 3.3 70B), SQLite Persistent Storage, Cron Automations.",
     technicalChallenge: "Parsing natural language intent into deterministic database records and scheduling reminders reliably.",
     learnings: "Function calling schemas, WhatsApp socket lifecycle persistence, and multi-turn conversational context preservation.",
-    tags: ["TypeScript", "Llama 3.3 70B", "Groq", "Baileys", "SQLite", "Tool Calling"],
+    tags: ["WhatsApp AI", "TypeScript", "Groq Llama 3.3", "SQLite", "Automations"],
     links: { visit: "", repo: "https://github.com/mirsydfchrynto/barbershop-wa-bot" },
-    image: "/secure_cbt_ui.webp",
+    image: "",
     collaborators: [
       { name: "M. Irsyad Fachryanto", role: "Lead Developer", github: "https://github.com/mirsydfchrynto" }
     ],
@@ -150,14 +154,15 @@ export const blueprints = [
   {
     id: "04",
     title: "kartunikah-template-live",
-    tagline: "Interactive digital wedding invitation web platform with real-time RSVP and custom styling.",
+    tagline: "Modern interactive digital wedding invitation with music and real-time RSVP guest tracking.",
+    quickSummary: "An elegant, lightning-fast digital invitation web platform where couples share event stories, schedules, Google Maps locations, and collect real-time guest confirmations.",
     curiosity: "How to build ultra-lightweight, customizable digital invitations with smooth animations and instant RSVP capture?",
     systemsExplored: "Next.js, React, Tailwind CSS, Serverless Functions, Audio API.",
     technicalChallenge: "Optimizing media delivery and music playback across restrictive mobile browser auto-play policies.",
     learnings: "Modern responsive CSS styling, audio gesture unlock mechanisms, and serverless form handling.",
-    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Live Demo"],
+    tags: ["Next.js", "Tailwind CSS", "TypeScript", "Audio API", "Live Demo"],
     links: { visit: "https://kartunikah-template-live.vercel.app", repo: "https://github.com/mirsydfchrynto/kartunikah-template-live" },
-    image: "/okey_bimbel_preview.webp",
+    image: "",
     collaborators: [
       { name: "M. Irsyad Fachryanto", role: "Developer", github: "https://github.com/mirsydfchrynto" }
     ],

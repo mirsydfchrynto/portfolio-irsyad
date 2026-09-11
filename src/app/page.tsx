@@ -71,12 +71,12 @@ export default function Home() {
           >
             <div className="flex items-center gap-2.5">
               <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span>Available for Full-Time Roles · 2026</span>
+              <span>Available for Full-Time Roles · Remote / Relocation Ready · 2026</span>
             </div>
             <div className="hidden sm:flex items-center gap-6 text-slate-600">
-              <span>Tegal, Indonesia</span>
+              <span>Based in Indonesia</span>
               <span>•</span>
-              <span>Mobile &amp; Full-Stack</span>
+              <span>Open Worldwide (Remote &amp; On-Site)</span>
             </div>
           </motion.div>
 
@@ -86,9 +86,9 @@ export default function Home() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.1, ease: easeOut }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-[86px] font-display font-black text-slate-900 tracking-tight leading-[1.05]"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-display font-black text-slate-900 tracking-tight leading-[1.05]"
             >
-              Crafting <span className="font-serif italic font-normal text-blue-600 underline decoration-blue-200 decoration-wavy underline-offset-8">high-integrity</span> mobile applications &amp; modern web systems.
+              Building digital products that are <span className="font-serif italic font-normal text-blue-600 underline decoration-blue-200 decoration-wavy underline-offset-8">dependable</span>, clear, and effortless to use.
             </motion.h1>
 
             <motion.p 
@@ -97,7 +97,7 @@ export default function Home() {
               transition={{ duration: 0.9, delay: 0.2, ease: easeOut }}
               className="text-lg sm:text-xl md:text-2xl text-slate-700 font-normal leading-relaxed max-w-3xl"
             >
-              I&apos;m <strong className="text-slate-900 font-semibold">M. Irsyad Fachryanto</strong>. I bridge surgical OS-level hardware security (Android Kiosk, MethodChannel) with fluid Flutter interfaces and reliable Next.js architectures.
+              I&apos;m <strong className="text-slate-900 font-semibold">M. Irsyad Fachryanto</strong>. I create reliable mobile applications with Flutter &amp; Android, modern web platforms with Next.js, and practical AI assistants that solve real daily operational challenges.
             </motion.p>
 
             {/* Subtle Action Link Trio */}
@@ -151,7 +151,7 @@ export default function Home() {
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
                 01 / Production Spotlight
               </span>
-              <span className="text-xs font-mono text-slate-600">LIVE AT SCALE</span>
+              <span className="text-xs font-mono text-slate-600">LIVE IN PRODUCTION</span>
             </div>
 
             {/* Giant Editorial Work Row */}
@@ -161,38 +161,47 @@ export default function Home() {
                 <div className="space-y-4">
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                    <span>In Active School Operations</span>
+                    <span>In Active School Exam Operations</span>
                   </div>
 
                   <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black text-slate-900 tracking-tight leading-tight">
                     Okey Bimbel CBT Ecosystem
                   </h2>
 
-                  <p className="text-lg text-slate-600 font-normal leading-relaxed">
-                    Eliminating 100% of exam cheating vectors on Android. A mission-critical dual-platform architecture connecting locked mobile clients to a real-time web supervision dashboard.
+                  <p className="text-lg text-slate-700 font-normal leading-relaxed">
+                    A dual-platform digital exam system built to eliminate cheating completely. Students take tests in a locked-down Android app, while educators supervise live sessions and scoring from a web dashboard.
                   </p>
                 </div>
 
                 {/* Plain-English Technical Breakthroughs */}
-                <div className="space-y-4 pt-4 border-t border-slate-200">
+                <div className="space-y-5 pt-4 border-t border-slate-200">
                   <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-slate-900">Surgical Kiosk Lock</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      MethodChannel calls Kotlin native <code className="text-blue-600 font-mono">startLockTask()</code> and <code className="text-blue-600 font-mono">FLAG_SECURE</code>, disabling multitasking, notifications, and screenshots.
+                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                      100% Cheat-Proof Screen Lock
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-4">
+                      Turns standard Android devices into dedicated test terminals. Students cannot open browser tabs, take screenshots, or switch apps during tests.
                     </p>
                   </div>
 
                   <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-slate-900">Dynamic 5-Second QR Handshake</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      Rotating auth tokens invalidate shared screenshots, verifying physical presence in the examination room.
+                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                      Anti-Screenshot Dynamic QR Code
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-4">
+                      Students join exams by scanning a live QR code on the teacher&apos;s screen that rotates every 5 seconds, preventing students from sharing photo codes outside the room.
                     </p>
                   </div>
 
                   <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-slate-900">Offline-Tolerant Session Cache</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      AES-256 encrypted local storage safely retains student answers during intermittent Wi-Fi drops, recovering instantly.
+                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                      Offline-Safe Answer Preservation
+                    </h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-4">
+                      If classroom Wi-Fi drops, student answers remain encrypted in local phone storage and resynchronize automatically once reconnected—zero lost work.
                     </p>
                   </div>
                 </div>
@@ -267,7 +276,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="text-xs font-mono text-slate-600 uppercase tracking-wider">
-                3 REPOSITORIES &amp; REAL PRODUCTS
+                4 CURATED LAB WORKS
               </p>
             </div>
 
@@ -291,9 +300,14 @@ export default function Home() {
                     <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 group-hover:text-blue-600 transition-colors tracking-tight">
                       {item.title}
                     </h3>
-                    <p className="text-base text-slate-600 font-normal leading-relaxed">
+                    <p className="text-base text-slate-800 font-medium leading-snug">
                       {item.tagline}
                     </p>
+                    {(item as any).quickSummary && (
+                      <p className="text-sm text-slate-600 font-normal leading-relaxed pt-1">
+                        {(item as any).quickSummary}
+                      </p>
+                    )}
                     <div className="flex flex-wrap gap-2 pt-2">
                       {item.tags.map((tag) => (
                         <span key={tag} className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-600">
@@ -336,32 +350,32 @@ export default function Home() {
 
             <div className="max-w-4xl space-y-6">
               <h2 className="text-3xl sm:text-5xl font-display font-black text-slate-900 tracking-tight leading-tight">
-                &ldquo;Software should be surgically reliable under the hood, yet feel <span className="font-serif italic font-normal text-blue-600">calm and effortless</span> to experience.&rdquo;
+                &ldquo;Software should be surgically reliable under the hood, yet feel <span className="font-serif italic font-normal text-blue-600">clear and effortless</span> for everyone.&rdquo;
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 pt-8 border-t border-slate-200">
               <div className="space-y-3">
-                <span className="text-xs font-mono font-bold text-blue-600">[01] NATIVE FIRST</span>
-                <h3 className="text-lg font-bold text-slate-900">Hardware &amp; OS Control</h3>
+                <span className="text-xs font-mono font-bold text-blue-600">[01] OPERATIONAL INTEGRITY</span>
+                <h3 className="text-lg font-bold text-slate-900">Reliable Under Real Conditions</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  When standard web platforms fall short of security or real-time performance, I drop into native Kotlin APIs to control window flags, process priority, and kiosk modes.
+                  From intermittent classroom Wi-Fi to high-concurrency exam peaks, software must protect user data, prevent cheating, and never freeze unexpectedly.
                 </p>
               </div>
 
               <div className="space-y-3">
-                <span className="text-xs font-mono font-bold text-blue-600">[02] DECOUPLED ARCHITECTURE</span>
-                <h3 className="text-lg font-bold text-slate-900">Clean Domain Boundaries</h3>
+                <span className="text-xs font-mono font-bold text-blue-600">[02] CLEAN BOUNDARIES</span>
+                <h3 className="text-lg font-bold text-slate-900">Decoupled &amp; Easy to Maintain</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  I isolate state management (BLoC/Riverpod) from UI layers. Codebases are organized so changes in cloud databases never cascade into breaking UI rendering.
+                  I isolate state management from UI layers. When databases or cloud services change, core business logic and user interfaces remain solid and untangled.
                 </p>
               </div>
 
               <div className="space-y-3">
-                <span className="text-xs font-mono font-bold text-blue-600">[03] DETERMINISTIC INTELLIGENCE</span>
-                <h3 className="text-lg font-bold text-slate-900">Practical On-Device &amp; Agent AI</h3>
+                <span className="text-xs font-mono font-bold text-blue-600">[03] PRACTICAL INTELLIGENCE</span>
+                <h3 className="text-lg font-bold text-slate-900">AI That Solves Daily Problems</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  From running MediaPipe Face Mesh on Dart background Isolates to building WhatsApp agents with structured tool-calling, I focus on AI that solves tangible operational problems.
+                  From on-device eye health guardians running privately without internet, to WhatsApp assistants managing appointments 24/7, AI is used where it provides tangible value.
                 </p>
               </div>
             </div>

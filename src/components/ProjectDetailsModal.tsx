@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, GitBranch, ArrowUpRight, Zap, ShieldAlert, CheckCircle2, FolderTree, Info, Users2 } from "lucide-react";
+import { X, GitBranch, ArrowUpRight, Zap, ShieldAlert, CheckCircle2, FolderTree, Info, Users2, Sparkles } from "lucide-react";
 
 interface TimelineItem {
   label: string;
@@ -27,6 +27,7 @@ interface ProjectDetails {
   role?: string;
   period?: string;
   tagline: string;
+  quickSummary?: string;
   url?: string;
   repo?: string;
   links?: { visit: string; repo: string };
@@ -127,6 +128,22 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                   <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-normal border-l-4 border-blue-500 pl-4 py-1">
                     {project.tagline}
                   </p>
+
+                  {project.quickSummary && (
+                    <div className="p-4 sm:p-5 rounded-2xl bg-blue-50/80 border border-blue-100/90 flex items-start gap-3 mt-4">
+                      <span className="p-1.5 rounded-lg bg-blue-600 text-white shrink-0 mt-0.5 shadow-sm">
+                        <Sparkles size={15} />
+                      </span>
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-blue-900 block">
+                          At a Glance (Simple Overview)
+                        </span>
+                        <p className="text-sm text-slate-800 font-normal leading-relaxed">
+                          {project.quickSummary}
+                        </p>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Context & Metrics */}
