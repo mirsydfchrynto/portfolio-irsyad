@@ -1,24 +1,24 @@
 export const introduction = {
   title: "M. Irsyad Fachryanto",
-  subtitle: "Software Architect & Full-Stack Engineer",
-  bio: "I am a computer science student dedicated to engineering high-integrity digital ecosystems. My core expertise lies in Flutter, Kotlin Native, and Next.js. I prioritize scalable architecture, operational reliability, and clean structures over complex but fragile solutions. This archive documents my engineering journey, problem-solving methodologies, and system-level explorations."
+  subtitle: "Mobile & Full-Stack Software Developer",
+  bio: "Software developer based in Indonesia specializing in Flutter, native Android (Kotlin), and modern web engineering with Next.js and TypeScript. I build high-integrity systems, kiosk-mode client security, and practical agentic AI workflows. Grounded in clean architecture, operational reliability, and real-world results."
 };
 
 export const productionExperience = {
   id: "okey-bimbel",
   title: "Okey Bimbel (CBT System)",
-  role: "Lead Full-Stack Developer",
-  period: "FEB 2025 - PRESENT",
+  role: "Full-Stack Developer",
+  period: "FEB 2026 - PRESENT",
   tagline: "High-integrity dual-platform exam ecosystem featuring native Android Kiosk Mode and dynamic QR handshake authentication.",
-  url: "https://okeybimbel.web.app/",
+  url: "https://github.com/mirsydfchrynto/okeybimbel-cbt-release",
   image: "/okey_bimbel_preview.webp",
   collaborators: [
-    { name: "M. Irsyad Fachryanto", role: "Lead Full-Stack Developer", github: "https://github.com/mirsydfchrynto" }
+    { name: "M. Irsyad Fachryanto", role: "Full-Stack Developer", github: "https://github.com/mirsydfchrynto" }
   ],
   metrics: [
     "Managing live exam operations for hundreds of concurrent students with zero data loss.",
-    "Automated centralized exam distribution and real-time monitoring workflows.",
-    "Eliminated 100% of cheating vectors via native-level window locking and hardware restrictions."
+    "Centralized question banking, student session monitoring, and real-time grading.",
+    "Restricted cheating vectors via native OS-level window locking and hardware restrictions."
   ],
   failureRecovery: {
     incident: "Real-time synchronization bottleneck during high-concurrency exam session (100+ students).",
@@ -26,14 +26,14 @@ export const productionExperience = {
     recovery: "Restructured data flow from global streams to pull-based heartbeats with local state caching. Implemented Unsub Guard to prevent memory leaks during listener teardown."
   },
   timeline: [
-    { label: "Security Analysis", description: "Standard web exams are vulnerable to tab-switching and screen capturing. Native intervention was required." },
-    { label: "QR Handshake", description: "Developed rotating dynamic tokens (5s intervals) to prevent replay attacks and ensure student identity." },
+    { label: "Security Analysis", description: "Standard web exams are vulnerable to tab-switching and screen capturing. Native OS intervention was required." },
+    { label: "QR Handshake", description: "Developed rotating dynamic tokens (5s intervals) to prevent replay attacks and authenticate student identity." },
     { label: "Kiosk Mode", description: "Integrated startLockTask() and WindowManager.FLAG_SECURE via MethodChannel in Kotlin Native." },
-    { label: "Performance", description: "Reduced database costs by 70% by transitioning to on-demand session listeners and optimized indexing." }
+    { label: "Performance", description: "Reduced database overhead by 70% transitioning to on-demand session listeners and optimized indexing." }
   ],
   journal: {
     context: "At Okey Bimbel, daily operations required a reliable digital exam platform to replace vulnerable standard web forms. The goal was total integrity with zero educator supervision required.",
-    whyBuilt: "Designed to allow teachers to manage question banks via Next.js while students scanned dynamic QRs to enter a locked Android environment. Flutter monitors lifecycle events, logging all background attempts.",
+    whyBuilt: "Designed to allow teachers to manage question banks via Next.js while students scan dynamic QRs to enter a locked Android environment. Flutter monitors lifecycle events, logging all background attempts.",
     systemThinking: "Built on decentralized dual-platform architecture. Question mappings are processed in background Isolates and stored locally with AES-256 encryption.",
     exploration: "Explored Kotlin-Dart interop for hardware-level security. Leveraged Lifecycle Listeners to detect window focus loss and trigger automated violation reports.",
     constraints: "Managed high-concurrency limitations by restructuring data flow from real-time global streams to isolated per-session heartbeats.",
@@ -45,197 +45,245 @@ export const productionExperience = {
 export const blueprints = [
   {
     id: "01",
-    title: "Secure CBT Master",
-    tagline: "Android Kiosk system integrated with Next.js 16 supervisor portal for high-stakes assessments.",
-    curiosity: "How to restrict cheating on Android devices at a system level without requiring device rooting?",
-    systemsExplored: "Flutter Kiosk mode (MethodChannel), startLockTask (Kotlin), Next.js 16 (Turbopack), Firestore Security Rules (Isolation).",
-    technicalChallenge: "Ensuring monitoring stability over unstable school networks while synchronizing server time to prevent local clock manipulation.",
-    learnings: "Advanced MethodChannel interop, designed network-time synchronization logic, and automated XLSX report generation.",
-    tags: ["Flutter", "Dart", "Kotlin Native", "Next.js 16", "Firestore"],
-    links: { visit: "", repo: "https://github.com/mirsydfchrynto/CBT-System" },
-    image: "/secure_cbt_ui.webp",
-    collaborators: [
-      { name: "M. Irsyad Fachryanto", role: "Lead System Architect", github: "https://github.com/mirsydfchrynto" }
-    ],
-    overview: "Secure CBT Master focuses on creating an isolated exam environment. It uses hardware-level window flags to block screenshots and screencasts.",
-    folderStructure: `cbt-system/
-├── mobile-cbt/ (Flutter)
-│   ├── android/ MainActivity.kt  # Kiosk Mode
-│   └── lib/ local_db_service.dart # Hive AES-256
-└── web-admin/ (Next.js)
-    ├── src/app/monitoring/      # Real-time
-    └── src/app/results/         # Grading`,
-    failureRecovery: {
-      incident: "Token rotation mismatch caused by high network latency (clock drift).",
-      rootCause: "Clients scanned tokens that already expired due to server-client time offsets.",
-      recovery: "Implemented a 'Grace-Period' validation logic that accepts both current and previous tokens, coupled with server-timestamp sync."
-    },
-    journal: {
-      context: "Digital exam platforms lack system-level security, allowing students to bypass restrictions easily.",
-      whyBuilt: "Built as a research-led ecosystem to provide educators with a tamper-proof environment for high-stakes assessments.",
-      systemThinking: "The architecture relies on strict data isolation. Tokens rotate every 5 seconds to prevent replay attacks.",
-      exploration: "Utilized startLockTask() to pin the app, disabling the status bar and Home button hardware-level.",
-      constraints: "Resolved Firestore Internal Assertion errors using a global Unsub Guard pattern.",
-      reflection: "Future optimization: Move handshake logic to an edge-cached API for sub-10ms validation latency.",
-      lessons: "Insights into Android process lifecycles and high-load NoSQL schema design."
-    }
-  },
-  {
-    id: "02",
-    title: "Geges Smart Barber",
-    tagline: "Integrated scheduling system with fair distribution algorithms and real-time availability tracking.",
-    curiosity: "How to balance workload among employees in a high-traffic service business using NoSQL constraints?",
-    systemsExplored: "Clean Architecture in Flutter, BLoC state isolation, Firestore real-time sync, PWA Service Worker caching.",
-    technicalChallenge: "Developing an in-memory fallback filter to handle Firestore query limitations during peak load.",
-    learnings: "Deepened understanding of Separation of Concerns (SoC), off-day logic, and enterprise tenant lifecycle management.",
-    tags: ["Flutter", "Dart", "Firebase App Check", "Next.js", "NoSQL"],
-    links: { visit: "", repo: "https://github.com/mirsydfchrynto/GEGES_Capstone" },
+    title: "Geges Smart Barber (Capstone 1)",
+    tagline: "Unified multi-tenant barbershop ecosystem with real-time queue management, bookings, product marketplace, and admin chat.",
+    curiosity: "How to unify fragmented barbershop operations into one platform with fair barber workload distribution?",
+    systemsExplored: "Flutter Mobile, Clean Architecture, BLoC State Isolation, Firestore Real-Time Streams, React Admin Portal, WhatsApp Gateway.",
+    technicalChallenge: "Developing a fair-work distribution algorithm that balances queue allocations among barbers based on monthly workload and shifts.",
+    learnings: "Deepened understanding of Separation of Concerns (SoC), real-time concurrency handling, and multi-tenant business provisioning.",
+    tags: ["Flutter", "Dart", "Clean Architecture", "Firestore", "React", "Live Queue"],
+    links: { visit: "", repo: "https://github.com/MyCampusLab/capstone-pt1" },
     image: "/geges_barber_ui.webp",
     collaborators: [
       { name: "M. Irsyad Fachryanto", role: "Lead Full-Stack Developer", github: "https://github.com/mirsydfchrynto" }
     ],
-    overview: "A comprehensive solution for barbershop management, featuring customer booking apps and owner dashboards for workforce management.",
+    overview: "Geges Smart Barber is my dream business platform designed to modernize the barbershop industry. Customers can join live queues, book appointments, order grooming products, and chat directly with shop admins, while barbers receive fair work distribution.",
     folderStructure: `geges-barber/
-├── lib/
-│   ├── services/ queue_service.dart # Fair-Work
-│   └── screens/ payment_screen.dart # Modern UI
-└── web-admin/
-    └── src/ services/ provisioning.ts # Cascade Delete`,
+├── customer-app/ (Flutter)
+│   ├── lib/core/          # Clean architecture layers
+│   ├── lib/features/queue # Live queue sync
+│   └── lib/features/store # Product marketplace
+└── web-admin/ (React)
+    ├── src/tenants/       # Multi-barber management
+    └── src/services/      # Fair-work scheduling algorithm`,
     failureRecovery: {
-      incident: "Application crash on queue screen due to missing composite indexes.",
-      rootCause: "Production environment queries failed because indexing hadn't finished propagating.",
-      recovery: "Implemented a 'State-Driven Fallback' that switches to in-memory filtering when a database query exception is caught."
+      incident: "Queue screen lag during peak weekend customer influx.",
+      rootCause: "Unbounded Firestore listeners and un-indexed compound queries.",
+      recovery: "Implemented state-driven local caching with optimistic UI updates and composite query indexes."
     },
     journal: {
-      context: "Physical queues at barbershops are often chaotic, leading to uneven workload distribution.",
-      whyBuilt: "Designed to distribute queues fairly based on monthly performance metrics while providing a seamless booking experience.",
-      systemThinking: "Follows Clean Architecture. Business logic is strictly isolated in the service layer for UI-independent testing.",
-      exploration: "Programmed a 'Fair Available Barberman' algorithm accounting for weekly off-days and service duration estimates.",
-      constraints: "Addressed PWA Service Worker rejection by configuring explicit Content-Type headers in firebase.json.",
-      lessons: "Database-UI decoupling is critical for production stability. Successfully passed 188+ automated tests."
+      context: "Traditional barbershops face chaotic queue lines, unfair tip/revenue splits among barbers, and lack of digital store integration.",
+      whyBuilt: "Built as an all-in-one platform uniting barbers under one roof with transparent live wait-times and integrated product sales.",
+      systemThinking: "Isolated business logic into distinct use-cases within Clean Architecture to enable rigorous automated testing.",
+      exploration: "Implemented the 'Fair Available Barber' algorithm accounting for weekly off-days and historical cut times.",
+      constraints: "Ensured low-latency sync so walk-in customers and app bookings never double-book barbers.",
+      lessons: "Production reliability depends heavily on decoupled state management and graceful network offline handling."
+    }
+  },
+  {
+    id: "02",
+    title: "VisionSafe (Capstone 2)",
+    tagline: "On-device AI eye-fatigue mitigation system using MediaPipe Face Mesh for real-time distance monitoring.",
+    curiosity: "Can we protect user eye health from screen fatigue on Android without transmitting sensitive camera feeds to remote servers?",
+    systemsExplored: "Flutter, MediaPipe Face Mesh (Edge AI), Android Foreground Service (Kotlin), Gaussian Blur Overlay, Dynamic Sampling.",
+    technicalChallenge: "Maintaining continuous Face Mesh landmark processing in the background without rapid battery depletion or OS process termination.",
+    learnings: "TensorFlow Lite & MediaPipe pipeline optimization, Android process lifecycles, and privacy-by-design edge computation.",
+    tags: ["Flutter", "MediaPipe", "Edge AI", "Computer Vision", "Kotlin Service"],
+    links: { visit: "", repo: "https://github.com/MyCampusLab/capstone-pt2" },
+    image: "/avatar.jpg",
+    collaborators: [
+      { name: "M. Irsyad Fachryanto", role: "AI & Native Systems Lead", github: "https://github.com/mirsydfchrynto" },
+      { name: "Marsha Dwi Lucyana", role: "UI/UX & Research Analyst", github: "https://github.com/marshadwi" }
+    ],
+    overview: "VisionSafe utilizes on-device MediaPipe Face Mesh to calculate the Z-coordinate distance from the user's eyes to the screen. When the distance drops below 30cm, it triggers an intelligent Gaussian blur overlay to safeguard vision health.",
+    folderStructure: `visionsafe/
+├── lib/ai/              # MediaPipe landmark processor
+├── lib/service/         # Dynamic sampling controller
+└── android/src/main/    # Kotlin Foreground Service & Window Overlay`,
+    failureRecovery: {
+      incident: "Background landmark detection terminated by Android battery manager.",
+      rootCause: "High continuous CPU cycle consumption exceeding background limits.",
+      recovery: "Engineered an adaptive frame-sampling loop that scales detection frequency dynamically based on battery state and device movement."
+    },
+    journal: {
+      context: "Computer Vision Syndrome is pervasive due to screen overuse and poor ergonomic distance habits.",
+      whyBuilt: "To create an unobtrusive, zero-privacy-compromise eye guardian that actively enforces healthy viewing distance.",
+      systemThinking: "All image analysis occurs exclusively in local memory via isolated Dart threads without external network transmissions.",
+      exploration: "Tuned 3D landmark mesh coordinates to derive precise eye-to-sensor depth metrics in varying ambient lighting.",
+      constraints: "Optimized frame buffer handoffs between camera sensor and ML model to maintain sub-50ms inference latency.",
+      lessons: "Edge AI requires strict balance between model precision and device thermal constraints."
     }
   },
   {
     id: "03",
-    title: "capstone-pt2 (VisionSafe)",
-    tagline: "On-device AI eye-fatigue mitigation system using MediaPipe Face Mesh for real-time distance monitoring.",
-    curiosity: "Can we reduce Computer Vision Syndrome using Edge AI without sending visual data to a server?",
-    systemsExplored: "Flutter, MediaPipe Face Mesh (Edge AI), Background Services, Local Notifications, SQLite.",
-    technicalChallenge: "Maintaining continuous Face Mesh processing in the background without excessive battery drain.",
-    learnings: "TensorFlow Lite integration, image processing loop optimization, and system-level notification management.",
-    tags: ["Flutter", "MediaPipe", "Edge AI", "Computer Vision"],
-    links: { visit: "", repo: "https://github.com/mirsydfchrynto/visionsafe-app" },
-    image: "/avatar.jpg",
+    title: "Febrian Barbershop AI Agent",
+    tagline: "Production WhatsApp conversational agent powered by Llama 3.3 70B (Groq) with tool calling and SQLite memory.",
+    curiosity: "How to automate customer booking and walk-in logging for local service businesses with zero missed inquiries?",
+    systemsExplored: "Node.js, TypeScript, Baileys WhatsApp Gateway, Groq SDK (Llama 3.3 70B), SQLite Persistent Storage, Cron Automations.",
+    technicalChallenge: "Parsing natural language intent into deterministic database records and scheduling reminders reliably.",
+    learnings: "Function calling schemas, WhatsApp socket lifecycle persistence, and multi-turn conversational context preservation.",
+    tags: ["TypeScript", "Llama 3.3 70B", "Groq", "Baileys", "SQLite", "Tool Calling"],
+    links: { visit: "", repo: "https://github.com/mirsydfchrynto/barbershop-wa-bot" },
+    image: "/secure_cbt_ui.webp",
     collaborators: [
-      { name: "M. Irsyad Fachryanto", role: "AI Research Lead", github: "https://github.com/mirsydfchrynto" },
-      { name: "Marsha Dwi Lucyana", role: "UI/UX & Research Analyst", github: "https://github.com/marshadwi" }
+      { name: "M. Irsyad Fachryanto", role: "Lead Developer", github: "https://github.com/mirsydfchrynto" }
     ],
-    overview: "VisionSafe uses Edge AI to monitor if a user is too close to the screen or blinking infrequently, providing real-time alerts.",
+    overview: "A WhatsApp AI business assistant actively deployed for Febrian Barbershop. Handles inquiries, books appointments, records walk-ins, and manages business knowledge with tool calling and SQLite persistence.",
+    folderStructure: `barbershop-wa-bot/
+├── src/services/whatsapp.ts  # Baileys socket gateway
+├── src/services/ai.ts        # Groq Llama 3.3 tool-calling
+└── src/database.ts           # SQLite booking & memory schema`,
     failureRecovery: {
-      incident: "Background processing killed by Android System due to high resource usage.",
-      rootCause: "The AI model consumed CPU cycles beyond the background threshold.",
-      recovery: "Implemented a 'Dynamic Sampling Rate' that scales detection based on battery level, coupled with a Foreground Service."
+      incident: "WhatsApp session disconnect on network drop.",
+      rootCause: "Transient socket termination not handled with auto-reconnection credentials.",
+      recovery: "Configured multi-file auth persistence and exponential backoff retry with pino logging."
     },
     journal: {
-      context: "Digital eye strain is increasing globally due to improper viewing distance and decreased blink rates.",
-      whyBuilt: "Built to provide a private, proactive health companion that ensures safe screen usage habits.",
-      systemThinking: "Runs a MediaPipe pipeline on a separate Dart Isolate to prevent UI stuttering.",
-      exploration: "Optimized TFLite models for mid-range Android devices. Developed an overlay notification system.",
-      constraints: "Balanced CPU load and camera power consumption with adaptive frame-capture logic.",
-      lessons: "Advanced Edge AI understanding and privacy-by-design principles."
+      context: "Local barbershop owners lose revenue when phone inquiries go unanswered during busy haircut sessions.",
+      whyBuilt: "Automate booking confirmation, pricelist explanations, and operational queries 24/7 without human delay.",
+      systemThinking: "Structured tools allow the LLM to emit deterministic booking tokens that update the SQLite queue directly.",
+      exploration: "Experimented with Groq fast inference for sub-second WhatsApp response turnarounds.",
+      constraints: "Prevented prompt injection and hallucinated pricing by enforcing strict system constraints and static business pricelists.",
+      lessons: "Real-world agentic value lies in deterministic tool invocation over open-ended conversation."
+    }
+  },
+  {
+    id: "04",
+    title: "kartunikah-template-live",
+    tagline: "Interactive digital wedding invitation web platform with real-time RSVP and custom styling.",
+    curiosity: "How to build ultra-lightweight, customizable digital invitations with smooth animations and instant RSVP capture?",
+    systemsExplored: "Next.js, React, Tailwind CSS, Serverless Functions, Audio API.",
+    technicalChallenge: "Optimizing media delivery and music playback across restrictive mobile browser auto-play policies.",
+    learnings: "Modern responsive CSS styling, audio gesture unlock mechanisms, and serverless form handling.",
+    tags: ["Next.js", "React", "Tailwind CSS", "TypeScript", "Live Demo"],
+    links: { visit: "https://kartunikah-template-live.vercel.app", repo: "https://github.com/mirsydfchrynto/kartunikah-template-live" },
+    image: "/okey_bimbel_preview.webp",
+    collaborators: [
+      { name: "M. Irsyad Fachryanto", role: "Developer", github: "https://github.com/mirsydfchrynto" }
+    ],
+    overview: "A published, live digital wedding invitation web template enabling customizable couple stories, event timelines, gift registry, and guest RSVP tracking.",
+    folderStructure: `kartunikah/
+├── src/components/   # Animated invitation scenes
+└── src/app/          # Next.js app router`,
+    failureRecovery: {
+      incident: "Background music blocked by mobile Safari and Chrome policies.",
+      rootCause: "Browsers reject unprompted audio autoplay.",
+      recovery: "Coupled audio play with the initial 'Open Invitation' user tap gesture."
+    },
+    journal: {
+      context: "Digital invitations require fast loading speeds on slow cellular networks and elegant responsive styling.",
+      whyBuilt: "Provide couples with a modern, paperless alternative featuring instant guest RSVP collection.",
+      systemThinking: "Designed component-first for zero layout shift and minimal JavaScript bundle overhead.",
+      exploration: "Tailwind animation utilities for subtle floral and typography entrance effects.",
+      constraints: "Kept initial bundle payload under 150KB for rapid load times.",
+      lessons: "User gesture handling is essential when orchestrating rich multimedia web experiences."
     }
   }
 ];
 
 export const engineeringJourney = [
   {
-    period: "FEB 2025 - PRESENT",
+    period: "FEB 2026 - PRESENT",
     role: "Full-Stack Developer",
     location: "Okey Bimbel",
-    description: "Engineering a dual-platform anti-cheat exam ecosystem. Developed supervisor portals, native Kiosk interop, and optimized NoSQL patterns for high-concurrency environments."
+    description: "Maintaining the live dual-platform exam ecosystem. Built Android Kiosk client with Kotlin native platform channels, Next.js supervisor portals, and optimized Firestore pipelines."
   },
   {
     period: "2024 - PRESENT",
     role: "Flutter Mentor",
     location: "Community Plug-in",
-    description: "Mentoring 40+ students in mastering maintainable mobile architectures. Focused on Clean Architecture, SOLID principles, and effective state management."
+    description: "Mentoring students in mastering maintainable mobile architectures, Clean Architecture principles, state management (Riverpod/BLoC), and Android platform channels."
   },
   {
-    period: "2023 - PRESENT",
-    role: "Core Member",
-    location: "Community Plug-in",
-    description: "Contributing to the university's engineering ecosystem by organizing technical workshops and introducing efficient CLI-based workflows."
+    period: "2024 - 2026",
+    role: "Capstone Projects Lead",
+    location: "Engineering Academic & Production Work",
+    description: "Architected Geges Smart Barber (live queueing, booking & multi-tenant barbershop platform) and VisionSafe (on-device MediaPipe edge AI eye-health guardian)."
   }
 ];
 
 export const exploredTools = [
   {
     category: "Mobile Systems",
-    technologies: ["Flutter SDK", "Dart", "Kotlin Native", "Android APIs / Kiosk Mode"]
+    technologies: ["Flutter SDK", "Dart", "Kotlin Native", "Android SDK / Kiosk Mode", "MethodChannel", "Riverpod", "Hive"]
   },
   {
-    category: "Web & API Architectures",
-    technologies: ["Next.js 16", "React", "TypeScript", "FastAPI", "NoSQL Optimization"]
+    category: "Web & Full-Stack",
+    technologies: ["Next.js (App Router)", "React", "TypeScript", "Tailwind CSS", "Node.js", "Firebase Firestore", "Supabase", "PostgreSQL"]
   },
   {
-    category: "Systems & Security",
-    technologies: ["Linux Core / Bash", "Firebase App Check", "Systemd Daemons", "Process Lifecycles"]
+    category: "AI & Agentic Systems",
+    technologies: ["MediaPipe Face Mesh", "Edge AI / TFLite", "Groq SDK (Llama 3.3)", "Function / Tool Calling", "Baileys WhatsApp Gateway", "Hermes OS Automations"]
+  },
+  {
+    category: "Tools & Environments",
+    technologies: ["Linux / Shell", "Docker", "Git", "Figma", "Three.js", "REST APIs"]
   }
 ];
 
 export const inlineResume = {
-  summary: "6th-semester Computer Science student at Universitas Harkat Negeri Tegal with a 3.92/4.00 GPA. Specialized in Mobile Engineering (Flutter & Kotlin) and System Architecture. Dedicated to building high-integrity systems through Clean Architecture and SOLID principles.",
+  summary: "Software developer specializing in Mobile Engineering (Flutter & Kotlin Native) and Full-Stack Web Development (Next.js & TypeScript). Focused on building high-integrity systems, kiosk-mode security, and practical agentic AI workflows.",
   education: [
     {
-      institution: "Universitas Harkat Negeri Tegal",
-      degree: "B.S. in Computer Science (Applied)",
+      institution: "Higher Education in Informatics Engineering",
+      degree: "Informatics Engineering (Applied Computer Science)",
       period: "2023 - PRESENT",
-      notes: "GPA: 3.92 / 4.00. Active Mentor & Core Member at Community Plug-in."
+      notes: "Active Flutter Mentor at Community Plug-in. Focus on Mobile Systems, Edge AI, and Scalable Web Architecture."
     },
     {
       institution: "SMK Negeri 2 Tegal",
       degree: "Computer and Network Engineering",
       period: "2020 - 2023",
-      notes: "Focus on server administration, Linux infrastructure, and networking fundamentals."
+      notes: "Foundations in server administration, Linux infrastructure, and networking protocols."
     }
   ],
   experience: [
     {
       company: "Okey Bimbel",
-      role: "Lead IT Developer",
-      period: "FEB 2025 - PRESENT",
-      description: "Primary technology partner for engineering and operational support of the digital exam ecosystem.",
+      role: "Full-Stack Developer",
+      period: "FEB 2026 - PRESENT",
+      description: "Core technology developer for the dual-platform digital exam ecosystem.",
       bullets: [
-        "Built and maintained Next.js 16 portals and Flutter clients for real-time exam supervision.",
-        "Engineered native Kotlin interop (startLockTask) to enforce strict kiosk mode.",
-        "Strategic IT consulting for cloud optimization and infrastructure scaling."
+        "Built and maintain the Next.js supervisor portal and Flutter Android CBT client.",
+        "Implemented Kotlin startLockTask() and FLAG_SECURE for hardware-level kiosk lockdown.",
+        "Engineered dynamic 5-second QR token rotation preventing unauthorized exam entry."
+      ]
+    },
+    {
+      company: "Community Plug-in",
+      role: "Flutter Mentor",
+      period: "2024 - PRESENT",
+      description: "Mentoring students in mastering maintainable mobile architectures and industrial standards.",
+      bullets: [
+        "Guiding students through Clean Architecture, BLoC/Riverpod, and platform channels.",
+        "Hosting recurring practical code reviews and mobile development workshops."
       ]
     }
   ],
   community: [
     {
-      organization: "Community Plug-in",
-      role: "Flutter Mentor",
+      organization: "Engineering & Open Source",
+      role: "Project Contributor",
       period: "2024 - PRESENT",
-      description: "Mentoring students in mastering maintainable Flutter architectures and industrial standards.",
+      description: "Building production solutions including barbershop AI assistants, wedding platforms, and student productivity tools.",
       bullets: [
-        "Guided 40+ students through structured Flutter engineering courses.",
-        "Organized recurring specialized mobile programming workshops."
+        "Published live Android CBT APK releases and open-source project documentation.",
+        "Developing real-world AI agent integrations with tool calling and database persistence."
       ]
     }
   ],
   skills: [
     {
       category: "Mobile Engineering",
-      tools: ["Flutter", "Dart OOP", "Kotlin Native", "Android Kiosk Mode", "Riverpod", "Hive AES-256"]
+      tools: ["Flutter", "Dart", "Kotlin Native", "Android Kiosk Mode", "MethodChannel", "Riverpod", "Hive"]
     },
     {
-      category: "Web & Core Systems",
-      tools: ["Next.js", "React", "TypeScript", "FastAPI", "Firestore Optimization", "NoSQL Design"]
+      category: "Web & Backend",
+      tools: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Firebase Firestore", "Supabase", "PostgreSQL"]
     },
     {
-      category: "Systems & Security",
-      tools: ["Linux / Shell", "Firebase App Check", "Systemd Services", "Process Lifecycle", "MethodChannel"]
+      category: "AI & Systems",
+      tools: ["MediaPipe Face Mesh", "Groq Llama 3.3", "Tool Calling", "Linux / Shell", "Docker", "Three.js", "Git"]
     }
   ]
 };

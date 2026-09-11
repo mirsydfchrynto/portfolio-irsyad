@@ -8,6 +8,7 @@ import { KernelTerminalExplorer } from "@/components/KernelTerminalExplorer";
 import { ProjectLabCard } from "@/components/ProjectLabCard";
 import { CommandPalette } from "@/components/CommandPalette";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
+import { ThreeParticleCanvas } from "@/components/ThreeParticleCanvas";
 import { 
   introduction, 
   productionExperience, 
@@ -47,8 +48,11 @@ export default function Home() {
       <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-[#E31B23]/[0.02] to-transparent pointer-events-none z-0" />
 
       {/* 00. HERO SECTION */}
-      <header className="relative min-h-[100svh] flex flex-col justify-center px-6 md:px-12 pt-20 md:pt-0 z-10">
-        <div className="max-w-7xl mx-auto w-full relative">
+      <header className="relative min-h-[100svh] flex flex-col justify-center px-6 md:px-12 pt-20 md:pt-0 z-10 overflow-hidden">
+        {/* Interactive 3D Three.js Node/Particle Canvas */}
+        <ThreeParticleCanvas className="opacity-90" />
+
+        <div className="max-w-7xl mx-auto w-full relative z-10">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
             
             <motion.div 
@@ -60,19 +64,19 @@ export default function Home() {
               <div className="space-y-4 md:space-y-6">
                 <div className="flex items-center gap-3">
                   <span className="w-8 md:w-10 h-[1px] bg-[#E31B23]" />
-                  <span className="section-label tracking-[0.4em] md:tracking-[0.6em]">Software Student & Developer</span>
+                  <span className="section-label tracking-[0.4em] md:tracking-[0.6em]">Mobile &amp; Full-Stack Developer</span>
                 </div>
                 <h1 className="giant-type text-white group cursor-default">
                   M. Irsyad <br/>
                   <span className="text-white/10 group-hover:text-[#E31B23] transition-colors duration-1000 ease-out">Fachryanto</span>
                 </h1>
                 <p className="text-white/30 font-display text-lg md:text-2xl tracking-tight lowercase max-w-xl">
-                  Building High-Integrity Digital Ecosystems.
+                  Flutter · Native Android (Kotlin) · Next.js · Agentic Systems
                 </p>
               </div>
               
               <p className="text-white/50 text-base md:text-xl leading-relaxed max-w-2xl font-medium border-l border-white/10 pl-6 md:pl-8 py-2">
-                Focused on engineering modern interfaces, native mobile integrations, and high-reliability systems with absolute operational integrity.
+                Building reliable mobile clients with native OS security, scalable Next.js web applications, and practical on-device &amp; conversational AI workflows.
               </p>
 
               <div className="flex flex-wrap gap-4 md:gap-6 pt-2 md:pt-4">
@@ -81,7 +85,7 @@ export default function Home() {
                   aria-label="View Production Projects"
                   className="group relative px-8 md:px-10 py-4 md:py-5 bg-white text-black text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.2em] hover:text-white transition-all overflow-hidden"
                 >
-                  <span className="relative z-10">Initialize_Archive</span>
+                  <span className="relative z-10">Explore_Work</span>
                   <div className="absolute inset-0 bg-[#E31B23] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
                 </a>
                 <a 
@@ -90,6 +94,14 @@ export default function Home() {
                   className="px-8 md:px-10 py-4 md:py-5 border border-white/10 text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.2em] text-white/40 hover:text-white hover:border-white/40 transition-all"
                 >
                   Review_CV
+                </a>
+                <a 
+                  href="https://linkedin.com/in/mirsydfchrynto" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 md:px-8 py-4 md:py-5 border border-white/10 text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.2em] text-[#E31B23] hover:border-[#E31B23] transition-all"
+                >
+                  LinkedIn &rarr;
                 </a>
               </div>
             </motion.div>
@@ -306,18 +318,18 @@ export default function Home() {
               </h2>
             </motion.div>
 
-            <motion.div className="p-8 md:p-12 border border-white/5 bg-black space-y-8 md:space-y-10 shadow-2xl relative overflow-hidden" {...fadeInUp}>
+             <motion.div className="p-8 md:p-12 border border-white/5 bg-black space-y-8 md:space-y-10 shadow-2xl relative overflow-hidden" {...fadeInUp}>
               <div className="absolute top-0 left-0 w-full h-1 bg-[#E31B23]/20" />
               <div className="space-y-6 md:space-y-8">
                  <div className="space-y-2 md:space-y-3">
-                    <span className="font-mono text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest font-black block">Performance_Metrics &rarr;</span>
-                    <span className="text-white font-black text-2xl md:text-3xl tracking-tighter font-display uppercase italic">IPK: 3.92</span>
+                    <span className="font-mono text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest font-black block">Status &rarr;</span>
+                    <span className="text-white font-black text-2xl md:text-3xl tracking-tighter font-display uppercase italic text-[#E31B23]">Active Builder</span>
                  </div>
                  <div className="space-y-2 md:space-y-3 border-t border-white/5 pt-6 md:pt-8">
-                    <span className="font-mono text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest font-black block">Active_Mode &rarr;</span>
+                    <span className="font-mono text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest font-black block">Core_Focus &rarr;</span>
                     <div className="flex items-center gap-3">
                        <span className="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-emerald-500 animate-pulse" />
-                       <span className="text-emerald-500 font-black text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em]">Operational_Excellence</span>
+                       <span className="text-emerald-500 font-black text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em]">Mobile &amp; Full-Stack Systems</span>
                     </div>
                  </div>
               </div>
@@ -360,26 +372,30 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#E31B23]/[0.03] to-transparent pointer-events-none" />
         <motion.div className="max-w-7xl mx-auto p-8 md:p-32 border border-white/10 bg-[#0a0a0c] text-center space-y-10 md:space-y-16 shadow-[0_120px_200px_-50px_rgba(0,0,0,1)] relative z-10" {...fadeInUp}>
           <div className="space-y-4 md:space-y-6">
-            <span className="section-label tracking-[0.6em] md:tracking-[0.8em]">[06] Termination</span>
+            <span className="section-label tracking-[0.6em] md:tracking-[0.8em]">[06] Contact</span>
             <h2 className="text-4xl md:text-[120px] font-black uppercase tracking-tighter font-display leading-[0.8] mb-4">Establish<br/><span className="text-[#E31B23]">Connection</span></h2>
-            <p className="text-white/30 text-base md:text-2xl font-medium max-w-3xl mx-auto italic tracking-tight underline decoration-[#E31B23]/20 underline-offset-8">Open for discussions regarding mobile performance optimization, native integrations, or system architecture.</p>
+            <p className="text-white/30 text-base md:text-2xl font-medium max-w-3xl mx-auto italic tracking-tight underline decoration-[#E31B23]/20 underline-offset-8">Open for discussions regarding mobile development, native integrations, full-stack systems, or agentic workflows.</p>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 pt-12 md:pt-16 border-t border-white/5 max-w-4xl mx-auto font-mono text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 pt-12 md:pt-16 border-t border-white/5 max-w-5xl mx-auto font-mono text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em]">
             <a href="mailto:irsydfchrynto@gmail.com" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
                <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">01 // EMAIL</span>
                <span>Email</span>
             </a>
+            <a href="https://linkedin.com/in/mirsydfchrynto" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
+               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">02 // LINKEDIN</span>
+               <span>LinkedIn</span>
+            </a>
             <a href="https://wa.me/6285865826621" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">02 // WHATSAPP</span>
+               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">03 // WHATSAPP</span>
                <span>WhatsApp</span>
             </a>
             <a href="https://github.com/mirsydfchrynto" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">03 // GITHUB</span>
+               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">04 // GITHUB</span>
                <span>GitHub</span>
             </a>
             <a href="https://instagram.com/muhammadirsyadf" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">04 // INSTAGRAM</span>
+               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">05 // INSTAGRAM</span>
                <span>Instagram</span>
             </a>
           </div>
@@ -387,16 +403,8 @@ export default function Home() {
       </section>
 
       <footer className="py-16 md:py-24 border-t border-white/5 text-center relative overflow-hidden">
-        <div className="font-mono text-[8px] md:text-[10px] text-white/10 uppercase tracking-[0.4em] md:tracking-[0.6em] font-black relative z-10 px-6">
-          M. Irsyad Fachryanto &copy; 2026 // <span className="text-white/5 italic">Handcrafted with focus on Architecture & System Integrity</span>
-        </div>
-        {/* Stealth Visitor Tracker - Elite Monitoring */}
-        <div className="mt-8 flex justify-center opacity-5 hover:opacity-100 transition-opacity duration-500">
-          <img 
-            src="https://komarev.com/ghpvc/?username=mirsydfchrynto&label=SYSTEM_TRAFFIC&color=E31B23&style=flat-square" 
-            alt="System Traffic Monitor" 
-            className="h-5 pointer-events-none"
-          />
+        <div className="font-mono text-[8px] md:text-[10px] text-white/20 uppercase tracking-[0.4em] md:tracking-[0.6em] font-black relative z-10 px-6">
+          M. Irsyad Fachryanto &copy; 2026 · <span className="text-white/10 italic">Mobile &amp; Full-Stack Systems</span>
         </div>
         <div className="absolute inset-0 bg-noise opacity-[0.01] pointer-events-none" />
       </footer>

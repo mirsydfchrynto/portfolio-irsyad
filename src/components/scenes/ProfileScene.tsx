@@ -55,15 +55,15 @@ export function ProfileScene({ handleDownload, downloading }: ProfileSceneProps)
             
             <div className="space-y-3 md:space-y-4 border-t border-white/5 pt-6 md:pt-8">
               <span className="text-[#E31B23]/50 block font-black text-[9px] md:text-[11px]">Focus_Node &rarr;</span>
-              <span className="text-white text-[13px] md:text-[14px] normal-case tracking-normal font-sans font-black block">Full-Stack Architect &amp; Native Mobile</span>
+              <span className="text-white text-[13px] md:text-[14px] normal-case tracking-normal font-sans font-black block">Mobile &amp; Full-Stack Developer</span>
             </div>
 
             <div className="space-y-3 md:space-y-4 border-t border-white/5 pt-6 md:pt-8">
               <div className="flex items-center justify-between">
-                <span className="text-[#E31B23]/50 block font-black text-[9px] md:text-[11px]">Performance &rarr;</span>
+                <span className="text-[#E31B23]/50 block font-black text-[9px] md:text-[11px]">Status &rarr;</span>
                 <div className="flex items-center gap-2 text-[#E31B23]">
                   <Activity size={12} className="animate-pulse" />
-                  <span className="font-black text-[11px] md:text-[12px]">IPK: 3.92</span>
+                  <span className="font-black text-[11px] md:text-[12px]">PRODUCTION ACTIVE</span>
                 </div>
               </div>
             </div>

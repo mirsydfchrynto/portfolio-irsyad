@@ -25,14 +25,14 @@ export const metadata: Metadata = {
   verification: {
     google: "44_I-FdL_RTHGcAcZbaD8ozX9ICPPf-uyvKvAHhTLo4",
   },
-  title: "M. Irsyad Fachryanto | Full-Stack Architect & Mobile Engineer",
-  description: "Official Portfolio of M. Irsyad Fachryanto. 6th-semester Computer Science Student at Universitas Harkat Negeri Tegal (GPA 3.92). Specialist in Flutter, Kotlin Native, and Next.js.",
+  title: "M. Irsyad Fachryanto | Mobile & Full-Stack Developer",
+  description: "Official Portfolio of M. Irsyad Fachryanto. Mobile and full-stack software developer specializing in Flutter, Kotlin Native, Next.js, and practical AI integrations.",
   alternates: {
     canonical: "https://irsyad-architect.surge.sh",
   },
   openGraph: {
-    title: "M. Irsyad Fachryanto | Digital Architecture & Engineering",
-    description: "Personal archive and portfolio of M. Irsyad Fachryanto. Engineering high-integrity digital ecosystems.",
+    title: "M. Irsyad Fachryanto | Mobile & Full-Stack Developer",
+    description: "Personal portfolio of M. Irsyad Fachryanto. Mobile engineering, native Android integration, and high-performance web systems.",
     url: "https://irsyad-architect.surge.sh",
     siteName: "M. Irsyad Fachryanto Portfolio",
     images: [
@@ -48,8 +48,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "M. Irsyad Fachryanto",
-    description: "Software Architect & Computer Science Student. Specialist in Secure Systems.",
+    title: "M. Irsyad Fachryanto | Software Developer",
+    description: "Mobile & Full-Stack Developer specializing in Flutter, Kotlin, and Next.js.",
     images: ["/avatar.jpg"],
     creator: "@mirsydfchrynto",
   },
@@ -79,19 +79,14 @@ export default function RootLayout({
     "familyName": "Fachryanto",
     "url": "https://irsyad-architect.surge.sh",
     "image": "https://irsyad-architect.surge.sh/avatar.jpg",
-    "jobTitle": "Full-Stack Architect & Mobile Engineer",
-    "alumniOf": {
-      "@type": "CollegeOrUniversity",
-      "name": "Universitas Harkat Negeri Tegal",
-      "sameAs": "https://harkat.ac.id" 
-    },
+    "jobTitle": "Mobile & Full-Stack Developer",
     "sameAs": [
       "https://github.com/mirsydfchrynto",
       "https://instagram.com/muhammadirsyadf",
       "https://linkedin.com/in/mirsydfchrynto",
       "https://developers.google.com/profile/u/105716030488150294968"
     ],
-    "description": "M. Irsyad Fachryanto is a high-achieving Computer Science student (GPA 3.92) and Software Architect specializing in secure mobile and web ecosystems.",
+    "description": "M. Irsyad Fachryanto is a software developer specializing in secure mobile ecosystems, Flutter, native Android, and Next.js full-stack applications.",
     "knowsAbout": [
       "Software Engineering",
       "Mobile App Development",
