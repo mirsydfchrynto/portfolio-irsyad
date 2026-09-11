@@ -4,32 +4,27 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ThreeFluidWave } from "@/components/ThreeFluidWave";
-import { ArtisticAvatar } from "@/components/ArtisticAvatar";
-import { ProjectLabCard } from "@/components/ProjectLabCard";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
 import { 
   introduction, 
   productionExperience, 
   blueprints, 
   engineeringJourney, 
-  exploredTools,
-  inlineResume 
+  exploredTools 
 } from "@/config/portfolioData";
 import { pdfBase64 } from "@/config/pdfBase64";
 import { 
   ArrowUpRight, 
+  ArrowDown,
   Download, 
   Sparkles, 
   ShieldCheck, 
-  Smartphone, 
-  Globe2, 
-  Cpu, 
   CheckCircle2, 
-  Mail, 
-  MessageSquare, 
   Layers,
   ExternalLink,
-  Code2
+  Code2,
+  Terminal,
+  Cpu
 } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/SocialIcons";
 
@@ -42,459 +37,488 @@ export default function Home() {
     setTimeout(() => setDownloading(false), 1500);
   };
 
-  const fadeInUp = {
-    initial: { opacity: 0, y: 20 },
+  const easeOut = [0.16, 1, 0.3, 1] as any;
+
+  const fadeIn = {
+    initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-80px" },
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as any }
+    viewport: { once: true, margin: "-100px" },
+    transition: { duration: 0.8, ease: easeOut }
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 relative selection:bg-blue-600 selection:text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative">
       <Navbar />
 
-      {/* Subtle Studio Grid */}
-      <div className="fixed inset-0 z-0 studio-grid pointer-events-none opacity-80" />
+      {/* Ambient 3D Fluid Silk Wave (Interactive Background Art) */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <ThreeFluidWave className="opacity-70" />
+      </div>
 
-      {/* 01. HERO SECTION */}
-      <header className="relative min-h-[92svh] flex flex-col justify-center px-4 sm:px-6 lg:px-12 pt-28 pb-16 z-10 overflow-hidden">
-        {/* Serene 3D Fluid Silk Wave */}
-        <ThreeFluidWave className="opacity-90" />
+      <div className="relative z-10">
+        
+        {/* ============================================================ */}
+        {/* 01. HERO / EDITORIAL OPENING */}
+        {/* ============================================================ */}
+        <header className="min-h-[95svh] flex flex-col justify-between px-6 sm:px-10 lg:px-16 pt-32 pb-16 max-w-7xl mx-auto">
+          
+          {/* Top Micro-Header */}
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: easeOut }}
+            className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/80 pb-6 text-xs font-mono tracking-widest uppercase text-slate-600 font-medium"
+          >
+            <div className="flex items-center gap-2.5">
+              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+              <span>Available for Full-Time Roles · 2026</span>
+            </div>
+            <div className="hidden sm:flex items-center gap-6 text-slate-600">
+              <span>Tegal, Indonesia</span>
+              <span>•</span>
+              <span>Mobile &amp; Full-Stack</span>
+            </div>
+          </motion.div>
 
-        <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
-            {/* Left Column: Human Pitch */}
+          {/* Grand Typographic Statement */}
+          <div className="py-12 md:py-20 space-y-10 max-w-5xl">
+            <motion.h1 
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: easeOut }}
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-[86px] font-display font-black text-slate-900 tracking-tight leading-[1.05]"
+            >
+              Crafting <span className="font-serif italic font-normal text-blue-600 underline decoration-blue-200 decoration-wavy underline-offset-8">high-integrity</span> mobile applications &amp; modern web systems.
+            </motion.h1>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: easeOut }}
+              className="text-lg sm:text-xl md:text-2xl text-slate-700 font-normal leading-relaxed max-w-3xl"
+            >
+              I&apos;m <strong className="text-slate-900 font-semibold">M. Irsyad Fachryanto</strong>. I bridge surgical OS-level hardware security (Android Kiosk, MethodChannel) with fluid Flutter interfaces and reliable Next.js architectures.
+            </motion.p>
+
+            {/* Subtle Action Link Trio */}
             <motion.div 
-              className="lg:col-span-7 space-y-8 text-left"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.3, ease: easeOut }}
+              className="flex flex-wrap items-center gap-6 pt-4"
             >
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs font-semibold shadow-xs">
-                  <Sparkles size={13} className="text-blue-600" />
-                  <span>Open to Software Engineering Roles &amp; Collaborations</span>
-                </div>
+              <a
+                href="#selected-works"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 text-white hover:bg-blue-600 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all shadow-md hover:shadow-xl active:scale-95"
+              >
+                <span>Explore Works</span>
+                <ArrowDown size={15} />
+              </a>
 
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 font-display tracking-tight leading-[1.05]">
-                  Building high-impact <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600">
-                    mobile &amp; full-stack
-                  </span> systems.
-                </h1>
-
-                <p className="text-lg md:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl">
-                  Hi, I&apos;m <span className="font-semibold text-slate-900">M. Irsyad Fachryanto</span> — a developer specializing in 
-                  <span className="text-blue-700 font-semibold"> Flutter</span>, native <span className="text-blue-700 font-semibold">Android (Kotlin)</span>, and modern <span className="text-blue-700 font-semibold">Next.js</span> web systems. Grounded in clean architecture, operational reliability, and real-world results.
-                </p>
-              </div>
-
-              {/* Action CTAs */}
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
-                <a
-                  href="#production-work"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-600/25 hover:shadow-lg hover:shadow-blue-600/35 transition-all active:scale-95"
-                >
-                  <span>Explore Production Work</span>
-                  <ArrowUpRight size={16} />
-                </a>
-
-                <a 
-                  href={`data:application/pdf;base64,${pdfBase64}`}
-                  download="CV M.IRSYAD FACHRYANTO.pdf"
-                  onClick={handleDownload}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm font-semibold shadow-xs hover:border-slate-300 transition-all active:scale-95"
-                >
-                  <Download size={16} className="text-blue-600" />
-                  <span>{downloading ? "Preparing PDF..." : "Download Resume"}</span>
-                </a>
-              </div>
-
-              {/* Quick Trust Signals */}
-              <div className="pt-6 border-t border-slate-200/80 flex flex-wrap items-center gap-6 text-xs text-slate-500 font-medium">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck size={16} className="text-blue-600" />
-                  <span>Kiosk &amp; Platform Security</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Smartphone size={16} className="text-blue-600" />
-                  <span>Flutter &amp; Kotlin Native</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Globe2 size={16} className="text-blue-600" />
-                  <span>Next.js &amp; Cloud Real-time</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Column: Clean Artistic Emblem */}
-            <motion.div
-              className="lg:col-span-5 flex justify-center"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <ArtisticAvatar />
+              <a
+                href={`data:application/pdf;base64,${pdfBase64}`}
+                download="CV M.IRSYAD FACHRYANTO.pdf"
+                onClick={handleDownload}
+                className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-slate-300 hover:border-slate-900 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all"
+              >
+                <Download size={15} className="text-blue-600" />
+                <span>{downloading ? "Syncing Buffer..." : "Curriculum Vitae"}</span>
+              </a>
             </motion.div>
           </div>
-        </div>
-      </header>
 
-      {/* 02. RECRUITER QUICK SNAPSHOT (3 CORE PILLARS) */}
-      <section className="py-12 border-y border-slate-200/70 bg-white/70 backdrop-blur-xs relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-6">
-            {/* Card 1 */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  ● Live In Production
-                </span>
-                <span className="text-xs font-mono text-slate-400">01</span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900">Okey Bimbel CBT Ecosystem</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Dual-platform exam system running for hundreds of students with native Kotlin kiosk lockdown (<code className="text-blue-600">startLockTask</code>) and dynamic QR handshake authentication.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
-                  Capstone 1 · Business Vision
-                </span>
-                <span className="text-xs font-mono text-slate-400">02</span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900">Geges Smart Barber</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                An all-in-one barbershop platform: live queue tracking, online booking, grooming marketplace, and an algorithm that distributes workload fairly among barbers.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
-                  Capstone 2 · On-Device AI
-                </span>
-                <span className="text-xs font-mono text-slate-400">03</span>
-              </div>
-              <h3 className="text-lg font-bold text-slate-900">VisionSafe (EyeGuardian)</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Privacy-first eye health guardian using MediaPipe Face Mesh. Calculates 3D eye-screen depth and triggers Gaussian blur if &lt;30cm without sending data to servers.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 03. FEATURED PRODUCTION CASE STUDY (OKEY BIMBEL) */}
-      <section id="production-work" className="py-20 md:py-28 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <motion.div className="flex flex-col md:flex-row md:items-end justify-between gap-6" {...fadeInUp}>
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
-                <Layers size={14} />
-                <span>Featured Production Work</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight">
-                Okey Bimbel Exam Platform
-              </h2>
-            </div>
-            <p className="text-sm text-slate-600 max-w-md md:text-right leading-relaxed">
-              Eliminating 100% of exam cheating vectors on Android while providing teachers with instant real-time oversight.
-            </p>
-          </motion.div>
-
-          {/* Featured Case Study Card */}
+          {/* Bottom Micro-Meta */}
           <motion.div 
-            className="p-8 md:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-lg shadow-slate-900/5 grid lg:grid-cols-12 gap-10 items-center"
-            {...fadeInUp}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            className="flex items-center justify-between pt-6 border-t border-slate-200/80 text-xs font-mono text-slate-600"
           >
-            <div className="lg:col-span-7 space-y-6">
-              <div className="space-y-3">
-                <div className="flex flex-wrap gap-2">
-                  <span className="badge-emerald">Live In Production</span>
-                  <span className="badge-blue">Flutter Mobile</span>
-                  <span className="badge-slate">Kotlin Native Kiosk</span>
-                  <span className="badge-slate">Next.js Supervisor</span>
-                </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 font-display">
-                  Hardware-Enforced Kiosk Mode &amp; Real-Time Supervision
-                </h3>
-                <p className="text-sm md:text-base text-slate-600 leading-relaxed">
-                  Traditional web forms fail high-stakes exams because students switch tabs, take screenshots, or manipulate device clocks. At Okey Bimbel, I engineered a locked-down Android client coupled with a dynamic Next.js supervision portal.
-                </p>
-              </div>
+            <span>[01] SELECTED INDEX</span>
+            <span className="hidden sm:inline">SCROLL TO DISCOVER ARCHIVE</span>
+            <span>2024 — 2026</span>
+          </motion.div>
+        </header>
 
-              {/* 4 Feature Points */}
-              <div className="grid sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
-                  <span className="text-xs font-bold text-slate-900 block">Kiosk Mode Lockdown</span>
-                  <span className="text-xs text-slate-500">Android startLockTask() disables Home button, notification shade, and multitasking.</span>
-                </div>
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
-                  <span className="text-xs font-bold text-slate-900 block">Dynamic QR Handshake</span>
-                  <span className="text-xs text-slate-500">5-second rotating session tokens prevent credential sharing and replay attacks.</span>
-                </div>
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
-                  <span className="text-xs font-bold text-slate-900 block">Encrypted Local State</span>
-                  <span className="text-xs text-slate-500">Hive AES-256 caching saves student progress locally even during intermittent school Wi-Fi.</span>
-                </div>
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
-                  <span className="text-xs font-bold text-slate-900 block">Real-time Web Admin</span>
-                  <span className="text-xs text-slate-500">Teachers monitor active student status, question delivery, and automatic grading.</span>
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-100">
-                <button
-                  onClick={() => setSelectedProject(productionExperience)}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-all active:scale-95"
-                >
-                  <span>Read Full Technical Journal</span>
-                  <ArrowUpRight size={14} />
-                </button>
-
-                {productionExperience.url && (
-                  <a
-                    href={productionExperience.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold transition-colors"
-                  >
-                    <Download size={14} className="text-blue-600" />
-                    <span>Download Release APK</span>
-                  </a>
-                )}
-              </div>
+        {/* ============================================================ */}
+        {/* 02. EDITORIAL SPOTLIGHT: OKEY BIMBEL (LIVE PRODUCTION) */}
+        {/* ============================================================ */}
+        <section id="selected-works" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
+          <div className="space-y-16">
+            
+            {/* Section Tag */}
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
+                01 / Production Spotlight
+              </span>
+              <span className="text-xs font-mono text-slate-600">LIVE AT SCALE</span>
             </div>
 
-            {/* Right: Interface Image or Visual Preview */}
-            <div className="lg:col-span-5 relative group">
-              <div className="rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-100 aspect-video lg:aspect-square flex items-center justify-center relative">
-                {productionExperience.image ? (
-                  <img
-                    src={productionExperience.image}
-                    alt="Okey Bimbel CBT Interface"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <div className="p-8 text-center space-y-3">
-                    <Smartphone size={40} className="text-blue-600 mx-auto" />
-                    <span className="text-sm font-semibold text-slate-700 block">Okey Bimbel Mobile CBT</span>
+            {/* Giant Editorial Work Row */}
+            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+              
+              <div className="lg:col-span-6 space-y-8">
+                <div className="space-y-4">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                    <span>In Active School Operations</span>
                   </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                  <span className="text-xs font-semibold text-white">Click to View Architecture Details</span>
+
+                  <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black text-slate-900 tracking-tight leading-tight">
+                    Okey Bimbel CBT Ecosystem
+                  </h2>
+
+                  <p className="text-lg text-slate-600 font-normal leading-relaxed">
+                    Eliminating 100% of exam cheating vectors on Android. A mission-critical dual-platform architecture connecting locked mobile clients to a real-time web supervision dashboard.
+                  </p>
+                </div>
+
+                {/* Plain-English Technical Breakthroughs */}
+                <div className="space-y-4 pt-4 border-t border-slate-200">
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-bold text-slate-900">Surgical Kiosk Lock</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      MethodChannel calls Kotlin native <code className="text-blue-600 font-mono">startLockTask()</code> and <code className="text-blue-600 font-mono">FLAG_SECURE</code>, disabling multitasking, notifications, and screenshots.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-bold text-slate-900">Dynamic 5-Second QR Handshake</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      Rotating auth tokens invalidate shared screenshots, verifying physical presence in the examination room.
+                    </p>
+                  </div>
+
+                  <div className="space-y-1">
+                    <h3 className="text-sm font-bold text-slate-900">Offline-Tolerant Session Cache</h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      AES-256 encrypted local storage safely retains student answers during intermittent Wi-Fi drops, recovering instantly.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Stack & CTAs */}
+                <div className="space-y-6 pt-4">
+                  <div className="flex flex-wrap gap-2 text-xs font-mono text-slate-600">
+                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Flutter Mobile</span>
+                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Kotlin Native</span>
+                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Next.js 16</span>
+                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Firestore</span>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-4">
+                    <button
+                      onClick={() => setSelectedProject(productionExperience)}
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-sm active:scale-95"
+                    >
+                      <span>Read Full Architecture Journal</span>
+                      <ArrowUpRight size={14} />
+                    </button>
+
+                    {productionExperience.url && (
+                      <a
+                        href={productionExperience.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 hover:border-slate-900 text-slate-700 text-xs font-semibold tracking-wider uppercase transition-colors"
+                      >
+                        <Download size={14} className="text-blue-600" />
+                        <span>Download Release APK</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Visual Showcase Card */}
+              <div 
+                onClick={() => setSelectedProject(productionExperience)}
+                className="lg:col-span-6 rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl bg-slate-100 cursor-pointer group relative aspect-[4/3]"
+              >
+                <img
+                  src={productionExperience.image}
+                  alt="Okey Bimbel CBT Interface Preview"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                  <div className="text-white space-y-1">
+                    <span className="text-xs font-mono uppercase tracking-widest text-blue-300 block">Interactive Case Study</span>
+                    <span className="text-lg font-bold">Click to examine system architecture &amp; failure recovery logs &rarr;</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* 04. PROJECTS & CAPSTONES */}
-      <section id="projects" className="py-20 md:py-28 bg-white/50 border-t border-slate-200/80 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <motion.div className="flex flex-col md:flex-row md:items-end justify-between gap-6" {...fadeInUp}>
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
-                <Code2 size={14} />
-                <span>Curated Projects &amp; Capstones</span>
+        {/* ============================================================ */}
+        {/* 03. CURATED ARCHIVE & CAPSTONES */}
+        {/* ============================================================ */}
+        <section id="projects" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
+          <div className="space-y-16">
+            
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold block mb-1">
+                  02 / Capstones &amp; Engineering Lab
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-display font-black text-slate-900 tracking-tight">
+                  Selected Works
+                </h2>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight">
-                Architectural Work &amp; Research
+              <p className="text-xs font-mono text-slate-600 uppercase tracking-wider">
+                3 REPOSITORIES &amp; REAL PRODUCTS
+              </p>
+            </div>
+
+            {/* Editorial Showcase Rows */}
+            <div className="divide-y divide-slate-200/90">
+              {blueprints.map((item, idx) => (
+                <motion.article
+                  key={item.id}
+                  {...fadeIn}
+                  onClick={() => setSelectedProject(item as any)}
+                  className="py-12 md:py-16 grid lg:grid-cols-12 gap-8 lg:gap-12 items-baseline group cursor-pointer hover:bg-blue-50/30 transition-colors -mx-4 px-4 rounded-2xl"
+                >
+                  {/* Number & Meta */}
+                  <div className="lg:col-span-2 font-mono text-xs text-slate-600 space-y-1">
+                    <span className="text-base font-bold text-slate-900 block group-hover:text-blue-600 transition-colors">0{idx + 2}</span>
+                    <span className="uppercase tracking-wider">PROJECT</span>
+                  </div>
+
+                  {/* Title & Description */}
+                  <div className="lg:col-span-6 space-y-3">
+                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 group-hover:text-blue-600 transition-colors tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-base text-slate-600 font-normal leading-relaxed">
+                      {item.tagline}
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {item.tags.map((tag) => (
+                        <span key={tag} className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-600">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Right: Action & Repo */}
+                  <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col lg:items-end justify-between gap-4 self-center">
+                    <span className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 group-hover:translate-x-1 transition-transform tracking-wider uppercase font-mono">
+                      <span>Explore Architecture</span>
+                      <ArrowUpRight size={14} />
+                    </span>
+                    {item.links.repo && (
+                      <span className="text-xs font-mono text-slate-600 truncate max-w-[240px]">
+                        {item.links.repo.replace("https://github.com/", "gh/")}
+                      </span>
+                    )}
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 04. PHILOSOPHY & ENGINEERING MINDSET */}
+        {/* ============================================================ */}
+        <section id="philosophy" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
+          <div className="space-y-16">
+            
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
+                03 / Engineering Principles
+              </span>
+              <span className="text-xs font-mono text-slate-600">HOW I BUILD</span>
+            </div>
+
+            <div className="max-w-4xl space-y-6">
+              <h2 className="text-3xl sm:text-5xl font-display font-black text-slate-900 tracking-tight leading-tight">
+                &ldquo;Software should be surgically reliable under the hood, yet feel <span className="font-serif italic font-normal text-blue-600">calm and effortless</span> to experience.&rdquo;
               </h2>
             </div>
-            <p className="text-sm text-slate-600 max-w-md md:text-right leading-relaxed">
-              From on-device edge computer vision to conversational AI agents and unified barbershop platforms.
-            </p>
-          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {blueprints.map((project) => (
-              <ProjectLabCard
-                key={project.id}
-                project={project}
-                onOpenDetails={() => setSelectedProject(project as any)}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 05. TECHNICAL CAPABILITIES (CLEAR & READABLE) */}
-      <section id="skills" className="py-20 md:py-28 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <motion.div className="space-y-3 text-center max-w-2xl mx-auto" {...fadeInUp}>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
-              <Cpu size={14} />
-              <span>Technical Arsenal</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-display tracking-tight">
-              Technologies &amp; Engineering Skills
-            </h2>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Curated tools I utilize daily to build high-performance mobile clients and scalable web backends.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {exploredTools.map((group, idx) => (
-              <motion.div
-                key={group.category}
-                className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xs space-y-4"
-                {...fadeInUp}
-              >
-                <div className="space-y-1">
-                  <span className="text-[11px] font-mono text-blue-600 font-bold">0{idx + 1}</span>
-                  <h3 className="text-base font-bold text-slate-900 font-display">{group.category}</h3>
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {group.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-50 text-slate-700 border border-slate-200/70"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 06. EXPERIENCE & MENTORING (HUMAN STORY) */}
-      <section id="experience" className="py-20 md:py-28 bg-white/50 border-t border-slate-200/80 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <motion.div className="space-y-3 text-left" {...fadeInUp}>
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
-              <CheckCircle2 size={14} />
-              <span>Work &amp; Mentorship</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-display tracking-tight">
-              Experience Timeline
-            </h2>
-          </motion.div>
-
-          <div className="space-y-8 max-w-4xl">
-            {engineeringJourney.map((item, i) => (
-              <motion.div
-                key={i}
-                className="relative pl-8 md:pl-10 border-l-2 border-blue-200 space-y-2 group"
-                {...fadeInUp}
-              >
-                <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-white border-4 border-blue-600 group-hover:scale-125 transition-transform" />
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="text-lg md:text-xl font-bold text-slate-900">
-                    {item.role} <span className="text-blue-600">@</span> {item.location}
-                  </h3>
-                  <span className="text-xs font-semibold font-mono text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
-                    {item.period}
-                  </span>
-                </div>
-                <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                  {item.description}
+            <div className="grid md:grid-cols-3 gap-8 pt-8 border-t border-slate-200">
+              <div className="space-y-3">
+                <span className="text-xs font-mono font-bold text-blue-600">[01] NATIVE FIRST</span>
+                <h3 className="text-lg font-bold text-slate-900">Hardware &amp; OS Control</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  When standard web platforms fall short of security or real-time performance, I drop into native Kotlin APIs to control window flags, process priority, and kiosk modes.
                 </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+              </div>
 
-      {/* 07. CONTACT & CONNECT */}
-      <section id="contact" className="py-24 md:py-32 relative z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10">
-          
-          <motion.div className="space-y-4" {...fadeInUp}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold">
-              <MessageSquare size={13} className="text-blue-600" />
-              <span>Get In Touch</span>
+              <div className="space-y-3">
+                <span className="text-xs font-mono font-bold text-blue-600">[02] DECOUPLED ARCHITECTURE</span>
+                <h3 className="text-lg font-bold text-slate-900">Clean Domain Boundaries</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  I isolate state management (BLoC/Riverpod) from UI layers. Codebases are organized so changes in cloud databases never cascade into breaking UI rendering.
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <span className="text-xs font-mono font-bold text-blue-600">[03] DETERMINISTIC INTELLIGENCE</span>
+                <h3 className="text-lg font-bold text-slate-900">Practical On-Device &amp; Agent AI</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">
+                  From running MediaPipe Face Mesh on Dart background Isolates to building WhatsApp agents with structured tool-calling, I focus on AI that solves tangible operational problems.
+                </p>
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
-              Let&apos;s build something great together.
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 05. TECHNICAL INDEX / CAPABILITIES */}
+        {/* ============================================================ */}
+        <section id="index" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
+          <div className="space-y-16">
+            
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
+                04 / Technical Index
+              </span>
+              <span className="text-xs font-mono text-slate-600">CAPABILITIES &amp; STACK</span>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {exploredTools.map((category, i) => (
+                <div key={category.category} className="space-y-4">
+                  <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+                    <span className="text-xs font-mono font-bold text-blue-600">0{i+1}</span>
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900">{category.category}</h3>
+                  </div>
+                  <ul className="space-y-2">
+                    {category.technologies.map((tech) => (
+                      <li key={tech} className="text-sm text-slate-600 flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-slate-300" />
+                        <span>{tech}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 06. CAREER & MENTORING TIMELINE */}
+        {/* ============================================================ */}
+        <section id="experience" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
+          <div className="space-y-16">
+            
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
+                05 / Career Chronicle
+              </span>
+              <span className="text-xs font-mono text-slate-600">PRODUCTION &amp; MENTORSHIP</span>
+            </div>
+
+            <div className="divide-y divide-slate-200">
+              {engineeringJourney.map((entry, i) => (
+                <div key={i} className="py-8 grid md:grid-cols-12 gap-6 items-baseline">
+                  <div className="md:col-span-3 font-mono text-xs text-blue-600 font-bold">
+                    {entry.period}
+                  </div>
+                  <div className="md:col-span-4 space-y-1">
+                    <h3 className="text-lg font-bold text-slate-900">{entry.role}</h3>
+                    <span className="text-xs font-mono text-slate-600">{entry.location}</span>
+                  </div>
+                  <div className="md:col-span-5 text-sm text-slate-600 leading-relaxed">
+                    {entry.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 07. CONTACT / CALL TO ACTION (AWWWARDS EDITORIAL FINALE) */}
+        {/* ============================================================ */}
+        <section id="contact" className="py-32 md:py-48 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto text-left">
+          <div className="space-y-12 max-w-4xl">
+            <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold block">
+              06 / Get In Touch
+            </span>
+
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-display font-black text-slate-900 tracking-tight leading-[1.05]">
+              Let&apos;s build something <span className="font-serif italic font-normal text-blue-600">meaningful</span> together.
             </h2>
-            <p className="text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
-              I&apos;m actively open to junior/mid-level software engineering roles, mobile contract projects, and team collaborations. Feel free to reach out directly.
+
+            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl font-normal">
+              Whether you have an open software engineering role, a mobile app in need of performance engineering, or an ambitious product idea — my inbox is always open.
             </p>
-          </motion.div>
 
-          {/* Contact Methods */}
-          <motion.div 
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4"
-            {...fadeInUp}
-          >
-            <a
-              href="mailto:irsydfchrynto@gmail.com"
-              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <Mail size={18} />
-              </div>
-              <span className="text-xs font-bold text-slate-900">Email</span>
-              <span className="text-[11px] text-slate-500 truncate max-w-full">irsydfchrynto@gmail.com</span>
-            </a>
+            {/* Giant Clickable Email */}
+            <div className="pt-4">
+              <a
+                href="mailto:irsydfchrynto@gmail.com"
+                className="group inline-flex items-center gap-4 text-2xl sm:text-4xl md:text-5xl font-display font-black text-slate-900 hover:text-blue-600 transition-colors border-b-2 border-slate-300 hover:border-blue-600 pb-2"
+              >
+                <span>irsydfchrynto@gmail.com</span>
+                <ArrowUpRight size={32} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
+              </a>
+            </div>
 
-            <a
-              href="https://linkedin.com/in/mirsydfchrynto"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <LinkedInIcon size={18} />
-              </div>
-              <span className="text-xs font-bold text-slate-900">LinkedIn</span>
-              <span className="text-[11px] text-slate-500">/in/mirsydfchrynto</span>
-            </a>
+            {/* Minimalist Social Links */}
+            <div className="pt-10 flex flex-wrap gap-8 text-xs font-mono uppercase tracking-widest text-slate-600 font-semibold">
+              <a 
+                href="https://linkedin.com/in/mirsydfchrynto" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors flex items-center gap-1.5"
+              >
+                <LinkedInIcon size={14} />
+                <span>LinkedIn</span>
+              </a>
+              <a 
+                href="https://wa.me/6285865826621" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors flex items-center gap-1.5"
+              >
+                <WhatsAppIcon size={14} />
+                <span>WhatsApp</span>
+              </a>
+              <a 
+                href="https://github.com/mirsydfchrynto" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors flex items-center gap-1.5"
+              >
+                <GitHubIcon size={14} />
+                <span>GitHub</span>
+              </a>
+              <a 
+                href="https://instagram.com/muhammadirsyadf" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-blue-600 transition-colors"
+              >
+                Instagram
+              </a>
+            </div>
+          </div>
+        </section>
 
-            <a
-              href="https://wa.me/6285865826621"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <WhatsAppIcon size={18} />
-              </div>
-              <span className="text-xs font-bold text-slate-900">WhatsApp</span>
-              <span className="text-[11px] text-slate-500">+62 858-6582-6621</span>
-            </a>
+        {/* ============================================================ */}
+        {/* FOOTER */}
+        {/* ============================================================ */}
+        <footer className="py-12 border-t border-slate-200 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-600">
+          <div>
+            M. Irsyad Fachryanto &copy; 2026 // Craftsmanship &amp; Architectural Integrity
+          </div>
+          <div className="flex items-center gap-4">
+            <span>Next.js 16 · Three.js · Flutter · Kotlin</span>
+            <a href="#" className="text-blue-600 hover:underline">Back to top ↑</a>
+          </div>
+        </footer>
 
-            <a
-              href="https://github.com/mirsydfchrynto"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
-            >
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                <GitHubIcon size={18} />
-              </div>
-              <span className="text-xs font-bold text-slate-900">GitHub</span>
-              <span className="text-[11px] text-slate-500">@mirsydfchrynto</span>
-            </a>
-          </motion.div>
-        </div>
-      </section>
+      </div>
 
-      {/* FOOTER */}
-      <footer className="py-12 border-t border-slate-200/80 text-center relative z-10 bg-white/60">
-        <div className="text-xs text-slate-500">
-          M. Irsyad Fachryanto &copy; 2026 · Built with Flutter, Kotlin Native &amp; Next.js expertise.
-        </div>
-      </footer>
-
-      {/* MODAL */}
+      {/* CASE STUDY MODAL */}
       <ProjectDetailsModal
         project={selectedProject}
         isOpen={!!selectedProject}

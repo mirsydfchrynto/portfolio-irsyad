@@ -4,6 +4,7 @@
   --font-sans: "Inter", var(--font-inter), ui-sans-serif, system-ui;
   --font-display: "Space Grotesk", var(--font-space-grotesk), sans-serif;
   --font-mono: "JetBrains Mono", var(--font-jetbrains-mono), monospace;
+  --font-serif: "Newsreader", var(--font-serif), Georgia, serif;
 }
 
 :root {

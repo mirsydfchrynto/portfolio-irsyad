@@ -225,6 +225,11 @@ export function ThreeFluidWave({ className = "" }: ThreeFluidWaveProps) {
         cleanup = initThreeWave();
       } catch (err) {
         console.warn("Three.js WebGL fallback triggered:", err);
+        if (container) {
+          while (container.firstChild) {
+            container.removeChild(container.firstChild);
+          }
+        }
         cleanup = init2DWaveFallback();
       }
     } else {

@@ -18,11 +18,11 @@ export function Navbar() {
   }, []);
 
   const links = [
-    { name: "Production Work", href: "#production-work" },
-    { name: "Projects & Capstones", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" },
+    { name: "Spotlight", href: "#selected-works" },
+    { name: "Works", href: "#projects" },
+    { name: "Philosophy", href: "#philosophy" },
+    { name: "Index", href: "#index" },
+    { name: "Chronicle", href: "#experience" },
   ];
 
   return (
