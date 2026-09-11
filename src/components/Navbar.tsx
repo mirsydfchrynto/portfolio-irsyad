@@ -48,12 +48,12 @@ export function Navbar() {
               aria-label="Home"
             >
               <div className="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/20 group-hover:scale-105 transition-transform">
-                <span className="font-mono text-xs font-black">IF</span>
+                <span className="font-mono text-xs font-black tracking-tight">MIF</span>
               </div>
-              <div className="flex items-baseline gap-1">
-                <span className="font-display font-bold text-slate-900 text-sm sm:text-base tracking-tight">
-                  Muhammad Irsyad Fachryanto
-                </span>
+              <div className="flex items-center gap-2 text-xs font-mono text-slate-600 font-medium">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="hidden sm:inline">Available for work</span>
+                <span className="sm:hidden font-bold text-slate-900">MIF</span>
               </div>
             </a>
 

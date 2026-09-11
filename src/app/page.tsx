@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ThreeFluidWave } from "@/components/ThreeFluidWave";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
-import { InteractiveDevicePreview } from "@/components/InteractiveDevicePreview";
 import { 
   productionExperience, 
   blueprints, 
@@ -27,7 +26,14 @@ import {
   Layers,
   Sparkles,
   CheckCircle2,
-  Mail
+  ShieldCheck,
+  Zap,
+  Lock,
+  Eye,
+  Scissors,
+  QrCode,
+  WifiOff,
+  Database
 } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/SocialIcons";
 
@@ -35,7 +41,6 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [activeProjectTab, setActiveProjectTab] = useState(0);
 
   const handleDownload = () => {
     setDownloading(true);
@@ -48,111 +53,50 @@ export default function Home() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // Projects list for the interactive phone showcase
-  const showcaseProjects = [
-    {
-      title: "Okey Bimbel CBT (Exam App)",
-      tagline: "Android exam app that completely blocks cheating.",
-      whatItIs: "An exam app for schools that locks students' phones into kiosk mode so they cannot switch apps, open Google, or take screenshots during tests.",
-      highlights: [
-        "Hardware Kiosk Lock: Android OS disables home button, split screen, and notifications.",
-        "Anti-Cheat QR: 5-second rotating QR code on teacher's screen to join exam.",
-        "Offline-Safe: Wi-Fi disconnects do not lose answers; everything syncs back automatically."
-      ],
-      stack: ["Flutter", "Kotlin Native", "Next.js", "Firestore"],
-      data: productionExperience,
-      repo: (productionExperience as any).url,
-      apk: (productionExperience as any).url,
-    },
-    {
-      title: "Geges Smart Barber",
-      tagline: "All-in-one barbershop app with live queue tracking.",
-      whatItIs: "A complete mobile app for barbershop customers to take queue numbers from home, see live wait times, book their favorite barber, and buy styling products.",
-      highlights: [
-        "Live Queue: See current haircut number and estimated waiting time in minutes.",
-        "Fair Barber Allocation: Algorithm balances customer assignments among active barbers.",
-        "Integrated Store: Buy pomade and hair care products directly in-app."
-      ],
-      stack: ["Flutter", "Clean Architecture", "Firestore", "React Admin"],
-      data: blueprints[0],
-      repo: blueprints[0].links.repo,
-      apk: "",
-    },
-    {
-      title: "VisionSafe (Eye Guardian)",
-      tagline: "Smart eye protector that blurs screen when held too close.",
-      whatItIs: "An on-device health app that uses camera AI to calculate the distance between your eyes and the phone. If you hold the screen closer than 30cm, it gently blurs the screen until you move back.",
-      highlights: [
-        "100% On-Device AI: MediaPipe Face Mesh runs locally on your phone CPU.",
-        "Zero Privacy Risk: Camera stream never leaves your phone and is never uploaded.",
-        "Gentle Reminder: Gaussian blur stops screen fatigue without sudden shutdowns."
-      ],
-      stack: ["Flutter", "MediaPipe AI", "Android Kotlin", "Edge AI"],
-      data: blueprints[1],
-      repo: blueprints[1].links.repo,
-      apk: "",
-    },
-    {
-      title: "Febrian Barbershop AI Bot",
-      tagline: "24/7 WhatsApp AI assistant automating haircut bookings.",
-      whatItIs: "An AI chatbot connected to WhatsApp for a local barbershop. It answers price questions, checks available time slots, and records haircut bookings into the database automatically.",
-      highlights: [
-        "Fast AI Response: Powered by Groq Llama 3.3 70B with sub-400ms turnaround.",
-        "Database Tool Calling: Automatically checks and saves bookings to SQLite.",
-        "24/7 Active: Barbers never miss customer inquiries while busy cutting hair."
-      ],
-      stack: ["TypeScript", "Groq Llama 3.3", "WhatsApp API", "SQLite"],
-      data: blueprints[2],
-      repo: blueprints[2].links.repo,
-      apk: "",
-    },
-  ];
-
-  const currentShowcase = showcaseProjects[activeProjectTab];
-
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative">
       <Navbar />
 
-      {/* Subtle background ambient wave */}
+      {/* ThreeUI-inspired Ambient Fluid Canvas */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <ThreeFluidWave className="opacity-50" />
+        <ThreeFluidWave className="opacity-55" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* ============================================================ */}
-        {/* 1. HERO SECTION (HONEST, CLEAR, DIRECT) */}
+        {/* 1. HERO SECTION (AUTHORITATIVE, HONEST, CLEAN) */}
         {/* ============================================================ */}
-        <header className="min-h-[85vh] flex flex-col justify-center pt-28 pb-16">
+        <header className="min-h-[88vh] flex flex-col justify-center pt-28 pb-16">
           <div className="space-y-6 max-w-4xl">
             
-            {/* Status Badge */}
+            {/* Status Pill */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-xs font-semibold text-blue-700">
               <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span>Available for Full-Time Roles · Remote / Anywhere</span>
+              <span>Full-Stack &amp; Mobile Software Developer</span>
             </div>
 
-            {/* Name & Headline */}
+            {/* Grand Authoritative Name */}
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold text-slate-900 tracking-tight leading-[1.1]">
-              Hi, I&apos;m <span className="text-blue-600">Muhammad Irsyad Fachryanto</span>.
+              Muhammad Irsyad Fachryanto
             </h1>
 
+            {/* Simple, Clear, Direct Bio */}
             <p className="text-xl sm:text-2xl text-slate-700 font-normal leading-relaxed">
-              I&apos;m a software developer specializing in <strong className="text-slate-900 font-semibold">Flutter &amp; Android (Kotlin)</strong> mobile apps, modern <strong className="text-slate-900 font-semibold">Next.js</strong> web applications, and practical <strong className="text-slate-900 font-semibold">AI tools</strong>.
+              I build reliable mobile applications with <strong className="text-slate-900 font-semibold">Flutter &amp; Android (Kotlin)</strong>, modern web platforms with <strong className="text-slate-900 font-semibold">Next.js</strong>, and practical <strong className="text-slate-900 font-semibold">AI assistants</strong>.
             </p>
 
             <p className="text-base sm:text-lg text-slate-600 font-normal max-w-2xl leading-relaxed">
-              Based in Indonesia. I focus on building reliable software with clean architecture, strong security under the hood, and intuitive user experiences.
+              Based in Indonesia. Focused on production stability, OS-level hardware security, and clear user experiences that solve real daily problems.
             </p>
 
-            {/* Action Buttons */}
+            {/* CTAs */}
             <div className="flex flex-wrap items-center gap-4 pt-4">
               <a
-                href="#interactive-showcase"
+                href="#projects"
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white hover:bg-blue-600 text-sm font-semibold transition-all shadow-sm active:scale-95"
               >
-                <span>Try Interactive Apps</span>
+                <span>Explore Selected Works</span>
                 <ArrowDown size={16} />
               </a>
 
@@ -163,7 +107,7 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl border border-slate-300 hover:border-slate-900 bg-white text-slate-800 text-sm font-semibold transition-all shadow-xs"
               >
                 <Download size={16} className="text-blue-600" />
-                <span>{downloading ? "Downloading..." : "Download Resume (CV)"}</span>
+                <span>{downloading ? "Downloading..." : "Curriculum Vitae (PDF)"}</span>
               </a>
 
               <button
@@ -175,7 +119,7 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Direct Social Links */}
+            {/* Quick Links */}
             <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200 text-xs font-semibold uppercase tracking-wider text-slate-600">
               <a 
                 href="https://wa.me/6285865826621" 
@@ -210,201 +154,379 @@ export default function Home() {
         </header>
 
         {/* ============================================================ */}
-        {/* 2. INTERACTIVE LIVE PHONE SHOWCASE (FUN, VISUAL, ZERO FLUFF) */}
+        {/* 2. SELECTED WORKS (THREEUI & ACETERNITY BENTO GRID) */}
         {/* ============================================================ */}
-        <section id="interactive-showcase" className="py-20 border-t border-slate-200">
+        <section id="projects" className="py-20 border-t border-slate-200">
           <div className="space-y-12">
             
-            {/* Header */}
-            <div className="space-y-2 max-w-2xl">
-              <div className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600">
-                Interactive Showcase
+            {/* Section Heading */}
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
+              <div>
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 block mb-1">
+                  Selected Works
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-display font-black text-slate-900 tracking-tight">
+                  Real Projects &amp; Products
+                </h2>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-black text-slate-900 tracking-tight">
-                Try the apps directly on the screen.
-              </h2>
-              <p className="text-base text-slate-600 font-normal">
-                Click the tabs or tap buttons on the phone to see how each project actually works in real life.
+              <p className="text-xs font-mono text-slate-500 uppercase">
+                4 CORE CODEBASES &amp; SYSTEMS
               </p>
             </div>
 
-            {/* Two Column Showcase Layout */}
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* ThreeUI-Style Bento Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
               
-              {/* Left Column: Clear Honest Details */}
-              <div className="lg:col-span-6 space-y-6">
-                
-                <div className="space-y-2">
-                  <div className="text-xs font-mono font-semibold text-blue-600 uppercase">
-                    PROJECT 0{activeProjectTab + 1} OF 04
+              {/* ======================================================= */}
+              {/* BENTO CARD 1: OKEY BIMBEL CBT (LARGE FEATURED HERO CARD) */}
+              {/* ======================================================= */}
+              <motion.div 
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="lg:col-span-12 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 hover:border-blue-500/80 transition-all shadow-sm space-y-8 relative overflow-hidden"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-xs font-bold font-mono uppercase tracking-wider text-emerald-700">
+                      Live in Active School Operations
+                    </span>
                   </div>
-                  <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight">
-                    {currentShowcase.title}
-                  </h3>
-                  <p className="text-base font-semibold text-slate-700">
-                    {currentShowcase.tagline}
-                  </p>
-                </div>
-
-                {/* What it is */}
-                <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-xs space-y-1">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-800 block">
-                    What It Does:
+                  <span className="text-xs font-mono text-slate-400">
+                    FEATURED PRODUCTION SYSTEM
                   </span>
-                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                    {currentShowcase.whatItIs}
-                  </p>
                 </div>
 
-                {/* How it solves problems */}
-                <div className="space-y-2.5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-slate-800 block">
-                    Key Features:
-                  </span>
-                  <ul className="space-y-2 text-sm text-slate-600 font-normal">
-                    {currentShowcase.highlights.map((h, i) => (
-                      <li key={i} className="flex items-start gap-2.5">
-                        <CheckCircle2 size={16} className="text-blue-600 shrink-0 mt-0.5" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <div className="grid md:grid-cols-12 gap-8 items-start">
+                  
+                  {/* Left: Summary */}
+                  <div className="md:col-span-7 space-y-4">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-black text-slate-900 tracking-tight">
+                      Okey Bimbel CBT Ecosystem
+                    </h3>
+                    <p className="text-base sm:text-lg font-medium text-blue-600">
+                      High-integrity digital exam platform that completely prevents student cheating on Android devices.
+                    </p>
+                    <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+                      Built for schools to turn regular student phones and tablets into locked test terminals. Students cannot open Google, switch apps, or screenshot questions, while teachers track student progress and scoring live from a web portal.
+                    </p>
 
-                {/* Stack Tags */}
-                <div className="space-y-2 pt-2">
-                  <div className="flex flex-wrap gap-2">
-                    {currentShowcase.stack.map((tech) => (
-                      <span 
-                        key={tech}
-                        className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs font-medium text-slate-700"
-                      >
-                        {tech}
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      <span className="px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-mono font-medium border border-blue-100">
+                        Flutter Mobile
                       </span>
-                    ))}
+                      <span className="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-mono font-medium">
+                        Kotlin Native (Kiosk Mode)
+                      </span>
+                      <span className="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-mono font-medium">
+                        Next.js Supervisor Portal
+                      </span>
+                      <span className="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-mono font-medium">
+                        Firebase Firestore
+                      </span>
+                    </div>
                   </div>
+
+                  {/* Right: 3 Concrete Solutions */}
+                  <div className="md:col-span-5 space-y-3.5 bg-slate-50/80 p-6 rounded-2xl border border-slate-200/80">
+                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-slate-700">
+                      Key Technical Breakthroughs:
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <Lock size={16} className="text-blue-600 shrink-0 mt-0.5" />
+                        <div className="text-xs text-slate-700 leading-relaxed">
+                          <strong className="text-slate-900 block font-semibold">OS-Level Kiosk Lock:</strong>
+                          Calls native Kotlin <code className="text-blue-600">startLockTask()</code> and <code className="text-blue-600">FLAG_SECURE</code> to block multitasking and screenshots.
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3">
+                        <QrCode size={16} className="text-blue-600 shrink-0 mt-0.5" />
+                        <div className="text-xs text-slate-700 leading-relaxed">
+                          <strong className="text-slate-900 block font-semibold">5-Second Dynamic QR Code:</strong>
+                          Rotating token on teacher&apos;s screen ensures physical classroom presence and prevents sharing.
+                        </div>
+                      </div>
+
+                      <div className="flex items-start gap-3">
+                        <WifiOff size={16} className="text-blue-600 shrink-0 mt-0.5" />
+                        <div className="text-xs text-slate-700 leading-relaxed">
+                          <strong className="text-slate-900 block font-semibold">Offline-Safe Local Cache:</strong>
+                          AES-256 encrypted storage safely preserves answers during Wi-Fi drops, recovering automatically.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-200">
+                {/* Bottom Action Row */}
+                <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-slate-100">
                   <button
-                    onClick={() => setSelectedProject(currentShowcase.data)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-sm active:scale-95"
+                    onClick={() => setSelectedProject(productionExperience)}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-sm active:scale-95"
                   >
                     <span>Read Architecture Case Study</span>
                     <ArrowUpRight size={14} />
                   </button>
 
-                  {currentShowcase.repo && (
+                  {productionExperience.url && (
                     <a
-                      href={currentShowcase.repo}
+                      href={productionExperience.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 hover:border-slate-900 text-slate-700 text-xs font-semibold tracking-wider uppercase transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-slate-300 hover:border-slate-900 bg-white text-slate-700 text-xs font-semibold tracking-wider uppercase transition-colors"
                     >
-                      <GitHubIcon size={14} />
-                      <span>GitHub</span>
+                      <Download size={14} className="text-blue-600" />
+                      <span>Download Release APK</span>
                     </a>
                   )}
                 </div>
+              </motion.div>
 
-              </div>
+              {/* ======================================================= */}
+              {/* BENTO CARD 2: GEGES SMART BARBER (CAPSTONE 1) */}
+              {/* ======================================================= */}
+              <motion.div 
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 hover:border-blue-400 transition-all shadow-sm space-y-6 flex flex-col justify-between"
+              >
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center text-xs font-mono">
+                    <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-100">
+                      CAPSTONE 1
+                    </span>
+                    <span className="text-slate-400">BUSINESS ECOSYSTEM</span>
+                  </div>
 
-              {/* Right Column: The Interactive Phone */}
-              <div className="lg:col-span-6 flex justify-center">
-                <InteractiveDevicePreview
-                  activeTab={activeProjectTab}
-                  onTabChange={(idx) => setActiveProjectTab(idx)}
-                />
-              </div>
+                  <h3 className="text-2xl font-display font-bold text-slate-900">
+                    Geges Smart Barber
+                  </h3>
 
-            </div>
+                  <p className="text-sm font-semibold text-blue-600">
+                    All-in-one barbershop app with live queue tracking and fair barber workload balancing.
+                  </p>
 
-          </div>
-        </section>
+                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                    Eliminates crowded barbershop waiting rooms. Customers can check live wait times and take queue numbers from home, book preferred barbers, and purchase grooming products directly in-app.
+                  </p>
 
-        {/* ============================================================ */}
-        {/* 3. ALL PROJECTS (CLEAN GRID, NO DUPLICATE FLUFF) */}
-        {/* ============================================================ */}
-        <section id="projects" className="py-20 border-t border-slate-200">
-          <div className="space-y-12">
-            
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
-              <div>
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-600 block mb-1">
-                  Portfolio Index
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-display font-black text-slate-900 tracking-tight">
-                  Selected Projects
-                </h2>
-              </div>
-              <p className="text-xs font-mono text-slate-500 uppercase">
-                4 REAL PROJECTS
-              </p>
-            </div>
+                  <div className="space-y-2 pt-2 border-t border-slate-100">
+                    <div className="text-xs font-mono font-semibold text-slate-700">Highlights:</div>
+                    <ul className="space-y-1.5 text-xs text-slate-600">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-blue-600 shrink-0" />
+                        <span>Real-time digital queue with live waiting time estimates</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-blue-600 shrink-0" />
+                        <span>Fair-Work distribution algorithm balancing haircut turns among barbers</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-blue-600 shrink-0" />
+                        <span>Clean Architecture with isolated BLoC state management</span>
+                      </li>
+                    </ul>
+                  </div>
 
-            {/* Clean 4-Card Grid */}
-            <div className="grid md:grid-cols-2 gap-8">
-              {showcaseProjects.map((p, idx) => (
-                <div 
-                  key={p.title}
-                  className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 hover:border-blue-400 transition-all space-y-6 shadow-xs flex flex-col justify-between"
-                >
-                  <div className="space-y-4">
-                    <div className="flex justify-between items-center text-xs font-mono">
-                      <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-100">
-                        PROJ 0{idx + 1}
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {blueprints[0].tags.map((t) => (
+                      <span key={t} className="px-2.5 py-0.5 rounded-md bg-slate-100 text-xs font-mono text-slate-600">
+                        {t}
                       </span>
-                      <span className="text-slate-500">{p.stack[0]}</span>
-                    </div>
+                    ))}
+                  </div>
+                </div>
 
-                    <h3 className="text-2xl font-display font-bold text-slate-900">
-                      {p.title}
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <button
+                    onClick={() => setSelectedProject(blueprints[0])}
+                    className="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                  >
+                    <span>View Case Study</span>
+                    <ArrowUpRight size={14} />
+                  </button>
+
+                  <a
+                    href={blueprints[0].links.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono text-slate-500 hover:text-slate-900 flex items-center gap-1"
+                  >
+                    <GitHubIcon size={13} />
+                    <span>GitHub Code</span>
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* ======================================================= */}
+              {/* BENTO CARD 3: VISIONSAFE (CAPSTONE 2) */}
+              {/* ======================================================= */}
+              <motion.div 
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 hover:border-blue-400 transition-all shadow-sm space-y-6 flex flex-col justify-between"
+              >
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center text-xs font-mono">
+                    <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-100">
+                      CAPSTONE 2
+                    </span>
+                    <span className="text-slate-400">EDGE AI / HEALTH TECH</span>
+                  </div>
+
+                  <h3 className="text-2xl font-display font-bold text-slate-900">
+                    VisionSafe
+                  </h3>
+
+                  <p className="text-sm font-semibold text-blue-600">
+                    Smart eye guardian: automatically blurs phone screen when held dangerously close.
+                  </p>
+
+                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                    Protects children and heavy phone users from screen fatigue and myopia. Uses front camera AI to measure eye-to-screen distance; if held closer than 30cm, it gently blurs the screen until you back away—zero cloud upload.
+                  </p>
+
+                  <div className="space-y-2 pt-2 border-t border-slate-100">
+                    <div className="text-xs font-mono font-semibold text-slate-700">Highlights:</div>
+                    <ul className="space-y-1.5 text-xs text-slate-600">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-blue-600 shrink-0" />
+                        <span>MediaPipe Face Mesh calculating 3D Z-depth coordinates</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-blue-600 shrink-0" />
+                        <span>100% private on-device processing in isolated Dart thread</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle2 size={13} className="text-blue-600 shrink-0" />
+                        <span>Dynamic frame sampling loop to preserve Android battery life</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {blueprints[1].tags.map((t) => (
+                      <span key={t} className="px-2.5 py-0.5 rounded-md bg-slate-100 text-xs font-mono text-slate-600">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <button
+                    onClick={() => setSelectedProject(blueprints[1])}
+                    className="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                  >
+                    <span>View Case Study</span>
+                    <ArrowUpRight size={14} />
+                  </button>
+
+                  <a
+                    href={blueprints[1].links.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono text-slate-500 hover:text-slate-900 flex items-center gap-1"
+                  >
+                    <GitHubIcon size={13} />
+                    <span>GitHub Code</span>
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* ======================================================= */}
+              {/* BENTO CARD 4: FEBRIAN BARBERSHOP AI AGENT */}
+              {/* ======================================================= */}
+              <motion.div 
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="lg:col-span-12 bg-white rounded-3xl p-8 sm:p-10 border border-slate-200 hover:border-blue-400 transition-all shadow-sm space-y-6"
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                  <div className="flex items-center gap-2">
+                    <Bot size={16} className="text-blue-600" />
+                    <span className="text-xs font-bold font-mono uppercase tracking-wider text-blue-600">
+                      Autonomous WhatsApp Agent
+                    </span>
+                  </div>
+                  <span className="text-xs font-mono text-slate-400">
+                    GROQ LLAMA 3.3 70B · SUB-400MS
+                  </span>
+                </div>
+
+                <div className="grid md:grid-cols-12 gap-8 items-start">
+                  <div className="md:col-span-7 space-y-3">
+                    <h3 className="text-2xl sm:text-3xl font-display font-black text-slate-900">
+                      Febrian Barbershop AI Agent
                     </h3>
-
-                    <p className="text-sm text-slate-600 leading-relaxed font-normal">
-                      {p.whatItIs}
+                    <p className="text-base font-semibold text-blue-600">
+                      24/7 WhatsApp AI concierge automating customer appointment bookings and walk-in logging.
                     </p>
-
-                    <div className="flex flex-wrap gap-1.5 pt-2">
-                      {p.stack.map((s) => (
-                        <span key={s} className="px-2.5 py-0.5 rounded-md bg-slate-100 text-xs font-mono text-slate-600">
-                          {s}
+                    <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                      Deployed for Febrian Barbershop. It chats with clients on WhatsApp, answers pricelist queries, verifies available barber slots, and writes confirmed bookings into a persistent SQLite database so barbers never miss calls during busy haircut sessions.
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {blueprints[2].tags.map((t) => (
+                        <span key={t} className="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-mono font-medium">
+                          {t}
                         </span>
                       ))}
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <button
-                      onClick={() => setSelectedProject(p.data)}
-                      className="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
-                    >
-                      <span>View Details</span>
-                      <ArrowUpRight size={14} />
-                    </button>
-
-                    {p.repo && (
-                      <a
-                        href={p.repo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs font-mono text-slate-500 hover:text-slate-900 flex items-center gap-1"
-                      >
-                        <GitHubIcon size={13} />
-                        <span>Source</span>
-                      </a>
-                    )}
+                  <div className="md:col-span-5 space-y-3 bg-slate-50/80 p-5 rounded-2xl border border-slate-200/80 text-xs">
+                    <div className="font-mono font-bold uppercase tracking-wider text-slate-700">
+                      Technical Implementation:
+                    </div>
+                    <ul className="space-y-2 text-slate-600">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 size={14} className="text-blue-600 shrink-0 mt-0.5" />
+                        <span>Structured LLM function calling to commit validated booking records</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 size={14} className="text-blue-600 shrink-0 mt-0.5" />
+                        <span>Multi-file WhatsApp socket authentication with auto-reconnect logic</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 size={14} className="text-blue-600 shrink-0 mt-0.5" />
+                        <span>Sub-second response turnarounds powered by Groq fast inference</span>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              ))}
+
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <button
+                    onClick={() => setSelectedProject(blueprints[2])}
+                    className="text-xs font-semibold text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                  >
+                    <span>View Case Study</span>
+                    <ArrowUpRight size={14} />
+                  </button>
+
+                  <a
+                    href={blueprints[2].links.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-mono text-slate-500 hover:text-slate-900 flex items-center gap-1"
+                  >
+                    <GitHubIcon size={13} />
+                    <span>GitHub Code</span>
+                  </a>
+                </div>
+              </motion.div>
+
             </div>
 
           </div>
         </section>
 
         {/* ============================================================ */}
-        {/* 4. SKILLS & TOOLS (HONEST & PRACTICAL) */}
+        {/* 3. SKILLS & TECHNOLOGIES (PRACTICAL MATRIX) */}
         {/* ============================================================ */}
         <section id="skills" className="py-20 border-t border-slate-200">
           <div className="space-y-12">
@@ -419,7 +541,7 @@ export default function Home() {
                 </h2>
               </div>
               <p className="text-xs font-mono text-slate-500 uppercase">
-                TOOLS USED IN REAL PROJECTS
+                TOOLS USED IN REAL PRODUCTION &amp; LAB
               </p>
             </div>
 
@@ -427,7 +549,7 @@ export default function Home() {
               {[
                 {
                   title: "Mobile Development",
-                  items: ["Flutter SDK", "Dart", "Android (Kotlin)", "Kiosk Mode (startLockTask)", "MethodChannel", "Riverpod", "Hive Cache"]
+                  items: ["Flutter SDK", "Dart", "Android (Kotlin Native)", "Kiosk Mode (startLockTask)", "MethodChannel", "Riverpod", "Hive Cache"]
                 },
                 {
                   title: "Web & Full-Stack",
@@ -439,7 +561,7 @@ export default function Home() {
                 },
                 {
                   title: "Developer Tools",
-                  items: ["Linux / Bash", "Git & GitHub", "Docker Basics", "Figma", "VS Code / Android Studio", "Web Audio API"]
+                  items: ["Linux / Bash", "Git & GitHub", "Docker Basics", "Figma", "Android Studio / VS Code", "Three.js Canvas"]
                 }
               ].map((cat) => (
                 <div key={cat.title} className="p-6 rounded-2xl bg-white border border-slate-200 space-y-4 shadow-xs">
@@ -462,7 +584,7 @@ export default function Home() {
         </section>
 
         {/* ============================================================ */}
-        {/* 5. EXPERIENCE & MENTORSHIP */}
+        {/* 4. WORK TIMELINE (HONEST & CONCISE) */}
         {/* ============================================================ */}
         <section id="experience" className="py-20 border-t border-slate-200">
           <div className="space-y-12">
@@ -502,7 +624,7 @@ export default function Home() {
         </section>
 
         {/* ============================================================ */}
-        {/* 6. CONTACT (DIRECT, CLEAR, 1-CLICK ACTIONS) */}
+        {/* 5. CONTACT (CLEAR, DIRECT, 1-CLICK ACTIONS) */}
         {/* ============================================================ */}
         <section id="contact" className="py-24 border-t border-slate-200">
           <div className="space-y-8 max-w-3xl">
@@ -516,7 +638,7 @@ export default function Home() {
             </h2>
 
             <p className="text-lg text-slate-700 font-normal leading-relaxed">
-              I&apos;m available for full-time engineering roles, mobile development, or contract work. Whether you have a project in mind or want to talk tech, feel free to reach out.
+              Available for full-time software engineering roles, mobile development, or contract work. Whether you have an open role or a product in mind, feel free to reach out.
             </p>
 
             {/* Email Box */}
