@@ -18,11 +18,10 @@ export function Navbar() {
   }, []);
 
   const links = [
-    { name: "Spotlight", href: "#selected-works" },
-    { name: "Works", href: "#projects" },
-    { name: "Philosophy", href: "#philosophy" },
-    { name: "Index", href: "#index" },
-    { name: "Chronicle", href: "#experience" },
+    { name: "Showroom", href: "#showroom" },
+    { name: "Matrix", href: "#matrix" },
+    { name: "Chronicle", href: "#ledger" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
@@ -31,10 +30,10 @@ export function Navbar() {
         role="navigation"
         aria-label="Main Navigation"
         className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
-          scrolled ? "py-2.5" : "py-4 md:py-6"
+          scrolled ? "py-2" : "py-3 md:py-5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:px-8 lg:px-12">
           <div
             className={`flex items-center justify-between px-4 sm:px-6 h-14 md:h-16 transition-all duration-300 border ${
               scrolled

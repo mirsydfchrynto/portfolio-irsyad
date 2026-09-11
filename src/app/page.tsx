@@ -1,12 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ThreeFluidWave } from "@/components/ThreeFluidWave";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
 import { 
-  introduction, 
+  OkeyBimbelExhibit, 
+  GegesBarberExhibit, 
+  VisionSafeExhibit, 
+  FebrianAIExhibit 
+} from "@/components/InteractiveProjectExhibits";
+import { 
   productionExperience, 
   blueprints, 
   engineeringJourney, 
@@ -18,100 +23,200 @@ import {
   ArrowDown,
   Download, 
   Sparkles, 
-  ShieldCheck, 
-  CheckCircle2, 
-  Layers,
-  ExternalLink,
-  Code2,
-  Terminal,
-  Cpu
+  Check, 
+  Copy, 
+  Layers, 
+  ChevronLeft, 
+  ChevronRight, 
+  Terminal, 
+  Cpu, 
+  ShieldAlert 
 } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/SocialIcons";
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [downloading, setDownloading] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [activeRoom, setActiveRoom] = useState(0);
+  const [timeStr, setTimeStr] = useState("12:00:00 WIB");
+
+  // Real-time Indonesian clock
+  useEffect(() => {
+    const updateTime = () => {
+      try {
+        const now = new Date();
+        const formatter = new Intl.DateTimeFormat("en-GB", {
+          timeZone: "Asia/Jakarta",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit"
+        });
+        setTimeStr(`${formatter.format(now)} WIB`);
+      } catch {}
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Keyboard navigation for the project showroom (Arrow Left / Right)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedProject) return; // don't navigate rooms while modal is open
+      if (e.key === "ArrowRight") {
+        setActiveRoom((prev) => (prev + 1) % 4);
+      } else if (e.key === "ArrowLeft") {
+        setActiveRoom((prev) => (prev - 1 + 4) % 4);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedProject]);
 
   const handleDownload = () => {
     setDownloading(true);
     setTimeout(() => setDownloading(false), 1500);
   };
 
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("irsydfchrynto@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   const easeOut = [0.16, 1, 0.3, 1] as any;
 
-  const fadeIn = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 0.8, ease: easeOut }
-  };
+  // The 4 Curated Exhibition Rooms
+  const rooms = [
+    {
+      index: "01",
+      code: "PROD-LIVE",
+      name: "Okey Bimbel CBT Ecosystem",
+      type: "PRODUCTION SPOTLIGHT",
+      tagline: "100% cheat-proof exam platform locking Android OS hardware.",
+      benefit: "Eliminates cheating completely in high-school exams. Students cannot leave the app, take screenshots, or split-screen, while teachers track scores live.",
+      pills: ["Kotlin Kiosk Lock", "5s Dynamic QR", "Offline-Safe Cache", "Next.js Portal"],
+      data: productionExperience,
+      component: <OkeyBimbelExhibit />
+    },
+    {
+      index: "02",
+      code: "CAPSTONE-1",
+      name: "Geges Smart Barber",
+      type: "BUSINESS ECOSYSTEM",
+      tagline: "All-in-one barbershop app: live digital queue, bookings, and store.",
+      benefit: "No more crowded barbershop waiting rooms. Customers monitor wait times from home, book preferred barbers, and shop styling products with fair barber turn allocation.",
+      pills: ["Flutter Mobile", "Fair-Work Algorithm", "Real-Time Queue", "React Admin"],
+      data: blueprints[0],
+      component: <GegesBarberExhibit />
+    },
+    {
+      index: "03",
+      code: "CAPSTONE-2",
+      name: "VisionSafe",
+      type: "EDGE AI / HEALTH TECH",
+      tagline: "Smart eye guardian: blurs screen automatically when held too close.",
+      benefit: "Protects children and heavy phone users from screen fatigue. When held closer than 30cm, it gently blurs the screen until you back away—zero cloud upload.",
+      pills: ["MediaPipe Face Mesh", "Edge AI (No Cloud)", "Background Isolate", "Kotlin Overlay"],
+      data: blueprints[1],
+      component: <VisionSafeExhibit />
+    },
+    {
+      index: "04",
+      code: "AGENTIC-AI",
+      name: "Febrian Barbershop AI",
+      type: "AUTONOMOUS AGENT",
+      tagline: "24/7 WhatsApp AI concierge automating bookings & inquiries.",
+      benefit: "Answers customer questions on WhatsApp, checks appointment slots, and commits bookings into SQLite database in sub-400ms so barbers never lose walk-ins.",
+      pills: ["Groq Llama 3.3 70B", "Tool / Function Calling", "Baileys WhatsApp", "SQLite Memory"],
+      data: blueprints[2],
+      component: <FebrianAIExhibit />
+    }
+  ];
+
+  const currentRoom = rooms[activeRoom];
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-blue-600 selection:text-white font-sans antialiased overflow-x-hidden relative">
       <Navbar />
 
-      {/* Ambient 3D Fluid Silk Wave (Interactive Background Art) */}
+      {/* Ambient 3D Fluid Silk Wave Background */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <ThreeFluidWave className="opacity-70" />
+        <ThreeFluidWave className="opacity-60" />
       </div>
 
       <div className="relative z-10">
         
         {/* ============================================================ */}
-        {/* 01. HERO / EDITORIAL OPENING */}
+        {/* ACT 01. THE MONOLITH CANVAS (HERO EXHIBIT) */}
         {/* ============================================================ */}
-        <header className="min-h-[95svh] flex flex-col justify-between px-6 sm:px-10 lg:px-16 pt-32 pb-16 max-w-7xl mx-auto">
+        <header className="min-h-screen w-full flex flex-col justify-between px-6 sm:px-10 lg:px-16 pt-28 pb-12 border-b border-slate-200">
           
-          {/* Top Micro-Header */}
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: easeOut }}
-            className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/80 pb-6 text-xs font-mono tracking-widest uppercase text-slate-600 font-medium"
-          >
-            <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span>Available for Full-Time Roles · Remote / Relocation Ready · 2026</span>
+          {/* Top Architectural HUD Ticker */}
+          <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono tracking-widest uppercase text-slate-600 border-b border-slate-200/90 pb-4">
+            <div className="flex items-center gap-3">
+              <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
+              <span className="text-slate-900 font-bold">M. IRSYAD FACHRYANTO</span>
+              <span className="text-slate-300">/</span>
+              <span className="text-blue-600 font-semibold">SOFTWARE ARCHITECT</span>
             </div>
-            <div className="hidden sm:flex items-center gap-6 text-slate-600">
-              <span>Based in Indonesia</span>
-              <span>•</span>
-              <span>Open Worldwide (Remote &amp; On-Site)</span>
-            </div>
-          </motion.div>
 
-          {/* Grand Typographic Statement */}
-          <div className="py-12 md:py-20 space-y-10 max-w-5xl">
-            <motion.h1 
-              initial={{ opacity: 0, y: 25 }}
+            <div className="flex items-center gap-6">
+              <div className="hidden sm:flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                <span className="text-slate-900 font-medium">TEGAL // {timeStr}</span>
+              </div>
+              <span className="hidden md:inline text-slate-300">•</span>
+              <span className="text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 font-semibold">
+                OPEN FOR FULL-TIME / REMOTE
+              </span>
+            </div>
+          </div>
+
+          {/* Frontal Monolithic Typography Statement */}
+          <div className="my-auto py-12 md:py-20 max-w-full space-y-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1, ease: easeOut }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-[84px] font-display font-black text-slate-900 tracking-tight leading-[1.05]"
+              transition={{ duration: 0.8, ease: easeOut }}
+              className="space-y-2"
             >
-              Building digital products that are <span className="font-serif italic font-normal text-blue-600 underline decoration-blue-200 decoration-wavy underline-offset-8">dependable</span>, clear, and effortless to use.
-            </motion.h1>
+              <div className="text-xs sm:text-sm font-mono tracking-[0.3em] uppercase text-blue-600 font-bold">
+                [ EXHIBITION // PORTFOLIO 2026 ]
+              </div>
 
-            <motion.p 
+              <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[110px] xl:text-[128px] font-display font-black text-slate-900 tracking-tighter leading-[0.88] uppercase">
+                SURGICAL <br />
+                <span className="font-serif italic font-normal text-blue-600 lowercase tracking-normal">
+                  resilience.
+                </span> <br />
+                HONEST CODE.
+              </h1>
+            </motion.div>
+
+            {/* Frugal, Direct Value Proposition */}
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.2, ease: easeOut }}
-              className="text-lg sm:text-xl md:text-2xl text-slate-700 font-normal leading-relaxed max-w-3xl"
+              transition={{ duration: 0.8, delay: 0.15, ease: easeOut }}
+              className="text-lg sm:text-2xl md:text-3xl text-slate-700 max-w-4xl font-normal leading-relaxed"
             >
-              I&apos;m <strong className="text-slate-900 font-semibold">M. Irsyad Fachryanto</strong>. I create reliable mobile applications with Flutter &amp; Android, modern web platforms with Next.js, and practical AI assistants that solve real daily operational challenges.
+              I build software that refuses to fail under pressure—from <strong className="text-slate-900 font-semibold">tamper-proof Android kiosk apps</strong> for live exams, to <strong className="text-slate-900 font-semibold">autonomous AI assistants</strong> running 24/7 on WhatsApp.
             </motion.p>
 
-            {/* Subtle Action Link Trio */}
-            <motion.div 
+            {/* Frontal Action Bar */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: easeOut }}
-              className="flex flex-wrap items-center gap-6 pt-4"
+              transition={{ duration: 0.8, delay: 0.25, ease: easeOut }}
+              className="flex flex-wrap items-center gap-4 pt-4"
             >
               <a
-                href="#selected-works"
+                href="#showroom"
                 className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-slate-900 text-white hover:bg-blue-600 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all shadow-md hover:shadow-xl active:scale-95"
               >
-                <span>Explore Works</span>
+                <span>Enter Interactive Showroom</span>
                 <ArrowDown size={15} />
               </a>
 
@@ -119,297 +224,300 @@ export default function Home() {
                 href={`data:application/pdf;base64,${pdfBase64}`}
                 download="CV M.IRSYAD FACHRYANTO.pdf"
                 onClick={handleDownload}
-                className="inline-flex items-center gap-2 px-6 py-4 rounded-full border border-slate-300 hover:border-slate-900 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all"
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-slate-300 hover:border-slate-900 text-slate-700 hover:text-slate-900 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all"
               >
                 <Download size={15} className="text-blue-600" />
-                <span>{downloading ? "Syncing Buffer..." : "Curriculum Vitae"}</span>
+                <span>{downloading ? "Syncing..." : "Download Resume PDF"}</span>
               </a>
+
+              <button
+                onClick={handleCopyEmail}
+                className="inline-flex items-center gap-2 px-5 py-4 rounded-full text-slate-600 hover:text-slate-900 text-xs sm:text-sm font-mono tracking-wider transition-colors"
+              >
+                {copied ? <Check size={14} className="text-emerald-600" /> : <Copy size={14} />}
+                <span>{copied ? "Email Copied!" : "irsydfchrynto@gmail.com"}</span>
+              </button>
             </motion.div>
           </div>
 
-          {/* Bottom Micro-Meta */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="flex items-center justify-between pt-6 border-t border-slate-200/80 text-xs font-mono text-slate-600"
-          >
-            <span>[01] SELECTED INDEX</span>
-            <span className="hidden sm:inline">SCROLL TO DISCOVER ARCHIVE</span>
-            <span>2024 — 2026</span>
-          </motion.div>
+          {/* Bottom HUD Metadata */}
+          <div className="flex flex-wrap items-center justify-between gap-4 pt-6 border-t border-slate-200/90 text-xs font-mono text-slate-500 uppercase">
+            <div>
+              <span>DISCIPLINE: </span>
+              <span className="text-slate-800 font-bold">FLUTTER · ANDROID KOTLIN · NEXT.JS · AGENTIC AI</span>
+            </div>
+            <div className="hidden sm:block">
+              <span>LOCATION: </span>
+              <span className="text-slate-800 font-bold">INDONESIA (READY FOR WORLDWIDE REMOTE)</span>
+            </div>
+            <div>
+              <span>SCROLL OR USE [← →] ARROWS</span>
+            </div>
+          </div>
         </header>
 
         {/* ============================================================ */}
-        {/* 02. EDITORIAL SPOTLIGHT: OKEY BIMBEL (LIVE PRODUCTION) */}
+        {/* ACT 02. THE INTERACTIVE EXHIBITION SHOWROOM (DIRECTED FLOW) */}
         {/* ============================================================ */}
-        <section id="selected-works" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
-          <div className="space-y-16">
-            
-            {/* Section Tag */}
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
-                01 / Production Spotlight
+        <section id="showroom" className="min-h-screen w-full py-20 md:py-28 px-6 sm:px-10 lg:px-16 border-b border-slate-200">
+          
+          {/* Section Header */}
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6 mb-12">
+            <div>
+              <span className="font-mono text-xs uppercase tracking-[0.25em] text-blue-600 font-bold block mb-1">
+                ACT 02 // CURATED EXHIBITION STAGE
               </span>
-              <span className="text-xs font-mono text-slate-600">LIVE IN PRODUCTION</span>
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black text-slate-900 tracking-tight uppercase">
+                Interactive Showroom
+              </h2>
             </div>
 
-            {/* Giant Editorial Work Row */}
-            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-              
-              <div className="lg:col-span-6 space-y-8">
-                <div className="space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                    <span>In Active School Exam Operations</span>
-                  </div>
-
-                  <h2 className="text-3xl sm:text-5xl lg:text-6xl font-display font-black text-slate-900 tracking-tight leading-tight">
-                    Okey Bimbel CBT Ecosystem
-                  </h2>
-
-                  <p className="text-lg text-slate-700 font-normal leading-relaxed">
-                    A dual-platform digital exam system built to eliminate cheating completely. Students take tests in a locked-down Android app, while educators supervise live sessions and scoring from a web dashboard.
-                  </p>
-                </div>
-
-                {/* Plain-English Technical Breakthroughs */}
-                <div className="space-y-5 pt-4 border-t border-slate-200">
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
-                      100% Cheat-Proof Screen Lock
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-4">
-                      Turns standard Android devices into dedicated test terminals. Students cannot open browser tabs, take screenshots, or switch apps during tests.
-                    </p>
-                  </div>
-
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
-                      Anti-Screenshot Dynamic QR Code
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-4">
-                      Students join exams by scanning a live QR code on the teacher&apos;s screen that rotates every 5 seconds, preventing students from sharing photo codes outside the room.
-                    </p>
-                  </div>
-
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
-                      Offline-Safe Answer Preservation
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed pl-4">
-                      If classroom Wi-Fi drops, student answers remain encrypted in local phone storage and resynchronize automatically once reconnected—zero lost work.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Stack & CTAs */}
-                <div className="space-y-6 pt-4">
-                  <div className="flex flex-wrap gap-2 text-xs font-mono text-slate-600">
-                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Flutter Mobile</span>
-                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Kotlin Native</span>
-                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Next.js 16</span>
-                    <span className="px-3 py-1 rounded-md bg-slate-100 border border-slate-200">Firestore</span>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-4">
-                    <button
-                      onClick={() => setSelectedProject(productionExperience)}
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-sm active:scale-95"
-                    >
-                      <span>Read Full Architecture Journal</span>
-                      <ArrowUpRight size={14} />
-                    </button>
-
-                    {productionExperience.url && (
-                      <a
-                        href={productionExperience.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-slate-300 hover:border-slate-900 text-slate-700 text-xs font-semibold tracking-wider uppercase transition-colors"
-                      >
-                        <Download size={14} className="text-blue-600" />
-                        <span>Download Release APK</span>
-                      </a>
-                    )}
-                  </div>
-                </div>
+            {/* Room Selector Pills */}
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                {rooms.map((room, idx) => (
+                  <button
+                    key={room.index}
+                    onClick={() => setActiveRoom(idx)}
+                    className={`px-3.5 py-2 rounded-xl text-xs font-mono font-bold transition-all ${
+                      activeRoom === idx
+                        ? "bg-slate-900 text-white shadow-sm"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                    }`}
+                  >
+                    {room.index}
+                  </button>
+                ))}
               </div>
 
-              {/* Visual Showcase Card */}
-              <div 
-                onClick={() => setSelectedProject(productionExperience)}
-                className="lg:col-span-6 rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl bg-slate-100 cursor-pointer group relative aspect-[4/3]"
-              >
-                <img
-                  src={productionExperience.image}
-                  alt="Okey Bimbel CBT Interface Preview"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
-                  <div className="text-white space-y-1">
-                    <span className="text-xs font-mono uppercase tracking-widest text-blue-300 block">Interactive Case Study</span>
-                    <span className="text-lg font-bold">Click to examine system architecture &amp; failure recovery logs &rarr;</span>
-                  </div>
-                </div>
+              {/* Prev / Next Controls */}
+              <div className="flex items-center gap-1">
+                <button
+                  onClick={() => setActiveRoom((prev) => (prev - 1 + 4) % 4)}
+                  aria-label="Previous Room"
+                  className="w-10 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 transition-colors shadow-sm"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={() => setActiveRoom((prev) => (prev + 1) % 4)}
+                  aria-label="Next Room"
+                  className="w-10 h-10 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 flex items-center justify-center text-slate-700 transition-colors shadow-sm"
+                >
+                  <ChevronRight size={18} />
+                </button>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* ============================================================ */}
-        {/* 03. CURATED ARCHIVE & CAPSTONES */}
-        {/* ============================================================ */}
-        <section id="projects" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
-          <div className="space-y-16">
-            
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-4">
-              <div>
-                <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold block mb-1">
-                  02 / Capstones &amp; Engineering Lab
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-display font-black text-slate-900 tracking-tight">
-                  Selected Works
-                </h2>
-              </div>
-              <p className="text-xs font-mono text-slate-600 uppercase tracking-wider">
-                4 CURATED LAB WORKS
-              </p>
-            </div>
-
-            {/* Editorial Showcase Rows */}
-            <div className="divide-y divide-slate-200/90">
-              {blueprints.map((item, idx) => (
-                <motion.article
-                  key={item.id}
-                  {...fadeIn}
-                  onClick={() => setSelectedProject(item as any)}
-                  className="py-12 md:py-16 grid lg:grid-cols-12 gap-8 lg:gap-12 items-baseline group cursor-pointer hover:bg-blue-50/30 transition-colors -mx-4 px-4 rounded-2xl"
-                >
-                  {/* Number & Meta */}
-                  <div className="lg:col-span-2 font-mono text-xs text-slate-600 space-y-1">
-                    <span className="text-base font-bold text-slate-900 block group-hover:text-blue-600 transition-colors">0{idx + 2}</span>
-                    <span className="uppercase tracking-wider">PROJECT</span>
+          {/* Active Room Stage (Edge-to-Edge Grid) */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentRoom.index}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.45, ease: easeOut }}
+              className="grid lg:grid-cols-12 gap-8 lg:gap-14 items-stretch"
+            >
+              {/* Left Column: Bold Narrative & Tactical Capabilities */}
+              <div className="lg:col-span-6 flex flex-col justify-between space-y-8 bg-white p-8 sm:p-10 lg:p-12 rounded-3xl border border-slate-200 shadow-sm">
+                <div className="space-y-6">
+                  
+                  {/* Room Meta Badges */}
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                    <span className="font-mono text-xs font-bold text-blue-600 tracking-wider">
+                      ROOM {currentRoom.index} / 04 // {currentRoom.code}
+                    </span>
+                    <span className="text-xs font-mono font-semibold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                      {currentRoom.type}
+                    </span>
                   </div>
 
-                  {/* Title & Description */}
-                  <div className="lg:col-span-6 space-y-3">
-                    <h3 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 group-hover:text-blue-600 transition-colors tracking-tight">
-                      {item.title}
+                  {/* Project Grand Title */}
+                  <div className="space-y-3">
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-display font-black text-slate-900 tracking-tight leading-tight">
+                      {currentRoom.name}
                     </h3>
-                    <p className="text-base text-slate-800 font-medium leading-snug">
-                      {item.tagline}
+                    <p className="text-lg sm:text-xl font-medium text-blue-600 leading-snug">
+                      {currentRoom.tagline}
                     </p>
-                    {(item as any).quickSummary && (
-                      <p className="text-sm text-slate-600 font-normal leading-relaxed pt-1">
-                        {(item as any).quickSummary}
-                      </p>
-                    )}
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {item.tags.map((tag) => (
-                        <span key={tag} className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-600">
-                          {tag}
+                  </div>
+
+                  {/* Plain-English Real Benefit (Zero Fluff) */}
+                  <div className="p-5 rounded-2xl bg-blue-50/60 border border-blue-100 space-y-1">
+                    <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-900 block">
+                      Real-World Impact
+                    </span>
+                    <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
+                      {currentRoom.benefit}
+                    </p>
+                  </div>
+
+                  {/* Capability Tags */}
+                  <div className="space-y-2">
+                    <span className="text-xs font-mono text-slate-400 uppercase tracking-wider block">
+                      Architectural Pillars
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {currentRoom.pills.map((pill) => (
+                        <span 
+                          key={pill}
+                          className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs font-mono text-slate-700 font-medium"
+                        >
+                          {pill}
                         </span>
                       ))}
                     </div>
                   </div>
+                </div>
 
-                  {/* Right: Action & Repo */}
-                  <div className="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col lg:items-end justify-between gap-4 self-center">
-                    <span className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 group-hover:translate-x-1 transition-transform tracking-wider uppercase font-mono">
-                      <span>Explore Architecture</span>
-                      <ArrowUpRight size={14} />
+                {/* Action CTAs */}
+                <div className="pt-6 border-t border-slate-100 flex flex-wrap items-center gap-4">
+                  <button
+                    onClick={() => setSelectedProject(currentRoom.data)}
+                    className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-md shadow-blue-500/20 active:scale-95"
+                  >
+                    <span>Open Technical Dossier</span>
+                    <ArrowUpRight size={14} />
+                  </button>
+
+                  {(currentRoom.data as any).url && (
+                    <a
+                      href={(currentRoom.data as any).url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl border border-slate-300 hover:border-slate-900 text-slate-700 text-xs font-semibold tracking-wider uppercase transition-colors"
+                    >
+                      <Download size={14} className="text-blue-600" />
+                      <span>Download APK</span>
+                    </a>
+                  )}
+
+                  {(currentRoom.data as any).links?.repo && (
+                    <a
+                      href={(currentRoom.data as any).links.repo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-3.5 rounded-2xl border border-slate-300 hover:border-slate-900 text-slate-700 text-xs font-semibold tracking-wider uppercase transition-colors"
+                    >
+                      <GitHubIcon size={14} />
+                      <span>Repository</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column: Live Interactive Simulator Stage */}
+              <div className="lg:col-span-6 flex flex-col">
+                <div className="h-full w-full">
+                  {currentRoom.component}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Quick Room Jump Footbar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-slate-200">
+            {rooms.map((r, i) => (
+              <div
+                key={r.index}
+                onClick={() => setActiveRoom(i)}
+                className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                  activeRoom === i
+                    ? "bg-white border-blue-600 shadow-md ring-2 ring-blue-600/10"
+                    : "bg-white/60 border-slate-200 hover:border-slate-300 hover:bg-white"
+                }`}
+              >
+                <div className="flex items-center justify-between text-xs font-mono text-slate-400 mb-1">
+                  <span>ROOM {r.index}</span>
+                  {activeRoom === i && <span className="text-blue-600 font-bold">● ACTIVE</span>}
+                </div>
+                <div className="text-sm font-bold text-slate-900 truncate">
+                  {r.name}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* ACT 03. THE BRUTALIST ARCHITECTURAL MATRIX (CAPABILITIES) */}
+        {/* ============================================================ */}
+        <section id="matrix" className="w-full py-20 md:py-28 px-6 sm:px-10 lg:px-16 border-b border-slate-200">
+          <div className="space-y-12">
+            
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-blue-600 font-bold block mb-1">
+                  ACT 03 // ARCHITECTURAL PILLARS
+                </span>
+                <h2 className="text-3xl sm:text-5xl font-display font-black text-slate-900 tracking-tight uppercase">
+                  Engineering Matrix
+                </h2>
+              </div>
+              <p className="text-xs font-mono text-slate-500 uppercase">
+                4 CORE SUBSYSTEMS &amp; FOUNDATIONS
+              </p>
+            </div>
+
+            {/* Edge-to-Edge Brutalist 4-Column Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {[
+                {
+                  code: "SYS-01",
+                  title: "Mobile OS Internals",
+                  lead: "Hardware-level control via Kotlin Native and Flutter MethodChannels.",
+                  skills: ["Kotlin Native", "startLockTask()", "FLAG_SECURE", "Flutter SDK", "Dart Isolates", "Riverpod", "Hive Cache"]
+                },
+                {
+                  code: "SYS-02",
+                  title: "Full-Stack Web Systems",
+                  lead: "Clean, decoupling App Router architectures with sub-second responses.",
+                  skills: ["Next.js 16", "TypeScript", "Tailwind CSS", "Firebase Firestore", "Supabase", "REST APIs", "Node.js"]
+                },
+                {
+                  code: "SYS-03",
+                  title: "On-Device & Agent AI",
+                  lead: "Privacy-preserving local machine vision and deterministic LLM tool-calling.",
+                  skills: ["MediaPipe Face Mesh", "TFLite Edge AI", "Groq Llama 3.3 70B", "Function Calling", "Baileys WhatsApp", "SQLite Memory"]
+                },
+                {
+                  code: "SYS-04",
+                  title: "Resilience Engineering",
+                  lead: "Systems engineered to survive intermittent drops and high concurrency.",
+                  skills: ["Offline-Tolerant Cache", "Fair Queue Balancing", "TOTP Dynamic QR", "AES-256 Storage", "Docker", "Linux Terminal"]
+                }
+              ].map((matrix) => (
+                <div 
+                  key={matrix.code}
+                  className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 hover:border-blue-500 transition-all group flex flex-col justify-between space-y-6 shadow-sm hover:shadow-md"
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between font-mono text-xs text-slate-400">
+                      <span>{matrix.code}</span>
+                      <span className="w-2 h-2 rounded-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                      {matrix.title}
+                    </h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                      {matrix.lead}
+                    </p>
+                  </div>
+
+                  <div className="space-y-2 pt-4 border-t border-slate-100">
+                    <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider block">
+                      Stack Ledger:
                     </span>
-                    {item.links.repo && (
-                      <span className="text-xs font-mono text-slate-600 truncate max-w-[240px]">
-                        {item.links.repo.replace("https://github.com/", "gh/")}
-                      </span>
-                    )}
+                    <div className="flex flex-wrap gap-1.5">
+                      {matrix.skills.map((s) => (
+                        <span key={s} className="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 text-slate-700">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 04. PHILOSOPHY & ENGINEERING MINDSET */}
-        {/* ============================================================ */}
-        <section id="philosophy" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
-          <div className="space-y-16">
-            
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
-                03 / Engineering Principles
-              </span>
-              <span className="text-xs font-mono text-slate-600">HOW I BUILD</span>
-            </div>
-
-            <div className="max-w-4xl space-y-6">
-              <h2 className="text-3xl sm:text-5xl font-display font-black text-slate-900 tracking-tight leading-tight">
-                &ldquo;Software should be surgically reliable under the hood, yet feel <span className="font-serif italic font-normal text-blue-600">clear and effortless</span> for everyone.&rdquo;
-              </h2>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 pt-8 border-t border-slate-200">
-              <div className="space-y-3">
-                <span className="text-xs font-mono font-bold text-blue-600">[01] OPERATIONAL INTEGRITY</span>
-                <h3 className="text-lg font-bold text-slate-900">Reliable Under Real Conditions</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  From intermittent classroom Wi-Fi to high-concurrency exam peaks, software must protect user data, prevent cheating, and never freeze unexpectedly.
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                <span className="text-xs font-mono font-bold text-blue-600">[02] CLEAN BOUNDARIES</span>
-                <h3 className="text-lg font-bold text-slate-900">Decoupled &amp; Easy to Maintain</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  I isolate state management from UI layers. When databases or cloud services change, core business logic and user interfaces remain solid and untangled.
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                <span className="text-xs font-mono font-bold text-blue-600">[03] PRACTICAL INTELLIGENCE</span>
-                <h3 className="text-lg font-bold text-slate-900">AI That Solves Daily Problems</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  From on-device eye health guardians running privately without internet, to WhatsApp assistants managing appointments 24/7, AI is used where it provides tangible value.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 05. TECHNICAL INDEX / CAPABILITIES */}
-        {/* ============================================================ */}
-        <section id="index" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
-          <div className="space-y-16">
-            
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
-                04 / Technical Index
-              </span>
-              <span className="text-xs font-mono text-slate-600">CAPABILITIES &amp; STACK</span>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {exploredTools.map((category, i) => (
-                <div key={category.category} className="space-y-4">
-                  <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
-                    <span className="text-xs font-mono font-bold text-blue-600">0{i+1}</span>
-                    <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900">{category.category}</h3>
-                  </div>
-                  <ul className="space-y-2">
-                    {category.technologies.map((tech) => (
-                      <li key={tech} className="text-sm text-slate-600 flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-slate-300" />
-                        <span>{tech}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               ))}
             </div>
@@ -417,27 +525,38 @@ export default function Home() {
         </section>
 
         {/* ============================================================ */}
-        {/* 06. CAREER & MENTORING TIMELINE */}
+        {/* ACT 04. PRODUCTION LEDGER (CHRONICLE) */}
         {/* ============================================================ */}
-        <section id="experience" className="py-24 md:py-36 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto">
-          <div className="space-y-16">
+        <section id="ledger" className="w-full py-20 md:py-28 px-6 sm:px-10 lg:px-16 border-b border-slate-200">
+          <div className="space-y-12">
             
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
-              <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold">
-                05 / Career Chronicle
-              </span>
-              <span className="text-xs font-mono text-slate-600">PRODUCTION &amp; MENTORSHIP</span>
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200 pb-6">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-[0.25em] text-blue-600 font-bold block mb-1">
+                  ACT 04 // VERIFIED TIMELINE
+                </span>
+                <h2 className="text-3xl sm:text-5xl font-display font-black text-slate-900 tracking-tight uppercase">
+                  Production Chronicle
+                </h2>
+              </div>
+              <p className="text-xs font-mono text-slate-500 uppercase">
+                OPERATIONAL ENGAGEMENTS
+              </p>
             </div>
 
-            <div className="divide-y divide-slate-200">
-              {engineeringJourney.map((entry, i) => (
-                <div key={i} className="py-8 grid md:grid-cols-12 gap-6 items-baseline">
-                  <div className="md:col-span-3 font-mono text-xs text-blue-600 font-bold">
+            {/* Brutalist Ledger Table */}
+            <div className="divide-y divide-slate-200 border-y border-slate-200">
+              {engineeringJourney.map((entry, idx) => (
+                <div 
+                  key={idx}
+                  className="py-8 grid md:grid-cols-12 gap-6 items-baseline hover:bg-blue-50/40 transition-colors px-4 rounded-2xl"
+                >
+                  <div className="md:col-span-3 font-mono text-xs text-blue-600 font-bold uppercase">
                     {entry.period}
                   </div>
                   <div className="md:col-span-4 space-y-1">
-                    <h3 className="text-lg font-bold text-slate-900">{entry.role}</h3>
-                    <span className="text-xs font-mono text-slate-600">{entry.location}</span>
+                    <h3 className="text-xl font-bold text-slate-900">{entry.role}</h3>
+                    <div className="text-xs font-mono text-slate-500">{entry.location}</div>
                   </div>
                   <div className="md:col-span-5 text-sm text-slate-600 leading-relaxed">
                     {entry.description}
@@ -449,90 +568,87 @@ export default function Home() {
         </section>
 
         {/* ============================================================ */}
-        {/* 07. CONTACT / CALL TO ACTION (AWWWARDS EDITORIAL FINALE) */}
+        {/* ACT 05. MONOLITHIC FINALE & COMMAND CENTER */}
         {/* ============================================================ */}
-        <section id="contact" className="py-32 md:py-48 border-t border-slate-200/90 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto text-left">
-          <div className="space-y-12 max-w-4xl">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-blue-600 font-bold block">
-              06 / Get In Touch
+        <section id="contact" className="min-h-[80vh] w-full py-24 md:py-36 px-6 sm:px-10 lg:px-16 flex flex-col justify-between">
+          <div className="space-y-10 max-w-5xl">
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-blue-600 font-bold block">
+              ACT 05 // COMMAND CENTER
             </span>
 
-            <h2 className="text-4xl sm:text-6xl md:text-7xl font-display font-black text-slate-900 tracking-tight leading-[1.05]">
-              Let&apos;s build something <span className="font-serif italic font-normal text-blue-600">meaningful</span> together.
+            <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-[100px] font-display font-black text-slate-900 tracking-tight leading-[0.92] uppercase">
+              LET&apos;S BUILD <br />
+              <span className="font-serif italic font-normal text-blue-600 lowercase tracking-normal">
+                something solid.
+              </span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl font-normal">
-              Whether you have an open software engineering role, a mobile app in need of performance engineering, or an ambitious product idea — my inbox is always open.
+            <p className="text-lg sm:text-2xl text-slate-700 leading-relaxed font-normal max-w-3xl">
+              Available for full-time engineering roles, mobile architecture, or performance contracting. Ready for remote worldwide or relocation.
             </p>
 
-            {/* Giant Clickable Email */}
+            {/* Giant Interactive Email Bar */}
             <div className="pt-4">
-              <a
-                href="mailto:irsydfchrynto@gmail.com"
-                className="group inline-flex items-center gap-4 text-2xl sm:text-4xl md:text-5xl font-display font-black text-slate-900 hover:text-blue-600 transition-colors border-b-2 border-slate-300 hover:border-blue-600 pb-2"
+              <button
+                onClick={handleCopyEmail}
+                className="group flex flex-wrap items-center gap-4 text-2xl sm:text-4xl md:text-5xl font-display font-black text-slate-900 hover:text-blue-600 transition-colors border-b-2 border-slate-300 hover:border-blue-600 pb-2 text-left"
               >
                 <span>irsydfchrynto@gmail.com</span>
-                <ArrowUpRight size={32} className="group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
-              </a>
+                <span className="text-xs font-mono px-3 py-1.5 rounded-full bg-slate-100 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                  {copied ? "COPIED TO CLIPBOARD" : "CLICK TO COPY"}
+                </span>
+              </button>
             </div>
 
-            {/* Minimalist Social Links */}
-            <div className="pt-10 flex flex-wrap gap-8 text-xs font-mono uppercase tracking-widest text-slate-600 font-semibold">
-              <a 
-                href="https://linkedin.com/in/mirsydfchrynto" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:text-blue-600 transition-colors flex items-center gap-1.5"
-              >
-                <LinkedInIcon size={14} />
-                <span>LinkedIn</span>
-              </a>
+            {/* Direct Connect Grid */}
+            <div className="pt-8 flex flex-wrap gap-8 text-xs font-mono uppercase tracking-widest text-slate-700 font-bold">
               <a 
                 href="https://wa.me/6285865826621" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-blue-600 transition-colors flex items-center gap-1.5"
+                className="flex items-center gap-2 hover:text-blue-600 transition-colors"
               >
-                <WhatsAppIcon size={14} />
-                <span>WhatsApp</span>
+                <WhatsAppIcon size={16} />
+                <span>WhatsApp (+62 858-6582-6621)</span>
               </a>
+
+              <a 
+                href="https://linkedin.com/in/mirsydfchrynto" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-blue-600 transition-colors"
+              >
+                <LinkedInIcon size={16} />
+                <span>LinkedIn</span>
+              </a>
+
               <a 
                 href="https://github.com/mirsydfchrynto" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-blue-600 transition-colors flex items-center gap-1.5"
+                className="flex items-center gap-2 hover:text-blue-600 transition-colors"
               >
-                <GitHubIcon size={14} />
+                <GitHubIcon size={16} />
                 <span>GitHub</span>
-              </a>
-              <a 
-                href="https://instagram.com/muhammadirsyadf" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="hover:text-blue-600 transition-colors"
-              >
-                Instagram
               </a>
             </div>
           </div>
-        </section>
 
-        {/* ============================================================ */}
-        {/* FOOTER */}
-        {/* ============================================================ */}
-        <footer className="py-12 border-t border-slate-200 px-6 sm:px-10 lg:px-16 max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-600">
-          <div>
-            M. Irsyad Fachryanto &copy; 2026 // Craftsmanship &amp; Architectural Integrity
-          </div>
-          <div className="flex items-center gap-4">
-            <span>Next.js 16 · Three.js · Flutter · Kotlin</span>
-            <a href="#" className="text-blue-600 hover:underline">Back to top ↑</a>
-          </div>
-        </footer>
+          {/* Footer Bar */}
+          <footer className="pt-20 border-t border-slate-200 mt-20 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono text-slate-500">
+            <div>
+              M. Irsyad Fachryanto &copy; 2026 // Architectural Integrity
+            </div>
+            <div className="flex items-center gap-4">
+              <span>Jakarta Time: {timeStr}</span>
+              <a href="#" className="text-blue-600 hover:underline">Return to Top ↑</a>
+            </div>
+          </footer>
+        </section>
 
       </div>
 
-      {/* CASE STUDY MODAL */}
+      {/* Case Study Deep Dive Modal */}
       <ProjectDetailsModal
         project={selectedProject}
         isOpen={!!selectedProject}
