@@ -79,30 +79,30 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[1000] bg-slate-900/60 backdrop-blur-md overflow-y-auto"
+          className="fixed inset-0 z-[1000] bg-black/60 backdrop-blur-sm overflow-y-auto"
         >
           <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10">
             <motion.div
-              initial={{ scale: 0.96, opacity: 0, y: 15 }}
+              initial={{ scale: 0.98, opacity: 0, y: 15 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.96, opacity: 0, y: 15 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full max-w-5xl bg-white rounded-3xl border border-slate-200/90 shadow-2xl overflow-hidden my-6"
+              exit={{ scale: 0.98, opacity: 0, y: 15 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-5xl bg-[#F7F7F4] rounded-sm border border-[#E2E2DC] shadow-2xl overflow-hidden my-6"
             >
-              {/* Sticky Modal Bar */}
-              <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md px-6 md:px-10 py-4 border-b border-slate-100 flex justify-between items-center">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shadow-sm shadow-blue-500/50" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-                    Project Case Study // {project.title}
+              {/* Sticky Architectural Modal Header */}
+              <div className="sticky top-0 z-50 bg-[#F7F7F4]/98 backdrop-blur-md px-6 md:px-10 py-4 border-b border-[#E2E2DC] flex justify-between items-center">
+                <div className="flex items-center gap-2.5 font-mono text-xs">
+                  <span className="w-2 h-2 rounded-full bg-[#111215]" />
+                  <span className="font-bold uppercase tracking-wider text-[#111215]">
+                    SPECIFICATION DOSSIER // {project.title}
                   </span>
                 </div>
                 <button
                   onClick={onClose}
                   aria-label="Close modal"
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+                  className="p-1.5 rounded-sm border border-[#E2E2DC] text-[#525866] hover:text-[#111215] hover:bg-white transition-colors"
                 >
-                  <X size={18} />
+                  <X size={16} />
                 </button>
               </div>
 
@@ -268,16 +268,16 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                 )}
 
                 {/* Bottom Action CTAs */}
-                <div className="pt-8 border-t border-slate-100 flex flex-wrap gap-4 justify-end">
+                <div className="pt-8 border-t border-[#E2E2DC] flex flex-wrap gap-4 justify-end">
                   {repoLink && (
                     <a
                       href={repoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-sm border border-[#E2E2DC] hover:border-[#111215] bg-white text-xs font-mono uppercase tracking-wider text-[#111215] transition-colors shadow-xs"
                     >
-                      <GitBranch size={15} />
-                      <span>View GitHub Repository</span>
+                      <GitBranch size={14} />
+                      <span>INSPECT SOURCE CODE</span>
                     </a>
                   )}
                   {liveLink && (
@@ -285,10 +285,10 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
                       href={liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-md shadow-blue-600/20 transition-all active:scale-95"
+                      className="inline-flex items-center gap-2 px-5 py-3 rounded-sm bg-[#111215] hover:bg-[#1D4ED8] text-[#F7F7F4] text-xs font-mono uppercase tracking-wider transition-all active:scale-95 shadow-xs"
                     >
-                      <span>Open Live Project</span>
-                      <ArrowUpRight size={15} />
+                      <span>LAUNCH PRODUCTION SYSTEM</span>
+                      <ArrowUpRight size={14} />
                     </a>
                   )}
                 </div>

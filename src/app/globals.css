@@ -8,14 +8,14 @@
 }
 
 :root {
-  /* 4 Core Balanced Colors: Clean Light Studio */
-  --bg-primary: #F8FAFC;      /* Pure clean canvas */
-  --bg-surface: #FFFFFF;      /* Card & container surface */
-  --text-main: #0F172A;       /* Slate-900 (High contrast WCAG AAA) */
-  --text-muted: #64748B;      /* Slate-500 */
-  --brand-blue: #2563EB;      /* Electric Royal Blue */
-  --brand-light: #EFF6FF;     /* Soft Sky/Ice Blue */
-  --border-light: #E2E8F0;    /* Crisp subtle border */
+  /* Architectural Engineering Monograph Palette */
+  --bg-primary: #F7F7F4;      /* Unbleached tactile studio paper */
+  --bg-surface: #FFFFFF;      /* Clean crisp white surface */
+  --text-main: #111215;       /* Deep carbon black */
+  --text-muted: #525866;      /* Balanced neutral gray */
+  --brand-cobalt: #1D4ED8;    /* International Cobalt Blue */
+  --brand-safety: #EA580C;    /* Industrial Safety Orange */
+  --border-hairline: #E2E2DC; /* Architectural hairline rule */
 }
 
 @layer base {
@@ -27,50 +27,52 @@
   }
   
   body {
-    @apply font-sans overflow-x-hidden bg-[#F8FAFC] text-slate-900;
+    @apply font-sans overflow-x-hidden bg-[#F7F7F4] text-[#111215];
   }
 
   ::selection {
-    background-color: #2563EB;
-    color: #FFFFFF;
+    background-color: #111215;
+    color: #F7F7F4;
   }
 }
 
 @layer components {
-  /* Subtle clean architectural grid */
-  .studio-grid {
+  /* Architectural drafting grid */
+  .blueprint-grid {
     background-image: 
-      linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(circle at 50% 20%, black 60%, transparent 100%);
+      linear-gradient(to right, rgba(17, 18, 21, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(17, 18, 21, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
   }
 
-  /* Clean studio card */
-  .studio-card {
+  /* Architectural Spec Sheet Card */
+  .spec-card {
     background-color: #FFFFFF;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid #E2E2DC;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .studio-card:hover {
-    border-color: #BFDBFE;
-    box-shadow: 0 20px 35px -8px rgba(37, 99, 235, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
-    transform: translateY(-2px);
+  .spec-card:hover {
+    border-color: #111215;
+    box-shadow: 0 12px 30px -10px rgba(17, 18, 21, 0.08);
   }
 
-  /* High contrast pill badge */
-  .badge-blue {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/80;
+  /* Technical Hairline Divider */
+  .hairline-divider {
+    border-color: #E2E2DC;
   }
 
-  .badge-slate {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200;
+  /* Technical Tag */
+  .tech-tag {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-[#F0F0EB] text-[#111215] border border-[#E2E2DC] rounded-sm;
   }
 
-  .badge-emerald {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200;
+  .tech-tag-cobalt {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-blue-50 text-blue-700 border border-blue-200 rounded-sm;
+  }
+
+  .tech-tag-safety {
+    @apply inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-orange-50 text-orange-700 border border-orange-200 rounded-sm;
   }
 
   .scrollbar-none::-webkit-scrollbar {
