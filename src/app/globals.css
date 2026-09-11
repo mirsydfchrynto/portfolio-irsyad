@@ -102,3 +102,68 @@
 .animate-wave-4 {
   animation: soundwave 0.9s ease-in-out infinite 0.1s;
 }
+
+/* Swiss Monograph Print Stylesheet (Ctrl + P) */
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: A4 portrait;
+  }
+
+  body {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+
+  nav,
+  .print\:hidden,
+  button,
+  .fixed,
+  a[href^="#"] {
+    display: none !important;
+  }
+
+  header {
+    min-height: auto !important;
+    padding-top: 0 !important;
+    padding-bottom: 1.5rem !important;
+    border-bottom: 2px solid #000000 !important;
+  }
+
+  .spec-card {
+    border: 1px solid #999999 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    margin-bottom: 1.25rem !important;
+    padding: 1.25rem !important;
+  }
+
+  h1 {
+    font-size: 28pt !important;
+    line-height: 1.1 !important;
+  }
+
+  h2 {
+    font-size: 16pt !important;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 13pt !important;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: #000000 !important;
+  }
+
+  .tech-tag,
+  .tech-tag-cobalt,
+  .tech-tag-safety {
+    border: 1px solid #CCCCCC !important;
+    background: transparent !important;
+    color: #000000 !important;
+  }
+}

@@ -86,22 +86,23 @@ export default function RootLayout({
     "familyName": "Fachryanto",
     "url": "https://irsyad-architect.surge.sh",
     "image": "https://irsyad-architect.surge.sh/avatar.jpg",
-    "jobTitle": "Mobile & Full-Stack Developer",
+    "jobTitle": "Systems & Mobile Craftsman",
     "sameAs": [
       "https://github.com/mirsydfchrynto",
       "https://instagram.com/muhammadirsyadf",
       "https://linkedin.com/in/mirsydfchrynto",
       "https://developers.google.com/profile/u/105716030488150294968"
     ],
-    "description": "M. Irsyad Fachryanto is a software developer specializing in secure mobile ecosystems, Flutter, native Android, and Next.js full-stack applications.",
+    "description": "Muhammad Irsyad Fachryanto is a Systems & Mobile Craftsman specializing in OS-level hardware security, Flutter, Kotlin Native, Edge AI (Jetson/MediaPipe), and Next.js platforms.",
     "knowsAbout": [
-      "Software Engineering",
-      "Mobile App Development",
-      "Flutter",
-      "Kotlin",
-      "Next.js",
-      "Cybersecurity",
-      "Full-Stack Development"
+      "Mobile Systems Engineering",
+      "Android Kiosk Security (startLockTask)",
+      "Flutter & BLoC Architecture",
+      "Kotlin Native Development",
+      "Edge AI & Computer Vision",
+      "MediaPipe & PyTorch",
+      "Next.js & React Full-Stack",
+      "Hardware-Software Lockdown"
     ],
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -134,7 +135,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${newsreader.variable} font-sans antialiased bg-[#F8FAFC] text-slate-900 selection:bg-blue-600 selection:text-white`}>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${newsreader.variable} font-sans antialiased bg-[#F7F7F4] text-[#111215] selection:bg-[#111215] selection:text-[#F7F7F4]`}>
         {children}
       </body>
     </html>

@@ -1,10 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ThreeFluidWave } from "@/components/ThreeFluidWave";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
+import { TelemetryTerminal } from "@/components/TelemetryTerminal";
 import { 
   productionExperience, 
   blueprints, 
@@ -34,7 +35,8 @@ import {
   Globe,
   Radio,
   FileCode2,
-  HardDrive
+  HardDrive,
+  Image as ImageIcon
 } from "lucide-react";
 import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/SocialIcons";
 
@@ -42,6 +44,11 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
   const [downloading, setDownloading] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  // Architectural View Toggles: Spec Logic vs Verified UI Proof
+  const [viewModeSys01, setViewModeSys01] = useState<"spec" | "preview">("spec");
+  const [viewModeSys02, setViewModeSys02] = useState<"spec" | "preview">("spec");
+  const [viewModeSys03, setViewModeSys03] = useState<"spec" | "preview">("spec");
 
   const handleDownload = () => {
     soundFX.playClick();
@@ -61,7 +68,7 @@ export default function Home() {
       <Navbar />
 
       {/* Subtle Fluid Wave Canvas */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden print:hidden">
         <ThreeFluidWave className="opacity-35" />
       </div>
 
@@ -109,7 +116,7 @@ export default function Home() {
             </p>
 
             {/* Tactile Action Keys */}
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-2 print:hidden">
               <a
                 href="#projects"
                 onClick={() => soundFX.playClick()}
@@ -213,7 +220,7 @@ export default function Home() {
               {/* ======================================================= */}
               <article className="spec-card rounded-sm p-6 sm:p-10 space-y-8 relative">
                 
-                {/* Spec Meta Strip */}
+                {/* Spec Meta Strip with View Toggle */}
                 <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E2E2DC] pb-4 font-mono text-xs">
                   <div className="flex items-center gap-2.5">
                     <span className="px-2 py-0.5 rounded-sm bg-[#111215] text-[#F7F7F4] font-bold">
@@ -228,8 +235,35 @@ export default function Home() {
                       ACTIVE IN PRODUCTION
                     </span>
                   </div>
-                  <div className="text-[11px] text-[#525866] uppercase tracking-wider">
-                    TARGET: ANDROID TABLETS / KIOSK LOCK
+
+                  {/* View Mode Toggle: Spec vs UI Proof */}
+                  <div className="flex items-center gap-1 bg-[#F0F0EB] p-1 border border-[#E2E2DC] rounded-xs print:hidden">
+                    <button
+                      onClick={() => {
+                        soundFX.playClick(900);
+                        setViewModeSys01("spec");
+                      }}
+                      className={`px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider rounded-xs transition-colors ${
+                        viewModeSys01 === "spec"
+                          ? "bg-[#111215] text-[#F7F7F4] font-bold"
+                          : "text-[#525866] hover:text-[#111215]"
+                      }`}
+                    >
+                      [SPEC PROTOCOL]
+                    </button>
+                    <button
+                      onClick={() => {
+                        soundFX.playClick(1100);
+                        setViewModeSys01("preview");
+                      }}
+                      className={`px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider rounded-xs transition-colors ${
+                        viewModeSys01 === "preview"
+                          ? "bg-[#111215] text-[#F7F7F4] font-bold"
+                          : "text-[#525866] hover:text-[#111215]"
+                      }`}
+                    >
+                      [LIVE UI PROOF]
+                    </button>
                   </div>
                 </div>
 
@@ -259,44 +293,78 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Right: Technical Architecture Breakdown */}
-                  <div className="lg:col-span-5 bg-[#F7F7F4] border border-[#E2E2DC] rounded-sm p-6 space-y-4">
-                    <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#111215] border-b border-[#E2E2DC] pb-2 flex items-center justify-between">
-                      <span>ENGINEERING BREAKTHROUGHS</span>
-                      <Terminal size={14} className="text-[#1D4ED8]" />
-                    </div>
+                  {/* Right: Toggleable Spec Box or Verified UI Proof */}
+                  <div className="lg:col-span-5">
+                    <AnimatePresence mode="wait">
+                      {viewModeSys01 === "spec" ? (
+                        <motion.div
+                          key="sys01-spec"
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
+                          transition={{ duration: 0.15 }}
+                          className="bg-[#F7F7F4] border border-[#E2E2DC] rounded-sm p-6 space-y-4"
+                        >
+                          <div className="font-mono text-xs font-bold uppercase tracking-wider text-[#111215] border-b border-[#E2E2DC] pb-2 flex items-center justify-between">
+                            <span>ENGINEERING BREAKTHROUGHS</span>
+                            <Terminal size={14} className="text-[#1D4ED8]" />
+                          </div>
 
-                    <div className="space-y-3.5">
-                      <div className="flex items-start gap-3">
-                        <Lock size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
-                        <div className="text-xs text-[#525866] leading-relaxed">
-                          <strong className="text-[#111215] block font-semibold">OS Kiosk Lock:</strong>
-                          Invokes Kotlin <code className="text-[#1D4ED8] font-mono">startLockTask()</code> and <code className="text-[#1D4ED8] font-mono">FLAG_SECURE</code> to physically disallow task switching and capture.
-                        </div>
-                      </div>
+                          <div className="space-y-3.5">
+                            <div className="flex items-start gap-3">
+                              <Lock size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
+                              <div className="text-xs text-[#525866] leading-relaxed">
+                                <strong className="text-[#111215] block font-semibold">OS Kiosk Lock:</strong>
+                                Invokes Kotlin <code className="text-[#1D4ED8] font-mono">startLockTask()</code> and <code className="text-[#1D4ED8] font-mono">FLAG_SECURE</code> to physically disallow task switching and capture.
+                              </div>
+                            </div>
 
-                      <div className="flex items-start gap-3">
-                        <QrCode size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
-                        <div className="text-xs text-[#525866] leading-relaxed">
-                          <strong className="text-[#111215] block font-semibold">5-Second Dynamic QR Handshake:</strong>
-                          Synchronized time-based QR on educator&apos;s proctor screen guarantees physical student classroom presence.
-                        </div>
-                      </div>
+                            <div className="flex items-start gap-3">
+                              <QrCode size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
+                              <div className="text-xs text-[#525866] leading-relaxed">
+                                <strong className="text-[#111215] block font-semibold">5-Second Dynamic QR Handshake:</strong>
+                                Synchronized time-based QR on educator&apos;s proctor screen guarantees physical student classroom presence.
+                              </div>
+                            </div>
 
-                      <div className="flex items-start gap-3">
-                        <WifiOff size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
-                        <div className="text-xs text-[#525866] leading-relaxed">
-                          <strong className="text-[#111215] block font-semibold">Resilient Local Fallback:</strong>
-                          Encrypted local cache auto-saves question states during school Wi-Fi dips, syncing back with zero loss.
-                        </div>
-                      </div>
-                    </div>
+                            <div className="flex items-start gap-3">
+                              <WifiOff size={15} className="text-[#1D4ED8] shrink-0 mt-0.5" />
+                              <div className="text-xs text-[#525866] leading-relaxed">
+                                <strong className="text-[#111215] block font-semibold">Resilient Local Fallback:</strong>
+                                Encrypted local cache auto-saves question states during school Wi-Fi dips, syncing back with zero loss.
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="sys01-preview"
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -4 }}
+                          transition={{ duration: 0.15 }}
+                          className="bg-[#111215] border border-[#2B2F3A] rounded-sm p-2.5 space-y-2"
+                        >
+                          <div className="flex items-center justify-between px-2 pt-1 font-mono text-[10px] text-[#A0A5B5] uppercase">
+                            <span>VERIFIED SCREENSHOT // KIOSK TERMINAL</span>
+                            <span className="text-emerald-400">● LIVE RUNTIME</span>
+                          </div>
+                          <div className="relative aspect-[16/10] w-full rounded-xs overflow-hidden bg-black border border-[#2B2F3A]">
+                            <img
+                              src="/okey_bimbel_preview.webp"
+                              alt="Okey Bimbel CBT Production Interface"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
 
                 </div>
 
                 {/* Spec Action Buttons */}
-                <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-[#E2E2DC]">
+                <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-[#E2E2DC] print:hidden">
                   <button
                     onClick={() => {
                       soundFX.playClick();
@@ -350,7 +418,36 @@ export default function Home() {
                         </span>
                         <span className="font-bold text-[#111215]">CAPSTONE 01</span>
                       </div>
-                      <span className="text-[#525866]">BUSINESS AUTOMATION</span>
+
+                      {/* View Toggle */}
+                      <div className="flex items-center gap-1 bg-[#F0F0EB] p-0.5 border border-[#E2E2DC] rounded-xs print:hidden">
+                        <button
+                          onClick={() => {
+                            soundFX.playClick(900);
+                            setViewModeSys02("spec");
+                          }}
+                          className={`px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-xs transition-colors ${
+                            viewModeSys02 === "spec"
+                              ? "bg-[#111215] text-[#F7F7F4] font-bold"
+                              : "text-[#525866] hover:text-[#111215]"
+                          }`}
+                        >
+                          SPEC
+                        </button>
+                        <button
+                          onClick={() => {
+                            soundFX.playClick(1100);
+                            setViewModeSys02("preview");
+                          }}
+                          className={`px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-xs transition-colors ${
+                            viewModeSys02 === "preview"
+                              ? "bg-[#111215] text-[#F7F7F4] font-bold"
+                              : "text-[#525866] hover:text-[#111215]"
+                          }`}
+                        >
+                          UI PROOF
+                        </button>
+                      </div>
                     </div>
 
                     <h3 className="text-2xl font-display font-black text-[#111215]">
@@ -365,23 +462,55 @@ export default function Home() {
                       Eliminates physical wait lines. Customers take live queue tokens from home, browse barbers, and order grooming products in one integrated mobile interface.
                     </p>
 
-                    <div className="space-y-2 pt-2 border-t border-[#E2E2DC] font-mono text-xs">
-                      <div className="text-[#111215] font-bold uppercase tracking-wider text-[11px]">Key Engineering Feats:</div>
-                      <ul className="space-y-1.5 text-xs text-[#525866]">
-                        <li className="flex items-center gap-2">
-                          <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
-                          <span>Fair-Work distribution algorithm balancing haircut turns</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
-                          <span>Clean Architecture with decoupled BLoC state isolation</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
-                          <span>Low-latency Firestore compound queries with local cache</span>
-                        </li>
-                      </ul>
-                    </div>
+                    <AnimatePresence mode="wait">
+                      {viewModeSys02 === "spec" ? (
+                        <motion.div
+                          key="sys02-spec"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.15 }}
+                          className="space-y-2 pt-2 border-t border-[#E2E2DC] font-mono text-xs"
+                        >
+                          <div className="text-[#111215] font-bold uppercase tracking-wider text-[11px]">Key Engineering Feats:</div>
+                          <ul className="space-y-1.5 text-xs text-[#525866]">
+                            <li className="flex items-center gap-2">
+                              <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
+                              <span>Fair-Work distribution algorithm balancing haircut turns</span>
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
+                              <span>Clean Architecture with decoupled BLoC state isolation</span>
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
+                              <span>Low-latency Firestore compound queries with local cache</span>
+                            </li>
+                          </ul>
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="sys02-preview"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.15 }}
+                          className="bg-[#111215] border border-[#2B2F3A] rounded-sm p-2 space-y-1"
+                        >
+                          <div className="flex items-center justify-between px-2 pt-1 font-mono text-[9px] text-[#A0A5B5] uppercase">
+                            <span>VERIFIED UI // BARBER QUEUE &amp; SHOP</span>
+                            <span className="text-emerald-400">FLUTTER BLOC</span>
+                          </div>
+                          <div className="relative aspect-[16/9] w-full rounded-xs overflow-hidden bg-black border border-[#2B2F3A]">
+                            <img
+                              src="/geges_barber_ui.webp"
+                              alt="Geges Barber Mobile Interface"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     <div className="flex flex-wrap gap-1.5 pt-2">
                       {blueprints[0].tags.map((t) => (
@@ -392,7 +521,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-[#E2E2DC] flex items-center justify-between">
+                  <div className="pt-4 border-t border-[#E2E2DC] flex items-center justify-between print:hidden">
                     <button
                       onClick={() => {
                         soundFX.playClick();
@@ -430,7 +559,36 @@ export default function Home() {
                         </span>
                         <span className="font-bold text-[#111215]">CAPSTONE 02</span>
                       </div>
-                      <span className="text-[#525866]">EDGE AI &amp; HEALTH TECH</span>
+
+                      {/* View Toggle */}
+                      <div className="flex items-center gap-1 bg-[#F0F0EB] p-0.5 border border-[#E2E2DC] rounded-xs print:hidden">
+                        <button
+                          onClick={() => {
+                            soundFX.playClick(900);
+                            setViewModeSys03("spec");
+                          }}
+                          className={`px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-xs transition-colors ${
+                            viewModeSys03 === "spec"
+                              ? "bg-[#111215] text-[#F7F7F4] font-bold"
+                              : "text-[#525866] hover:text-[#111215]"
+                          }`}
+                        >
+                          SPEC
+                        </button>
+                        <button
+                          onClick={() => {
+                            soundFX.playClick(1100);
+                            setViewModeSys03("preview");
+                          }}
+                          className={`px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-xs transition-colors ${
+                            viewModeSys03 === "preview"
+                              ? "bg-[#111215] text-[#F7F7F4] font-bold"
+                              : "text-[#525866] hover:text-[#111215]"
+                          }`}
+                        >
+                          UI PROOF
+                        </button>
+                      </div>
                     </div>
 
                     <h3 className="text-2xl font-display font-black text-[#111215]">
@@ -445,23 +603,55 @@ export default function Home() {
                       Protects eye health and mitigates early myopia. MediaPipe 3D Face Mesh analyzes eye-to-sensor depth locally in memory—100% private with zero image data transmitted over the network.
                     </p>
 
-                    <div className="space-y-2 pt-2 border-t border-[#E2E2DC] font-mono text-xs">
-                      <div className="text-[#111215] font-bold uppercase tracking-wider text-[11px]">Key Engineering Feats:</div>
-                      <ul className="space-y-1.5 text-xs text-[#525866]">
-                        <li className="flex items-center gap-2">
-                          <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
-                          <span>On-device MediaPipe Face Mesh landmark triangulation</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
-                          <span>Adaptive dynamic sampling reducing background CPU draw</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
-                          <span>Native Kotlin Foreground Service with system blur overlay</span>
-                        </li>
-                      </ul>
-                    </div>
+                    <AnimatePresence mode="wait">
+                      {viewModeSys03 === "spec" ? (
+                        <motion.div
+                          key="sys03-spec"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.15 }}
+                          className="space-y-2 pt-2 border-t border-[#E2E2DC] font-mono text-xs"
+                        >
+                          <div className="text-[#111215] font-bold uppercase tracking-wider text-[11px]">Key Engineering Feats:</div>
+                          <ul className="space-y-1.5 text-xs text-[#525866]">
+                            <li className="flex items-center gap-2">
+                              <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
+                              <span>On-device MediaPipe Face Mesh landmark triangulation</span>
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
+                              <span>Adaptive dynamic sampling reducing background CPU draw</span>
+                            </li>
+                            <li className="flex items-center gap-2">
+                              <CheckCircle2 size={13} className="text-[#1D4ED8] shrink-0" />
+                              <span>Native Kotlin Foreground Service with system blur overlay</span>
+                            </li>
+                          </ul>
+                        </motion.div>
+                      ) : (
+                        <motion.div
+                          key="sys03-preview"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.15 }}
+                          className="bg-[#111215] border border-[#2B2F3A] rounded-sm p-2 space-y-1"
+                        >
+                          <div className="flex items-center justify-between px-2 pt-1 font-mono text-[9px] text-[#A0A5B5] uppercase">
+                            <span>VERIFIED UI // ON-DEVICE DEPTH BLUR</span>
+                            <span className="text-emerald-400">MEDIAPIPE AI</span>
+                          </div>
+                          <div className="relative aspect-[16/9] w-full rounded-xs overflow-hidden bg-black border border-[#2B2F3A]">
+                            <img
+                              src="/secure_cbt_ui.webp"
+                              alt="VisionSafe Depth Guard Interface"
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     <div className="flex flex-wrap gap-1.5 pt-2">
                       {blueprints[1].tags.map((t) => (
@@ -472,7 +662,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-[#E2E2DC] flex items-center justify-between">
+                  <div className="pt-4 border-t border-[#E2E2DC] flex items-center justify-between print:hidden">
                     <button
                       onClick={() => {
                         soundFX.playClick();
@@ -533,7 +723,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="md:col-span-4 flex flex-col md:items-end gap-3">
+                  <div className="md:col-span-4 flex flex-col md:items-end gap-3 print:hidden">
                     <button
                       onClick={() => {
                         soundFX.playClick();
@@ -716,7 +906,7 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-[#E2E2DC]">
+            <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-[#E2E2DC] print:hidden">
               <a
                 href="mailto:irsydfchrynto@gmail.com"
                 onClick={() => soundFX.playClick()}
@@ -759,6 +949,9 @@ export default function Home() {
         </section>
 
       </div>
+
+      {/* Recruiter Telemetry Terminal (CLI Easter Egg) */}
+      <TelemetryTerminal />
 
       {/* Structured Case Study Modal */}
       <ProjectDetailsModal
