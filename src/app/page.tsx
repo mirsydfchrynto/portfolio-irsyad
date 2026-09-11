@@ -3,22 +3,35 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
-import { CodeWorkspace } from "@/components/CodeWorkspace";
-import { KernelTerminalExplorer } from "@/components/KernelTerminalExplorer";
+import { ThreeFluidWave } from "@/components/ThreeFluidWave";
+import { ArtisticAvatar } from "@/components/ArtisticAvatar";
 import { ProjectLabCard } from "@/components/ProjectLabCard";
-import { CommandPalette } from "@/components/CommandPalette";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
-import { ThreeParticleCanvas } from "@/components/ThreeParticleCanvas";
 import { 
   introduction, 
   productionExperience, 
   blueprints, 
   engineeringJourney, 
   exploredTools,
-  inlineResume
+  inlineResume 
 } from "@/config/portfolioData";
 import { pdfBase64 } from "@/config/pdfBase64";
-import { ArrowUpRight, GitBranch, Shield, Cpu, ExternalLink, Zap, Clock, CheckCircle2, Monitor } from "lucide-react";
+import { 
+  ArrowUpRight, 
+  Download, 
+  Sparkles, 
+  ShieldCheck, 
+  Smartphone, 
+  Globe2, 
+  Cpu, 
+  CheckCircle2, 
+  Mail, 
+  MessageSquare, 
+  Layers,
+  ExternalLink,
+  Code2
+} from "lucide-react";
+import { GitHubIcon, LinkedInIcon, WhatsAppIcon } from "@/components/SocialIcons";
 
 export default function Home() {
   const [selectedProject, setSelectedProject] = useState<any | null>(null);
@@ -29,337 +42,330 @@ export default function Home() {
     setTimeout(() => setDownloading(false), 1500);
   };
 
-  const easeCubic = [0.16, 1, 0.3, 1] as any;
-
   const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
+    initial: { opacity: 0, y: 20 },
     whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true, margin: "-100px" },
-    transition: { duration: 1, ease: easeCubic }
+    viewport: { once: true, margin: "-80px" },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as any }
   };
 
   return (
-    <div className="min-h-screen bg-[#060608] text-white relative selection:bg-white selection:text-black font-sans overflow-x-hidden">
-      <CommandPalette />
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 relative selection:bg-blue-600 selection:text-white font-sans overflow-x-hidden">
       <Navbar />
-      
-      {/* Absolute Perfection Grid */}
-      <div className="fixed inset-0 z-0 architect-grid opacity-[0.03] pointer-events-none" />
-      <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-b from-[#E31B23]/[0.02] to-transparent pointer-events-none z-0" />
 
-      {/* 00. HERO SECTION */}
-      <header className="relative min-h-[100svh] flex flex-col justify-center px-6 md:px-12 pt-20 md:pt-0 z-10 overflow-hidden">
-        {/* Interactive 3D Three.js Node/Particle Canvas */}
-        <ThreeParticleCanvas className="opacity-90" />
+      {/* Subtle Studio Grid */}
+      <div className="fixed inset-0 z-0 studio-grid pointer-events-none opacity-80" />
+
+      {/* 01. HERO SECTION */}
+      <header className="relative min-h-[92svh] flex flex-col justify-center px-4 sm:px-6 lg:px-12 pt-28 pb-16 z-10 overflow-hidden">
+        {/* Serene 3D Fluid Silk Wave */}
+        <ThreeFluidWave className="opacity-90" />
 
         <div className="max-w-7xl mx-auto w-full relative z-10">
-          <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             
+            {/* Left Column: Human Pitch */}
             <motion.div 
-              className="lg:col-span-7 space-y-8 md:space-y-12"
-              initial={{ opacity: 0, x: -40 }}
+              className="lg:col-span-7 space-y-8 text-left"
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2, ease: easeCubic }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="space-y-4 md:space-y-6">
-                <div className="flex items-center gap-3">
-                  <span className="w-8 md:w-10 h-[1px] bg-[#E31B23]" />
-                  <span className="section-label tracking-[0.4em] md:tracking-[0.6em]">Mobile &amp; Full-Stack Developer</span>
+              <div className="space-y-4">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 text-blue-700 text-xs font-semibold shadow-xs">
+                  <Sparkles size={13} className="text-blue-600" />
+                  <span>Open to Software Engineering Roles &amp; Collaborations</span>
                 </div>
-                <h1 className="giant-type text-white group cursor-default">
-                  M. Irsyad <br/>
-                  <span className="text-white/10 group-hover:text-[#E31B23] transition-colors duration-1000 ease-out">Fachryanto</span>
+
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 font-display tracking-tight leading-[1.05]">
+                  Building high-impact <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600">
+                    mobile &amp; full-stack
+                  </span> systems.
                 </h1>
-                <p className="text-white/30 font-display text-lg md:text-2xl tracking-tight lowercase max-w-xl">
-                  Flutter · Native Android (Kotlin) · Next.js · Agentic Systems
+
+                <p className="text-lg md:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl">
+                  Hi, I&apos;m <span className="font-semibold text-slate-900">M. Irsyad Fachryanto</span> — a developer specializing in 
+                  <span className="text-blue-700 font-semibold"> Flutter</span>, native <span className="text-blue-700 font-semibold">Android (Kotlin)</span>, and modern <span className="text-blue-700 font-semibold">Next.js</span> web systems. Grounded in clean architecture, operational reliability, and real-world results.
                 </p>
               </div>
-              
-              <p className="text-white/50 text-base md:text-xl leading-relaxed max-w-2xl font-medium border-l border-white/10 pl-6 md:pl-8 py-2">
-                Building reliable mobile clients with native OS security, scalable Next.js web applications, and practical on-device &amp; conversational AI workflows.
-              </p>
 
-              <div className="flex flex-wrap gap-4 md:gap-6 pt-2 md:pt-4">
-                <a 
-                  href="#production-experience" 
-                  aria-label="View Production Projects"
-                  className="group relative px-8 md:px-10 py-4 md:py-5 bg-white text-black text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.2em] hover:text-white transition-all overflow-hidden"
+              {/* Action CTAs */}
+              <div className="flex flex-wrap items-center gap-3.5 pt-2">
+                <a
+                  href="#production-work"
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-blue-600/25 hover:shadow-lg hover:shadow-blue-600/35 transition-all active:scale-95"
                 >
-                  <span className="relative z-10">Explore_Work</span>
-                  <div className="absolute inset-0 bg-[#E31B23] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                  <span>Explore Production Work</span>
+                  <ArrowUpRight size={16} />
                 </a>
+
                 <a 
-                  href="#resume" 
-                  aria-label="Jump to Career History"
-                  className="px-8 md:px-10 py-4 md:py-5 border border-white/10 text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.2em] text-white/40 hover:text-white hover:border-white/40 transition-all"
+                  href={`data:application/pdf;base64,${pdfBase64}`}
+                  download="CV M.IRSYAD FACHRYANTO.pdf"
+                  onClick={handleDownload}
+                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm font-semibold shadow-xs hover:border-slate-300 transition-all active:scale-95"
                 >
-                  Review_CV
+                  <Download size={16} className="text-blue-600" />
+                  <span>{downloading ? "Preparing PDF..." : "Download Resume"}</span>
                 </a>
-                <a 
-                  href="https://linkedin.com/in/mirsydfchrynto" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 md:px-8 py-4 md:py-5 border border-white/10 text-[10px] md:text-[11px] font-mono font-black uppercase tracking-[0.2em] text-[#E31B23] hover:border-[#E31B23] transition-all"
-                >
-                  LinkedIn &rarr;
-                </a>
+              </div>
+
+              {/* Quick Trust Signals */}
+              <div className="pt-6 border-t border-slate-200/80 flex flex-wrap items-center gap-6 text-xs text-slate-500 font-medium">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={16} className="text-blue-600" />
+                  <span>Kiosk &amp; Platform Security</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Smartphone size={16} className="text-blue-600" />
+                  <span>Flutter &amp; Kotlin Native</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Globe2 size={16} className="text-blue-600" />
+                  <span>Next.js &amp; Cloud Real-time</span>
+                </div>
               </div>
             </motion.div>
 
-            <motion.div 
-              className="lg:col-span-5 flex justify-center lg:justify-end"
+            {/* Right Column: Clean Artistic Emblem */}
+            <motion.div
+              className="lg:col-span-5 flex justify-center"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1.4, ease: easeCubic, delay: 0.2 }}
+              transition={{ duration: 0.9, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="relative group w-full max-w-[320px] md:max-w-[420px] aspect-[4/5] bg-neutral-900 border border-white/5 overflow-hidden shadow-2xl">
-                <img src="/avatar.jpg" alt="M. Irsyad Fachryanto Profile" className="w-full h-full object-cover grayscale contrast-[1.1] brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000 scale-[1.02] group-hover:scale-100" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                <div className="absolute top-6 md:top-8 right-6 md:right-8 font-mono text-[8px] md:text-[10px] text-white/40 font-black uppercase tracking-widest bg-black/40 backdrop-blur-md px-3 md:px-4 py-1.5 border border-white/5">LEARNING LOG</div>
-                <div className="absolute bottom-6 md:bottom-8 left-6 md:left-8 flex flex-col gap-1">
-                   <span className="font-mono text-[8px] md:text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">System_Status</span>
-                   <span className="text-white font-black text-[10px] md:text-xs uppercase tracking-widest bg-[#E31B23] px-3 py-1 shadow-2xl">Production_Ready</span>
-                </div>
-              </div>
+              <ArtisticAvatar />
             </motion.div>
           </div>
         </div>
       </header>
 
-      {/* 01. INTEGRATED WORKSTATION */}
-      <section className="py-20 md:py-40 relative border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12 md:space-y-20">
-          <motion.div className="flex flex-col md:flex-row justify-between items-end gap-8" {...fadeInUp}>
-            <div className="space-y-4">
-              <span className="section-label">[01] Engineering Terminal</span>
-              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter font-display leading-none">Integrated <br/><span className="text-white/10">Workstation</span></h2>
-            </div>
-            <p className="text-white/30 font-mono text-[11px] uppercase tracking-widest max-w-[40ch] text-right leading-relaxed hidden md:block">
-              System research, architecture implementation, and logic validation within a unified console.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="w-full bg-[#0a0a0c] border border-white/10 shadow-[0_80px_150px_-30px_rgba(0,0,0,1)] flex flex-col lg:grid lg:grid-cols-12 h-[500px] md:h-[600px] relative group transition-all duration-700 hover:border-white/20"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: easeCubic }}
-          >
-            <div className="absolute top-4 left-5 flex gap-1.5 z-30">
-               <div className="w-2 h-2 rounded-full bg-[#E31B23]/40" />
-               <div className="w-2 h-2 rounded-full bg-white/5" />
-               <div className="w-2 h-2 rounded-full bg-white/5" />
-            </div>
-
-            <div className="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-white/5 p-6 md:p-12 pt-12 md:pt-16 bg-white/[0.01] flex flex-col overflow-hidden relative">
-              <KernelTerminalExplorer />
-              <div className="absolute inset-0 bg-scanline pointer-events-none opacity-[0.02]" />
-            </div>
-
-            <div className="lg:col-span-7 flex flex-col bg-black/40 overflow-hidden relative pt-2 lg:pt-0">
-              <CodeWorkspace />
-            </div>
-
-            <div className="absolute -inset-[1px] bg-gradient-to-r from-[#E31B23]/20 via-transparent to-[#E31B23]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none" />
-          </motion.div>
-
-          <motion.div className="flex justify-between items-center px-2 md:px-4" {...fadeInUp}>
-            <div className="flex items-center gap-4 md:gap-6">
-               <span className="flex items-center gap-2 font-mono text-[8px] md:text-[9px] text-white/20 uppercase font-black"><Zap size={10} className="text-[#E31B23]"/> Latency: 0.04ms</span>
-               <span className="hidden xs:flex items-center gap-2 font-mono text-[8px] md:text-[9px] text-white/20 uppercase font-black"><Shield size={10} className="text-[#E31B23]"/> Encryption: AES-256</span>
-            </div>
-            <span className="font-mono text-[8px] md:text-[9px] text-white/20 uppercase font-black tracking-[0.2em] md:tracking-[0.4em] animate-pulse">Sync_Active</span>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 02. MANIFESTO */}
-      <section id="about" className="py-20 md:py-40 bg-white/[0.01] border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-12 gap-12 md:gap-20">
-          <div className="lg:col-span-5 space-y-8 md:space-y-12 lg:sticky lg:top-40 h-fit">
-            <motion.div className="space-y-4 md:space-y-6" {...fadeInUp}>
-              <span className="section-label">[02] Philosophy</span>
-              <h3 className="text-3xl md:text-5xl font-black font-display uppercase tracking-tighter leading-none">Engineering<br/>Manifesto</h3>
-            </motion.div>
-            <p className="paragraph-editorial text-sm md:text-lg text-white/40 italic leading-relaxed border-l-2 border-[#E31B23] pl-5 md:pl-10">
-              "Instead of building code that looks smart but is fragile, I prioritize clean structures, maintainable patterns, and reliability in real-world operations."
-            </p>
-          </div>
-
-          <div className="lg:col-span-7 space-y-12 md:space-y-20">
-            <motion.div className="space-y-6 md:space-y-8" {...fadeInUp}>
-              <h2 className="text-xl md:text-4xl font-black font-display uppercase tracking-tighter leading-tight text-white">
-                Engineering high-integrity digital ecosystems through technical precision, native integrations, and bold minimalism.
-              </h2>
-              <p className="text-white/60 text-base md:text-xl font-medium leading-relaxed">
-                {introduction.bio}
-              </p>
-            </motion.div>
-            
-            <div className="grid md:grid-cols-2 gap-10 md:gap-12 pt-8 md:pt-12 border-t border-white/10">
-              {exploredTools.map((exp, i) => (
-                <motion.div key={i} className="space-y-4 md:space-y-6 group" {...fadeInUp}>
-                  <div className="flex items-center gap-3 md:gap-4">
-                    <span className="font-mono text-[10px] md:text-[11px] text-[#E31B23] font-black">0{i+1}</span>
-                    <span className="font-mono text-[8px] md:text-[10px] text-white/40 uppercase tracking-[0.3em] md:tracking-[0.4em] font-black group-hover:text-white transition-colors">{exp.category}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => (
-                      <span key={tech} className="px-2 md:px-3 py-1 md:py-1.5 bg-white/[0.03] border border-white/5 text-[8px] md:text-[10px] font-bold text-white/30 uppercase tracking-widest group-hover:border-[#E31B23]/20 group-hover:text-white transition-all">{tech}</span>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 03. FEATURED WORK */}
-      <section id="production-experience" className="py-20 md:py-40 border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12 md:space-y-24">
-          <motion.div className="flex flex-col md:flex-row justify-between items-end gap-8 md:gap-10" {...fadeInUp}>
-            <div className="space-y-4">
-              <span className="section-label">[03] Feature Case Study</span>
-              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter font-display leading-none text-[#E31B23]">Okey Bimbel</h2>
-            </div>
-            <p className="font-mono text-[10px] md:text-[11px] text-white/20 uppercase tracking-[0.2em] md:tracking-[0.3em] font-black text-right leading-loose hidden md:block">Dual-Platform Integrated <br/>Anti-Cheat Ecosystem.</p>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-12 gap-10 md:gap-20 items-start">
-            <motion.div 
-              className="lg:col-span-7 relative group cursor-pointer aspect-video" 
-              {...fadeInUp} 
-              onClick={() => setSelectedProject(productionExperience)}
-            >
-              <div className="absolute inset-0 border-2 border-white/5 group-hover:border-[#E31B23]/30 transition-all duration-1000 z-10" />
-              <img src={productionExperience.image} alt="Okey Bimbel Dashboard" className="w-full h-full object-cover grayscale opacity-30 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000" />
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/60 via-transparent to-transparent" />
-              <div className="absolute bottom-6 md:bottom-10 left-6 md:left-10 z-20 flex items-center gap-6">
-                 <div className="bg-black/90 px-4 md:px-6 py-2 md:py-3 border border-white/10 font-mono text-[9px] md:text-[11px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-[#E31B23] shadow-2xl text-center">Technical_Journal &rarr;</div>
+      {/* 02. RECRUITER QUICK SNAPSHOT (3 CORE PILLARS) */}
+      <section className="py-12 border-y border-slate-200/70 bg-white/70 backdrop-blur-xs relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Card 1 */}
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                  ● Live In Production
+                </span>
+                <span className="text-xs font-mono text-slate-400">01</span>
               </div>
-            </motion.div>
+              <h3 className="text-lg font-bold text-slate-900">Okey Bimbel CBT Ecosystem</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Dual-platform exam system running for hundreds of students with native Kotlin kiosk lockdown (<code className="text-blue-600">startLockTask</code>) and dynamic QR handshake authentication.
+              </p>
+            </div>
 
-            <motion.div className="lg:col-span-5 space-y-8 md:space-y-12" {...fadeInUp}>
-              <div className="space-y-4 md:space-y-6">
-                <h3 className="text-xl md:text-3xl font-black font-display uppercase tracking-tight text-white/90 leading-tight">
-                  Eliminating 100% of Cheating Vectors via Native Android Interop.
+            {/* Card 2 */}
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-200">
+                  Capstone 1 · Business Vision
+                </span>
+                <span className="text-xs font-mono text-slate-400">02</span>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">Geges Smart Barber</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                An all-in-one barbershop platform: live queue tracking, online booking, grooming marketplace, and an algorithm that distributes workload fairly among barbers.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="p-6 rounded-2xl bg-white border border-slate-200/80 shadow-xs space-y-3">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+                  Capstone 2 · On-Device AI
+                </span>
+                <span className="text-xs font-mono text-slate-400">03</span>
+              </div>
+              <h3 className="text-lg font-bold text-slate-900">VisionSafe (EyeGuardian)</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Privacy-first eye health guardian using MediaPipe Face Mesh. Calculates 3D eye-screen depth and triggers Gaussian blur if &lt;30cm without sending data to servers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 03. FEATURED PRODUCTION CASE STUDY (OKEY BIMBEL) */}
+      <section id="production-work" className="py-20 md:py-28 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          <motion.div className="flex flex-col md:flex-row md:items-end justify-between gap-6" {...fadeInUp}>
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
+                <Layers size={14} />
+                <span>Featured Production Work</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight">
+                Okey Bimbel Exam Platform
+              </h2>
+            </div>
+            <p className="text-sm text-slate-600 max-w-md md:text-right leading-relaxed">
+              Eliminating 100% of exam cheating vectors on Android while providing teachers with instant real-time oversight.
+            </p>
+          </motion.div>
+
+          {/* Featured Case Study Card */}
+          <motion.div 
+            className="p-8 md:p-12 rounded-3xl bg-white border border-slate-200/90 shadow-lg shadow-slate-900/5 grid lg:grid-cols-12 gap-10 items-center"
+            {...fadeInUp}
+          >
+            <div className="lg:col-span-7 space-y-6">
+              <div className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  <span className="badge-emerald">Live In Production</span>
+                  <span className="badge-blue">Flutter Mobile</span>
+                  <span className="badge-slate">Kotlin Native Kiosk</span>
+                  <span className="badge-slate">Next.js Supervisor</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 font-display">
+                  Hardware-Enforced Kiosk Mode &amp; Real-Time Supervision
                 </h3>
-                <p className="text-white/50 text-base md:text-lg leading-relaxed font-medium max-w-xl">
-                  Engineered a high-stakes exam ecosystem with native Kiosk Mode locks and local database encryption for seamless student progress recovery.
+                <p className="text-sm md:text-base text-slate-600 leading-relaxed">
+                  Traditional web forms fail high-stakes exams because students switch tabs, take screenshots, or manipulate device clocks. At Okey Bimbel, I engineered a locked-down Android client coupled with a dynamic Next.js supervision portal.
                 </p>
               </div>
-              
-              <div className="grid grid-cols-2 gap-x-8 md:gap-x-12 gap-y-8 md:gap-y-10 py-8 md:py-12 border-y border-white/5">
-                <div className="space-y-1 md:space-y-2">
-                  <span className="font-mono text-[8px] md:text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Engine</span>
-                  <span className="text-white font-black uppercase text-[10px] md:text-[11px] tracking-widest block">Next.js + Flutter</span>
+
+              {/* 4 Feature Points */}
+              <div className="grid sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
+                  <span className="text-xs font-bold text-slate-900 block">Kiosk Mode Lockdown</span>
+                  <span className="text-xs text-slate-500">Android startLockTask() disables Home button, notification shade, and multitasking.</span>
                 </div>
-                <div className="space-y-1 md:space-y-2">
-                  <span className="font-mono text-[8px] md:text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Security</span>
-                  <span className="text-white font-black uppercase text-[10px] md:text-[11px] tracking-widest block">Kiosk Native</span>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
+                  <span className="text-xs font-bold text-slate-900 block">Dynamic QR Handshake</span>
+                  <span className="text-xs text-slate-500">5-second rotating session tokens prevent credential sharing and replay attacks.</span>
                 </div>
-                <div className="space-y-1 md:space-y-2">
-                  <span className="font-mono text-[8px] md:text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Storage</span>
-                  <span className="text-white font-black uppercase text-[10px] md:text-[11px] tracking-widest block">Hive AES-256</span>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
+                  <span className="text-xs font-bold text-slate-900 block">Encrypted Local State</span>
+                  <span className="text-xs text-slate-500">Hive AES-256 caching saves student progress locally even during intermittent school Wi-Fi.</span>
                 </div>
-                <div className="space-y-1 md:space-y-2">
-                  <span className="font-mono text-[8px] md:text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Scale</span>
-                  <span className="text-white font-black uppercase text-[10px] md:text-[11px] tracking-widest block">100+ Students</span>
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/60 space-y-1">
+                  <span className="text-xs font-bold text-slate-900 block">Real-time Web Admin</span>
+                  <span className="text-xs text-slate-500">Teachers monitor active student status, question delivery, and automatic grading.</span>
                 </div>
               </div>
 
-              <div className="flex gap-4 md:gap-6">
-                 <button 
-                  onClick={() => setSelectedProject(productionExperience)} 
-                  className="flex-grow py-4 md:py-5 bg-white text-black text-[10px] md:text-[11px] font-mono font-black uppercase tracking-widest hover:bg-[#E31B23] hover:text-white transition-all rounded-sm"
+              {/* Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-slate-100">
+                <button
+                  onClick={() => setSelectedProject(productionExperience)}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm transition-all active:scale-95"
                 >
-                  Read Full Journal
+                  <span>Read Full Technical Journal</span>
+                  <ArrowUpRight size={14} />
                 </button>
-                 {productionExperience.url && (
-                    <a href={productionExperience.url} aria-label="Visit Live Project" target="_blank" className="p-4 md:p-5 border border-white/10 hover:border-[#E31B23] text-white/40 hover:text-white transition-all rounded-sm">
-                      <ExternalLink size={18}/>
-                    </a>
-                 )}
+
+                {productionExperience.url && (
+                  <a
+                    href={productionExperience.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold transition-colors"
+                  >
+                    <Download size={14} className="text-blue-600" />
+                    <span>Download Release APK</span>
+                  </a>
+                )}
               </div>
-            </motion.div>
-          </div>
+            </div>
+
+            {/* Right: Interface Image or Visual Preview */}
+            <div className="lg:col-span-5 relative group">
+              <div className="rounded-2xl overflow-hidden border border-slate-200/90 shadow-md bg-slate-100 aspect-video lg:aspect-square flex items-center justify-center relative">
+                {productionExperience.image ? (
+                  <img
+                    src={productionExperience.image}
+                    alt="Okey Bimbel CBT Interface"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="p-8 text-center space-y-3">
+                    <Smartphone size={40} className="text-blue-600 mx-auto" />
+                    <span className="text-sm font-semibold text-slate-700 block">Okey Bimbel Mobile CBT</span>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                  <span className="text-xs font-semibold text-white">Click to View Architecture Details</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* 04. LABS */}
-      <section id="blueprints" className="py-20 md:py-40 bg-white/[0.01] border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-12 md:space-y-24">
-          <motion.div className="flex flex-col md:flex-row justify-between items-end gap-8 md:gap-10" {...fadeInUp}>
-            <div className="space-y-4 text-center md:text-left">
-              <span className="section-label">[04] Engineering Laboratory</span>
-              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter font-display leading-none">The <span className="text-white/10">Archive</span></h2>
+      {/* 04. PROJECTS & CAPSTONES */}
+      <section id="projects" className="py-20 md:py-28 bg-white/50 border-t border-slate-200/80 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          <motion.div className="flex flex-col md:flex-row md:items-end justify-between gap-6" {...fadeInUp}>
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
+                <Code2 size={14} />
+                <span>Curated Projects &amp; Capstones</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight">
+                Architectural Work &amp; Research
+              </h2>
             </div>
-            <p className="font-mono text-[11px] text-white/20 uppercase tracking-[0.4em] font-black hidden md:block">Experiments & Core Systems.</p>
+            <p className="text-sm text-slate-600 max-w-md md:text-right leading-relaxed">
+              From on-device edge computer vision to conversational AI agents and unified barbershop platforms.
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+          <div className="grid md:grid-cols-2 gap-8">
             {blueprints.map((project) => (
-              <ProjectLabCard key={project.id} project={project} onOpenDetails={() => setSelectedProject(project as any)} />
+              <ProjectLabCard
+                key={project.id}
+                project={project}
+                onOpenDetails={() => setSelectedProject(project as any)}
+              />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 05. RESUME */}
-      <section id="resume" className="py-20 md:py-40 border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 grid lg:grid-cols-12 gap-12 md:gap-24 items-start relative">
-          <div className="lg:col-span-5 lg:sticky lg:top-40 space-y-10 md:space-y-16">
-            <motion.div className="space-y-4 md:space-y-6" {...fadeInUp}>
-              <span className="section-label">[05] Record Synchronization</span>
-              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter font-display leading-none text-white group cursor-default">
-                Career<br/><span className="text-[#E31B23]">Journal</span>
-              </h2>
-            </motion.div>
+      {/* 05. TECHNICAL CAPABILITIES (CLEAR & READABLE) */}
+      <section id="skills" className="py-20 md:py-28 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          <motion.div className="space-y-3 text-center max-w-2xl mx-auto" {...fadeInUp}>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
+              <Cpu size={14} />
+              <span>Technical Arsenal</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-display tracking-tight">
+              Technologies &amp; Engineering Skills
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Curated tools I utilize daily to build high-performance mobile clients and scalable web backends.
+            </p>
+          </motion.div>
 
-             <motion.div className="p-8 md:p-12 border border-white/5 bg-black space-y-8 md:space-y-10 shadow-2xl relative overflow-hidden" {...fadeInUp}>
-              <div className="absolute top-0 left-0 w-full h-1 bg-[#E31B23]/20" />
-              <div className="space-y-6 md:space-y-8">
-                 <div className="space-y-2 md:space-y-3">
-                    <span className="font-mono text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest font-black block">Status &rarr;</span>
-                    <span className="text-white font-black text-2xl md:text-3xl tracking-tighter font-display uppercase italic text-[#E31B23]">Active Builder</span>
-                 </div>
-                 <div className="space-y-2 md:space-y-3 border-t border-white/5 pt-6 md:pt-8">
-                    <span className="font-mono text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest font-black block">Core_Focus &rarr;</span>
-                    <div className="flex items-center gap-3">
-                       <span className="w-1.5 md:w-2 h-1.5 md:h-2 rounded-full bg-emerald-500 animate-pulse" />
-                       <span className="text-emerald-500 font-black text-[9px] md:text-[11px] uppercase tracking-[0.2em] md:tracking-[0.3em]">Mobile &amp; Full-Stack Systems</span>
-                    </div>
-                 </div>
-              </div>
-
-              <a 
-                href={`data:application/pdf;base64,${pdfBase64}`}
-                download="CV M.IRSYAD FACHRYANTO.pdf"
-                onClick={handleDownload}
-                aria-label="Download Full CV"
-                className="group relative flex items-center justify-between w-full p-6 md:p-7 bg-white text-black font-mono text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] overflow-hidden transition-all shadow-[0_20px_40px_-10px_rgba(255,255,255,0.1)] rounded-sm"
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {exploredTools.map((group, idx) => (
+              <motion.div
+                key={group.category}
+                className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-xs space-y-4"
+                {...fadeInUp}
               >
-                <span className="relative z-10">{downloading ? "Syncing_Buffer..." : "Download_Full_CV"}</span>
-                <GitBranch size={20} className="relative z-10 group-hover:rotate-180 transition-transform duration-1000" />
-                <div className="absolute inset-0 bg-[#E31B23] translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-[0.16,1,0.3,1]" />
-              </a>
-            </motion.div>
-          </div>
-
-          <div className="lg:col-span-7 space-y-16 md:space-y-24">
-            {engineeringJourney.map((item, i) => (
-              <motion.div key={i} className="group relative pl-10 md:pl-16 border-l-2 border-white/5 transition-all duration-700 hover:border-[#E31B23]/40" {...fadeInUp}>
-                <div className="absolute -left-[7px] top-0 w-3 h-3 bg-neutral-900 border-2 border-white/10 group-hover:bg-[#E31B23] group-hover:border-[#E31B23] group-hover:scale-150 transition-all duration-700" />
-                <div className="space-y-6 md:space-y-8">
-                  <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-                    <h3 className="text-xl md:text-3xl font-black uppercase tracking-tighter font-display leading-none text-white/90 group-hover:text-white transition-colors">{item.role} <span className="text-[#E31B23]">@</span> {item.location}</h3>
-                    <span className="font-mono text-[9px] md:text-[10px] text-white/20 uppercase font-black tracking-widest">{item.period}</span>
-                  </div>
-                  <p className="text-base md:text-xl text-white/40 leading-relaxed font-medium italic group-hover:text-white/60 transition-colors">
-                    {item.description}
-                  </p>
+                <div className="space-y-1">
+                  <span className="text-[11px] font-mono text-blue-600 font-bold">0{idx + 1}</span>
+                  <h3 className="text-base font-bold text-slate-900 font-display">{group.category}</h3>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {group.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2.5 py-1 text-xs font-medium rounded-lg bg-slate-50 text-slate-700 border border-slate-200/70"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </motion.div>
             ))}
@@ -367,49 +373,133 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 06. CONTACT */}
-      <section id="contact" className="py-32 md:py-60 px-6 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#E31B23]/[0.03] to-transparent pointer-events-none" />
-        <motion.div className="max-w-7xl mx-auto p-8 md:p-32 border border-white/10 bg-[#0a0a0c] text-center space-y-10 md:space-y-16 shadow-[0_120px_200px_-50px_rgba(0,0,0,1)] relative z-10" {...fadeInUp}>
-          <div className="space-y-4 md:space-y-6">
-            <span className="section-label tracking-[0.6em] md:tracking-[0.8em]">[06] Contact</span>
-            <h2 className="text-4xl md:text-[120px] font-black uppercase tracking-tighter font-display leading-[0.8] mb-4">Establish<br/><span className="text-[#E31B23]">Connection</span></h2>
-            <p className="text-white/30 text-base md:text-2xl font-medium max-w-3xl mx-auto italic tracking-tight underline decoration-[#E31B23]/20 underline-offset-8">Open for discussions regarding mobile development, native integrations, full-stack systems, or agentic workflows.</p>
-          </div>
+      {/* 06. EXPERIENCE & MENTORING (HUMAN STORY) */}
+      <section id="experience" className="py-20 md:py-28 bg-white/50 border-t border-slate-200/80 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 md:gap-8 pt-12 md:pt-16 border-t border-white/5 max-w-5xl mx-auto font-mono text-[8px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.4em]">
-            <a href="mailto:irsydfchrynto@gmail.com" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">01 // EMAIL</span>
-               <span>Email</span>
-            </a>
-            <a href="https://linkedin.com/in/mirsydfchrynto" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">02 // LINKEDIN</span>
-               <span>LinkedIn</span>
-            </a>
-            <a href="https://wa.me/6285865826621" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">03 // WHATSAPP</span>
-               <span>WhatsApp</span>
-            </a>
-            <a href="https://github.com/mirsydfchrynto" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">04 // GITHUB</span>
-               <span>GitHub</span>
-            </a>
-            <a href="https://instagram.com/muhammadirsyadf" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 md:gap-4 text-white/30 hover:text-[#E31B23] transition-all">
-               <span className="text-white/5 font-mono text-[7px] md:text-[8px] group-hover:text-[#E31B23]/30 transition-colors">05 // INSTAGRAM</span>
-               <span>Instagram</span>
-            </a>
+          <motion.div className="space-y-3 text-left" {...fadeInUp}>
+            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-600">
+              <CheckCircle2 size={14} />
+              <span>Work &amp; Mentorship</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 font-display tracking-tight">
+              Experience Timeline
+            </h2>
+          </motion.div>
+
+          <div className="space-y-8 max-w-4xl">
+            {engineeringJourney.map((item, i) => (
+              <motion.div
+                key={i}
+                className="relative pl-8 md:pl-10 border-l-2 border-blue-200 space-y-2 group"
+                {...fadeInUp}
+              >
+                <div className="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-white border-4 border-blue-600 group-hover:scale-125 transition-transform" />
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="text-lg md:text-xl font-bold text-slate-900">
+                    {item.role} <span className="text-blue-600">@</span> {item.location}
+                  </h3>
+                  <span className="text-xs font-semibold font-mono text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full">
+                    {item.period}
+                  </span>
+                </div>
+                <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      <footer className="py-16 md:py-24 border-t border-white/5 text-center relative overflow-hidden">
-        <div className="font-mono text-[8px] md:text-[10px] text-white/20 uppercase tracking-[0.4em] md:tracking-[0.6em] font-black relative z-10 px-6">
-          M. Irsyad Fachryanto &copy; 2026 · <span className="text-white/10 italic">Mobile &amp; Full-Stack Systems</span>
+      {/* 07. CONTACT & CONNECT */}
+      <section id="contact" className="py-24 md:py-32 relative z-10">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-10">
+          
+          <motion.div className="space-y-4" {...fadeInUp}>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-semibold">
+              <MessageSquare size={13} className="text-blue-600" />
+              <span>Get In Touch</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 font-display tracking-tight">
+              Let&apos;s build something great together.
+            </h2>
+            <p className="text-base text-slate-600 max-w-xl mx-auto leading-relaxed">
+              I&apos;m actively open to junior/mid-level software engineering roles, mobile contract projects, and team collaborations. Feel free to reach out directly.
+            </p>
+          </motion.div>
+
+          {/* Contact Methods */}
+          <motion.div 
+            className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+            {...fadeInUp}
+          >
+            <a
+              href="mailto:irsydfchrynto@gmail.com"
+              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <Mail size={18} />
+              </div>
+              <span className="text-xs font-bold text-slate-900">Email</span>
+              <span className="text-[11px] text-slate-500 truncate max-w-full">irsydfchrynto@gmail.com</span>
+            </a>
+
+            <a
+              href="https://linkedin.com/in/mirsydfchrynto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <LinkedInIcon size={18} />
+              </div>
+              <span className="text-xs font-bold text-slate-900">LinkedIn</span>
+              <span className="text-[11px] text-slate-500">/in/mirsydfchrynto</span>
+            </a>
+
+            <a
+              href="https://wa.me/6285865826621"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <WhatsAppIcon size={18} />
+              </div>
+              <span className="text-xs font-bold text-slate-900">WhatsApp</span>
+              <span className="text-[11px] text-slate-500">+62 858-6582-6621</span>
+            </a>
+
+            <a
+              href="https://github.com/mirsydfchrynto"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center gap-2.5 group"
+            >
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <GitHubIcon size={18} />
+              </div>
+              <span className="text-xs font-bold text-slate-900">GitHub</span>
+              <span className="text-[11px] text-slate-500">@mirsydfchrynto</span>
+            </a>
+          </motion.div>
         </div>
-        <div className="absolute inset-0 bg-noise opacity-[0.01] pointer-events-none" />
+      </section>
+
+      {/* FOOTER */}
+      <footer className="py-12 border-t border-slate-200/80 text-center relative z-10 bg-white/60">
+        <div className="text-xs text-slate-500">
+          M. Irsyad Fachryanto &copy; 2026 · Built with Flutter, Kotlin Native &amp; Next.js expertise.
+        </div>
       </footer>
 
-      <ProjectDetailsModal project={selectedProject} isOpen={!!selectedProject} onClose={() => setSelectedProject(null)} />
+      {/* MODAL */}
+      <ProjectDetailsModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </div>
   );
 }

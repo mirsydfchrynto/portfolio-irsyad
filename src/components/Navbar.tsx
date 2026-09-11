@@ -1,180 +1,131 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { Cpu, GitBranch, Globe, Clock } from "lucide-react";
+import { Layers, Mail, Menu, X, ArrowUpRight } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Magnetic } from "./Magnetic";
+import { AmbientAudioPlayer } from "./AmbientAudioPlayer";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [localTime, setLocalTime] = useState("");
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 10) {
-        if (!scrolled) setScrolled(true);
-      } else {
-        if (scrolled) setScrolled(false);
-      }
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
-    const updateClock = () => {
-      const now = new Date();
-      const formatter = new Intl.DateTimeFormat("en-US", {
-        timeZone: "Asia/Jakarta",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false
-      });
-      setLocalTime(formatter.format(now));
-    };
-    
-    updateClock();
-    const interval = setInterval(updateClock, 30000);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      clearInterval(interval);
-    };
-  }, [scrolled]);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const links = [
-    { name: "ABOUT", href: "#about", id: "01" },
-    { name: "WORK", href: "#production-experience", id: "02" },
-    { name: "LABS", href: "#blueprints", id: "03" },
-    { name: "PROFILE", href: "#resume", id: "04" },
-    { name: "CONTACT", href: "#contact", id: "05" },
+    { name: "Production Work", href: "#production-work" },
+    { name: "Projects & Capstones", href: "#projects" },
+    { name: "Skills", href: "#skills" },
+    { name: "Experience", href: "#experience" },
+    { name: "Contact", href: "#contact" },
   ];
 
   return (
     <>
-      <nav 
+      <nav
         role="navigation"
         aria-label="Main Navigation"
-        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ease-[0.16,1,0.3,1] will-change-nav ${
-          scrolled ? "py-2 md:py-4" : "py-3 md:py-8 lg:py-10"
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${
+          scrolled ? "py-2.5" : "py-4 md:py-6"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-12">
-          <div className={`relative flex items-center justify-between px-5 md:px-8 h-12 md:h-16 transition-all duration-500 ease-[0.16,1,0.3,1] border border-white/5 bg-black/60 backdrop-blur-xl ${
-            scrolled ? "rounded-full" : "rounded-xl md:rounded-2xl"
-          }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className={`flex items-center justify-between px-4 sm:px-6 h-14 md:h-16 transition-all duration-300 border ${
+              scrolled
+                ? "bg-white/90 backdrop-blur-md border-slate-200/90 shadow-md shadow-slate-900/5 rounded-2xl"
+                : "bg-white/75 backdrop-blur-sm border-slate-200/60 shadow-sm rounded-2xl"
+            }`}
+          >
             {/* LOGO */}
-            <div className="flex-1 flex items-center">
-              <Magnetic strength={0.2}>
-                <div className="flex items-center gap-3 md:gap-4 group cursor-pointer" aria-label="Irsyad Architect Logo">
-                  <div className="relative w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
-                    <div className="absolute inset-0 bg-[#E31B23]/10 rounded-sm blur-lg opacity-0 group-hover:opacity-100 transition-all duration-700" />
-                    <div className="relative w-full h-full bg-[#050507] border border-white/10 flex items-center justify-center group-hover:border-[#E31B23]/40 transition-colors duration-700">
-                      <Cpu size={14} className="text-[#E31B23] md:size-4 group-hover:rotate-90 transition-transform duration-1000" />
-                    </div>
-                  </div>
-                  <div className="flex flex-col -space-y-1">
-                    <span className="text-[9px] md:text-[12px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em] text-white">
-                      M. IRSYAD F.
-                    </span>
-                    <span className="text-[7px] md:text-[8px] font-mono text-white/20 uppercase tracking-[0.1em] md:tracking-[0.2em] font-black">
-                      THE JOURNEY
-                    </span>
-                  </div>
-                </div>
-              </Magnetic>
+            <a
+              href="#"
+              className="flex items-center gap-2.5 group cursor-pointer"
+              aria-label="Home"
+            >
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/25 group-hover:scale-105 transition-transform">
+                <Layers size={17} className="stroke-[2.2]" />
+              </div>
+              <div className="flex items-baseline gap-1">
+                <span className="font-display font-black text-slate-900 text-base md:text-lg tracking-tight">
+                  Irsyad
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+              </div>
+            </a>
+
+            {/* NAVIGATION LINKS (DESKTOP) */}
+            <div className="hidden md:flex items-center gap-1 lg:gap-2">
+              {links.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="px-3.5 py-1.5 text-xs font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50/60 rounded-lg transition-all"
+                >
+                  {link.name}
+                </a>
+              ))}
             </div>
 
-            {/* NAVIGATION (CENTER) */}
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="flex gap-1">
-                {links.map((link) => (
-                  <Magnetic key={link.name} strength={0.1}>
-                    <a 
-                      href={link.href}
-                      aria-label={`Navigate to ${link.name}`}
-                      className="group relative px-4 py-2 overflow-hidden transition-colors duration-300"
-                    >
-                      <div className="flex items-center gap-2 relative z-10">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40 group-hover:text-white transition-colors duration-300 font-black">
-                          {link.name}
-                        </span>
-                      </div>
-                      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#E31B23] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-                    </a>
-                  </Magnetic>
-                ))}
-              </div>
-            </div>
+            {/* RIGHT SIDE: AUDIO & CONTACT BUTTON */}
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <AmbientAudioPlayer />
 
-            {/* CLOCK & SOCIAL (RIGHT) */}
-            <div className="flex-1 flex items-center justify-end gap-3 md:gap-8">
-              <div className="hidden sm:flex items-center gap-2 md:gap-3 px-3 md:px-4 py-1.5 md:py-2 bg-white/[0.02] border border-white/5 rounded-full" aria-label="Local Jakarta Time">
-                <Clock size={10} className="text-[#E31B23] opacity-50 md:size-3" />
-                <span className="text-[10px] md:text-[11px] font-mono text-white font-black">{localTime || "--:--"}</span>
-                <span className="hidden xs:inline text-[7px] font-mono text-white/20 uppercase tracking-widest font-black">WIB</span>
-              </div>
-
-              <div className="flex items-center gap-1 md:gap-2">
-                <a 
-                  href="https://github.com/mirsydfchrynto" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-2 text-white/20 hover:text-white transition-colors"
-                  aria-label="Visit GitHub Profile"
-                >
-                  <GitBranch size={14} className="md:size-4" />
-                </a>
-                <a 
-                  href="https://instagram.com/muhammadirsyadf" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="p-2 text-white/20 hover:text-white transition-colors"
-                  aria-label="Visit Instagram Profile"
-                >
-                  <Globe size={14} className="md:size-4" />
-                </a>
-              </div>
-
-              {/* Mobile Toggle */}
-              <button 
-                onClick={() => setIsOpen(!isOpen)}
-                aria-expanded={isOpen}
-                aria-label="Toggle Menu"
-                className="lg:hidden w-9 h-9 border border-white/10 text-white bg-white/5 rounded-lg flex flex-col items-center justify-center gap-1 transition-all active:scale-95"
+              <a
+                href="#contact"
+                className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-600/20 transition-all active:scale-95"
               >
-                <div className={`w-3.5 h-[1.5px] bg-white transition-all duration-500 ${isOpen ? "rotate-45 translate-y-[2.5px]" : ""}`} />
-                <div className={`w-3.5 h-[1.5px] bg-white transition-all duration-500 ${isOpen ? "-rotate-45 -translate-y-[2.5px]" : ""}`} />
+                <span>Let&apos;s Connect</span>
+                <ArrowUpRight size={13} />
+              </a>
+
+              {/* MOBILE MENU TOGGLE */}
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
+                className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
+              >
+                {isOpen ? <X size={18} /> : <Menu size={18} />}
               </button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU OVERLAY */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-0 z-[99] bg-[#060608]/95 backdrop-blur-2xl flex flex-col justify-center p-8"
+            exit={{ opacity: 0, y: -8 }}
+            className="fixed inset-x-4 top-20 z-[99] md:hidden bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl p-6 shadow-2xl"
           >
-            <div className="flex flex-col gap-6 w-full max-w-sm mx-auto">
-              {links.map((link, i) => (
-                <motion.a 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  key={link.name} 
+            <div className="flex flex-col gap-3">
+              {links.map((link) => (
+                <a
+                  key={link.name}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-4xl font-black text-white hover:text-[#E31B23] transition-colors font-display uppercase tracking-tighter"
+                  className="px-3 py-2 text-sm font-semibold text-slate-800 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-colors"
                 >
                   {link.name}
-                </motion.a>
+                </a>
               ))}
-            </div>
-            {/* Decoration for mobile menu */}
-            <div className="absolute bottom-10 left-10 font-mono text-[10px] text-white/10 uppercase tracking-[0.5em] font-black">
-              System_Navigation_Menu
+              <div className="pt-3 mt-2 border-t border-slate-100 flex items-center justify-between">
+                <a
+                  href="#contact"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full text-center py-2.5 text-xs font-semibold rounded-xl bg-blue-600 text-white shadow-sm"
+                >
+                  Get In Touch
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

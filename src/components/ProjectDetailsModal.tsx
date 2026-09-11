@@ -70,312 +70,213 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
   const repoLink = project.repo || (project.links && project.links.repo) || "";
   const liveLink = project.url || (project.links && project.links.visit) || "";
 
-  const sectionReveal = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 1, ease: [0.16, 1, 0.3, 1] as any }
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="fixed inset-0 z-[1000] bg-[#060608] overflow-y-auto selection:bg-[#E31B23] selection:text-white"
+          transition={{ duration: 0.3 }}
+          className="fixed inset-0 z-[1000] bg-slate-900/60 backdrop-blur-md overflow-y-auto"
         >
-          {/* Main Overlay Container */}
-          <div className="min-h-screen w-full flex flex-col relative z-50">
-            <div className="fixed inset-0 z-0 architect-grid opacity-[0.04] pointer-events-none" />
-            
-            {/* Sticky Top Navigation */}
-            <div className="sticky top-0 z-[100] bg-black/90 backdrop-blur-xl px-6 py-4 md:px-16 md:py-6 border-b border-white/5 flex justify-between items-center">
-              <div className="flex items-center gap-4">
-                <div className="w-2.5 h-2.5 bg-[#E31B23] rounded-full shadow-[0_0_15px_rgba(227,27,35,0.6)]" />
-                <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-white/40 font-bold truncate max-w-[150px] md:max-w-none">
-                  Project_Archive // {project.title}
-                </span>
+          <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 md:p-10">
+            <motion.div
+              initial={{ scale: 0.96, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.96, opacity: 0, y: 15 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="relative w-full max-w-5xl bg-white rounded-3xl border border-slate-200/90 shadow-2xl overflow-hidden my-6"
+            >
+              {/* Sticky Modal Bar */}
+              <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-md px-6 md:px-10 py-4 border-b border-slate-100 flex justify-between items-center">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shadow-sm shadow-blue-500/50" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                    Project Case Study // {project.title}
+                  </span>
+                </div>
+                <button
+                  onClick={onClose}
+                  aria-label="Close modal"
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+                >
+                  <X size={18} />
+                </button>
               </div>
-              <button 
-                onClick={onClose}
-                aria-label="Close Project Details"
-                className="group flex items-center gap-3 text-white/40 hover:text-white transition-colors"
-              >
-                <span className="font-mono text-[10px] uppercase tracking-widest font-bold hidden md:block">Exit_Archive</span>
-                <div className="p-2.5 border border-white/10 group-hover:border-[#E31B23]/40 transition-all rounded-sm">
-                  <X size={16} />
-                </div>
-              </button>
-            </div>
 
-            {/* Content Body */}
-            <article className="w-full max-w-6xl mx-auto px-6 md:px-16 py-12 md:py-24 space-y-32 md:space-y-48 relative z-10">
-              
-              {/* 01. HEADER SECTION */}
-              <motion.div {...sectionReveal} className="space-y-8 md:space-y-12">
-                <div className="flex flex-wrap items-center gap-4 md:gap-8 font-mono text-[10px] md:text-[11px] text-[#E31B23] uppercase font-black tracking-[0.3em]">
-                  {project.role && <span className="px-3 py-1.5 bg-[#E31B23]/5 border border-[#E31B23]/20">{project.role}</span>}
-                  {project.period && (
-                    <>
-                      <span className="text-white/10 hidden sm:block">|</span>
-                      <span className="text-white/40">{project.period}</span>
-                    </>
-                  )}
+              {/* Modal Content */}
+              <div className="p-6 md:p-12 space-y-12">
+                {/* Header */}
+                <div className="space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    {project.role && (
+                      <span className="px-3 py-1 text-xs font-semibold rounded-full bg-blue-50 text-blue-700 border border-blue-100">
+                        {project.role}
+                      </span>
+                    )}
+                    {project.period && (
+                      <span className="px-3 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600">
+                        {project.period}
+                      </span>
+                    )}
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-black text-slate-900 font-display tracking-tight leading-tight">
+                    {project.title}
+                  </h2>
+                  <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-normal border-l-4 border-blue-500 pl-4 py-1">
+                    {project.tagline}
+                  </p>
                 </div>
-                <h1 className="text-white text-5xl md:text-[100px] font-black uppercase tracking-tighter leading-[0.85] md:leading-[0.8]">
-                  {project.title}
-                </h1>
-                <p className="text-xl md:text-3xl text-white/40 leading-tight max-w-4xl font-display font-medium italic border-l-4 border-[#E31B23]/40 pl-8 py-2">
-                  {project.tagline}
-                </p>
-              </motion.div>
 
-              {/* 02. CORE CONTEXT */}
-              <div className="grid lg:grid-cols-12 gap-16 items-start">
-                 <motion.section {...sectionReveal} className="lg:col-span-8 space-y-10">
-                    <div className="flex items-center gap-4">
-                      <span className="font-mono text-[10px] text-[#E31B23] font-black">[01]</span>
-                      <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-2 flex-grow">
-                        Mission_Context
-                      </h2>
-                    </div>
-                    <div className="text-xl md:text-2xl text-white/60 leading-relaxed font-medium">
+                {/* Context & Metrics */}
+                <div className="grid md:grid-cols-12 gap-8 items-start">
+                  <div className="md:col-span-8 space-y-4">
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-blue-600">
+                      Background &amp; Mission
+                    </h3>
+                    <p className="text-base text-slate-700 leading-relaxed">
                       {project.journal.context}
-                    </div>
-                 </motion.section>
+                    </p>
+                    <p className="text-base text-slate-600 leading-relaxed">
+                      {project.journal.whyBuilt}
+                    </p>
+                  </div>
 
-                 <motion.aside {...sectionReveal} className="lg:col-span-4 space-y-10">
-                    {/* Collaborators Section */}
-                    {project.collaborators && project.collaborators.length > 0 && (
-                      <div className="p-8 border border-white/5 bg-white/[0.01] space-y-8 mb-10">
-                        <div className="flex items-center gap-3">
-                          <Users2 size={14} className="text-[#E31B23]" />
-                          <span className="font-mono text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Project_Collective</span>
-                        </div>
-                        <div className="space-y-6">
-                          {project.collaborators.map((member, i) => (
-                            <div key={i} className="group/member space-y-2">
-                              <div className="flex justify-between items-center">
-                                <span className="text-[11px] text-white font-black uppercase tracking-widest">{member.name}</span>
-                                {member.github && (
-                                  <a 
-                                    href={member.github} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="text-white/20 hover:text-[#E31B23] transition-colors"
-                                  >
-                                    <GitBranch size={12} />
-                                  </a>
-                                )}
-                              </div>
-                              <p className="text-[10px] text-white/30 font-mono uppercase tracking-wider">{member.role}</p>
+                  <div className="md:col-span-4 space-y-6">
+                    {project.metrics && project.metrics.length > 0 && (
+                      <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-700 block">
+                          Key Highlights
+                        </span>
+                        <div className="space-y-3">
+                          {project.metrics.map((m, idx) => (
+                            <div key={idx} className="flex gap-2.5 items-start">
+                              <CheckCircle2 size={16} className="text-emerald-600 shrink-0 mt-0.5" />
+                              <p className="text-xs font-medium text-slate-700 leading-normal">{m}</p>
                             </div>
                           ))}
                         </div>
                       </div>
                     )}
 
-                    <div className="p-8 border border-white/5 bg-white/[0.01] space-y-8">
-                       <span className="font-mono text-[9px] text-[#E31B23] font-black uppercase tracking-[0.4em]">Success_Metrics</span>
-                       <div className="space-y-6">
-                          {project.metrics?.map((m, i) => (
-                             <div key={i} className="flex gap-4 items-start">
-                                <CheckCircle2 size={14} className="text-emerald-500 shrink-0 mt-0.5" />
-                                <p className="text-[11px] text-white/40 font-black uppercase tracking-widest leading-relaxed">{m}</p>
-                             </div>
+                    {project.collaborators && project.collaborators.length > 0 && (
+                      <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+                        <span className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                          <Users2 size={14} className="text-blue-600" />
+                          Team &amp; Roles
+                        </span>
+                        <div className="space-y-2">
+                          {project.collaborators.map((c, i) => (
+                            <div key={i} className="flex justify-between items-center text-xs">
+                              <span className="font-semibold text-slate-800">{c.name}</span>
+                              <span className="text-slate-500 font-mono">{c.role}</span>
+                            </div>
                           ))}
-                       </div>
-                    </div>
-                 </motion.aside>
-              </div>
-
-              {/* 03. VISUAL ENGINE */}
-              {project.image && (
-                <motion.section {...sectionReveal} className="space-y-16">
-                  <div className="flex items-center gap-4">
-                    <span className="font-mono text-[10px] text-[#E31B23] font-black">[02]</span>
-                    <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-2 flex-grow">
-                      Visual_System
-                    </h2>
-                  </div>
-                  <div className="border border-white/10 p-3 bg-[#0a0a0c] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] relative group">
-                    <div className="relative aspect-video overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-1000">
-                      <img 
-                        src={project.image} 
-                        alt={`${project.title} Production Interface`}
-                        className="w-full h-full object-cover scale-[1.01] group-hover:scale-100 transition-transform duration-1000"
-                        loading="lazy"
-                      />
-                    </div>
-                    {/* Corner Accents */}
-                    <div className="absolute top-0 left-0 w-20 h-[1px] bg-[#E31B23]/40" />
-                    <div className="absolute top-0 left-0 w-[1px] h-20 bg-[#E31B23]/40" />
-                    <div className="absolute bottom-0 right-0 w-20 h-[1px] bg-[#E31B23]/40" />
-                    <div className="absolute bottom-0 right-0 w-[1px] h-20 bg-[#E31B23]/40" />
-                  </div>
-                </motion.section>
-              )}
-
-              {/* 04. FAILURE & RECOVERY */}
-              {project.failureRecovery && (
-                <motion.section {...sectionReveal} className="space-y-12">
-                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-[10px] text-[#E31B23] font-black">[03]</span>
-                    <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-2 flex-grow">
-                      System_Failure_Recovery
-                    </h2>
-                  </div>
-                  <div className="grid md:grid-cols-3 gap-1px bg-white/5 border border-white/5">
-                     <div className="bg-[#0a0a0c] p-10 space-y-6">
-                        <div className="flex items-center gap-3 text-rose-500">
-                           <ShieldAlert size={18} />
-                           <span className="font-mono text-[10px] font-black uppercase tracking-widest">Incident_Report</span>
                         </div>
-                        <p className="text-sm text-white/50 leading-relaxed font-medium">{project.failureRecovery.incident}</p>
-                     </div>
-                     <div className="bg-[#0a0a0c] p-10 space-y-6">
-                        <div className="flex items-center gap-3 text-amber-500">
-                           <Info size={18} />
-                           <span className="font-mono text-[10px] font-black uppercase tracking-widest">Root_Cause_Analysis</span>
-                        </div>
-                        <p className="text-sm text-white/50 leading-relaxed font-medium">{project.failureRecovery.rootCause}</p>
-                     </div>
-                     <div className="bg-[#0a0a0c] p-10 space-y-6">
-                        <div className="flex items-center gap-3 text-emerald-500">
-                           <Zap size={18} />
-                           <span className="font-mono text-[10px] font-black uppercase tracking-widest">Architect_Recovery</span>
-                        </div>
-                        <p className="text-sm text-white/50 leading-relaxed font-medium">{project.failureRecovery.recovery}</p>
-                     </div>
-                  </div>
-                </motion.section>
-              )}
-
-              {/* 05. ARCHITECTURE & LOGIC */}
-              <motion.section {...sectionReveal} className="space-y-16">
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-[10px] text-[#E31B23] font-black">[04]</span>
-                  <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-2 flex-grow">
-                    Architecture_Logic
-                  </h2>
-                </div>
-                <div className="grid lg:grid-cols-2 gap-20 items-center">
-                   <div className="text-white/50 text-lg leading-relaxed font-medium">
-                      {project.journal.systemThinking}
-                   </div>
-                   <div className="p-12 md:p-20 flex flex-col items-center justify-center bg-[#050507] border border-white/5 relative overflow-hidden">
-                      <div className="absolute inset-0 architect-grid-dense opacity-[0.03]" />
-                      <span className="font-mono text-[9px] text-[#E31B23] font-black uppercase tracking-[0.6em] mb-12 relative z-10">System_Logic_Map</span>
-                      <div className="w-full relative z-10">
-                        {project.id === "okey-bimbel" && <OkeyBimbelDiagram />}
-                        {project.id === "01" && <SecureCBTDiagram />}
-                        {project.id === "02" && <GegesBarberDiagram />}
-                        {project.id === "03" && <SecureCBTDiagram />}
                       </div>
-                   </div>
+                    )}
+                  </div>
                 </div>
-              </motion.section>
 
-              {/* 06. ENGINEERING LOGS */}
-              <motion.section {...sectionReveal} className="space-y-16">
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-[10px] text-[#E31B23] font-black">[05]</span>
-                  <h2 className="font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black border-b border-white/5 pb-2 flex-grow">
-                    Engineering_Artifacts
-                  </h2>
+                {/* Architecture & Diagram */}
+                <div className="space-y-6 pt-8 border-t border-slate-100">
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-blue-600">
+                    System Architecture &amp; Logic
+                  </h3>
+                  <p className="text-slate-600 leading-relaxed">
+                    {project.journal.systemThinking}
+                  </p>
+                  <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200/90 flex flex-col items-center justify-center">
+                    <span className="text-xs font-mono font-semibold text-slate-600 mb-6 uppercase tracking-wider">
+                      Architecture Topology
+                    </span>
+                    <div className="w-full max-w-lg">
+                      {project.id === "okey-bimbel" && <OkeyBimbelDiagram />}
+                      {project.id === "01" && <GegesBarberDiagram />}
+                      {project.id === "02" && <SecureCBTDiagram />}
+                      {project.id === "03" && <OkeyBimbelDiagram />}
+                    </div>
+                  </div>
                 </div>
-                <div className="grid lg:grid-cols-12 gap-16 items-start">
-                   <div className="lg:col-span-4 space-y-10">
-                      <div className="space-y-6">
-                        <h3 className="text-xl font-black text-white uppercase tracking-tighter">System Implementation</h3>
-                        <p className="text-white/40 text-sm leading-relaxed font-medium">
-                           {project.journal.exploration}
+
+                {/* Failure Recovery */}
+                {project.failureRecovery && (
+                  <div className="space-y-4 pt-8 border-t border-slate-100">
+                    <h3 className="text-sm font-bold uppercase tracking-wider text-blue-600">
+                      Technical Challenge &amp; Resolution
+                    </h3>
+                    <div className="grid md:grid-cols-3 gap-4">
+                      <div className="p-5 rounded-2xl bg-rose-50/60 border border-rose-200/70 space-y-2">
+                        <span className="text-xs font-bold text-rose-700 uppercase tracking-wider flex items-center gap-1.5">
+                          <ShieldAlert size={14} /> The Incident
+                        </span>
+                        <p className="text-xs text-rose-900 leading-relaxed font-medium">
+                          {project.failureRecovery.incident}
                         </p>
                       </div>
-                      
-                      <div className="space-y-6 pt-10 border-t border-white/5">
-                        <div className="flex items-center gap-3">
-                           <FolderTree size={14} className="text-[#E31B23]" />
-                           <span className="font-mono text-[9px] text-white/60 font-black uppercase tracking-widest">Project_Structure</span>
-                        </div>
-                        <pre className="text-[11px] text-[#E31B23]/70 font-mono leading-relaxed border-l-2 border-[#E31B23]/30 pl-8 py-2 overflow-x-auto whitespace-pre">
-                          {project.folderStructure}
-                        </pre>
+                      <div className="p-5 rounded-2xl bg-amber-50/60 border border-amber-200/70 space-y-2">
+                        <span className="text-xs font-bold text-amber-700 uppercase tracking-wider flex items-center gap-1.5">
+                          <Info size={14} /> Root Cause
+                        </span>
+                        <p className="text-xs text-amber-900 leading-relaxed font-medium">
+                          {project.failureRecovery.rootCause}
+                        </p>
                       </div>
-                   </div>
-
-                   <div className="lg:col-span-8 space-y-10">
-                      <div className="space-y-10">
-                         {project.timeline?.map((step, idx) => (
-                           <div key={idx} className="group relative pl-12 border-l-2 border-white/5 transition-all duration-700 hover:border-[#E31B23]/40">
-                              <div className="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-[#060608] border-2 border-white/10 group-hover:bg-[#E31B23] group-hover:border-[#E31B23] transition-all duration-700" />
-                              <div className="space-y-2">
-                                 <span className="font-mono text-[10px] text-[#E31B23] font-black uppercase tracking-widest">{step.label}</span>
-                                 <p className="text-white/50 text-base leading-relaxed font-medium">{step.description}</p>
-                              </div>
-                           </div>
-                         ))}
+                      <div className="p-5 rounded-2xl bg-emerald-50/60 border border-emerald-200/70 space-y-2">
+                        <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider flex items-center gap-1.5">
+                          <Zap size={14} /> Resolution
+                        </span>
+                        <p className="text-xs text-emerald-900 leading-relaxed font-medium">
+                          {project.failureRecovery.recovery}
+                        </p>
                       </div>
-                   </div>
-                </div>
-              </motion.section>
-
-              {/* 07. REFLECTION & RETROSPECTIVE */}
-              <motion.section {...sectionReveal} className="p-12 md:p-24 bg-white/[0.01] border border-white/5 space-y-20 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#E31B23]/[0.02] blur-[100px] rounded-full pointer-events-none" />
-                
-                <div className="grid md:grid-cols-2 gap-20 relative z-10">
-                   <div className="space-y-8">
-                      <span className="font-mono text-[10px] text-white/20 uppercase tracking-[0.4em] font-black">Technical_Reflection</span>
-                      <p className="text-white/50 text-lg leading-relaxed font-medium italic underline decoration-white/10 underline-offset-8">
-                        {project.journal.reflection}
-                      </p>
-                   </div>
-                   <div className="space-y-8">
-                      <span className="font-mono text-[10px] text-[#E31B23] uppercase tracking-[0.4em] font-black">Core_Lessons_Learned</span>
-                      <div className="text-2xl md:text-3xl text-white font-black leading-tight tracking-tighter uppercase">
-                        &quot;{project.journal.lessons}&quot;
-                      </div>
-                   </div>
-                </div>
-              </motion.section>
-
-              {/* ACTION CALLS */}
-              <div className="pt-20 flex flex-wrap justify-center gap-8">
-                {repoLink && (
-                  <a 
-                    href={repoLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-12 py-6 bg-white text-black text-[11px] font-mono font-black uppercase tracking-[0.2em] hover:bg-[#E31B23] hover:text-white transition-all shadow-2xl"
-                  >
-                    Source_Archive
-                  </a>
+                    </div>
+                  </div>
                 )}
-                {liveLink && (
-                  <a 
-                    href={liveLink} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="px-12 py-6 border-2 border-white/10 text-[11px] font-mono font-black uppercase tracking-[0.2em] text-white/40 hover:text-white hover:border-white transition-all"
-                  >
-                    Live_Deployment
-                  </a>
+
+                {/* Code Structure */}
+                {project.folderStructure && (
+                  <div className="space-y-4 pt-8 border-t border-slate-100">
+                    <div className="flex items-center gap-2">
+                      <FolderTree size={16} className="text-blue-600" />
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800">
+                        Codebase Layout
+                      </h3>
+                    </div>
+                    <pre className="p-5 rounded-2xl bg-slate-900 text-blue-200 font-mono text-xs overflow-x-auto leading-relaxed">
+                      {project.folderStructure}
+                    </pre>
+                  </div>
                 )}
-              </div>
-            </article>
 
-            {/* Footer */}
-            <footer className="mt-auto py-24 border-t border-white/5 bg-black text-center relative overflow-hidden">
-              <div className="font-mono text-[10px] text-white/10 uppercase tracking-[0.6em] font-black relative z-10">
-                M. Irsyad Fachryanto &copy; 2026 // System_Verified
+                {/* Bottom Action CTAs */}
+                <div className="pt-8 border-t border-slate-100 flex flex-wrap gap-4 justify-end">
+                  {repoLink && (
+                    <a
+                      href={repoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+                    >
+                      <GitBranch size={15} />
+                      <span>View GitHub Repository</span>
+                    </a>
+                  )}
+                  {liveLink && (
+                    <a
+                      href={liveLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-md shadow-blue-600/20 transition-all active:scale-95"
+                    >
+                      <span>Open Live Project</span>
+                      <ArrowUpRight size={15} />
+                    </a>
+                  )}
+                </div>
               </div>
-              <div className="absolute inset-0 bg-noise opacity-[0.01]" />
-            </footer>
-
+            </motion.div>
           </div>
         </motion.div>
       )}
@@ -383,59 +284,55 @@ export function ProjectDetailsModal({ project, isOpen, onClose }: ProjectDetails
   );
 }
 
-/* 1. Diagram SVG Okey Bimbel */
 function OkeyBimbelDiagram() {
   return (
-    <svg className="w-full h-auto" viewBox="0 0 420 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="70" width="90" height="40" rx="0" stroke="#E31B23" strokeWidth="2" fill="#000" />
-      <text x="55" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Next.js Admin</text>
-      <path d="M100 90 H150" stroke="#ffffff" strokeWidth="1" strokeDasharray="4,4" />
-      <polygon points="150,90 145,87 145,93" fill="#ffffff" />
-      <rect x="155" y="70" width="100" height="40" rx="0" stroke="#ffffff" strokeWidth="2" fill="#000" />
-      <text x="205" y="88" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Pro QR</text>
-      <text x="205" y="99" fill="#E31B23" fontSize="8" fontFamily="monospace" textAnchor="middle">Handshake</text>
-      <path d="M255 90 H305" stroke="#ffffff" strokeWidth="1" />
-      <polygon points="305,90 300,87 300,93" fill="#ffffff" />
-      <rect x="310" y="70" width="100" height="55" rx="0" stroke="#E31B23" strokeWidth="2" fill="#000" />
-      <text x="360" y="88" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Firebase</text>
-      <text x="360" y="99" fill="#E31B23" fontSize="8" fontFamily="monospace" textAnchor="middle">Realtime Stream</text>
+    <svg className="w-full h-auto" viewBox="0 0 420 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="60" width="100" height="44" rx="10" stroke="#2563EB" strokeWidth="2" fill="#FFFFFF" />
+      <text x="60" y="86" fill="#0F172A" fontSize="10" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Next.js Portal</text>
+      <path d="M110 82 H155" stroke="#94A3B8" strokeWidth="1.5" strokeDasharray="3,3" />
+      <polygon points="155,82 148,78 148,86" fill="#94A3B8" />
+      <rect x="160" y="60" width="105" height="44" rx="10" stroke="#0F172A" strokeWidth="2" fill="#FFFFFF" />
+      <text x="212" y="80" fill="#0F172A" fontSize="9" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Dynamic QR</text>
+      <text x="212" y="93" fill="#2563EB" fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">5s Handshake</text>
+      <path d="M265 82 H310" stroke="#94A3B8" strokeWidth="1.5" />
+      <polygon points="310,82 303,78 303,86" fill="#94A3B8" />
+      <rect x="315" y="55" width="95" height="54" rx="10" stroke="#2563EB" strokeWidth="2" fill="#FFFFFF" />
+      <text x="362" y="78" fill="#0F172A" fontSize="10" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Kiosk Client</text>
+      <text x="362" y="94" fill="#2563EB" fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Kotlin Native</text>
     </svg>
   );
 }
 
-/* 2. Diagram SVG Secure CBT */
 function SecureCBTDiagram() {
   return (
-    <svg className="w-full h-auto" viewBox="0 0 420 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="70" width="100" height="40" rx="0" stroke="#ffffff" strokeWidth="2" fill="#000" />
-      <text x="60" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Edge AI</text>
-      <path d="M110 90 H160" stroke="#E31B23" strokeWidth="2" />
-      <polygon points="160,90 155,87 155,93" fill="#E31B23" />
-      <rect x="165" y="70" width="90" height="40" rx="0" stroke="#E31B23" strokeWidth="2" fill="#000" />
-      <text x="210" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Face Mesh</text>
-      <path d="M255 90 H305" stroke="#E31B23" strokeWidth="2" strokeDasharray="4,4" />
-      <polygon points="305,90 300,87 300,93" fill="#E31B23" />
-      <rect x="310" y="70" width="100" height="45" rx="0" stroke="#ffffff" strokeWidth="2" fill="#000" />
-      <text x="360" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Warning System</text>
+    <svg className="w-full h-auto" viewBox="0 0 420 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="60" width="105" height="44" rx="10" stroke="#0F172A" strokeWidth="2" fill="#FFFFFF" />
+      <text x="67" y="86" fill="#0F172A" fontSize="10" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Camera Feed</text>
+      <path d="M120 82 H165" stroke="#2563EB" strokeWidth="2" />
+      <polygon points="165,82 158,78 158,86" fill="#2563EB" />
+      <rect x="170" y="60" width="105" height="44" rx="10" stroke="#2563EB" strokeWidth="2" fill="#FFFFFF" />
+      <text x="222" y="80" fill="#0F172A" fontSize="9" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">MediaPipe AI</text>
+      <text x="222" y="93" fill="#2563EB" fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Z-Depth Calc</text>
+      <path d="M275 82 H315" stroke="#2563EB" strokeWidth="2" strokeDasharray="3,3" />
+      <polygon points="315,82 308,78 308,86" fill="#2563EB" />
+      <rect x="320" y="60" width="90" height="44" rx="10" stroke="#0F172A" strokeWidth="2" fill="#FFFFFF" />
+      <text x="365" y="86" fill="#0F172A" fontSize="9" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Blur Overlay</text>
     </svg>
   );
 }
 
-/* 3. Diagram SVG Geges Barber */
 function GegesBarberDiagram() {
   return (
-    <svg className="w-full h-auto" viewBox="0 0 420 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="70" width="90" height="40" rx="0" stroke="#ffffff" strokeWidth="2" fill="#000" />
-      <text x="55" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Clean Arch</text>
-      <path d="M100 90 H150" stroke="#E31B23" strokeWidth="1" />
-      <rect x="155" y="70" width="110" height="40" rx="0" stroke="#E31B23" strokeWidth="2" fill="#000" />
-      <text x="210" y="94" fill="#ffffff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">Fair Algo</text>
-      <path d="M265 85 H325" stroke="#ffffff" strokeWidth="1" />
-      <rect x="330" y="70" width="80" height="30" rx="0" stroke="#ffffff" strokeWidth="2" fill="#000" />
-      <text x="370" y="88" fill="#ffffff" fontSize="8" fontFamily="monospace" textAnchor="middle" fontWeight="bold">188+ Tests</text>
-      <path d="M210 110 V150 H330" stroke="#E31B23" strokeWidth="1" strokeDasharray="3,3" />
-      <rect x="330" y="135" width="80" height="30" rx="0" stroke="#E31B23" strokeWidth="1" fill="#000" />
-      <text x="370" y="152" fill="#ffffff" fontSize="7" fontFamily="monospace" textAnchor="middle">Integrity</text>
+    <svg className="w-full h-auto" viewBox="0 0 420 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="60" width="95" height="44" rx="10" stroke="#0F172A" strokeWidth="2" fill="#FFFFFF" />
+      <text x="62" y="86" fill="#0F172A" fontSize="10" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Flutter App</text>
+      <path d="M110 82 H155" stroke="#2563EB" strokeWidth="2" />
+      <rect x="160" y="55" width="115" height="54" rx="10" stroke="#2563EB" strokeWidth="2" fill="#FFFFFF" />
+      <text x="217" y="78" fill="#0F172A" fontSize="9" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Fair Work Algo</text>
+      <text x="217" y="94" fill="#2563EB" fontSize="8" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Queue Balancing</text>
+      <path d="M275 82 H320" stroke="#94A3B8" strokeWidth="1.5" />
+      <rect x="325" y="60" width="85" height="44" rx="10" stroke="#0F172A" strokeWidth="2" fill="#FFFFFF" />
+      <text x="367" y="86" fill="#0F172A" fontSize="9" fontFamily="sans-serif" textAnchor="middle" fontWeight="bold">Firestore</text>
     </svg>
   );
 }

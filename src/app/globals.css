@@ -7,64 +7,69 @@
 }
 
 :root {
-  --accent: #E31B23;
-  --bg: #060608;
+  /* 4 Core Balanced Colors: Clean Light Studio */
+  --bg-primary: #F8FAFC;      /* Pure clean canvas */
+  --bg-surface: #FFFFFF;      /* Card & container surface */
+  --text-main: #0F172A;       /* Slate-900 (High contrast WCAG AAA) */
+  --text-muted: #64748B;      /* Slate-500 */
+  --brand-blue: #2563EB;      /* Electric Royal Blue */
+  --brand-light: #EFF6FF;     /* Soft Sky/Ice Blue */
+  --border-light: #E2E8F0;    /* Crisp subtle border */
 }
 
 @layer base {
   html {
-    background-color: var(--bg);
-    color: white;
+    background-color: var(--bg-primary);
+    color: var(--text-main);
     -webkit-font-smoothing: antialiased;
     scroll-behavior: smooth;
   }
   
   body {
-    @apply font-sans overflow-x-hidden;
+    @apply font-sans overflow-x-hidden bg-[#F8FAFC] text-slate-900;
   }
 
   ::selection {
-    background-color: white;
-    color: black;
+    background-color: #2563EB;
+    color: #FFFFFF;
   }
 }
 
 @layer components {
-  .architect-grid {
+  /* Subtle clean architectural grid */
+  .studio-grid {
     background-image: 
-      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: clamp(40px, 5vw, 80px) clamp(40px, 5vw, 80px);
-    mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+      linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(circle at 50% 20%, black 60%, transparent 100%);
   }
 
-  .architect-grid-dense {
-    background-image: 
-      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
+  /* Clean studio card */
+  .studio-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .brutal-card {
-    @apply border border-white/5 bg-white/[0.01] transition-all duration-700;
+  .studio-card:hover {
+    border-color: #BFDBFE;
+    box-shadow: 0 20px 35px -8px rgba(37, 99, 235, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+    transform: translateY(-2px);
   }
 
-  .brutal-card:hover {
-    @apply border-white/20 bg-white/[0.03] shadow-[0_0_80px_rgba(227,27,35,0.05)];
+  /* High contrast pill badge */
+  .badge-blue {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200/80;
   }
 
-  .giant-type {
-    @apply font-display font-black tracking-tighter uppercase leading-[0.8] md:leading-[0.75];
-    font-size: clamp(1.75rem, 11vw, 9rem);
+  .badge-slate {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200;
   }
 
-  .section-label {
-    @apply font-mono text-[8px] md:text-[10px] font-black uppercase tracking-[0.4em] md:tracking-[0.6em] text-[#E31B23];
-  }
-
-  .paragraph-editorial {
-    @apply text-base md:text-xl text-white/50 leading-relaxed font-medium;
-    max-width: 65ch;
+  .badge-emerald {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200;
   }
 
   .scrollbar-none::-webkit-scrollbar {
@@ -74,32 +79,23 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-
-  .bg-scanline {
-    background: linear-gradient(
-      to bottom,
-      transparent 50%,
-      rgba(0, 0, 0, 0.5) 51%,
-      transparent 51%
-    );
-    background-size: 100% 4px;
-  }
-
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  }
 }
 
-/* GPU Accelerated Animations */
-.will-change-nav {
-  will-change: transform, padding, background-color;
+/* Sound wave animation */
+@keyframes soundwave {
+  0%, 100% { height: 4px; }
+  50% { height: 16px; }
 }
 
-@keyframes pulse-intense {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.1); }
+.animate-wave-1 {
+  animation: soundwave 1s ease-in-out infinite;
 }
-
-.animate-pulse-intense {
-  animation: pulse-intense 2s ease-in-out infinite;
+.animate-wave-2 {
+  animation: soundwave 0.8s ease-in-out infinite 0.2s;
+}
+.animate-wave-3 {
+  animation: soundwave 1.2s ease-in-out infinite 0.4s;
+}
+.animate-wave-4 {
+  animation: soundwave 0.9s ease-in-out infinite 0.1s;
 }
