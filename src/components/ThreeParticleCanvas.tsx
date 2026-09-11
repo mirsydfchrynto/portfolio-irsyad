@@ -14,243 +14,377 @@ export function ThreeParticleCanvas({ className = "" }: ThreeParticleCanvasProps
     const container = containerRef.current;
     if (!container) return;
 
-    const width = container.clientWidth;
-    const height = container.clientHeight;
+    let cleanup: (() => void) | undefined;
 
-    // Scene & Camera
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
-    camera.position.z = 280;
+    // Check WebGL availability safely
+    const isWebGLAvailable = () => {
+      try {
+        const testCanvas = document.createElement("canvas");
+        return Boolean(
+          window.WebGLRenderingContext &&
+            (testCanvas.getContext("webgl") || testCanvas.getContext("experimental-webgl"))
+        );
+      } catch {
+        return false;
+      }
+    };
 
-    // WebGL Renderer
-    const renderer = new THREE.WebGLRenderer({
-      alpha: true,
-      antialias: true,
-      powerPreference: "high-performance",
-    });
-    renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    container.appendChild(renderer.domElement);
+    // 1. High-Fidelity 3D WebGL Implementation
+    const initThreeWebGL = (): (() => void) => {
+      const width = container.clientWidth || window.innerWidth;
+      const height = container.clientHeight || window.innerHeight;
 
-    // Particle Configuration
-    const particleCount = 75;
-    const maxDistance = 90;
-    const bounds = { x: 300, y: 220, z: 160 };
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
+      camera.position.z = 280;
 
-    const positions = new Float32Array(particleCount * 3);
-    const velocities: { x: number; y: number; z: number }[] = [];
-    const colors = new Float32Array(particleCount * 3);
+      const renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        powerPreference: "high-performance",
+      });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
 
-    const crimsonColor = new THREE.Color("#E31B23");
-    const dimWhiteColor = new THREE.Color("#9ca3af");
-    const whiteColor = new THREE.Color("#f3f4f6");
+      const particleCount = 75;
+      const maxDistance = 90;
+      const bounds = { x: 300, y: 220, z: 160 };
 
-    for (let i = 0; i < particleCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * bounds.x * 2;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * bounds.y * 2;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * bounds.z * 2;
+      const positions = new Float32Array(particleCount * 3);
+      const velocities: { x: number; y: number; z: number }[] = [];
+      const colors = new Float32Array(particleCount * 3);
 
-      velocities.push({
-        x: (Math.random() - 0.5) * 0.45,
-        y: (Math.random() - 0.5) * 0.45,
-        z: (Math.random() - 0.5) * 0.35,
+      const crimsonColor = new THREE.Color("#E31B23");
+      const dimWhiteColor = new THREE.Color("#9ca3af");
+      const whiteColor = new THREE.Color("#f3f4f6");
+
+      for (let i = 0; i < particleCount; i++) {
+        positions[i * 3] = (Math.random() - 0.5) * bounds.x * 2;
+        positions[i * 3 + 1] = (Math.random() - 0.5) * bounds.y * 2;
+        positions[i * 3 + 2] = (Math.random() - 0.5) * bounds.z * 2;
+
+        velocities.push({
+          x: (Math.random() - 0.5) * 0.45,
+          y: (Math.random() - 0.5) * 0.45,
+          z: (Math.random() - 0.5) * 0.35,
+        });
+
+        const isCrimson = Math.random() < 0.28;
+        const c = isCrimson ? crimsonColor : Math.random() < 0.5 ? dimWhiteColor : whiteColor;
+        colors[i * 3] = c.r;
+        colors[i * 3 + 1] = c.g;
+        colors[i * 3 + 2] = c.b;
+      }
+
+      const pointGeometry = new THREE.BufferGeometry();
+      pointGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      pointGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+
+      const createCircleTexture = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 64;
+        canvas.height = 64;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return null;
+        const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+        gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+        gradient.addColorStop(0.35, "rgba(255, 255, 255, 0.85)");
+        gradient.addColorStop(0.7, "rgba(227, 27, 35, 0.3)");
+        gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 64, 64);
+        return new THREE.CanvasTexture(canvas);
+      };
+
+      const texture = createCircleTexture();
+      const pointMaterial = new THREE.PointsMaterial({
+        size: 5.5,
+        vertexColors: true,
+        map: texture || undefined,
+        transparent: true,
+        opacity: 0.9,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
       });
 
-      // Accent roughly 25% with crimson red, rest with sleek silver/white
-      const isCrimson = Math.random() < 0.28;
-      const c = isCrimson ? crimsonColor : Math.random() < 0.5 ? dimWhiteColor : whiteColor;
-      colors[i * 3] = c.r;
-      colors[i * 3 + 1] = c.g;
-      colors[i * 3 + 2] = c.b;
-    }
+      const pointCloud = new THREE.Points(pointGeometry, pointMaterial);
+      scene.add(pointCloud);
 
-    // Points Geometry & Material
-    const pointGeometry = new THREE.BufferGeometry();
-    pointGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    pointGeometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+      const linePositions = new Float32Array(particleCount * particleCount * 6);
+      const lineColors = new Float32Array(particleCount * particleCount * 6);
+      const lineGeometry = new THREE.BufferGeometry();
+      lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
+      lineGeometry.setAttribute("color", new THREE.BufferAttribute(lineColors, 3));
 
-    // Particle sprite using canvas circle
-    const createCircleTexture = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = 64;
-      canvas.height = 64;
-      const ctx = canvas.getContext("2d")!;
-      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
-      gradient.addColorStop(0.35, "rgba(255, 255, 255, 0.85)");
-      gradient.addColorStop(0.7, "rgba(227, 27, 35, 0.3)");
-      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 64, 64);
-      return new THREE.CanvasTexture(canvas);
-    };
+      const lineMaterial = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.5,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      });
 
-    const pointMaterial = new THREE.PointsMaterial({
-      size: 5.5,
-      vertexColors: true,
-      map: createCircleTexture(),
-      transparent: true,
-      opacity: 0.9,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
+      const linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+      scene.add(linesMesh);
 
-    const pointCloud = new THREE.Points(pointGeometry, pointMaterial);
-    scene.add(pointCloud);
+      const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+      const handleMouseMove = (event: MouseEvent) => {
+        const rect = container.getBoundingClientRect();
+        const clientX = event.clientX - rect.left;
+        const clientY = event.clientY - rect.top;
+        mouse.targetX = (clientX / rect.width) * 2 - 1;
+        mouse.targetY = -(clientY / rect.height) * 2 + 1;
+      };
 
-    // Dynamic Connecting Lines
-    const linePositions = new Float32Array(particleCount * particleCount * 6);
-    const lineColors = new Float32Array(particleCount * particleCount * 6);
-    const lineGeometry = new THREE.BufferGeometry();
-    lineGeometry.setAttribute("position", new THREE.BufferAttribute(linePositions, 3));
-    lineGeometry.setAttribute("color", new THREE.BufferAttribute(lineColors, 3));
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
 
-    const lineMaterial = new THREE.LineBasicMaterial({
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.5,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
+      const handleResize = () => {
+        if (!container) return;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      };
 
-    const linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
-    scene.add(linesMesh);
+      window.addEventListener("resize", handleResize);
 
-    // Mouse Interaction
-    const mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+      let animationFrameId: number;
+      const clock = new THREE.Clock();
 
-    const handleMouseMove = (event: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const clientX = event.clientX - rect.left;
-      const clientY = event.clientY - rect.top;
-      mouse.targetX = (clientX / rect.width) * 2 - 1;
-      mouse.targetY = -(clientY / rect.height) * 2 + 1;
-    };
+      const animate = () => {
+        animationFrameId = requestAnimationFrame(animate);
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+        const elapsedTime = clock.getElapsedTime();
 
-    // Resize Observer
-    const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
-    };
+        mouse.x += (mouse.targetX - mouse.x) * 0.04;
+        mouse.y += (mouse.targetY - mouse.y) * 0.04;
 
-    window.addEventListener("resize", handleResize);
+        scene.rotation.y = mouse.x * 0.35 + Math.sin(elapsedTime * 0.12) * 0.08;
+        scene.rotation.x = -mouse.y * 0.25 + Math.cos(elapsedTime * 0.1) * 0.06;
 
-    // Animation Loop
-    let animationFrameId: number;
-    let clock = new THREE.Clock();
+        const posAttr = pointGeometry.attributes.position as THREE.BufferAttribute;
+        const currentPos = posAttr.array as Float32Array;
 
-    const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
+        for (let i = 0; i < particleCount; i++) {
+          const i3 = i * 3;
+          currentPos[i3] += velocities[i].x;
+          currentPos[i3 + 1] += velocities[i].y;
+          currentPos[i3 + 2] += velocities[i].z;
 
-      const elapsedTime = clock.getElapsedTime();
+          if (Math.abs(currentPos[i3]) > bounds.x) velocities[i].x *= -1;
+          if (Math.abs(currentPos[i3 + 1]) > bounds.y) velocities[i].y *= -1;
+          if (Math.abs(currentPos[i3 + 2]) > bounds.z) velocities[i].z *= -1;
+        }
+        posAttr.needsUpdate = true;
 
-      // Smooth mouse lerp
-      mouse.x += (mouse.targetX - mouse.x) * 0.04;
-      mouse.y += (mouse.targetY - mouse.y) * 0.04;
+        let lineIndex = 0;
+        const linePosAttr = lineGeometry.attributes.position as THREE.BufferAttribute;
+        const lineColAttr = lineGeometry.attributes.color as THREE.BufferAttribute;
+        const lPos = linePosAttr.array as Float32Array;
+        const lCol = lineColAttr.array as Float32Array;
 
-      // Subtle scene rotation based on cursor
-      scene.rotation.y = mouse.x * 0.35 + Math.sin(elapsedTime * 0.12) * 0.08;
-      scene.rotation.x = -mouse.y * 0.25 + Math.cos(elapsedTime * 0.1) * 0.06;
+        for (let i = 0; i < particleCount; i++) {
+          const p1x = currentPos[i * 3];
+          const p1y = currentPos[i * 3 + 1];
+          const p1z = currentPos[i * 3 + 2];
 
-      const posAttr = pointGeometry.attributes.position as THREE.BufferAttribute;
-      const currentPos = posAttr.array as Float32Array;
+          for (let j = i + 1; j < particleCount; j++) {
+            const p2x = currentPos[j * 3];
+            const p2y = currentPos[j * 3 + 1];
+            const p2z = currentPos[j * 3 + 2];
 
-      // Update particle positions
-      for (let i = 0; i < particleCount; i++) {
-        const i3 = i * 3;
-        currentPos[i3] += velocities[i].x;
-        currentPos[i3 + 1] += velocities[i].y;
-        currentPos[i3 + 2] += velocities[i].z;
+            const dx = p1x - p2x;
+            const dy = p1y - p2y;
+            const dz = p1z - p2z;
+            const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-        // Bounce back within bounds
-        if (Math.abs(currentPos[i3]) > bounds.x) velocities[i].x *= -1;
-        if (Math.abs(currentPos[i3 + 1]) > bounds.y) velocities[i].y *= -1;
-        if (Math.abs(currentPos[i3 + 2]) > bounds.z) velocities[i].z *= -1;
-      }
-      posAttr.needsUpdate = true;
+            if (dist < maxDistance) {
+              const alpha = 1 - dist / maxDistance;
 
-      // Update Lines between nearby particles
-      let lineIndex = 0;
-      const linePosAttr = lineGeometry.attributes.position as THREE.BufferAttribute;
-      const lineColAttr = lineGeometry.attributes.color as THREE.BufferAttribute;
-      const lPos = linePosAttr.array as Float32Array;
-      const lCol = lineColAttr.array as Float32Array;
+              lPos[lineIndex * 3] = p1x;
+              lPos[lineIndex * 3 + 1] = p1y;
+              lPos[lineIndex * 3 + 2] = p1z;
 
-      for (let i = 0; i < particleCount; i++) {
-        const p1x = currentPos[i * 3];
-        const p1y = currentPos[i * 3 + 1];
-        const p1z = currentPos[i * 3 + 2];
+              lPos[(lineIndex + 1) * 3] = p2x;
+              lPos[(lineIndex + 1) * 3 + 1] = p2y;
+              lPos[(lineIndex + 1) * 3 + 2] = p2z;
 
-        for (let j = i + 1; j < particleCount; j++) {
-          const p2x = currentPos[j * 3];
-          const p2y = currentPos[j * 3 + 1];
-          const p2z = currentPos[j * 3 + 2];
+              const isRedLine = (i + j) % 3 === 0;
+              const r = isRedLine ? 0.89 * alpha : 0.45 * alpha;
+              const g = isRedLine ? 0.11 * alpha : 0.5 * alpha;
+              const b = isRedLine ? 0.14 * alpha : 0.55 * alpha;
 
-          const dx = p1x - p2x;
-          const dy = p1y - p2y;
-          const dz = p1z - p2z;
-          const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+              lCol[lineIndex * 3] = r;
+              lCol[lineIndex * 3 + 1] = g;
+              lCol[lineIndex * 3 + 2] = b;
 
-          if (dist < maxDistance) {
-            const alpha = 1 - dist / maxDistance;
+              lCol[(lineIndex + 1) * 3] = r;
+              lCol[(lineIndex + 1) * 3 + 1] = g;
+              lCol[(lineIndex + 1) * 3 + 2] = b;
 
-            // Point 1
-            lPos[lineIndex * 3] = p1x;
-            lPos[lineIndex * 3 + 1] = p1y;
-            lPos[lineIndex * 3 + 2] = p1z;
-
-            // Point 2
-            lPos[(lineIndex + 1) * 3] = p2x;
-            lPos[(lineIndex + 1) * 3 + 1] = p2y;
-            lPos[(lineIndex + 1) * 3 + 2] = p2z;
-
-            // Accent with subtle red tint for close connections
-            const isRedLine = (i + j) % 3 === 0;
-            const r = isRedLine ? 0.89 * alpha : 0.45 * alpha;
-            const g = isRedLine ? 0.11 * alpha : 0.5 * alpha;
-            const b = isRedLine ? 0.14 * alpha : 0.55 * alpha;
-
-            lCol[lineIndex * 3] = r;
-            lCol[lineIndex * 3 + 1] = g;
-            lCol[lineIndex * 3 + 2] = b;
-
-            lCol[(lineIndex + 1) * 3] = r;
-            lCol[(lineIndex + 1) * 3 + 1] = g;
-            lCol[(lineIndex + 1) * 3 + 2] = b;
-
-            lineIndex += 2;
+              lineIndex += 2;
+            }
           }
         }
-      }
 
-      lineGeometry.setDrawRange(0, lineIndex);
-      linePosAttr.needsUpdate = true;
-      lineColAttr.needsUpdate = true;
+        lineGeometry.setDrawRange(0, lineIndex);
+        linePosAttr.needsUpdate = true;
+        lineColAttr.needsUpdate = true;
 
-      renderer.render(scene, camera);
+        renderer.render(scene, camera);
+      };
+
+      animate();
+
+      return () => {
+        cancelAnimationFrame(animationFrameId);
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("resize", handleResize);
+        if (container && renderer.domElement.parentNode === container) {
+          container.removeChild(renderer.domElement);
+        }
+        pointGeometry.dispose();
+        pointMaterial.dispose();
+        lineGeometry.dispose();
+        lineMaterial.dispose();
+        renderer.dispose();
+      };
     };
 
-    animate();
+    // 2. High-Performance 2D Canvas Fallback (100% Reliable across all environments)
+    const init2DFallback = (): (() => void) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = container.clientWidth || window.innerWidth;
+      canvas.height = container.clientHeight || window.innerHeight;
+      container.appendChild(canvas);
 
-    // Cleanup
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", handleResize);
-      if (container && renderer.domElement.parentNode === container) {
-        container.removeChild(renderer.domElement);
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return () => {};
+
+      interface Particle2D {
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        isRed: boolean;
+        radius: number;
       }
-      pointGeometry.dispose();
-      pointMaterial.dispose();
-      lineGeometry.dispose();
-      lineMaterial.dispose();
-      renderer.dispose();
+
+      const particles: Particle2D[] = [];
+      const particleCount = 65;
+      const maxDist = 95;
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          isRed: Math.random() < 0.28,
+          radius: Math.random() * 1.5 + 1.2,
+        });
+      }
+
+      let mouse = { x: canvas.width / 2, y: canvas.height / 2 };
+      const handleMouseMove = (e: MouseEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        };
+      };
+
+      window.addEventListener("mousemove", handleMouseMove, { passive: true });
+
+      const handleResize = () => {
+        canvas.width = container.clientWidth || window.innerWidth;
+        canvas.height = container.clientHeight || window.innerHeight;
+      };
+
+      window.addEventListener("resize", handleResize);
+
+      let animId: number;
+      const render = () => {
+        animId = requestAnimationFrame(render);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+
+          // Gentle mouse interaction
+          const dxMouse = p.x - mouse.x;
+          const dyMouse = p.y - mouse.y;
+          const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+          if (distMouse < 100) {
+            const force = (100 - distMouse) / 100;
+            p.x += (dxMouse / distMouse) * force * 1.2;
+            p.y += (dyMouse / distMouse) * force * 1.2;
+          }
+
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0) p.x = canvas.width;
+          if (p.x > canvas.width) p.x = 0;
+          if (p.y < 0) p.y = canvas.height;
+          if (p.y > canvas.height) p.y = 0;
+
+          // Draw node
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fillStyle = p.isRed ? "rgba(227, 27, 35, 0.9)" : "rgba(243, 244, 246, 0.75)";
+          ctx.fill();
+
+          // Connect lines
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < maxDist) {
+              const alpha = (1 - dist / maxDist) * 0.45;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = p.isRed || p2.isRed
+                ? `rgba(227, 27, 35, ${alpha * 0.85})`
+                : `rgba(156, 163, 175, ${alpha * 0.5})`;
+              ctx.lineWidth = 0.8;
+              ctx.stroke();
+            }
+          }
+        }
+      };
+
+      render();
+
+      return () => {
+        cancelAnimationFrame(animId);
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("resize", handleResize);
+        if (canvas.parentNode === container) {
+          container.removeChild(canvas);
+        }
+      };
+    };
+
+    // Safe Execution Guard: Try Three.js WebGL, fall back seamlessly on any exception
+    if (isWebGLAvailable()) {
+      try {
+        cleanup = initThreeWebGL();
+      } catch (err) {
+        console.warn("WebGL initialization encountered an error. Falling back gracefully to 2D canvas:", err);
+        cleanup = init2DFallback();
+      }
+    } else {
+      cleanup = init2DFallback();
+    }
+
+    return () => {
+      if (cleanup) cleanup();
     };
   }, []);
 
