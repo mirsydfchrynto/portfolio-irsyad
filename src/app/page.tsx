@@ -5,12 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navbar } from "@/components/Navbar";
 import { ThreeFluidWave } from "@/components/ThreeFluidWave";
 import { ProjectDetailsModal } from "@/components/ProjectDetailsModal";
-import { 
-  OkeyBimbelExhibit, 
-  GegesBarberExhibit, 
-  VisionSafeExhibit, 
-  FebrianAIExhibit 
-} from "@/components/InteractiveProjectExhibits";
+import { SpatialHardwareConsole } from "@/components/SpatialHardwareConsole";
 import { 
   productionExperience, 
   blueprints, 
@@ -98,7 +93,6 @@ export default function Home() {
       benefit: "Eliminates cheating completely in high-school exams. Students cannot leave the app, take screenshots, or split-screen, while teachers track scores live.",
       pills: ["Kotlin Kiosk Lock", "5s Dynamic QR", "Offline-Safe Cache", "Next.js Portal"],
       data: productionExperience,
-      component: <OkeyBimbelExhibit />
     },
     {
       index: "02",
@@ -109,7 +103,6 @@ export default function Home() {
       benefit: "No more crowded barbershop waiting rooms. Customers monitor wait times from home, book preferred barbers, and shop styling products with fair barber turn allocation.",
       pills: ["Flutter Mobile", "Fair-Work Algorithm", "Real-Time Queue", "React Admin"],
       data: blueprints[0],
-      component: <GegesBarberExhibit />
     },
     {
       index: "03",
@@ -120,7 +113,6 @@ export default function Home() {
       benefit: "Protects children and heavy phone users from screen fatigue. When held closer than 30cm, it gently blurs the screen until you back away—zero cloud upload.",
       pills: ["MediaPipe Face Mesh", "Edge AI (No Cloud)", "Background Isolate", "Kotlin Overlay"],
       data: blueprints[1],
-      component: <VisionSafeExhibit />
     },
     {
       index: "04",
@@ -131,7 +123,6 @@ export default function Home() {
       benefit: "Answers customer questions on WhatsApp, checks appointment slots, and commits bookings into SQLite database in sub-400ms so barbers never lose walk-ins.",
       pills: ["Groq Llama 3.3 70B", "Tool / Function Calling", "Baileys WhatsApp", "SQLite Memory"],
       data: blueprints[2],
-      component: <FebrianAIExhibit />
     }
   ];
 
@@ -408,10 +399,14 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Right Column: Live Interactive Simulator Stage */}
+              {/* Right Column: 3D Spatial Hardware Console (Exploded Monolith & 8D Audio) */}
               <div className="lg:col-span-6 flex flex-col">
                 <div className="h-full w-full">
-                  {currentRoom.component}
+                  <SpatialHardwareConsole
+                    activeProjectIndex={activeRoom}
+                    onSelectProject={(idx) => setActiveRoom(idx)}
+                    onOpenDossier={() => setSelectedProject(currentRoom.data)}
+                  />
                 </div>
               </div>
             </motion.div>
